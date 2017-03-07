@@ -675,11 +675,11 @@ public class UpdateProccesorThread extends Thread {
 		Inet4Address domainID = null;
 		SimpleTEDB simpleTEDB=null;
 
-		if (pceNLRI.getPCEDescriptors()!=null){
-			PCEv4DescriptorsTLV pceTLV= pceNLRI.getPCEDescriptors();
+		if (pceNLRI.getPCEv4Descriptors()!=null){
+			PCEv4DescriptorsTLV pceTLV= pceNLRI.getPCEv4Descriptors();
 			MDPCE = pceTLV.getPCEv4Address();
 			simpleTEDB.setMDPCE(MDPCE);
-			domainID= pceNLRI.getPCEDescriptors().getAreaID().getAREA_ID();
+			domainID= pceNLRI.getPCEv4Descriptors().getAreaID().getAREA_ID();
 		}
 		log.info("Received IT info for domain "+String.valueOf(domainID)+" from peer "+learntFrom);
 

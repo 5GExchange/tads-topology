@@ -630,7 +630,7 @@ public class SendTopology implements Runnable {
 			AreaIDNodeDescriptorSubTLV domID =new AreaIDNodeDescriptorSubTLV();
 			domID.setAREA_ID((Inet4Address) InetAddress.getByName(domainID));
 			pcev4.setAreaID(domID);
-			pceNLRI.setPCEDescriptors(pcev4);
+			pceNLRI.setPCEv4Descriptors(pcev4);
 			return update;
 
 		} catch (Exception e) {
