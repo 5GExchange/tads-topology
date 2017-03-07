@@ -24,6 +24,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.net.Inet4Address;
+import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.LinkedList;
@@ -1329,6 +1330,20 @@ public class FileTEDBUpdater {
 						domain_id = getCharacterDataFromElement(domain_id_e);
 						log.debug("Looking for nodes in domain: " + domain_id);
 						log.info("Loading topology from domain " + domain_id);
+					}
+
+
+					NodeList mdPCE = element1.getElementsByTagName("mdpce");
+					for (int i = 0; i < mdPCE.getLength(); i++) {
+						Element element = (Element) mdPCE.item(i);
+
+						NodeList ipList = element.getElementsByTagName("ipv4");
+						Element ipElement = (Element) ipList.item(0);
+						String MDIP = getCharacterDataFromElement(ipElement);
+
+						log.info("load MDPCE of " + domain_id+" with IP "+ MDIP);
+						tedb.setMDPCE((Inet4Address) InetAddress.getByName(MDIP));
+
 					}
 
 					NodeList itResourcesElement = element1.getElementsByTagName("it_resources");

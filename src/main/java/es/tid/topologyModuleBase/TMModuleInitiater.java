@@ -1,26 +1,21 @@
 package es.tid.topologyModuleBase;
 
-import java.net.ServerSocket;
-import java.util.ArrayList;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Lock;
-import java.util.logging.Logger;
-
-import es.tid.topologyModuleBase.session.ws.WSOldSession;
 import es.tid.topologyModuleBase.database.TopologiesDataBase;
 import es.tid.topologyModuleBase.plugins.TMPlugin;
 import es.tid.topologyModuleBase.plugins.reader.TopologyReaderBGPLS;
 import es.tid.topologyModuleBase.plugins.reader.TopologyReaderCOP;
 import es.tid.topologyModuleBase.plugins.reader.TopologyReaderOSPF;
 import es.tid.topologyModuleBase.plugins.reader.TopologyReaderXML;
-import es.tid.topologyModuleBase.plugins.writer.TopologyServerBGPLS;
-import es.tid.topologyModuleBase.plugins.writer.TopologyServerCOP;
-import es.tid.topologyModuleBase.plugins.writer.TopologyServerGson;
-import es.tid.topologyModuleBase.plugins.writer.TopologyServerIETF;
-import es.tid.topologyModuleBase.plugins.writer.TopologyServerUnify;
 import es.tid.topologyModuleBase.plugins.readerwriter.TopologyReaderWriterBGPLS;
-import es.tid.topologyModuleBase.plugins.writer.TopologyServerTAPI;
+import es.tid.topologyModuleBase.plugins.writer.*;
+import es.tid.topologyModuleBase.session.ws.WSOldSession;
+
+import java.net.ServerSocket;
+import java.util.ArrayList;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.logging.Logger;
 
 
 public class TMModuleInitiater {
@@ -58,6 +53,7 @@ public class TMModuleInitiater {
 			if (actualLittleParams.isXML())
 			{
 				TMPlugin p = new TopologyReaderXML(ted, actualLittleParams,lock);
+				System.out.println("Andrea............................................Topology reader");
 				executor.execute(p);
 				pluginsList.add(p);
 				//log.info("topology readed from file. State:\n"+ted.printTopology());

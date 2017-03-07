@@ -3,6 +3,7 @@ package es.tid.bgp.bgp4Peer.updateTEDB;
 import es.tid.bgp.bgp4.messages.BGP4Update;
 import es.tid.bgp.bgp4.update.fields.*;
 import es.tid.bgp.bgp4.update.fields.pathAttributes.*;
+import es.tid.bgp.bgp4.update.tlv.PCEv4DescriptorsTLV;
 import es.tid.bgp.bgp4.update.tlv.linkstate_attribute_tlvs.*;
 import es.tid.bgp.bgp4.update.tlv.node_link_prefix_descriptor_subTLVs.*;
 import es.tid.ospf.ospfv2.lsa.tlv.subtlv.*;
@@ -183,6 +184,9 @@ public class UpdateProccesorThread extends Thread {
 								case NLRITypes.IT_Node_NLRI:
 									fillITNodeInformation((ITNodeNLRI)(nlri), learntFrom);
 									continue;
+									case NLRITypes.PCE_NLRI:
+										fillMDPCEInformation((PCENLRI)(nlri), learntFrom);
+										continue;
 								default:
 									log.debug("Attribute Code unknown");
 								}
@@ -658,7 +662,57 @@ public class UpdateProccesorThread extends Thread {
 
 		return te_info;
 	}
-	
+
+	private void fillMDPCEInformation(PCENLRI pceNLRI, String learntFrom){
+/*		try {
+			Thread.sleep(2000);                 //1000 milliseconds is one second.
+		} catch(InterruptedException ex) {
+			Thread.currentThread().interrupt();
+		}
+	*/
+		DomainTEDB domainTEDB= null;
+		Inet4Address MDPCE = null;
+		Inet4Address domainID = null;
+		SimpleTEDB simpleTEDB=null;
+
+		if (pceNLRI.getPCEDescriptors()!=null){
+			PCEv4DescriptorsTLV pceTLV= pceNLRI.getPCEDescriptors();
+			MDPCE = pceTLV.getPCEv4Address();
+			simpleTEDB.setMDPCE(MDPCE);
+			domainID= pceNLRI.getPCEDescriptors().getAreaID().getAREA_ID();
+		}
+		log.info("Received IT info for domain "+String.valueOf(domainID)+" from peer "+learntFrom);
+
+		domainTEDB=(DomainTEDB)intraTEDBs.get(String.valueOf(domainID));
+		if (domainTEDB instanceof SimpleTEDB){
+			simpleTEDB = (SimpleTEDB) domainTEDB;
+		}else if (domainTEDB==null){
+			simpleTEDB = new SimpleTEDB();
+			simpleTEDB.createGraph();
+			//try {
+			//	simpleTEDB.setDomainID((Inet4Address) InetAddress.getByName(String.valueOf(pceNLRI.getAreaID())));
+			//	//simpleTEDB.setDomainID( pceNLRI.getAreaID().getAREA_ID());
+			//} catch (UnknownHostException e) {
+			//	e.printStackTrace();
+			//}
+
+			//try {
+			//simpleTEDB.setDomainID((Inet4Address) InetAddress.getByName(String.valueOf(pceNLRI.getAreaID())));
+			simpleTEDB.setDomainID(domainID);
+			//} catch (UnknownHostException e) {
+			//	e.printStackTrace();
+			//}
+			this.intraTEDBs.put(String.valueOf(domainID), simpleTEDB);
+
+		}
+		else {
+			log.error("PROBLEM: TEDB not compatible");
+			return;
+		}
+
+
+	}
+
 
 	private void fillITNodeInformation(ITNodeNLRI itNodeNLRI, String learntFrom){
 /*		try {

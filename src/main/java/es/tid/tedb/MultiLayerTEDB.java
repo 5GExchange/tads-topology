@@ -456,4 +456,16 @@ public class MultiLayerTEDB implements DomainTEDB {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public Inet4Address getMDPCE() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setMDPCE(Inet4Address IP) {
+		// TODO Auto-generated method stub
+
+	}
+	
 }

@@ -1,12 +1,10 @@
 package es.tid.bgp.bgp4Peer.peer;
 
 import es.tid.bgp.bgp4.messages.BGP4Update;
-import es.tid.bgp.bgp4.update.fields.ITNodeNLRI;
-import es.tid.bgp.bgp4.update.fields.LinkNLRI;
-import es.tid.bgp.bgp4.update.fields.NodeNLRI;
-import es.tid.bgp.bgp4.update.fields.PathAttribute;
+import es.tid.bgp.bgp4.update.fields.*;
 import es.tid.bgp.bgp4.update.fields.pathAttributes.*;
 import es.tid.bgp.bgp4.update.tlv.LocalNodeDescriptorsTLV;
+import es.tid.bgp.bgp4.update.tlv.PCEv4DescriptorsTLV;
 import es.tid.bgp.bgp4.update.tlv.ProtocolIDCodes;
 import es.tid.bgp.bgp4.update.tlv.RemoteNodeDescriptorsTLV;
 import es.tid.bgp.bgp4.update.tlv.linkstate_attribute_tlvs.*;
@@ -25,6 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.Inet4Address;
+import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.*;
 
@@ -139,7 +138,11 @@ public class SendTopology implements Runnable {
 							if (((DomainTEDB)ted).getItResources()!=null){
 								sendITNodeNLRI( domainID, ((DomainTEDB)ted).getItResources());
 							}
-			
+
+							if (((DomainTEDB)ted).getMDPCE()!=null){
+								sendMDPCENLRI( domainID, ((DomainTEDB)ted).getMDPCE());
+							}
+
 						}
 				
 
@@ -225,7 +228,32 @@ public class SendTopology implements Runnable {
 //
 //		}
 	}
-	
+
+	private void sendMDPCENLRI(String domainID, Inet4Address IP){
+		//Andrea
+		log.debug("Sending IT REsources");
+		BGP4Update update = createMsgUpdateMDPCENLRI(domainID, IP);
+		sendMessage(update);
+//		Iterator<Object> vertexIt = vertexSet.iterator();
+//		//Enviamos primero los nodos. Un Node NLRI por cada nodo.
+//		while (vertexIt.hasNext()){
+//			Inet4Address node = (Inet4Address)vertexIt.next();
+//			//log.info(" XXXX node: "+ node);
+//			Node_Info node_info = NodeTable.get(node);
+//			//log.info(" XXXX node_info: "+ node_info);
+//			if (node_info!=null){
+//				log.debug("Sending node: ("+node+")");
+//				//Mandamos NodeNLRI
+//				BGP4Update update = createMsgUpdateNodeNLRI(node_info);
+//				sendMessage(update);
+//			}else {
+//				log.error("Node "+node+ " HAS NO node_info in NodeTable");
+//			}
+//
+//
+//		}
+	}
+
 	/**
 	 * This function sends a BGP4 update message (encoded in a LinkNLRI) for each link in the list
 	 * @param interdomainLinks
@@ -560,7 +588,59 @@ public class SendTopology implements Runnable {
 			}
 		
 	}
-	
+
+
+	private  BGP4Update createMsgUpdateMDPCENLRI(String domainID, Inet4Address IP){
+		try{
+
+			BGP4Update update= new BGP4Update();
+			//Path Attributes
+			ArrayList<PathAttribute> pathAttributes = update.getPathAttributes();
+			//Origin
+			OriginAttribute or = new OriginAttribute();
+			or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
+			pathAttributes.add(or);
+
+			//AS_PATH
+			if (send4AS==true) {
+				AS4_Path_Attribute as_path = new AS4_Path_Attribute();
+				AS4_Path_Segment as_path_seg = new AS4_Path_Segment();
+				long[] segs = new long[1];
+				segs[0] = 65522;
+				as_path_seg.setSegments(segs);
+				as_path.getAsPathSegments().add(as_path_seg);
+				pathAttributes.add(as_path);
+			}
+			else {
+				AS_Path_Attribute as_path = new AS_Path_Attribute();
+				AS_Path_Segment as_path_seg = new AS_Path_Segment();
+				int[] segs = new int[1];
+				segs[0] = 65522;
+				as_path_seg.setSegments(segs);
+				as_path.getAsPathSegments().add(as_path_seg);
+				pathAttributes.add(as_path);
+			}
+
+			//NLRI
+			PCENLRI pceNLRI = new PCENLRI();
+			PCEv4DescriptorsTLV pcev4 = new PCEv4DescriptorsTLV();
+			pcev4.setPCEv4Address(IP);
+			//update.setLearntFrom(itResources.getLearntFrom());
+			log.info("Creating IT Update related to domain "+domainID+" learnt from ");
+			AreaIDNodeDescriptorSubTLV domID =new AreaIDNodeDescriptorSubTLV();
+			domID.setAREA_ID((Inet4Address) InetAddress.getByName(domainID));
+			pcev4.setAreaID(domID);
+			pceNLRI.setPCEDescriptors(pcev4);
+			return update;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
+
 	/**
 	 * Function to create a BGP4 update message with a link NRLI field. To send the links.
 	 * 				

@@ -402,9 +402,17 @@ String topoString="";
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public Inet4Address getMDPCE() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
+	@Override
+	public void setMDPCE(Inet4Address ip) {
+		// TODO Auto-generated method stub
 
-	
-	
+	}
+
 
 }

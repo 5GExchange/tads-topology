@@ -45,7 +45,7 @@ public class TopologyReaderXML extends TopologyReader
 				readNetwork(params.getNetworkDescriptionFile());
 			}
 			else if(params.getModexml().equals("TM")){
-				log.info("Inside TM");
+				log.info("Andrea.........................................Inside TM");
 				ted.initializeFromFile(params.getNetworkDescriptionFile(), params.getIdentifier(), true);
 			}
 			else log.warning("Unknow Mode");

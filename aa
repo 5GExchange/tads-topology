@@ -1,0 +1,344 @@
+Andrea............................................Topology reader
+VALOR DEL FLAG: false
+VALOR DEL FLAG: false
+VALOR DEL FLAG: false
+Parsing Config File::target/conf1wayTest/BGPLS1.xml
+15:12:08.242 [pool-2-thread-3] DEBUG BGP4Peer - Found peer configuration
+15:12:08.246 [pool-2-thread-3] INFO  BGP4Peer - Inizializing BGP4 Peer
+15:12:08.272 [pool-2-thread-1] DEBUG BGP4Peer - 1. SimpleDirectedWeightedGraph
+15:12:08.322 [pool-2-thread-1] DEBUG BGP4Peer - Looking for nodes in domain: 0.0.0.1
+15:12:08.323 [pool-2-thread-1] INFO  BGP4Peer - Loading topology from domain 0.0.0.1
+15:12:08.324 [pool-2-thread-1] INFO  BGP4Peer - load MDPCE of 0.0.0.1 with IP 172.16.0.2
+15:12:08.326 [pool-2-thread-1] INFO  BGP4Peer - Adding node 172.16.101.101
+15:12:08.327 [pool-2-thread-1] DEBUG BGP4Peer - About to look for SID
+15:12:08.327 [pool-2-thread-1] DEBUG BGP4Peer - SID not found
+15:12:08.327 [pool-2-thread-1] INFO  BGP4Peer - Adding node 172.16.101.102
+15:12:08.327 [pool-2-thread-1] DEBUG BGP4Peer - About to look for SID
+15:12:08.327 [pool-2-thread-1] DEBUG BGP4Peer - SID not found
+15:12:08.328 [pool-2-thread-1] INFO  BGP4Peer - Adding node 172.16.101.103
+15:12:08.328 [pool-2-thread-1] DEBUG BGP4Peer - About to look for SID
+15:12:08.328 [pool-2-thread-1] DEBUG BGP4Peer - SID not found
+15:12:08.328 [pool-2-thread-1] INFO  BGP4Peer - Adding node 172.16.101.104
+15:12:08.328 [pool-2-thread-1] DEBUG BGP4Peer - About to look for SID
+15:12:08.328 [pool-2-thread-1] DEBUG BGP4Peer - SID not found
+15:12:08.328 [pool-2-thread-1] DEBUG BGP4Peer - Looking for nodes in domain: 0.0.0.2
+15:12:08.328 [pool-2-thread-1] INFO  BGP4Peer - Loading topology from domain 0.0.0.2
+15:12:08.329 [pool-2-thread-1] INFO  BGP4Peer - Adding node 172.16.102.101
+15:12:08.329 [pool-2-thread-1] DEBUG BGP4Peer - About to look for SID
+15:12:08.329 [pool-2-thread-1] DEBUG BGP4Peer - SID not found
+15:12:08.329 [pool-2-thread-1] INFO  BGP4Peer - Adding node 172.16.102.102
+15:12:08.329 [pool-2-thread-1] DEBUG BGP4Peer - About to look for SID
+15:12:08.329 [pool-2-thread-1] DEBUG BGP4Peer - SID not found
+15:12:08.329 [pool-2-thread-1] DEBUG BGP4Peer - Read network = true
+15:12:08.329 [pool-2-thread-1] DEBUG BGP4Peer - Looking for links in domain: 0.0.0.1
+15:12:08.330 [pool-2-thread-1] DEBUG BGP4Peer - New Link
+15:12:08.330 [pool-2-thread-1] DEBUG BGP4Peer - type::intradomain
+15:12:08.332 [pool-2-thread-1] DEBUG BGP4Peer - SRC if id: 1
+15:12:08.332 [pool-2-thread-1] DEBUG BGP4Peer - DST if id: 1
+15:12:08.333 [pool-2-thread-1] DEBUG BGP4Peer - Preparing to add edge
+15:12:08.333 [pool-2-thread-1] DEBUG BGP4Peer - NODES IN GRAPH:: [/172.16.101.101, /172.16.101.102, /172.16.101.103, /172.16.101.104]
+15:12:08.336 [pool-2-thread-1] DEBUG BGP4Peer - s_router_id_addr: /172.16.101.101; d_router_id_addr: /172.16.101.104; edge: null:1-->null:1 NumFibers = 0
+ TED: UndirectionalLinkDelay [delay_ms=99]
+MinMaxUndirectionalLinkDelay [low_delay_ms=23 , high_delay_ms=250]
+
+
+15:12:08.337 [pool-2-thread-1] DEBUG BGP4Peer - New Intradomain Edge
+15:12:08.337 [pool-2-thread-1] INFO  BGP4Peer - New intradomain link: /172.16.101.101 --> /172.16.101.104 learnt 
+15:12:08.337 [pool-2-thread-1] DEBUG BGP4Peer - New Link
+15:12:08.337 [pool-2-thread-1] DEBUG BGP4Peer - type::intradomain
+15:12:08.337 [pool-2-thread-1] DEBUG BGP4Peer - SRC if id: 1
+15:12:08.337 [pool-2-thread-1] DEBUG BGP4Peer - DST if id: 1
+15:12:08.342 [pool-2-thread-1] DEBUG BGP4Peer - Preparing to add edge
+15:12:08.342 [pool-2-thread-1] DEBUG BGP4Peer - NODES IN GRAPH:: [/172.16.101.101, /172.16.101.102, /172.16.101.103, /172.16.101.104]
+15:12:08.342 [pool-2-thread-1] DEBUG BGP4Peer - s_router_id_addr: /172.16.101.104; d_router_id_addr: /172.16.101.101; edge: null:1-->null:1 NumFibers = 0
+ TED: UndirectionalLinkDelay [delay_ms=99]
+MinMaxUndirectionalLinkDelay [low_delay_ms=23 , high_delay_ms=250]
+
+
+15:12:08.342 [pool-2-thread-1] DEBUG BGP4Peer - New Intradomain Edge
+15:12:08.342 [pool-2-thread-1] INFO  BGP4Peer - New intradomain link: /172.16.101.104 --> /172.16.101.101 learnt 
+15:12:08.342 [pool-2-thread-1] DEBUG BGP4Peer - New Link
+15:12:08.342 [pool-2-thread-1] DEBUG BGP4Peer - type::intradomain
+15:12:08.343 [pool-2-thread-1] DEBUG BGP4Peer - SRC if id: 2
+15:12:08.343 [pool-2-thread-1] DEBUG BGP4Peer - DST if id: 1
+15:12:08.343 [pool-2-thread-1] DEBUG BGP4Peer - Preparing to add edge
+15:12:08.344 [pool-2-thread-1] DEBUG BGP4Peer - NODES IN GRAPH:: [/172.16.101.101, /172.16.101.102, /172.16.101.103, /172.16.101.104]
+15:12:08.344 [pool-2-thread-1] DEBUG BGP4Peer - s_router_id_addr: /172.16.101.101; d_router_id_addr: /172.16.101.102; edge: null:2-->null:1 NumFibers = 0
+ TED: UndirectionalLinkDelay [delay_ms=3000]
+MinMaxUndirectionalLinkDelay [low_delay_ms=150 , high_delay_ms=4000]
+
+
+15:12:08.344 [pool-2-thread-1] DEBUG BGP4Peer - New Intradomain Edge
+15:12:08.344 [pool-2-thread-1] INFO  BGP4Peer - New intradomain link: /172.16.101.101 --> /172.16.101.102 learnt 
+15:12:08.344 [pool-2-thread-1] DEBUG BGP4Peer - New Link
+15:12:08.344 [pool-2-thread-1] DEBUG BGP4Peer - type::intradomain
+15:12:08.344 [pool-2-thread-1] DEBUG BGP4Peer - SRC if id: 1
+15:12:08.344 [pool-2-thread-1] DEBUG BGP4Peer - DST if id: 2
+15:12:08.350 [pool-2-thread-3] DEBUG BGP4Peer - Initializing Session Manager to connect as server
+15:12:08.351 [pool-2-thread-1] DEBUG BGP4Peer - Preparing to add edge
+15:12:08.351 [pool-2-thread-1] DEBUG BGP4Peer - NODES IN GRAPH:: [/172.16.101.101, /172.16.101.102, /172.16.101.103, /172.16.101.104]
+15:12:08.352 [pool-2-thread-1] DEBUG BGP4Peer - s_router_id_addr: /172.16.101.102; d_router_id_addr: /172.16.101.101; edge: null:1-->null:2 NumFibers = 0
+ TED: UndirectionalLinkDelay [delay_ms=3000]
+MinMaxUndirectionalLinkDelay [low_delay_ms=150 , high_delay_ms=4000]
+
+
+15:12:08.352 [pool-2-thread-1] DEBUG BGP4Peer - New Intradomain Edge
+15:12:08.352 [pool-3-thread-1] INFO  BGP4Peer - Trying to establish new session with peer /10.0.0.1 on port 1790
+15:12:08.353 [pool-3-thread-2] DEBUG BGP4Peer - SERVER Listening on port: 179
+15:12:08.353 [pool-3-thread-2] DEBUG BGP4Peer - SERVER Listening on address: /0.0.0.0
+15:12:08.352 [pool-2-thread-1] INFO  BGP4Peer - New intradomain link: /172.16.101.102 --> /172.16.101.101 learnt 
+15:12:08.352 [pool-2-thread-3] DEBUG BGP4Peer - Initializing Management Server
+15:12:08.357 [pool-2-thread-1] DEBUG BGP4Peer - New Link
+15:12:08.357 [pool-2-thread-1] DEBUG BGP4Peer - type::intradomain
+15:12:08.357 [pool-2-thread-1] DEBUG BGP4Peer - SRC if id: 2
+15:12:08.357 [pool-2-thread-1] DEBUG BGP4Peer - DST if id: 1
+15:12:08.357 [pool-2-thread-1] DEBUG BGP4Peer - Preparing to add edge
+15:12:08.357 [pool-2-thread-1] DEBUG BGP4Peer - NODES IN GRAPH:: [/172.16.101.101, /172.16.101.102, /172.16.101.103, /172.16.101.104]
+15:12:08.357 [pool-2-thread-1] DEBUG BGP4Peer - s_router_id_addr: /172.16.101.102; d_router_id_addr: /172.16.101.103; edge: null:2-->null:1 NumFibers = 0
+ TED: UndirectionalLinkDelay [delay_ms=1003]
+MinMaxUndirectionalLinkDelay [low_delay_ms=150 , high_delay_ms=4000]
+
+
+15:12:08.357 [pool-2-thread-1] DEBUG BGP4Peer - New Intradomain Edge
+15:12:08.358 [pool-2-thread-1] INFO  BGP4Peer - New intradomain link: /172.16.101.102 --> /172.16.101.103 learnt 
+15:12:08.358 [pool-2-thread-1] DEBUG BGP4Peer - New Link
+15:12:08.358 [pool-2-thread-1] DEBUG BGP4Peer - type::intradomain
+15:12:08.358 [pool-2-thread-1] DEBUG BGP4Peer - SRC if id: 1
+15:12:08.358 [pool-2-thread-1] DEBUG BGP4Peer - DST if id: 2
+15:12:08.358 [pool-2-thread-1] DEBUG BGP4Peer - Preparing to add edge
+15:12:08.358 [pool-2-thread-1] DEBUG BGP4Peer - NODES IN GRAPH:: [/172.16.101.101, /172.16.101.102, /172.16.101.103, /172.16.101.104]
+15:12:08.358 [pool-2-thread-1] DEBUG BGP4Peer - s_router_id_addr: /172.16.101.103; d_router_id_addr: /172.16.101.102; edge: null:1-->null:2 NumFibers = 0
+ TED: UndirectionalLinkDelay [delay_ms=1003]
+MinMaxUndirectionalLinkDelay [low_delay_ms=150 , high_delay_ms=4000]
+
+
+15:12:08.358 [pool-2-thread-1] DEBUG BGP4Peer - New Intradomain Edge
+15:12:08.358 [pool-2-thread-1] INFO  BGP4Peer - New intradomain link: /172.16.101.103 --> /172.16.101.102 learnt 
+15:12:08.358 [pool-2-thread-1] DEBUG BGP4Peer - New Link
+15:12:08.358 [pool-2-thread-1] DEBUG BGP4Peer - type::intradomain
+15:12:08.358 [pool-2-thread-1] DEBUG BGP4Peer - SRC if id: 2
+15:12:08.358 [pool-2-thread-1] DEBUG BGP4Peer - DST if id: 2
+15:12:08.359 [pool-2-thread-1] DEBUG BGP4Peer - Preparing to add edge
+15:12:08.359 [pool-2-thread-1] DEBUG BGP4Peer - NODES IN GRAPH:: [/172.16.101.101, /172.16.101.102, /172.16.101.103, /172.16.101.104]
+15:12:08.359 [pool-2-thread-1] DEBUG BGP4Peer - s_router_id_addr: /172.16.101.103; d_router_id_addr: /172.16.101.104; edge: null:2-->null:2 NumFibers = 0
+ TED: UndirectionalLinkDelay [delay_ms=323]
+MinMaxUndirectionalLinkDelay [low_delay_ms=150 , high_delay_ms=4000]
+
+
+15:12:08.359 [pool-2-thread-1] DEBUG BGP4Peer - New Intradomain Edge
+15:12:08.359 [pool-2-thread-1] INFO  BGP4Peer - New intradomain link: /172.16.101.103 --> /172.16.101.104 learnt 
+15:12:08.359 [pool-2-thread-1] DEBUG BGP4Peer - New Link
+15:12:08.359 [pool-2-thread-1] DEBUG BGP4Peer - type::intradomain
+15:12:08.359 [pool-2-thread-1] DEBUG BGP4Peer - SRC if id: 2
+15:12:08.359 [pool-2-thread-1] DEBUG BGP4Peer - DST if id: 2
+15:12:08.359 [pool-2-thread-1] DEBUG BGP4Peer - Preparing to add edge
+15:12:08.360 [pool-2-thread-1] DEBUG BGP4Peer - NODES IN GRAPH:: [/172.16.101.101, /172.16.101.102, /172.16.101.103, /172.16.101.104]
+15:12:08.360 [pool-2-thread-1] DEBUG BGP4Peer - s_router_id_addr: /172.16.101.104; d_router_id_addr: /172.16.101.103; edge: null:2-->null:2 NumFibers = 0
+ TED: UndirectionalLinkDelay [delay_ms=323]
+MinMaxUndirectionalLinkDelay [low_delay_ms=150 , high_delay_ms=4000]
+
+
+15:12:08.360 [pool-2-thread-1] DEBUG BGP4Peer - New Intradomain Edge
+15:12:08.360 [pool-2-thread-1] INFO  BGP4Peer - New intradomain link: /172.16.101.104 --> /172.16.101.103 learnt 
+15:12:08.360 [pool-2-thread-1] DEBUG BGP4Peer - New Link
+15:12:08.360 [pool-2-thread-1] DEBUG BGP4Peer - type::intradomain
+15:12:08.360 [pool-2-thread-1] DEBUG BGP4Peer - SRC if id: 3
+15:12:08.360 [pool-2-thread-1] DEBUG BGP4Peer - DST if id: 3
+15:12:08.360 [pool-2-thread-1] DEBUG BGP4Peer - Preparing to add edge
+15:12:08.360 [pool-2-thread-1] DEBUG BGP4Peer - NODES IN GRAPH:: [/172.16.101.101, /172.16.101.102, /172.16.101.103, /172.16.101.104]
+15:12:08.360 [pool-2-thread-1] DEBUG BGP4Peer - s_router_id_addr: /172.16.101.102; d_router_id_addr: /172.16.101.104; edge: null:3-->null:3 NumFibers = 0
+ TED: UndirectionalLinkDelay [delay_ms=2232]
+MinMaxUndirectionalLinkDelay [low_delay_ms=150 , high_delay_ms=4000]
+
+
+15:12:08.360 [pool-2-thread-1] DEBUG BGP4Peer - New Intradomain Edge
+15:12:08.360 [pool-2-thread-1] INFO  BGP4Peer - New intradomain link: /172.16.101.102 --> /172.16.101.104 learnt 
+15:12:08.360 [pool-2-thread-1] DEBUG BGP4Peer - New Link
+15:12:08.360 [pool-2-thread-1] DEBUG BGP4Peer - type::intradomain
+15:12:08.360 [pool-2-thread-1] DEBUG BGP4Peer - SRC if id: 3
+15:12:08.361 [pool-2-thread-1] DEBUG BGP4Peer - DST if id: 3
+15:12:08.361 [pool-2-thread-1] DEBUG BGP4Peer - Preparing to add edge
+15:12:08.361 [pool-2-thread-1] DEBUG BGP4Peer - NODES IN GRAPH:: [/172.16.101.101, /172.16.101.102, /172.16.101.103, /172.16.101.104]
+15:12:08.361 [pool-2-thread-1] DEBUG BGP4Peer - s_router_id_addr: /172.16.101.104; d_router_id_addr: /172.16.101.102; edge: null:3-->null:3 NumFibers = 0
+ TED: UndirectionalLinkDelay [delay_ms=2232]
+MinMaxUndirectionalLinkDelay [low_delay_ms=150 , high_delay_ms=4000]
+
+
+15:12:08.361 [pool-2-thread-1] DEBUG BGP4Peer - New Intradomain Edge
+15:12:08.361 [pool-2-thread-1] INFO  BGP4Peer - New intradomain link: /172.16.101.104 --> /172.16.101.102 learnt 
+15:12:08.361 [pool-2-thread-1] DEBUG BGP4Peer - New Link
+15:12:08.361 [pool-2-thread-1] DEBUG BGP4Peer - type::intradomain
+15:12:08.361 [pool-2-thread-1] DEBUG BGP4Peer - SRC if id: 13
+15:12:08.361 [pool-2-thread-1] DEBUG BGP4Peer - DST if id: 11
+15:12:08.361 [pool-2-thread-1] DEBUG BGP4Peer - Preparing to add edge
+15:12:08.361 [pool-2-thread-1] DEBUG BGP4Peer - NODES IN GRAPH:: [/172.16.101.101, /172.16.101.102, /172.16.101.103, /172.16.101.104]
+15:12:08.361 [pool-2-thread-1] DEBUG BGP4Peer - s_router_id_addr: /172.16.101.104; d_router_id_addr: /172.16.102.101; edge: null:13-->null:11 NumFibers = 0
+ TED: UndirectionalLinkDelay [delay_ms=102]
+
+
+15:12:08.362 [pool-2-thread-1] DEBUG BGP4Peer - New Interdomain Edge
+15:12:08.362 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source router_id: 172.16.101.104
+15:12:08.362 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source domain_id: /0.0.0.1
+15:12:08.362 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source if_id: 13
+15:12:08.362 [pool-2-thread-1] DEBUG BGP4Peer - Edge Destination router_id: 172.16.102.101
+15:12:08.362 [pool-2-thread-1] DEBUG BGP4Peer - Destination domain_id: <Unknown>
+15:12:08.362 [pool-2-thread-1] DEBUG BGP4Peer - Edge Dest if_id: 11
+15:12:08.362 [pool-2-thread-1] INFO  BGP4Peer - New interdomain link: /172.16.101.104 --> /172.16.102.101 learnt 
+15:12:08.362 [pool-2-thread-1] DEBUG BGP4Peer - New Link
+15:12:08.362 [pool-2-thread-1] DEBUG BGP4Peer - type::intradomain
+15:12:08.362 [pool-2-thread-1] DEBUG BGP4Peer - SRC if id: 13
+15:12:08.363 [pool-2-thread-1] DEBUG BGP4Peer - DST if id: 11
+15:12:08.363 [pool-2-thread-1] DEBUG BGP4Peer - Preparing to add edge
+15:12:08.363 [pool-2-thread-1] DEBUG BGP4Peer - NODES IN GRAPH:: [/172.16.101.101, /172.16.101.102, /172.16.101.103, /172.16.101.104]
+15:12:08.363 [pool-2-thread-1] DEBUG BGP4Peer - s_router_id_addr: /172.16.101.103; d_router_id_addr: /172.16.102.102; edge: null:13-->null:11 NumFibers = 0
+ TED: UndirectionalLinkDelay [delay_ms=230]
+
+
+15:12:08.363 [pool-2-thread-1] DEBUG BGP4Peer - New Interdomain Edge
+15:12:08.363 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source router_id: 172.16.101.103
+15:12:08.363 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source domain_id: /0.0.0.1
+15:12:08.363 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source if_id: 13
+15:12:08.371 [pool-2-thread-1] DEBUG BGP4Peer - Edge Destination router_id: 172.16.102.102
+15:12:08.371 [pool-2-thread-1] DEBUG BGP4Peer - Destination domain_id: <Unknown>
+15:12:08.371 [pool-2-thread-1] DEBUG BGP4Peer - Edge Dest if_id: 11
+15:12:08.371 [pool-2-thread-1] INFO  BGP4Peer - New interdomain link: /172.16.101.103 --> /172.16.102.102 learnt 
+15:12:08.372 [pool-2-thread-1] DEBUG BGP4Peer - Info graph edge :: [/172.16.101.101:1-->/172.16.101.104:1 NumFibers = 1
+ TED: UndirectionalLinkDelay [delay_ms=99]
+MinMaxUndirectionalLinkDelay [low_delay_ms=23 , high_delay_ms=250]
+
+, /172.16.101.104:1-->/172.16.101.101:1 NumFibers = 1
+ TED: UndirectionalLinkDelay [delay_ms=99]
+MinMaxUndirectionalLinkDelay [low_delay_ms=23 , high_delay_ms=250]
+
+, /172.16.101.101:2-->/172.16.101.102:1 NumFibers = 1
+ TED: UndirectionalLinkDelay [delay_ms=3000]
+MinMaxUndirectionalLinkDelay [low_delay_ms=150 , high_delay_ms=4000]
+
+, /172.16.101.102:1-->/172.16.101.101:2 NumFibers = 1
+ TED: UndirectionalLinkDelay [delay_ms=3000]
+MinMaxUndirectionalLinkDelay [low_delay_ms=150 , high_delay_ms=4000]
+
+, /172.16.101.102:2-->/172.16.101.103:1 NumFibers = 1
+ TED: UndirectionalLinkDelay [delay_ms=1003]
+MinMaxUndirectionalLinkDelay [low_delay_ms=150 , high_delay_ms=4000]
+
+, /172.16.101.103:1-->/172.16.101.102:2 NumFibers = 1
+ TED: UndirectionalLinkDelay [delay_ms=1003]
+MinMaxUndirectionalLinkDelay [low_delay_ms=150 , high_delay_ms=4000]
+
+, /172.16.101.103:2-->/172.16.101.104:2 NumFibers = 1
+ TED: UndirectionalLinkDelay [delay_ms=323]
+MinMaxUndirectionalLinkDelay [low_delay_ms=150 , high_delay_ms=4000]
+
+, /172.16.101.104:2-->/172.16.101.103:2 NumFibers = 1
+ TED: UndirectionalLinkDelay [delay_ms=323]
+MinMaxUndirectionalLinkDelay [low_delay_ms=150 , high_delay_ms=4000]
+
+, /172.16.101.102:3-->/172.16.101.104:3 NumFibers = 1
+ TED: UndirectionalLinkDelay [delay_ms=2232]
+MinMaxUndirectionalLinkDelay [low_delay_ms=150 , high_delay_ms=4000]
+
+, /172.16.101.104:3-->/172.16.101.102:3 NumFibers = 1
+ TED: UndirectionalLinkDelay [delay_ms=2232]
+MinMaxUndirectionalLinkDelay [low_delay_ms=150 , high_delay_ms=4000]
+
+]
+15:12:08.372 [pool-2-thread-1] DEBUG BGP4Peer - Read network = true
+15:12:08.372 [pool-2-thread-1] DEBUG BGP4Peer - Looking for links in domain: 0.0.0.2
+15:12:08.372 [pool-2-thread-1] DEBUG BGP4Peer - Info graph edge :: []
+15:12:08.406 [pool-2-thread-1] INFO  BGP4Peer - Multidomain Graph
+15:12:08.409 [pool-2-thread-1] INFO  BGP4Peer - Adding Domain: /0.0.0.1
+15:12:08.409 [pool-2-thread-1] DEBUG BGP4Peer - Router_id: 172.16.101.101
+15:12:08.409 [pool-2-thread-1] DEBUG BGP4Peer - Router_id: 172.16.101.102
+15:12:08.409 [pool-2-thread-1] DEBUG BGP4Peer - Router_id: 172.16.101.103
+15:12:08.409 [pool-2-thread-1] DEBUG BGP4Peer - Router_id: 172.16.101.104
+15:12:08.409 [pool-2-thread-1] INFO  BGP4Peer - Adding Domain: /0.0.0.2
+15:12:08.409 [pool-2-thread-1] DEBUG BGP4Peer - Router_id: 172.16.102.101
+15:12:08.409 [pool-2-thread-1] DEBUG BGP4Peer - Router_id: 172.16.102.102
+15:12:08.409 [pool-2-thread-1] DEBUG BGP4Peer - Domain_ids read
+15:12:08.409 [pool-2-thread-1] DEBUG BGP4Peer - Looking at edge
+15:12:08.410 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source router_id: 172.16.101.101
+15:12:08.410 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source domain_id: /0.0.0.1
+15:12:08.410 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source if_id: 1
+15:12:08.410 [pool-2-thread-1] DEBUG BGP4Peer - Edge Destination router_id: 172.16.101.104
+15:12:08.410 [pool-2-thread-1] DEBUG BGP4Peer - Destination domain_id: /0.0.0.1
+15:12:08.410 [pool-2-thread-1] DEBUG BGP4Peer - Edge Dest if_id: 1
+15:12:08.410 [pool-2-thread-1] DEBUG BGP4Peer - Looking at edge
+15:12:08.410 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source router_id: 172.16.101.104
+15:12:08.410 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source domain_id: /0.0.0.1
+15:12:08.410 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source if_id: 1
+15:12:08.410 [pool-2-thread-1] DEBUG BGP4Peer - Edge Destination router_id: 172.16.101.101
+15:12:08.410 [pool-2-thread-1] DEBUG BGP4Peer - Destination domain_id: /0.0.0.1
+15:12:08.410 [pool-2-thread-1] DEBUG BGP4Peer - Edge Dest if_id: 1
+15:12:08.410 [pool-2-thread-1] DEBUG BGP4Peer - Looking at edge
+15:12:08.411 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source router_id: 172.16.101.101
+15:12:08.411 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source domain_id: /0.0.0.1
+15:12:08.411 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source if_id: 2
+15:12:08.411 [pool-2-thread-1] DEBUG BGP4Peer - Edge Destination router_id: 172.16.101.102
+15:12:08.411 [pool-2-thread-1] DEBUG BGP4Peer - Destination domain_id: /0.0.0.1
+15:12:08.411 [pool-2-thread-1] DEBUG BGP4Peer - Edge Dest if_id: 1
+15:12:08.411 [pool-2-thread-1] DEBUG BGP4Peer - Looking at edge
+15:12:08.416 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source router_id: 172.16.101.102
+15:12:08.416 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source domain_id: /0.0.0.1
+15:12:08.416 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source if_id: 1
+15:12:08.416 [pool-2-thread-1] DEBUG BGP4Peer - Edge Destination router_id: 172.16.101.101
+15:12:08.417 [pool-2-thread-1] DEBUG BGP4Peer - Destination domain_id: /0.0.0.1
+15:12:08.417 [pool-2-thread-1] DEBUG BGP4Peer - Edge Dest if_id: 2
+15:12:08.417 [pool-2-thread-1] DEBUG BGP4Peer - Looking at edge
+15:12:08.417 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source router_id: 172.16.101.102
+15:12:08.417 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source domain_id: /0.0.0.1
+15:12:08.417 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source if_id: 2
+15:12:08.417 [pool-2-thread-1] DEBUG BGP4Peer - Edge Destination router_id: 172.16.101.103
+15:12:08.418 [pool-2-thread-1] DEBUG BGP4Peer - Destination domain_id: /0.0.0.1
+15:12:08.418 [pool-2-thread-1] DEBUG BGP4Peer - Edge Dest if_id: 1
+15:12:08.418 [pool-2-thread-1] DEBUG BGP4Peer - Looking at edge
+15:12:08.418 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source router_id: 172.16.101.103
+15:12:08.418 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source domain_id: /0.0.0.1
+15:12:08.418 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source if_id: 1
+15:12:08.419 [pool-2-thread-1] DEBUG BGP4Peer - Edge Destination router_id: 172.16.101.102
+15:12:08.419 [pool-2-thread-1] DEBUG BGP4Peer - Destination domain_id: /0.0.0.1
+15:12:08.419 [pool-2-thread-1] DEBUG BGP4Peer - Edge Dest if_id: 2
+15:12:08.419 [pool-2-thread-1] DEBUG BGP4Peer - Looking at edge
+15:12:08.419 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source router_id: 172.16.101.103
+15:12:08.419 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source domain_id: /0.0.0.1
+15:12:08.420 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source if_id: 2
+15:12:08.420 [pool-2-thread-1] DEBUG BGP4Peer - Edge Destination router_id: 172.16.101.104
+15:12:08.420 [pool-2-thread-1] DEBUG BGP4Peer - Destination domain_id: /0.0.0.1
+15:12:08.420 [pool-2-thread-1] DEBUG BGP4Peer - Edge Dest if_id: 2
+15:12:08.420 [pool-2-thread-1] DEBUG BGP4Peer - Looking at edge
+15:12:08.420 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source router_id: 172.16.101.104
+15:12:08.420 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source domain_id: /0.0.0.1
+15:12:08.420 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source if_id: 2
+15:12:08.420 [pool-2-thread-1] DEBUG BGP4Peer - Edge Destination router_id: 172.16.101.103
+15:12:08.421 [pool-2-thread-1] DEBUG BGP4Peer - Destination domain_id: /0.0.0.1
+15:12:08.421 [pool-2-thread-1] DEBUG BGP4Peer - Edge Dest if_id: 2
+15:12:08.421 [pool-2-thread-1] DEBUG BGP4Peer - Looking at edge
+15:12:08.421 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source router_id: 172.16.101.102
+15:12:08.421 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source domain_id: /0.0.0.1
+15:12:08.422 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source if_id: 3
+15:12:08.422 [pool-2-thread-1] DEBUG BGP4Peer - Edge Destination router_id: 172.16.101.104
+15:12:08.422 [pool-2-thread-1] DEBUG BGP4Peer - Destination domain_id: /0.0.0.1
+15:12:08.422 [pool-2-thread-1] DEBUG BGP4Peer - Edge Dest if_id: 3
+15:12:08.422 [pool-2-thread-1] DEBUG BGP4Peer - Looking at edge
+15:12:08.422 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source router_id: 172.16.101.104
+15:12:08.422 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source domain_id: /0.0.0.1
+15:12:08.422 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source if_id: 3
+15:12:08.422 [pool-2-thread-1] DEBUG BGP4Peer - Edge Destination router_id: 172.16.101.102
+15:12:08.422 [pool-2-thread-1] DEBUG BGP4Peer - Destination domain_id: /0.0.0.1
+15:12:08.422 [pool-2-thread-1] DEBUG BGP4Peer - Edge Dest if_id: 3
+15:12:08.422 [pool-2-thread-1] DEBUG BGP4Peer - Looking at edge
+15:12:08.423 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source router_id: 172.16.101.104
+15:12:08.423 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source domain_id: /0.0.0.1
+15:12:08.423 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source if_id: 13
+15:12:08.423 [pool-2-thread-1] DEBUG BGP4Peer - Edge Destination router_id: 172.16.102.101
+15:12:08.423 [pool-2-thread-1] DEBUG BGP4Peer - Destination domain_id: /0.0.0.2
+15:12:08.423 [pool-2-thread-1] DEBUG BGP4Peer - Edge Dest if_id: 11
+15:12:08.449 [pool-2-thread-1] INFO  BGP4Peer - Adding interdomain link /0.0.0.1-->/0.0.0.2 learnt 
+15:12:08.449 [pool-2-thread-1] DEBUG BGP4Peer - Looking at edge
+15:12:08.452 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source router_id: 172.16.101.103
+15:12:08.452 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source domain_id: /0.0.0.1
+15:12:08.452 [pool-2-thread-1] DEBUG BGP4Peer - Edge Source if_id: 13
+15:12:08.452 [pool-2-thread-1] DEBUG BGP4Peer - Edge Destination router_id: 172.16.102.102
+15:12:08.453 [pool-2-thread-1] DEBUG BGP4Peer - Destination domain_id: /0.0.0.2
+15:12:08.453 [pool-2-thread-1] DEBUG BGP4Peer - Edge Dest if_id: 11
+15:12:08.453 [pool-2-thread-1] INFO  BGP4Peer - Adding interdomain link /0.0.0.1-->/0.0.0.2 learnt 

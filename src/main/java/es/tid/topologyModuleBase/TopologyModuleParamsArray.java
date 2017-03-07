@@ -133,7 +133,7 @@ public class TopologyModuleParamsArray
 				littleParams.setXML(true);
 				if (littleParams.getModexml()=="TM") littleParams.setIdentifier(getCharacterDataFromElement(((Element) nodes_xml.getElementsByTagName("Identifier").item(0))));
 
-				log.info("XML configured with file: "+littleParams.getNetworkDescriptionFile());
+				log.info("..................................................XML configured with file: "+littleParams.getNetworkDescriptionFile());
 				paramList.add(littleParams);
 			}
 			
