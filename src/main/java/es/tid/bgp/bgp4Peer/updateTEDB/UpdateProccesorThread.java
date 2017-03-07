@@ -94,7 +94,7 @@ public class UpdateProccesorThread extends Thread {
 
 	public UpdateProccesorThread(LinkedBlockingQueue<BGP4Update> updateList,
 			MultiDomainTEDB multiTedb ,Hashtable<String,TEDB> intraTEDBs ){
-		log=LoggerFactory.getLogger("BGP4Server");
+		log=LoggerFactory.getLogger("BGP4Peer");
 		running=true;
 		this.updateList=updateList;
 		this.multiTedb = multiTedb;
@@ -185,6 +185,7 @@ public class UpdateProccesorThread extends Thread {
 									fillITNodeInformation((ITNodeNLRI)(nlri), learntFrom);
 									continue;
 									case NLRITypes.PCE_NLRI:
+										log.info("Received PCE_NLRI");
 										fillMDPCEInformation((PCENLRI)(nlri), learntFrom);
 										continue;
 								default:
@@ -681,7 +682,7 @@ public class UpdateProccesorThread extends Thread {
 			simpleTEDB.setMDPCE(MDPCE);
 			domainID= pceNLRI.getPCEv4Descriptors().getAreaID().getAREA_ID();
 		}
-		log.info("Received IT info for domain "+String.valueOf(domainID)+" from peer "+learntFrom);
+		log.info("Received PCE info for domain "+String.valueOf(domainID)+" from peer "+learntFrom+": "+String.valueOf(MDPCE));
 
 		domainTEDB=(DomainTEDB)intraTEDBs.get(String.valueOf(domainID));
 		if (domainTEDB instanceof SimpleTEDB){

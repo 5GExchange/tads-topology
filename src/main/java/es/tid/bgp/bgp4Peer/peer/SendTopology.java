@@ -140,6 +140,7 @@ public class SendTopology implements Runnable {
 							}
 
 							if (((DomainTEDB)ted).getMDPCE()!=null){
+								log.info("Sending MDPCE addreess for domain "+domainID+"IP: "+String.valueOf(((DomainTEDB)ted).getMDPCE()));
 								sendMDPCENLRI( domainID, ((DomainTEDB)ted).getMDPCE());
 							}
 
@@ -231,7 +232,7 @@ public class SendTopology implements Runnable {
 
 	private void sendMDPCENLRI(String domainID, Inet4Address IP){
 		//Andrea
-		log.debug("Sending IT REsources");
+		log.debug("Sending PCE Address");
 		BGP4Update update = createMsgUpdateMDPCENLRI(domainID, IP);
 		sendMessage(update);
 //		Iterator<Object> vertexIt = vertexSet.iterator();
@@ -626,7 +627,7 @@ public class SendTopology implements Runnable {
 			PCEv4DescriptorsTLV pcev4 = new PCEv4DescriptorsTLV();
 			pcev4.setPCEv4Address(IP);
 			//update.setLearntFrom(itResources.getLearntFrom());
-			log.info("Creating IT Update related to domain "+domainID+" learnt from ");
+			log.info("Creating PCE Update related to domain "+domainID);
 			AreaIDNodeDescriptorSubTLV domID =new AreaIDNodeDescriptorSubTLV();
 			domID.setAREA_ID((Inet4Address) InetAddress.getByName(domainID));
 			pcev4.setAreaID(domID);

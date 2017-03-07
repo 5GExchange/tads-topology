@@ -39,7 +39,7 @@ public class BGP4SessionClient extends GenericBGP4Session{
 	public BGP4SessionClient(BGP4SessionsInformation bgp4SessionsInformation,UpdateDispatcher updateDispatcher, Inet4Address peerBGP_IPaddress, int peerBGP_port, int holdTime,Inet4Address BGPIdentifier,int version,int myAutonomousSystem, String localBGP4Address, int localBGP4Port,int keepAliveTimer){
 		super(bgp4SessionsInformation, holdTime, BGPIdentifier, version, myAutonomousSystem,keepAliveTimer);
 		timer=new Timer();
-		log = LoggerFactory.getLogger("BGP4Client");		
+		log = LoggerFactory.getLogger("BGP4Peer");
 		this.peerBGP_port = peerBGP_port;
 		this.updateDispatcher=updateDispatcher;
 		this.localBGP4Address=localBGP4Address;

@@ -44,7 +44,7 @@ public class BGP4PeerInitiatedSession extends GenericBGP4Session{
 		super(bgp4SessionsInformation, holdTime, BGPIdentifier, version, myAutonomousSystem,keepAliveTimer);
 
 		this.setFSMstate(BGP4StateSession.BGP4_STATE_IDLE);
-		log=LoggerFactory.getLogger("BGP4Server");
+		log=LoggerFactory.getLogger("BGP4Peer");
 		log.debug("New BGP4Session: "+s);
 		this.socket = s;
 		try {
@@ -128,7 +128,7 @@ public class BGP4PeerInitiatedSession extends GenericBGP4Session{
 						break;
 
 					case BGP4MessageTypes.MESSAGE_UPDATE:
-						log.debug("UPDATE message from "+this.remotePeerIP);						
+						log.debug("UPDATE message from "+this.remotePeerIP);
 						BGP4Update bgp4Update = new BGP4Update(msg);
 						log.debug(bgp4Update.toString());
 						bgp4Update.setLearntFrom(this.getRemotePeerIP().toString());

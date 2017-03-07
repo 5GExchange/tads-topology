@@ -6,7 +6,7 @@
         </Console>
       </Appenders>
       <Loggers>
-        <Logger name="BGP4Peer" level="trace" additivity="false">
+        <Logger name="BGP4Peer" level="info" additivity="false">
           <AppenderRef ref="Console"/>
         </Logger>
         <Root level="error">

@@ -1375,7 +1375,7 @@ public class FileTEDBUpdater {
 						if (itResourcesMem!=null) itResources.setMem(itResourcesMem);
 						if (itResourcesStorage!=null) {
 							itResources.setStorage(itResourcesStorage);
-							log.info("set learn from for it resources "+ itResources.toString());
+							log.debug("set learn from for it resources "+ itResources.toString());
 						}
 
 						tedb.setItResources(itResources);

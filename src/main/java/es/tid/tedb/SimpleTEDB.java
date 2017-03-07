@@ -72,7 +72,7 @@ public class SimpleTEDB implements DomainTEDB{
 	private boolean multidomain=false;//By default, the TED has only one domain
 	Logger log;
 	public SimpleTEDB(){
-		log=LoggerFactory.getLogger("TEDBParser");		
+		log=LoggerFactory.getLogger("BGP4Peer");
 		registeredAlgorithms= new ArrayList<TEDListener>();
 		registeredAlgorithmssson= new ArrayList<SSONListener>();
 		TEDBlock=new ReentrantLock();
@@ -769,6 +769,7 @@ public class SimpleTEDB implements DomainTEDB{
 	}
 
 	public void setMDPCE(Inet4Address IP) {
+		log.info("MD-PCE set to: "+String.valueOf(IP));
 		this.MDPCE = IP;
 	}
 
