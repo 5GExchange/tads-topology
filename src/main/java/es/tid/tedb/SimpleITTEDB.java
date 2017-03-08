@@ -403,13 +403,13 @@ String topoString="";
 		
 	}
 	@Override
-	public Inet4Address getMDPCE() {
+	public PCEInfo getMDPCE() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void setMDPCE(Inet4Address ip) {
+	public void setMDPCE(PCEInfo ip) {
 		// TODO Auto-generated method stub
 
 	}

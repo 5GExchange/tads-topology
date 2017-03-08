@@ -65,9 +65,9 @@ public interface DomainTEDB extends TEDB {
 	public IT_Resources getItResources();
 	public void setItResources(IT_Resources itResources);
 
-	public Inet4Address getMDPCE();
+	public PCEInfo getMDPCE();
 
-	public void setMDPCE(Inet4Address IP);
+	public void setMDPCE(PCEInfo IP);
 
 
 }

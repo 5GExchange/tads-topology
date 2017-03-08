@@ -24,8 +24,8 @@ public class SimpleTEDB implements DomainTEDB{
 	
 	private IT_Resources itResources;
 
-	private Inet4Address MDPCE;
-
+	//private Inet4Address MDPCE;
+	private PCEInfo MDPCE;
 	/**
 	 * List of algorithms that will be notified when there are significant changes in the TED
 	 */
@@ -395,8 +395,8 @@ public class SimpleTEDB implements DomainTEDB{
 		String topoString="";
 
 		int size = interDomainLinks.size();
-		log.info("MDPCE: "+MDPCE.getHostAddress());
-		topoString="MDPCE for domain "+domainID+": "+MDPCE.getHostAddress();
+		log.info("MDPCE: "+MDPCE.getPCEipv4().getHostAddress());
+		topoString="MDPCE for domain "+domainID+": "+MDPCE.getPCEipv4().getHostAddress();
 		return topoString;
 	}
 
@@ -777,13 +777,13 @@ public class SimpleTEDB implements DomainTEDB{
 		this.itResources = itResources;
 	}
 
-	public Inet4Address getMDPCE() {
+	public PCEInfo getMDPCE() {
 		return MDPCE;
 	}
 
-	public void setMDPCE(Inet4Address IP) {
+	public void setMDPCE(PCEInfo PCE) {
 		//log.info("MD-PCE set to: "+String.valueOf(IP));
-		this.MDPCE = IP;
+		this.MDPCE = PCE;
 	}
 
 

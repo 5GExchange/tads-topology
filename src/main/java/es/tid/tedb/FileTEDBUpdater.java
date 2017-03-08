@@ -1332,9 +1332,10 @@ public class FileTEDBUpdater {
 						log.info("Loading topology from domain " + domain_id);
 					}
 
-
+					PCEInfo pce= new PCEInfo();
 					NodeList mdPCE = element1.getElementsByTagName("mdpce");
 					for (int i = 0; i < mdPCE.getLength(); i++) {
+
 						Element element = (Element) mdPCE.item(i);
 
 						NodeList ipList = element.getElementsByTagName("ipv4");
@@ -1342,7 +1343,9 @@ public class FileTEDBUpdater {
 						String MDIP = getCharacterDataFromElement(ipElement);
 
 						log.info("load MDPCE of " + domain_id+" with IP "+ MDIP);
-						tedb.setMDPCE((Inet4Address) InetAddress.getByName(MDIP));
+						pce.setPCEipv4((Inet4Address) InetAddress.getByName(MDIP));
+						pce.setLearntFrom("local"); //to be confirmed
+						tedb.setMDPCE(pce);
 
 					}
 

@@ -236,7 +236,7 @@ public class SendTopology implements Runnable {
 //		}
 	}
 
-	private void sendMDPCENLRI(String domainID, Inet4Address IP){
+	private void sendMDPCENLRI(String domainID, PCEInfo IP){
 		//Andrea
 		log.debug("Sending PCE Address");
 		BGP4Update update = createMsgUpdateMDPCENLRI(domainID, IP);
@@ -596,7 +596,7 @@ public class SendTopology implements Runnable {
 		
 	}
 
-	private  BGP4Update createMsgUpdateMDPCENLRI(String domainID, Inet4Address IP){
+	private  BGP4Update createMsgUpdateMDPCENLRI(String domainID, PCEInfo IP){
 		try{
 
 			String domainIDx= null;
@@ -634,8 +634,8 @@ public class SendTopology implements Runnable {
 			pceNLRI.setRoutingUniverseIdentifier(identifier);
 
 			PCEv4DescriptorsTLV pcev4 = new PCEv4DescriptorsTLV();
-			pcev4.setPCEv4Address(IP);
-			//update.setLearntFrom(itResources.getLearntFrom());
+			pcev4.setPCEv4Address(IP.getPCEipv4());
+			update.setLearntFrom(IP.getLearntFrom());
 			log.info("Creating PCE Update related to domain "+domainID);
 			AreaIDNodeDescriptorSubTLV domID =new AreaIDNodeDescriptorSubTLV();
 

@@ -672,15 +672,18 @@ public class UpdateProccesorThread extends Thread {
 		}
 	*/
 		DomainTEDB domainTEDB= null;
-		Inet4Address MDPCE = null;
+		PCEInfo MDPCE= new PCEInfo();
+		Inet4Address PCEip = null;
 		Inet4Address domainID = null;
 		SimpleTEDB simpleTEDB=null;
 
 		if (pceNLRI.getPCEv4Descriptors()!=null){
 			PCEv4DescriptorsTLV pceTLV= pceNLRI.getPCEv4Descriptors();
-			MDPCE = pceTLV.getPCEv4Address();
+			PCEip = pceTLV.getPCEv4Address();
 
 			domainID= pceNLRI.getPCEv4Descriptors().getAreaID().getAREA_ID();
+			MDPCE.setPCEipv4(PCEip);
+			MDPCE.setLearntFrom(learntFrom);
 		}
 		log.info("Received PCE info for domain "+String.valueOf(domainID)+" from peer "+learntFrom+": "+String.valueOf(MDPCE));
 
