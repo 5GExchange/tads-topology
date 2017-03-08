@@ -58,7 +58,8 @@ public class SendTopology implements Runnable {
 	private Logger log;
 	private int instanceId=1;
 	private boolean sendIntraDomainLinks=false;
-
+	private int ASnumber=1;
+	private boolean isASnumber= false;
 	private boolean send4AS=false;
 
 
@@ -71,13 +72,14 @@ public class SendTopology implements Runnable {
 		log = LoggerFactory.getLogger("BGP4Peer");
 	}
 
-	public void configure( Hashtable<String,TEDB> intraTEDBs,BGP4SessionsInformation bgp4SessionsInformation,boolean sendTopology,int instanceId,boolean sendIntraDomainLinks, MultiDomainTEDB multiTED){
+	public void configure( Hashtable<String,TEDB> intraTEDBs,BGP4SessionsInformation bgp4SessionsInformation,boolean sendTopology,int instanceId,boolean sendIntraDomainLinks, MultiDomainTEDB multiTED, int AS){
 		this.intraTEDBs=intraTEDBs;
 		this.bgp4SessionsInformation=bgp4SessionsInformation;
 		this.sendTopology= sendTopology;
 		this.instanceId = instanceId;
 		this.sendIntraDomainLinks=sendIntraDomainLinks;
 		this.multiDomainTEDB=multiTED;
+		this.ASnumber=AS;
 		try {
 			this.localAreaID=(Inet4Address)Inet4Address.getByName("0.0.0.0");
 			this.localBGPLSIdentifer=(Inet4Address)Inet4Address.getByName("1.1.1.1");
@@ -97,6 +99,25 @@ public class SendTopology implements Runnable {
 		this.sendIntraDomainLinks=sendIntraDomainLinks;
 		this.multiDomainTEDB=multiTED;
 		this.isTest=test;
+		try {
+			this.localAreaID=(Inet4Address)Inet4Address.getByName("0.0.0.0");
+			this.localBGPLSIdentifer=(Inet4Address)Inet4Address.getByName("1.1.1.1");
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public void configure( Hashtable<String,TEDB> intraTEDBs,BGP4SessionsInformation bgp4SessionsInformation,boolean sendTopology,int instanceId,boolean sendIntraDomainLinks, MultiDomainTEDB multiTED, boolean test, int AS){
+		this.intraTEDBs=intraTEDBs;
+		this.bgp4SessionsInformation=bgp4SessionsInformation;
+		this.sendTopology= sendTopology;
+		this.instanceId = instanceId;
+		this.sendIntraDomainLinks=sendIntraDomainLinks;
+		this.multiDomainTEDB=multiTED;
+		this.isTest=test;
+		this.ASnumber=AS;
 		try {
 			this.localAreaID=(Inet4Address)Inet4Address.getByName("0.0.0.0");
 			this.localBGPLSIdentifer=(Inet4Address)Inet4Address.getByName("1.1.1.1");
@@ -437,20 +458,22 @@ public class SendTopology implements Runnable {
 	private  BGP4Update createMsgUpdateNodeNLRI(Node_Info node_info){
 		try{
 			
-		
+
 				BGP4Update update= new BGP4Update();	
 				//Path Attributes
 				ArrayList<PathAttribute> pathAttributes = update.getPathAttributes();
+
 				//Origin
 				OriginAttribute or = new OriginAttribute(); 
 				or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
 				pathAttributes.add(or);
 				//AS_PATH
+
 				if (send4AS==true) {
 					AS4_Path_Attribute as_path = new AS4_Path_Attribute();
 					AS4_Path_Segment as_path_seg = new AS4_Path_Segment();
 					long[] segs = new long[1];
-					segs[0] = 65522;
+					segs[0] = ASnumber;
 					as_path_seg.setSegments(segs);
 					as_path.getAsPathSegments().add(as_path_seg);
 					pathAttributes.add(as_path);
@@ -459,7 +482,7 @@ public class SendTopology implements Runnable {
 					AS_Path_Attribute as_path = new AS_Path_Attribute();
 					AS_Path_Segment as_path_seg = new AS_Path_Segment();
 					int[] segs = new int[1];
-					segs[0] = 65522;
+					segs[0] = ASnumber;
 					as_path_seg.setSegments(segs);
 					as_path.getAsPathSegments().add(as_path_seg);
 					pathAttributes.add(as_path);
@@ -546,7 +569,7 @@ public class SendTopology implements Runnable {
 				AS4_Path_Attribute as_path = new AS4_Path_Attribute();
 				AS4_Path_Segment as_path_seg = new AS4_Path_Segment();
 				long[] segs = new long[1];
-				segs[0] = 65522;
+				segs[0] = ASnumber;
 				as_path_seg.setSegments(segs);
 				as_path.getAsPathSegments().add(as_path_seg);
 				pathAttributes.add(as_path);
@@ -555,14 +578,13 @@ public class SendTopology implements Runnable {
 				AS_Path_Attribute as_path = new AS_Path_Attribute();
 				AS_Path_Segment as_path_seg = new AS_Path_Segment();
 				int[] segs = new int[1];
-				segs[0] = 65522;
+				segs[0] = ASnumber;
 				as_path_seg.setSegments(segs);
 				as_path.getAsPathSegments().add(as_path_seg);
 				pathAttributes.add(as_path);
 			}
 
 
-		
 
 			//NLRI
 			ITNodeNLRI itNodeNLRI = new ITNodeNLRI();
@@ -606,25 +628,25 @@ public class SendTopology implements Runnable {
 			//Origin
 			OriginAttribute or = new OriginAttribute();
 			or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
-			//pathAttributes.add(or);
+			pathAttributes.add(or);
 			//AS_PATH
 			if (send4AS==true) {
 				AS4_Path_Attribute as_path = new AS4_Path_Attribute();
 				AS4_Path_Segment as_path_seg = new AS4_Path_Segment();
 				long[] segs = new long[1];
-				segs[0] = 65522;
+				segs[0] = ASnumber;
 				as_path_seg.setSegments(segs);
 				as_path.getAsPathSegments().add(as_path_seg);
-				//pathAttributes.add(as_path);
+				pathAttributes.add(as_path);
 			}
 			else {
 				AS_Path_Attribute as_path = new AS_Path_Attribute();
 				AS_Path_Segment as_path_seg = new AS_Path_Segment();
 				int[] segs = new int[1];
-				segs[0] = 65522;
+				segs[0] = ASnumber;
 				as_path_seg.setSegments(segs);
 				as_path.getAsPathSegments().add(as_path_seg);
-				//pathAttributes.add(as_path);
+				pathAttributes.add(as_path);
 			}
 
 
@@ -906,7 +928,7 @@ public class SendTopology implements Runnable {
 			AS4_Path_Attribute as_path = new AS4_Path_Attribute();
 			AS4_Path_Segment as_path_seg = new AS4_Path_Segment();
 			long[] segs = new long[1];
-			segs[0] = 65522;
+			segs[0] = ASnumber;
 			as_path_seg.setSegments(segs);
 			as_path.getAsPathSegments().add(as_path_seg);
 			pathAttributes.add(as_path);
@@ -915,7 +937,7 @@ public class SendTopology implements Runnable {
 			AS_Path_Attribute as_path = new AS_Path_Attribute();
 			AS_Path_Segment as_path_seg = new AS_Path_Segment();
 			int[] segs = new int[1];
-			segs[0] = 65522;
+			segs[0] = ASnumber;
 			as_path_seg.setSegments(segs);
 			as_path.getAsPathSegments().add(as_path_seg);
 			pathAttributes.add(as_path);

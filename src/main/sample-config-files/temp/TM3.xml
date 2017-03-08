@@ -3,11 +3,11 @@
     <managementIP>localhost</managementIP>
     <managementPort>5003</managementPort>
 
-    <XML>
+    <XML_Plugin>
         <mode>TM</mode>
-        <XMLFileTopology>target/conf1wayTest/network3.xml</XMLFileTopology>
+        <XMLFileTopology>target/temp/network3.xml</XMLFileTopology>
         <Identifier>3.3.3.3</Identifier>>
-    </XML>
+    </XML_Plugin>
      <InitFrom>
         <Init>initFromXML</Init>
     </InitFrom>
@@ -21,7 +21,7 @@
     <BGPLS>
         <Reader>True</Reader>
         <Writer>True</Writer>
-        <BGPLSconfigFile>target/conf1wayTest/BGPLS3.xml</BGPLSconfigFile>
+        <BGPLSconfigFile>target/temp/BGPLS3.xml</BGPLSconfigFile>
     </BGPLS>
    
 </config>
