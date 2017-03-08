@@ -590,7 +590,65 @@ public class SendTopology implements Runnable {
 		
 	}
 
+	private  BGP4Update createMsgUpdateMDPCENLRI(String domainID, Inet4Address IP){
+		try{
 
+
+			BGP4Update update= new BGP4Update();
+			//Path Attributes
+			ArrayList<PathAttribute> pathAttributes = update.getPathAttributes();
+			//Origin
+			OriginAttribute or = new OriginAttribute();
+			or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
+			//pathAttributes.add(or);
+			//AS_PATH
+			if (send4AS==true) {
+				AS4_Path_Attribute as_path = new AS4_Path_Attribute();
+				AS4_Path_Segment as_path_seg = new AS4_Path_Segment();
+				long[] segs = new long[1];
+				segs[0] = 65522;
+				as_path_seg.setSegments(segs);
+				as_path.getAsPathSegments().add(as_path_seg);
+				//pathAttributes.add(as_path);
+			}
+			else {
+				AS_Path_Attribute as_path = new AS_Path_Attribute();
+				AS_Path_Segment as_path_seg = new AS_Path_Segment();
+				int[] segs = new int[1];
+				segs[0] = 65522;
+				as_path_seg.setSegments(segs);
+				as_path.getAsPathSegments().add(as_path_seg);
+				//pathAttributes.add(as_path);
+			}
+
+
+			//NLRI
+			PCENLRI pceNLRI = new PCENLRI();
+			pceNLRI.setProtocolID(ProtocolIDCodes.Unknown_Protocol_ID);
+			pceNLRI.setRoutingUniverseIdentifier(identifier);
+
+			PCEv4DescriptorsTLV pcev4 = new PCEv4DescriptorsTLV();
+			pcev4.setPCEv4Address(IP);
+			//update.setLearntFrom(itResources.getLearntFrom());
+			log.info("Creating PCE Update related to domain "+domainID);
+			AreaIDNodeDescriptorSubTLV domID =new AreaIDNodeDescriptorSubTLV();
+			domID.setAREA_ID((Inet4Address) InetAddress.getByName(domainID));
+			pcev4.setAreaID(domID);
+			pceNLRI.setPCEv4Descriptors(pcev4);
+
+			BGP_LS_MP_Reach_Attribute ra= new BGP_LS_MP_Reach_Attribute();
+			ra.setLsNLRI(pceNLRI);
+			pathAttributes.add(ra);
+			log.info(ra.toString());
+			return update;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+	/*
 	private  BGP4Update createMsgUpdateMDPCENLRI(String domainID, Inet4Address IP){
 		try{
 
@@ -639,7 +697,7 @@ public class SendTopology implements Runnable {
 			return null;
 		}
 
-	}
+	}*/
 
 
 	/**

@@ -386,8 +386,21 @@ public class SimpleTEDB implements DomainTEDB{
 		}
 		if (interDomainLinks != null)
 			topoString=topoString+printInterDomainLinks();
+		if (MDPCE!= null)
+			topoString=topoString+printMDPCE();
 		return topoString;
 	}
+
+	public String printMDPCE(){
+		String topoString="";
+
+		int size = interDomainLinks.size();
+		log.info("MDPCE: "+MDPCE.getHostAddress());
+		topoString="MDPCE for domain "+domainID+": "+MDPCE.getHostAddress();
+		return topoString;
+	}
+
+
 
 	public String printInterDomainLinks(){
 		String topoString="";
@@ -769,7 +782,7 @@ public class SimpleTEDB implements DomainTEDB{
 	}
 
 	public void setMDPCE(Inet4Address IP) {
-		log.info("MD-PCE set to: "+String.valueOf(IP));
+		//log.info("MD-PCE set to: "+String.valueOf(IP));
 		this.MDPCE = IP;
 	}
 

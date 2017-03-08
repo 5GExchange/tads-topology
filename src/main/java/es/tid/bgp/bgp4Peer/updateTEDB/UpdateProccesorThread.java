@@ -679,7 +679,7 @@ public class UpdateProccesorThread extends Thread {
 		if (pceNLRI.getPCEv4Descriptors()!=null){
 			PCEv4DescriptorsTLV pceTLV= pceNLRI.getPCEv4Descriptors();
 			MDPCE = pceTLV.getPCEv4Address();
-			simpleTEDB.setMDPCE(MDPCE);
+
 			domainID= pceNLRI.getPCEv4Descriptors().getAreaID().getAREA_ID();
 		}
 		log.info("Received PCE info for domain "+String.valueOf(domainID)+" from peer "+learntFrom+": "+String.valueOf(MDPCE));
@@ -687,9 +687,11 @@ public class UpdateProccesorThread extends Thread {
 		domainTEDB=(DomainTEDB)intraTEDBs.get(String.valueOf(domainID));
 		if (domainTEDB instanceof SimpleTEDB){
 			simpleTEDB = (SimpleTEDB) domainTEDB;
+			simpleTEDB.setMDPCE(MDPCE);
 		}else if (domainTEDB==null){
 			simpleTEDB = new SimpleTEDB();
 			simpleTEDB.createGraph();
+			simpleTEDB.setMDPCE(MDPCE);
 			//try {
 			//	simpleTEDB.setDomainID((Inet4Address) InetAddress.getByName(String.valueOf(pceNLRI.getAreaID())));
 			//	//simpleTEDB.setDomainID( pceNLRI.getAreaID().getAREA_ID());
@@ -710,6 +712,7 @@ public class UpdateProccesorThread extends Thread {
 			log.error("PROBLEM: TEDB not compatible");
 			return;
 		}
+
 
 
 	}
