@@ -4,10 +4,7 @@ import com.google.common.base.Splitter;
 import es.tid.bgp.bgp4.messages.BGP4Update;
 import es.tid.bgp.bgp4.update.fields.*;
 import es.tid.bgp.bgp4.update.fields.pathAttributes.*;
-import es.tid.bgp.bgp4.update.tlv.LocalNodeDescriptorsTLV;
-import es.tid.bgp.bgp4.update.tlv.PCEv4DescriptorsTLV;
-import es.tid.bgp.bgp4.update.tlv.ProtocolIDCodes;
-import es.tid.bgp.bgp4.update.tlv.RemoteNodeDescriptorsTLV;
+import es.tid.bgp.bgp4.update.tlv.*;
 import es.tid.bgp.bgp4.update.tlv.linkstate_attribute_tlvs.*;
 import es.tid.bgp.bgp4.update.tlv.node_link_prefix_descriptor_subTLVs.*;
 import es.tid.bgp.bgp4Peer.bgp4session.BGP4SessionsInformation;
@@ -623,6 +620,7 @@ public class SendTopology implements Runnable {
 
 			String domainIDx= null;
 			BGP4Update update= new BGP4Update();
+			update.setLearntFrom(IP.getLearntFrom());
 			//Path Attributes
 			ArrayList<PathAttribute> pathAttributes = update.getPathAttributes();
 			//Origin
@@ -654,22 +652,27 @@ public class SendTopology implements Runnable {
 			PCENLRI pceNLRI = new PCENLRI();
 			pceNLRI.setProtocolID(ProtocolIDCodes.Unknown_Protocol_ID);
 			pceNLRI.setRoutingUniverseIdentifier(identifier);
-
+			//PCE descriptor
 			PCEv4DescriptorsTLV pcev4 = new PCEv4DescriptorsTLV();
 			pcev4.setPCEv4Address(IP.getPCEipv4());
-			update.setLearntFrom(IP.getLearntFrom());
-			log.info("Creating PCE Update related to domain "+domainID);
-			AreaIDNodeDescriptorSubTLV domID =new AreaIDNodeDescriptorSubTLV();
-
-
-			domainIDx = domainID.replace("/", "");
-			//domID.setAREA_ID((Inet4Address) InetAddress.getByName(domainID));
-
-			log.info(domainIDx);
-			domID.setAREA_ID((Inet4Address) forString(domainIDx));
-			pcev4.setAreaID(domID);
 			pceNLRI.setPCEv4Descriptors(pcev4);
 
+			log.info("Creating PCE Update related to domain "+domainID);
+
+			//Domain TLV
+			PCEv4DomainTLV domTLV= new PCEv4DomainTLV();
+			AreaIDNodeDescriptorSubTLV domID =new AreaIDNodeDescriptorSubTLV();
+			domainIDx = domainID.replace("/", "");
+			log.info(domainIDx);
+			domID.setAREA_ID((Inet4Address) forString(domainIDx));
+			//domTLV.addAreaIDSubTLV(domID);
+
+			ArrayList<AreaIDNodeDescriptorSubTLV> list = new ArrayList<AreaIDNodeDescriptorSubTLV>();
+			list.add(domID);
+			domTLV.setAreaIDSubTLVs(list);
+			pceNLRI.setPCEv4DomainID(domTLV);
+
+			//add NLRI to BGP-LS
 			BGP_LS_MP_Reach_Attribute ra= new BGP_LS_MP_Reach_Attribute();
 			ra.setLsNLRI(pceNLRI);
 			pathAttributes.add(ra);

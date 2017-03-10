@@ -26,6 +26,14 @@ public class SimpleTEDB implements DomainTEDB{
 
 	//private Inet4Address MDPCE;
 	private PCEInfo MDPCE;
+
+	ArrayList<Inet4Address> localDomains = new ArrayList<Inet4Address>();
+	ArrayList<Inet4Address> localASs = new ArrayList<Inet4Address>();
+	ArrayList<Inet4Address> NeighDomains = new ArrayList<Inet4Address>();
+	ArrayList<Inet4Address> NeighASs = new ArrayList<Inet4Address>();
+
+
+
 	/**
 	 * List of algorithms that will be notified when there are significant changes in the TED
 	 */
@@ -786,5 +794,37 @@ public class SimpleTEDB implements DomainTEDB{
 		this.MDPCE = PCE;
 	}
 
+	public ArrayList<Inet4Address> getLocalDomains() {
+		return localDomains;
+	}
 
+	public void setLocalDomains(ArrayList<Inet4Address> list) {
+		//log.info("MD-PCE set to: "+String.valueOf(IP));
+		this.localDomains = list;
+	}
+
+	public ArrayList<Inet4Address> getLocalASs() {
+		return localASs;
+	}
+
+	public void setLocalASs(ArrayList<Inet4Address> list) {
+		//log.info("MD-PCE set to: "+String.valueOf(IP));
+		this.localASs = list;
+	}
+	public ArrayList<Inet4Address> getNeighDomains() {
+		return NeighDomains;
+	}
+
+	public void setNeighDomains(ArrayList<Inet4Address> list) {
+		//log.info("MD-PCE set to: "+String.valueOf(IP));
+		this.NeighDomains = list;
+	}
+	public ArrayList<Inet4Address> getNeighASs() {
+		return NeighASs;
+	}
+
+	public void setNeighASs(ArrayList<Inet4Address> list) {
+		//log.info("MD-PCE set to: "+String.valueOf(IP));
+		this.NeighASs = list;
+	}
 }

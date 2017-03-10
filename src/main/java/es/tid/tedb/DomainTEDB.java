@@ -4,6 +4,7 @@ package es.tid.tedb;
 import es.tid.ospf.ospfv2.lsa.tlv.subtlv.complexFields.BitmapLabelSet;
 
 import java.net.Inet4Address;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.Set;
@@ -68,6 +69,21 @@ public interface DomainTEDB extends TEDB {
 	public PCEInfo getMDPCE();
 
 	public void setMDPCE(PCEInfo IP);
+
+	public ArrayList<Inet4Address> getLocalDomains();
+
+	public void setLocalDomains(ArrayList<Inet4Address> list);
+
+	public ArrayList<Inet4Address> getLocalASs();
+
+	public void setLocalASs(ArrayList<Inet4Address> list);
+
+	public ArrayList<Inet4Address> getNeighDomains();
+
+	public void setNeighDomains(ArrayList<Inet4Address> list);
+	public ArrayList<Inet4Address> getNeighASs();
+
+	public void setNeighASs(ArrayList<Inet4Address> list);
 
 
 }

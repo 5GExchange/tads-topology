@@ -414,5 +414,50 @@ String topoString="";
 
 	}
 
+	@Override
+	public ArrayList<Inet4Address> getLocalDomains(){
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setLocalDomains(ArrayList<Inet4Address> list){
+		// TODO Auto-generated method stu
+	}
+
+	@Override
+	public ArrayList<Inet4Address> getLocalASs(){
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setLocalASs(ArrayList<Inet4Address> list){
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public ArrayList<Inet4Address> getNeighDomains(){
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setNeighDomains(ArrayList<Inet4Address> list){
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public ArrayList<Inet4Address> getNeighASs(){
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setNeighASs(ArrayList<Inet4Address> list){
+		// TODO Auto-generated method stub
+	}
+
+
 
 }

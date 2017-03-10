@@ -4,6 +4,8 @@ import es.tid.bgp.bgp4.messages.BGP4Update;
 import es.tid.bgp.bgp4.update.fields.*;
 import es.tid.bgp.bgp4.update.fields.pathAttributes.*;
 import es.tid.bgp.bgp4.update.tlv.PCEv4DescriptorsTLV;
+import es.tid.bgp.bgp4.update.tlv.PCEv4DomainTLV;
+import es.tid.bgp.bgp4.update.tlv.PCEv4NeighboursTLV;
 import es.tid.bgp.bgp4.update.tlv.linkstate_attribute_tlvs.*;
 import es.tid.bgp.bgp4.update.tlv.node_link_prefix_descriptor_subTLVs.*;
 import es.tid.ospf.ospfv2.lsa.tlv.subtlv.*;
@@ -676,47 +678,71 @@ public class UpdateProccesorThread extends Thread {
 		Inet4Address PCEip = null;
 		Inet4Address domainID = null;
 		SimpleTEDB simpleTEDB=null;
+		ArrayList<Inet4Address> localDomains = new ArrayList<Inet4Address>();
+		ArrayList<Inet4Address> localASs = new ArrayList<Inet4Address>();
+		ArrayList<Inet4Address> NeighDomains = new ArrayList<Inet4Address>();
+		ArrayList<Inet4Address> NeighASs = new ArrayList<Inet4Address>();
 
 		if (pceNLRI.getPCEv4Descriptors()!=null){
 			PCEv4DescriptorsTLV pceTLV= pceNLRI.getPCEv4Descriptors();
 			PCEip = pceTLV.getPCEv4Address();
-
-			domainID= pceNLRI.getPCEv4Descriptors().getAreaID().getAREA_ID();
 			MDPCE.setPCEipv4(PCEip);
 			MDPCE.setLearntFrom(learntFrom);
 		}
+		if (pceNLRI.getPCEv4DomainID()!=null){
+			PCEv4DomainTLV domTLV= pceNLRI.getPCEv4DomainID();
+			//ArrayList<AreaIDNodeDescriptorSubTLV> arealist = ;
+			for (AreaIDNodeDescriptorSubTLV area: domTLV.getAreaIDSubTLVs()){
+				if (!localDomains.contains(area.getAREA_ID())){
+					localDomains.add(area.getAREA_ID());
+				}
+			}
+			for (AutonomousSystemNodeDescriptorSubTLV as: domTLV.getASSubTLVs()){
+				if (!localASs.contains(as.getAS_ID())){
+					localASs.add(as.getAS_ID());
+				}
+			}
+
+		}
+		if (pceNLRI.getPCEv4NeighbourID()!=null){
+			PCEv4NeighboursTLV NdomTLV= pceNLRI.getPCEv4NeighbourID();
+			//ArrayList<AreaIDNodeDescriptorSubTLV> arealist = ;
+			for (AreaIDNodeDescriptorSubTLV area: NdomTLV.getAreaIDSubTLVs()){
+				if (!NeighDomains.contains(area.getAREA_ID())){
+					NeighDomains.add(area.getAREA_ID());
+				}
+			}
+			for (AutonomousSystemNodeDescriptorSubTLV as: NdomTLV.getASSubTLVs()){
+				if (!NeighASs.contains(as.getAS_ID())){
+					NeighASs.add(as.getAS_ID());
+				}
+			}
+
+		}
+
 		log.info("Received PCE info for domain "+String.valueOf(domainID)+" from peer "+learntFrom+": "+String.valueOf(MDPCE));
 
 		domainTEDB=(DomainTEDB)intraTEDBs.get(String.valueOf(domainID));
 		if (domainTEDB instanceof SimpleTEDB){
 			simpleTEDB = (SimpleTEDB) domainTEDB;
-			simpleTEDB.setMDPCE(MDPCE);
+
 		}else if (domainTEDB==null){
 			simpleTEDB = new SimpleTEDB();
 			simpleTEDB.createGraph();
-			simpleTEDB.setMDPCE(MDPCE);
-			//try {
-			//	simpleTEDB.setDomainID((Inet4Address) InetAddress.getByName(String.valueOf(pceNLRI.getAreaID())));
-			//	//simpleTEDB.setDomainID( pceNLRI.getAreaID().getAREA_ID());
-			//} catch (UnknownHostException e) {
-			//	e.printStackTrace();
-			//}
-
-			//try {
-			//simpleTEDB.setDomainID((Inet4Address) InetAddress.getByName(String.valueOf(pceNLRI.getAreaID())));
-			simpleTEDB.setDomainID(domainID);
-			//} catch (UnknownHostException e) {
-			//	e.printStackTrace();
-			//}
 			this.intraTEDBs.put(String.valueOf(domainID), simpleTEDB);
 
 		}
+
 		else {
 			log.error("PROBLEM: TEDB not compatible");
 			return;
 		}
-
-
+		simpleTEDB.setMDPCE(MDPCE);
+		simpleTEDB.setLocalDomains(localDomains);
+		simpleTEDB.setLocalASs(localASs);
+		simpleTEDB.setNeighASs(NeighASs);
+		simpleTEDB.setNeighDomains(NeighDomains);
+		simpleTEDB.setDomainID(domainID);
 
 	}
 
