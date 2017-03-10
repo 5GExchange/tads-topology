@@ -152,24 +152,25 @@ public class SendTopology implements Runnable {
 					while (iter.hasMoreElements()){						
 						String domainID = iter.nextElement();
 						//Andrea
-						log.debug("Sending TED from domain "+domainID);
+						if (domainID != null) {
+							log.debug("Sending TED from domain " + domainID);
 
-						TEDB ted=intraTEDBs.get(domainID);
-						if (ted instanceof DomainTEDB) {
-							sendLinkNLRI( ((DomainTEDB)ted).getIntraDomainLinks(),domainID);
-							//log.info(" XXXX ted.getNodeTable():"+ted.getNodeTable());
-							sendNodeNLRI( ((DomainTEDB)ted).getIntraDomainLinksvertexSet(), ((DomainTEDB)ted).getNodeTable());
-							if (((DomainTEDB)ted).getItResources()!=null){
-								sendITNodeNLRI( domainID, ((DomainTEDB)ted).getItResources());
+							TEDB ted = intraTEDBs.get(domainID);
+							if (ted instanceof DomainTEDB) {
+								sendLinkNLRI(((DomainTEDB) ted).getIntraDomainLinks(), domainID);
+								//log.info(" XXXX ted.getNodeTable():"+ted.getNodeTable());
+								sendNodeNLRI(((DomainTEDB) ted).getIntraDomainLinksvertexSet(), ((DomainTEDB) ted).getNodeTable());
+								if (((DomainTEDB) ted).getItResources() != null) {
+									sendITNodeNLRI(domainID, ((DomainTEDB) ted).getItResources());
+								}
+
+								if (((DomainTEDB) ted).getMDPCE() != null) {
+									log.info("Sending MDPCE addreess for domain " + domainID + " with IP: " + String.valueOf(((DomainTEDB) ted).getMDPCE().getPCEipv4()));
+									sendMDPCENLRI(domainID, ((DomainTEDB) ted).getMDPCE());
+								}
+
 							}
-
-							if (((DomainTEDB)ted).getMDPCE()!=null){
-								log.info("Sending MDPCE addreess for domain "+domainID+" with IP: "+String.valueOf(((DomainTEDB)ted).getMDPCE().getPCEipv4()));
-								sendMDPCENLRI( domainID, ((DomainTEDB)ted).getMDPCE());
-							}
-
 						}
-				
 
 						
 					}
