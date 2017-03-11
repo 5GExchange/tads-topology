@@ -3,11 +3,11 @@
     <managementIP>localhost</managementIP>
     <managementPort>5002</managementPort>
 
-    <XML>
+    <XML_Plugin>
         <mode>TM</mode>
     	<XMLFileTopology>target/conf1wayTest/network2.xml</XMLFileTopology>
         <Identifier>2.2.2.2</Identifier>>
-    </XML>
+    </XML_Plugin>
      <InitFrom>
         <Init>initFromXML</Init>
     </InitFrom>

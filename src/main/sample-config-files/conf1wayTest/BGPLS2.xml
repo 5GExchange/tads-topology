@@ -14,15 +14,9 @@
     </configPeer-->
 	<configPeer>
                 <peer>localhost</peer>
-                <export>true</export>
-                <import>false</import>
-                <peerPort>11179</peerPort>
-    </configPeer>
-	<configPeer>
-                <peer>localhost</peer>
                 <export>false</export>
                 <import>true</import>
-                <peerPort>33179</peerPort>
+                <peerPort>11179</peerPort>
     </configPeer>
 	<!-- Ficheros log (servidor, protocolo PCEP y OSPF). Campos opcionales-->
 	<BGP4LogFile>BGP4Parser-BGPLS2.log</BGP4LogFile><!-- Default value: BGP4Parser.log -->

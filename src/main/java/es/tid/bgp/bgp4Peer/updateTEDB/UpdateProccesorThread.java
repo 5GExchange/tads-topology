@@ -682,6 +682,7 @@ public class UpdateProccesorThread extends Thread {
 		ArrayList<Inet4Address> localASs = new ArrayList<Inet4Address>();
 		ArrayList<Inet4Address> NeighDomains = new ArrayList<Inet4Address>();
 		ArrayList<Inet4Address> NeighASs = new ArrayList<Inet4Address>();
+		StringBuffer sb=new StringBuffer(1000);
 
 		if (pceNLRI.getPCEv4Descriptors()!=null){
 			PCEv4DescriptorsTLV pceTLV= pceNLRI.getPCEv4Descriptors();
@@ -693,13 +694,18 @@ public class UpdateProccesorThread extends Thread {
 			PCEv4DomainTLV domTLV= pceNLRI.getPCEv4DomainID();
 			//ArrayList<AreaIDNodeDescriptorSubTLV> arealist = ;
 			for (AreaIDNodeDescriptorSubTLV area: domTLV.getAreaIDSubTLVs()){
+				log.info("Area ID received: "+area.getAREA_ID().getHostAddress());
 				if (!localDomains.contains(area.getAREA_ID())){
+					log.info("not present, added");
+					sb.append("Local Area: "+area.toString());
 					localDomains.add(area.getAREA_ID());
 				}
 			}
 			for (AutonomousSystemNodeDescriptorSubTLV as: domTLV.getASSubTLVs()){
 				if (!localASs.contains(as.getAS_ID())){
 					localASs.add(as.getAS_ID());
+					sb.append("Local AS: "+as.toString());
+
 				}
 			}
 
@@ -719,30 +725,39 @@ public class UpdateProccesorThread extends Thread {
 			}
 
 		}
+		log.info("Received PCE info for domain/AS "+sb.toString()+" from peer "+learntFrom+": "+MDPCE.getPCEipv4().getHostAddress());
 
-		log.info("Received PCE info for domain "+String.valueOf(domainID)+" from peer "+learntFrom+": "+String.valueOf(MDPCE));
+		for (Inet4Address domain: localDomains){
 
-		domainTEDB=(DomainTEDB)intraTEDBs.get(String.valueOf(domainID));
-		if (domainTEDB instanceof SimpleTEDB){
-			simpleTEDB = (SimpleTEDB) domainTEDB;
 
-		}else if (domainTEDB==null){
-			simpleTEDB = new SimpleTEDB();
-			simpleTEDB.createGraph();
-			this.intraTEDBs.put(String.valueOf(domainID), simpleTEDB);
+			domainTEDB=(DomainTEDB)intraTEDBs.get(domain.getHostAddress());
+			if (domainTEDB instanceof SimpleTEDB){
+				simpleTEDB = (SimpleTEDB) domainTEDB;
+				simpleTEDB.setMDPCE(MDPCE);
+				simpleTEDB.setLocalDomains(localDomains);
+				simpleTEDB.setLocalASs(localASs);
+				simpleTEDB.setNeighASs(NeighASs);
+				simpleTEDB.setNeighDomains(NeighDomains);
+				simpleTEDB.setDomainID(domain);
 
+			}else if (domainTEDB==null) {
+				simpleTEDB = new SimpleTEDB();
+				simpleTEDB.createGraph();
+				this.intraTEDBs.put(domain.getHostAddress(), simpleTEDB);
+				simpleTEDB.setMDPCE(MDPCE);
+				simpleTEDB.setLocalDomains(localDomains);
+				simpleTEDB.setLocalASs(localASs);
+				simpleTEDB.setNeighASs(NeighASs);
+				simpleTEDB.setNeighDomains(NeighDomains);
+				simpleTEDB.setDomainID(domain);
+			}
+
+
+			else {
+				log.error("PROBLEM: TEDB not compatible");
+				return;
+			}
 		}
-
-		else {
-			log.error("PROBLEM: TEDB not compatible");
-			return;
-		}
-		simpleTEDB.setMDPCE(MDPCE);
-		simpleTEDB.setLocalDomains(localDomains);
-		simpleTEDB.setLocalASs(localASs);
-		simpleTEDB.setNeighASs(NeighASs);
-		simpleTEDB.setNeighDomains(NeighDomains);
-		simpleTEDB.setDomainID(domainID);
 
 	}
 

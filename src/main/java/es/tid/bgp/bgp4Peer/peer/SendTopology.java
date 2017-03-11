@@ -164,8 +164,8 @@ public class SendTopology implements Runnable {
 									sendITNodeNLRI(domainID, ((DomainTEDB) ted).getItResources());
 								}
 
-								if (((DomainTEDB) ted).getMDPCE() != null) {
-									log.info("Sending MDPCE addreess for domain " + domainID + " with IP: " + String.valueOf(((DomainTEDB) ted).getMDPCE().getPCEipv4()));
+								if (((DomainTEDB) ted).getMDPCE() != null && domainID != null) {
+									log.info("Sending MDPCE addreess for domain " + domainID + " with IP: " + ((DomainTEDB) ted).getMDPCE().getPCEipv4().getHostAddress());
 									sendMDPCENLRI(domainID, ((DomainTEDB) ted).getMDPCE());
 								}
 
@@ -666,11 +666,11 @@ public class SendTopology implements Runnable {
 			domainIDx = domainID.replace("/", "");
 			log.info(domainIDx);
 			domID.setAREA_ID((Inet4Address) forString(domainIDx));
-			domTLV.addAreaIDSubTLV(domID);
+			//domTLV.addAreaIDSubTLV(domID);
 
-			//ArrayList<AreaIDNodeDescriptorSubTLV> list = new ArrayList<AreaIDNodeDescriptorSubTLV>();
-			//list.add(domID);
-			//domTLV.setAreaIDSubTLVs(list);
+			ArrayList<AreaIDNodeDescriptorSubTLV> list = new ArrayList<AreaIDNodeDescriptorSubTLV>();
+			list.add(domID);
+			domTLV.setAreaIDSubTLVs(list);
 			pceNLRI.setPCEv4DomainID(domTLV);
 
 			//add NLRI to BGP-LS
