@@ -115,10 +115,11 @@ public class UpdateProccesorThread extends Thread {
 			try {
 				clearAttributes();
 				PathAttribute att_ls = null;
-				PathAttribute att_mpreach  = null; 
+				PathAttribute att_localpref = null;
+				PathAttribute att_mpreach = null;
 				PathAttribute att = null;
 				updateMsg= updateList.take();
-				log.debug("Update Procesor Thread Reading the message: \n"+ updateMsg.toString());
+				log.debug("Update Processor Thread Reading the message: \n"+ updateMsg.toString());
 				//Andrea To be checked
 				String learntFrom = updateMsg.getLearntFrom();
 				log.debug("Received from "+learntFrom);
@@ -141,8 +142,11 @@ public class UpdateProccesorThread extends Thread {
 						break;	
 					case PathAttributesTypeCode.PATH_ATTRIBUTE_TYPECODE_ORIGIN:
 						//log.info("We don't use ORIGIN");
-						break;	
-					default:
+						break;
+						case PathAttributesTypeCode.PATH_ATTRIBUTE_TYPECODE_LOCAL_PREF:
+							att_localpref= att;
+							break;
+						default:
 						//log.info("Attribute typecode " + typeCode +"unknown");
 						break;
 					}
@@ -154,6 +158,9 @@ public class UpdateProccesorThread extends Thread {
 					pathAttributeListUtil.add(att_ls);
 				if(att_mpreach!=null)
 					pathAttributeListUtil.add(att_mpreach);
+				if(att_localpref!=null)
+					pathAttributeListUtil.add(att_localpref);
+
 
 				if (pathAttributeListUtil != null){
 					for (int i=0;i<pathAttributeListUtil.size();i++){
@@ -162,7 +169,11 @@ public class UpdateProccesorThread extends Thread {
 						switch (typeCode){	
 						// cuando encontramos el link state attribute rellenamos las tlvs que nos llegan para luego
 						// meterlas en la te_info o en la node_info
-						case PathAttributesTypeCode.PATH_ATTRIBUTE_TYPECODE_BGP_LS_ATTRIBUTE:
+							case PathAttributesTypeCode.PATH_ATTRIBUTE_TYPECODE_LOCAL_PREF:
+								processAttributeLocalPref((LOCAL_PREF_Attribute) att);
+								continue;
+
+							case PathAttributesTypeCode.PATH_ATTRIBUTE_TYPECODE_BGP_LS_ATTRIBUTE:
 							processAttributeLinkState((LinkStateAttribute) att);
 							continue;
 							// cuando procesamos el mp_reach distinguimos entre nodo y link...
@@ -218,6 +229,19 @@ public class UpdateProccesorThread extends Thread {
 	/**
 	 * Function which process the attribute link State. It updates the fields passed by argument. 
 	 */
+
+
+
+	private void processAttributeLocalPref(LOCAL_PREF_Attribute localprefAtt) {
+
+		int localPref =0;
+		localPref = localprefAtt.getValue();
+		log.info("Received local preference= "+ String.valueOf(localPref));
+
+
+
+	}
+
 	private void processAttributeLinkState(LinkStateAttribute lsAtt){
 
 		if (lsAtt.getMaximumLinkBandwidthTLV() != null){

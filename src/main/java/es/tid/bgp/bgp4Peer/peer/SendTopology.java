@@ -56,6 +56,8 @@ public class SendTopology implements Runnable {
 	private int instanceId=1;
 	private boolean sendIntraDomainLinks=false;
 	private int ASnumber=1;
+	private int LocalPref=100;
+
 	private boolean isASnumber= false;
 	private boolean send4AS=false;
 
@@ -69,14 +71,34 @@ public class SendTopology implements Runnable {
 		log = LoggerFactory.getLogger("BGP4Peer");
 	}
 
-	public void configure( Hashtable<String,TEDB> intraTEDBs,BGP4SessionsInformation bgp4SessionsInformation,boolean sendTopology,int instanceId,boolean sendIntraDomainLinks, MultiDomainTEDB multiTED, int AS){
+	public void configure( Hashtable<String,TEDB> intraTEDBs,BGP4SessionsInformation bgp4SessionsInformation,boolean sendTopology,int instanceId,boolean sendIntraDomainLinks, MultiDomainTEDB multiTED){
+		configure(intraTEDBs, bgp4SessionsInformation, sendTopology, instanceId,sendIntraDomainLinks,multiTED, false, 0, 0);
+
+	}
+
+	public void configure( Hashtable<String,TEDB> intraTEDBs,BGP4SessionsInformation bgp4SessionsInformation,boolean sendTopology,int instanceId,boolean sendIntraDomainLinks, MultiDomainTEDB multiTED, boolean test){
+		configure(intraTEDBs, bgp4SessionsInformation, sendTopology, instanceId,sendIntraDomainLinks,multiTED, test, 0, 0);
+
+	}
+
+
+
+	public void configure( Hashtable<String,TEDB> intraTEDBs,BGP4SessionsInformation bgp4SessionsInformation,boolean sendTopology,int instanceId,boolean sendIntraDomainLinks, MultiDomainTEDB multiTED, int AS, int pref){
+		configure(intraTEDBs, bgp4SessionsInformation, sendTopology, instanceId,sendIntraDomainLinks,multiTED, false,AS, pref);
+
+	}
+
+
+	public void configure( Hashtable<String,TEDB> intraTEDBs,BGP4SessionsInformation bgp4SessionsInformation,boolean sendTopology,int instanceId,boolean sendIntraDomainLinks, MultiDomainTEDB multiTED, boolean test, int AS, int localPref){
 		this.intraTEDBs=intraTEDBs;
 		this.bgp4SessionsInformation=bgp4SessionsInformation;
 		this.sendTopology= sendTopology;
 		this.instanceId = instanceId;
 		this.sendIntraDomainLinks=sendIntraDomainLinks;
 		this.multiDomainTEDB=multiTED;
-		this.ASnumber=AS;
+		if (AS != 0) this.ASnumber=AS;
+		this.isTest=test;
+		if (localPref!=0) this.LocalPref=localPref;
 		try {
 			this.localAreaID=(Inet4Address)Inet4Address.getByName("0.0.0.0");
 			this.localBGPLSIdentifer=(Inet4Address)Inet4Address.getByName("1.1.1.1");
@@ -87,24 +109,6 @@ public class SendTopology implements Runnable {
 		
 	}
 
-
-	public void configure( Hashtable<String,TEDB> intraTEDBs,BGP4SessionsInformation bgp4SessionsInformation,boolean sendTopology,int instanceId,boolean sendIntraDomainLinks, MultiDomainTEDB multiTED, boolean test){
-		this.intraTEDBs=intraTEDBs;
-		this.bgp4SessionsInformation=bgp4SessionsInformation;
-		this.sendTopology= sendTopology;
-		this.instanceId = instanceId;
-		this.sendIntraDomainLinks=sendIntraDomainLinks;
-		this.multiDomainTEDB=multiTED;
-		this.isTest=test;
-		try {
-			this.localAreaID=(Inet4Address)Inet4Address.getByName("0.0.0.0");
-			this.localBGPLSIdentifer=(Inet4Address)Inet4Address.getByName("1.1.1.1");
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
 
 	public void configure( Hashtable<String,TEDB> intraTEDBs,BGP4SessionsInformation bgp4SessionsInformation,boolean sendTopology,int instanceId,boolean sendIntraDomainLinks, MultiDomainTEDB multiTED, boolean test, int AS){
 		this.intraTEDBs=intraTEDBs;
@@ -165,7 +169,7 @@ public class SendTopology implements Runnable {
 								}
 
 								if (((DomainTEDB) ted).getMDPCE() != null && domainID != null) {
-									log.info("Sending MDPCE addreess for domain " + domainID + " with IP: " + ((DomainTEDB) ted).getMDPCE().getPCEipv4().getHostAddress());
+									log.info("Sending MDPCE address for domain " + domainID + " with IP: " + ((DomainTEDB) ted).getMDPCE().getPCEipv4().getHostAddress());
 									sendMDPCENLRI(domainID, ((DomainTEDB) ted).getMDPCE());
 								}
 
@@ -232,7 +236,7 @@ public class SendTopology implements Runnable {
 
 	private void sendITNodeNLRI(String domainID, IT_Resources itResources){
 		//Andrea
-		log.debug("Sending IT REsources");
+		log.debug("Sending IT Resources");
 		BGP4Update update = createMsgUpdateITNodeNLRI(domainID, itResources);
 		sendMessage(update);
 //		Iterator<Object> vertexIt = vertexSet.iterator();	
@@ -407,11 +411,20 @@ public class SendTopology implements Runnable {
 			if (session==null) {
 				log.error("SESSION NULL");
 			}else {
+
 				if (session.getSendTo()) {
 					String destination = session.getRemotePeerIP().getHostAddress();
 					log.debug("BGP4 Update learnt from:" + update.getLearntFrom());
 					if (isTest){
 						log.debug("Sending BGP4 update to:" + destination+" with no check on the ID since it is test");
+						if (session.getMyAutonomousSystem()!= session.getRemoteAutonomousSystem()){
+							log.info ("size before: "+ String.valueOf(update.getPathAttributes().size()));
+							for (PathAttribute attr: update.getPathAttributes()){
+								if (attr.getTypeCode()== PathAttributesTypeCode.PATH_ATTRIBUTE_TYPECODE_LOCAL_PREF)
+									update.getPathAttributes().remove(attr);
+									log.info ("size after removing: "+ String.valueOf(update.getPathAttributes().size()));
+							}
+						}
 						session.sendBGP4Message(update);
 					}
 					else{
@@ -486,7 +499,15 @@ public class SendTopology implements Runnable {
 					pathAttributes.add(as_path);
 				}
 
-			//Node Attribute
+						//LOCAL PREF Attribute
+			LOCAL_PREF_Attribute as_local_pref = new LOCAL_PREF_Attribute();
+
+
+
+			as_local_pref.setValue(LocalPref);
+			pathAttributes.add(as_local_pref);
+
+						//Node Attribute
 		
 				LinkStateAttribute  linkStateAttribute = new LinkStateAttribute();
 				boolean linkStateNeeded=false;
@@ -582,7 +603,10 @@ public class SendTopology implements Runnable {
 				pathAttributes.add(as_path);
 			}
 
-
+					//LOCAL PREF Attribute
+			LOCAL_PREF_Attribute as_local_pref = new LOCAL_PREF_Attribute();
+			as_local_pref.setValue(LocalPref);
+			pathAttributes.add(as_local_pref);
 
 			//NLRI
 			ITNodeNLRI itNodeNLRI = new ITNodeNLRI();
@@ -647,7 +671,10 @@ public class SendTopology implements Runnable {
 				as_path.getAsPathSegments().add(as_path_seg);
 				pathAttributes.add(as_path);
 			}
-
+				//LOCAL PREF Attribute
+				LOCAL_PREF_Attribute as_local_pref = new LOCAL_PREF_Attribute();
+				as_local_pref.setValue(LocalPref);
+				pathAttributes.add(as_local_pref);
 
 			//NLRI
 			PCENLRI pceNLRI = new PCENLRI();
@@ -947,6 +974,10 @@ public class SendTopology implements Runnable {
 			pathAttributes.add(as_path);
 		}
 
+		//LOCAL PREF Attribute
+		LOCAL_PREF_Attribute as_local_pref = new LOCAL_PREF_Attribute();
+		as_local_pref.setValue(LocalPref);
+		pathAttributes.add(as_local_pref);
 
 		//1.2. LINK-STATE
 		//MPLS

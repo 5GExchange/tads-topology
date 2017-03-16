@@ -44,6 +44,7 @@
          startup and is the same for every local interface and BGP peer. --> 
 	<!--<BGPIdentifier>192.168.1.200</BGPIdentifier> -->
 	<!-- If the peer is in charge of sending its topology (only the interdomain Links) to the other BGP peer it is connected to. Default: false -->
+	<LocalPref>100</LocalPref>
 	<sendTopology>true</sendTopology>
 	<!-- Delay between topology updates sent in ms -->
 	<sendTopoDelay>5000</sendTopoDelay>

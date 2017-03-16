@@ -35,11 +35,13 @@ public class BGP4SessionClientManager implements Runnable{
 	private Inet4Address BGPIdentifier;
 	private int version = 4;
 	private int myAutonomousSystem;
+
+
 	private UpdateDispatcher ud;
 	private Boolean updateFrom;
 	private Boolean sendTo;
 
-	public BGP4SessionClientManager(BGP4SessionsInformation bgp4SessionInformation,UpdateDispatcher ud, BGP4LSPeerInfo peer,int bgp4Port,String my_IPAddress,int  my_bgp4Port , int holdTime,Inet4Address BGPIdentifier,int version,int myAutonomousSystem, int my_keepAliveTimer){	
+	public BGP4SessionClientManager(BGP4SessionsInformation bgp4SessionInformation,UpdateDispatcher ud, BGP4LSPeerInfo peer,int bgp4Port,String my_IPAddress,int  my_bgp4Port , int holdTime,Inet4Address BGPIdentifier,int version,int myAutonomousSystem, int my_keepAliveTimer){
 		log=LoggerFactory.getLogger("BGP4Peer");
 		this.bgp4SessionInformation=bgp4SessionInformation;
 		this.holdTime=holdTime;
@@ -76,7 +78,7 @@ public class BGP4SessionClientManager implements Runnable{
 				try{
 					bgp4SessionInformation.notifySessionStart(peerIP);	
 					log.debug("Session with BGP-LS peer"+peer +" dead, trying to establish new session");
-					bgp4SessionClient= new BGP4SessionClient(bgp4SessionInformation,ud,peer.getPeerIP(),peer.getPeerPort(),holdTime,BGPIdentifier,version,myAutonomousSystem,localBGP4Address, localBGP4Port,keepAliveTimer);
+					bgp4SessionClient= new BGP4SessionClient(bgp4SessionInformation,ud,peer.getPeerIP(),peer.getPeerPort(),holdTime,BGPIdentifier,version,myAutonomousSystem,localBGP4Address,localBGP4Port,keepAliveTimer);
 					bgp4SessionClient.setSendTo(sendTo);
 					bgp4SessionClient.setUpdateFrom(updateFrom);
 					bgp4SessionClient.start();
@@ -91,7 +93,7 @@ public class BGP4SessionClientManager implements Runnable{
 				bgp4SessionInformation.notifySessionStart(peerIP);		
 				log.info("Trying to establish new session with peer "+ peer.getPeerIP()+" on port "+peer.getPeerPort());
 				bgp4SessionClient = new BGP4SessionClient(bgp4SessionInformation,ud, peer.getPeerIP(), peer.getPeerPort(), holdTime, BGPIdentifier,
-						version,myAutonomousSystem,localBGP4Address, localBGP4Port ,keepAliveTimer);
+						version,myAutonomousSystem,localBGP4Address,localBGP4Port ,keepAliveTimer);
 				bgp4SessionClient.setSendTo(sendTo);
 				bgp4SessionClient.setUpdateFrom(updateFrom);
 				bgp4SessionClient.start();
