@@ -1,6 +1,7 @@
 package es.tid.tedb;
 
 
+import es.tid.bgp.bgp4.update.tlv.PCEv4ScopeTLV;
 import es.tid.ospf.ospfv2.lsa.tlv.subtlv.complexFields.BitmapLabelSet;
 
 import java.net.Inet4Address;
@@ -85,5 +86,12 @@ public interface DomainTEDB extends TEDB {
 
 	public void setNeighASs(ArrayList<Inet4Address> list);
 
+	public void setPCEScope(PCEv4ScopeTLV pcescope);
+	public PCEv4ScopeTLV getPCEscope();
 
 }
+
+
+
+
+

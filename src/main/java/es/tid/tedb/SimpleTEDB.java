@@ -1,5 +1,6 @@
 package es.tid.tedb;
 
+import es.tid.bgp.bgp4.update.tlv.PCEv4ScopeTLV;
 import es.tid.of.DataPathID;
 import es.tid.ospf.ospfv2.lsa.tlv.subtlv.complexFields.BitmapLabelSet;
 import org.jgrapht.graph.SimpleDirectedWeightedGraph;
@@ -32,7 +33,7 @@ public class SimpleTEDB implements DomainTEDB{
 	ArrayList<Inet4Address> NeighDomains = new ArrayList<Inet4Address>();
 	ArrayList<Inet4Address> NeighASs = new ArrayList<Inet4Address>();
 
-
+	private PCEv4ScopeTLV pceScope;
 
 	/**
 	 * List of algorithms that will be notified when there are significant changes in the TED
@@ -794,6 +795,7 @@ public class SimpleTEDB implements DomainTEDB{
 		this.MDPCE = PCE;
 	}
 
+
 	public ArrayList<Inet4Address> getLocalDomains() {
 		return localDomains;
 	}
@@ -802,6 +804,18 @@ public class SimpleTEDB implements DomainTEDB{
 		//log.info("MD-PCE set to: "+String.valueOf(IP));
 		this.localDomains = list;
 	}
+
+
+	public void setPCEScope(PCEv4ScopeTLV pcescope) {
+		//log.info("MD-PCE set to: "+String.valueOf(IP));
+		this.pceScope = pcescope;
+	}
+
+	public PCEv4ScopeTLV getPCEscope() {
+		return pceScope;
+	}
+
+
 
 	public ArrayList<Inet4Address> getLocalASs() {
 		return localASs;

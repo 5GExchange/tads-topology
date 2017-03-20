@@ -1,5 +1,6 @@
 package es.tid.tedb;
 
+import es.tid.bgp.bgp4.update.tlv.PCEv4ScopeTLV;
 import es.tid.ospf.ospfv2.lsa.tlv.subtlv.complexFields.BitmapLabelSet;
 import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 
@@ -509,6 +510,18 @@ public class MultiLayerTEDB implements DomainTEDB {
 	@Override
 	public void setNeighASs(ArrayList<Inet4Address> list){
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public PCEv4ScopeTLV getPCEscope(){
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setPCEScope(PCEv4ScopeTLV pcescope) {
+
+
 	}
 
 

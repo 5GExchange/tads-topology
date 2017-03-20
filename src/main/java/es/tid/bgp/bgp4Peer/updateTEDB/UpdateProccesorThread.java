@@ -6,6 +6,7 @@ import es.tid.bgp.bgp4.update.fields.pathAttributes.*;
 import es.tid.bgp.bgp4.update.tlv.PCEv4DescriptorsTLV;
 import es.tid.bgp.bgp4.update.tlv.PCEv4DomainTLV;
 import es.tid.bgp.bgp4.update.tlv.PCEv4NeighboursTLV;
+import es.tid.bgp.bgp4.update.tlv.PCEv4ScopeTLV;
 import es.tid.bgp.bgp4.update.tlv.linkstate_attribute_tlvs.*;
 import es.tid.bgp.bgp4.update.tlv.node_link_prefix_descriptor_subTLVs.*;
 import es.tid.ospf.ospfv2.lsa.tlv.subtlv.*;
@@ -100,7 +101,6 @@ public class UpdateProccesorThread extends Thread {
 		running=true;
 		this.updateList=updateList;
 		this.multiTedb = multiTedb;
-
 		this.intraTEDBs=intraTEDBs;
 		this.availableLabels= new AvailableLabels();
 		this.updateLinks=new LinkedList<UpdateLink>();
@@ -699,9 +699,14 @@ public class UpdateProccesorThread extends Thread {
 	*/
 		DomainTEDB domainTEDB= null;
 		PCEInfo MDPCE= new PCEInfo();
+		PCEv4ScopeTLV pceScope= new PCEv4ScopeTLV();
 		Inet4Address PCEip = null;
 		Inet4Address domainID = null;
 		SimpleTEDB simpleTEDB=null;
+		int preR=0;
+		int preL=0;
+		int preS=0;
+		int preY=0;
 		ArrayList<Inet4Address> localDomains = new ArrayList<Inet4Address>();
 		ArrayList<Inet4Address> localASs = new ArrayList<Inet4Address>();
 		ArrayList<Inet4Address> NeighDomains = new ArrayList<Inet4Address>();
@@ -714,6 +719,18 @@ public class UpdateProccesorThread extends Thread {
 			MDPCE.setPCEipv4(PCEip);
 			MDPCE.setLearntFrom(learntFrom);
 		}
+
+		log.info("  Before PCE Scope:   ");
+
+		if (pceNLRI.getPCEv4ScopeTLV()!=null){
+			pceScope=pceNLRI.getPCEv4ScopeTLV();
+			preR= pceScope.getPre_R();
+			preL= pceScope.getPre_L();
+			preS= pceScope.getPre_S();
+			preY= pceScope.getPre_Y();
+			log.info("PCE Scope PreR:" +preR +"  PreL:" +preL + "PreS:" +preS + "PreY:" +preY);
+		}
+
 		if (pceNLRI.getPCEv4DomainID()!=null){
 			PCEv4DomainTLV domTLV= pceNLRI.getPCEv4DomainID();
 			//ArrayList<AreaIDNodeDescriptorSubTLV> arealist = ;
@@ -763,6 +780,8 @@ public class UpdateProccesorThread extends Thread {
 				simpleTEDB.setNeighASs(NeighASs);
 				simpleTEDB.setNeighDomains(NeighDomains);
 				simpleTEDB.setDomainID(domain);
+				simpleTEDB.setPCEScope(pceScope);
+
 
 			}else if (domainTEDB==null) {
 				simpleTEDB = new SimpleTEDB();
@@ -774,6 +793,8 @@ public class UpdateProccesorThread extends Thread {
 				simpleTEDB.setNeighASs(NeighASs);
 				simpleTEDB.setNeighDomains(NeighDomains);
 				simpleTEDB.setDomainID(domain);
+				simpleTEDB.setPCEScope(pceScope);
+
 			}
 
 

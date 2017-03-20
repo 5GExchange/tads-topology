@@ -57,13 +57,10 @@ public class SendTopology implements Runnable {
 	private boolean sendIntraDomainLinks=false;
 	private int ASnumber=1;
 	private int LocalPref=100;
-
 	private boolean isASnumber= false;
 	private boolean send4AS=false;
 
 
-	
-	
 	private Inet4Address localBGPLSIdentifer;
 	private Inet4Address localAreaID;
 	
@@ -501,9 +498,6 @@ public class SendTopology implements Runnable {
 
 						//LOCAL PREF Attribute
 			LOCAL_PREF_Attribute as_local_pref = new LOCAL_PREF_Attribute();
-
-
-
 			as_local_pref.setValue(LocalPref);
 			pathAttributes.add(as_local_pref);
 
@@ -525,13 +519,13 @@ public class SendTopology implements Runnable {
 					pathAttributes.add(linkStateAttribute);
 				}
 		
-				//NLRI
+								//NLRI
 				NodeNLRI nodeNLRI = new NodeNLRI();
 				nodeNLRI.setProtocolID(ProtocolIDCodes.Unknown_Protocol_ID);	
 				nodeNLRI.setRoutingUniverseIdentifier(identifier);
 				LocalNodeDescriptorsTLV localNodeDescriptors = new LocalNodeDescriptorsTLV();
 		
-				//igp router id
+									//igp router id
 				if(node_info.getIpv4Address()!=null){
 					IGPRouterIDNodeDescriptorSubTLV igpRouterIDLNSubTLV = new IGPRouterIDNodeDescriptorSubTLV();
 					igpRouterIDLNSubTLV.setIpv4AddressOSPF(node_info.getIpv4Address());	
@@ -676,15 +670,24 @@ public class SendTopology implements Runnable {
 				as_local_pref.setValue(LocalPref);
 				pathAttributes.add(as_local_pref);
 
-			//NLRI
+						//NLRI
 			PCENLRI pceNLRI = new PCENLRI();
 			pceNLRI.setProtocolID(ProtocolIDCodes.Unknown_Protocol_ID);
 			pceNLRI.setRoutingUniverseIdentifier(identifier);
-			//PCE descriptor
+						//PCE descriptor
 			PCEv4DescriptorsTLV pcev4 = new PCEv4DescriptorsTLV();
 			pcev4.setPCEv4Address(IP.getPCEipv4());
 			pceNLRI.setPCEv4Descriptors(pcev4);
 
+					//PCE Scope SubTLV
+			PCEv4ScopeTLV pcev4scope= new PCEv4ScopeTLV();
+			pceNLRI.setPCEv4ScopeTLV(pcev4scope);
+			pcev4scope.setPre_L(5);
+			pcev4scope.setPre_R(3);
+			pcev4scope.setPre_S(4);
+			pcev4scope.setPre_Y(1);
+
+			
 			log.info("Creating PCE Update related to domain "+domainID);
 
 			//Domain TLV
@@ -978,7 +981,6 @@ public class SendTopology implements Runnable {
 		LOCAL_PREF_Attribute as_local_pref = new LOCAL_PREF_Attribute();
 		as_local_pref.setValue(LocalPref);
 		pathAttributes.add(as_local_pref);
-
 		//1.2. LINK-STATE
 		//MPLS
 		float maximumBandwidth = 0; 
