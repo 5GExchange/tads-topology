@@ -13,8 +13,7 @@ timestamps {
             def tadsVersion = version() + ".${env.BUILD_NUMBER}"
             docker.withRegistry('https://5gex.tmit.bme.hu') {
                 def image = docker.build("tads:${tadsVersion}", "-f Dockerfile.tads .")
-                image.push()
-                image.push('latest')
+                image.push('unstable')
             }
         }
         step([$class: 'Mailer', recipients: '5gex-devel@tmit.bme.hu'])
