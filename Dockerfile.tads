@@ -1,4 +1,6 @@
 FROM openjdk:8-jre
+ARG GIT_REVISION=unknown
+LABEL git-revision=$GIT_REVISION    
 
 COPY target/topology-*-shaded.jar /opt/tads/topology.jar
 COPY target/examples/log4j2.xml /opt/tads/
