@@ -1,5 +1,7 @@
 FROM goyalzz/ubuntu-java-8-maven-docker-image
 MAINTAINER Oscar Gonzalez (oscar.gonzalezdedios@telefonica.com)
+ARG GIT_REVISION=unknown
+LABEL git-revision=$GIT_REVISION    
 LABEL version="1.3.4"
 LABEL description="BGP Peer"
 LABEL source_url="https://github.com/telefonicaid/netphony-topology"
