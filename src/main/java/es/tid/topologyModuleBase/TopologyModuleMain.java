@@ -1,15 +1,14 @@
 package es.tid.topologyModuleBase;
 
-import java.util.ArrayList;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
 import es.tid.tedb.MDTEDB;
-import es.tid.tedb.SimpleTEDB;
+import es.tid.tedb.MultiDomainTEDB;
 import es.tid.topologyModuleBase.database.TopologiesDataBase;
 import es.tid.topologyModuleBase.management.TMManagementServer;
 import es.tid.topologyModuleBase.plugins.TMPlugin;
-import es.tid.tedb.MultiDomainTEDB;
+
+import java.util.ArrayList;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Main class of the Topology Module 
@@ -45,7 +44,9 @@ public class TopologyModuleMain
 		TMms.start();
 		
 		(new TMModuleInitiater(sTop, params, lock, pluginsList)).intiate();
-		
+		////////////////////////
+
+
 	}
 	
 }

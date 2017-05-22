@@ -5,7 +5,7 @@
 
     <XML_Plugin>
         <mode>TM</mode>
-    	<XMLFileTopology>target/conf1wayTest/network2.xml</XMLFileTopology>
+    	<XMLFileTopology>target/ODL/network.xml</XMLFileTopology>
         <Identifier>2.2.2.2</Identifier>>
     </XML_Plugin>
      <InitFrom>
@@ -21,7 +21,8 @@
     <BGPLS>
         <Reader>True</Reader>
         <Writer>True</Writer>
-        <BGPLSconfigFile>target/conf1wayTest/BGPLS2.xml</BGPLSconfigFile>
+        <BGPLSconfigFile>target/ODL/BGPLS1.xml</BGPLSconfigFile>
+        <BGPLSconfigFile>target/ODL/BGPLS1.xml</BGPLSconfigFile>
     </BGPLS>
    
 </config>

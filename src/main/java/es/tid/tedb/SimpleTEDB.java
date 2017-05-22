@@ -1,21 +1,16 @@
 package es.tid.tedb;
 
-import java.net.Inet4Address;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Set;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import es.tid.bgp.bgp4.update.tlv.PCEv4ScopeTLV;
+import es.tid.of.DataPathID;
+import es.tid.ospf.ospfv2.lsa.tlv.subtlv.complexFields.BitmapLabelSet;
+import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.jgrapht.graph.SimpleDirectedWeightedGraph;
-
-import es.tid.of.DataPathID;
-import es.tid.ospf.ospfv2.lsa.tlv.subtlv.complexFields.BitmapLabelSet;
+import java.net.Inet4Address;
+import java.util.*;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Traffic Engineering Database of a Domain.
@@ -29,6 +24,16 @@ public class SimpleTEDB implements DomainTEDB{
 	private Inet4Address domainID;
 	
 	private IT_Resources itResources;
+
+	//private Inet4Address MDPCE;
+	private PCEInfo MDPCE;
+
+	ArrayList<Inet4Address> localDomains = new ArrayList<Inet4Address>();
+	ArrayList<Inet4Address> localASs = new ArrayList<Inet4Address>();
+	ArrayList<Inet4Address> NeighDomains = new ArrayList<Inet4Address>();
+	ArrayList<Inet4Address> NeighASs = new ArrayList<Inet4Address>();
+
+	private PCEv4ScopeTLV pceScope;
 
 	/**
 	 * List of algorithms that will be notified when there are significant changes in the TED
@@ -76,7 +81,7 @@ public class SimpleTEDB implements DomainTEDB{
 	private boolean multidomain=false;//By default, the TED has only one domain
 	Logger log;
 	public SimpleTEDB(){
-		log=LoggerFactory.getLogger("TEDBParser");		
+		log=LoggerFactory.getLogger("BGP4Peer");
 		registeredAlgorithms= new ArrayList<TEDListener>();
 		registeredAlgorithmssson= new ArrayList<SSONListener>();
 		TEDBlock=new ReentrantLock();
@@ -390,8 +395,21 @@ public class SimpleTEDB implements DomainTEDB{
 		}
 		if (interDomainLinks != null)
 			topoString=topoString+printInterDomainLinks();
+		if (MDPCE!= null)
+			topoString=topoString+printMDPCE();
 		return topoString;
 	}
+
+	public String printMDPCE(){
+		String topoString="";
+
+		int size = interDomainLinks.size();
+		log.info("MDPCE: "+MDPCE.getPCEipv4().getHostAddress());
+		topoString="MDPCE for domain "+domainID+": "+MDPCE.getPCEipv4().getHostAddress();
+		return topoString;
+	}
+
+
 
 	public String printInterDomainLinks(){
 		String topoString="";
@@ -767,6 +785,60 @@ public class SimpleTEDB implements DomainTEDB{
 	public void setItResources(IT_Resources itResources) {
 		this.itResources = itResources;
 	}
-	
-	
+
+	public PCEInfo getMDPCE() {
+		return MDPCE;
+	}
+
+	public void setMDPCE(PCEInfo PCE) {
+		//log.info("MD-PCE set to: "+String.valueOf(IP));
+		this.MDPCE = PCE;
+	}
+
+
+	public ArrayList<Inet4Address> getLocalDomains() {
+		return localDomains;
+	}
+
+	public void setLocalDomains(ArrayList<Inet4Address> list) {
+		//log.info("MD-PCE set to: "+String.valueOf(IP));
+		this.localDomains = list;
+	}
+
+
+	public void setPCEScope(PCEv4ScopeTLV pcescope) {
+		//log.info("MD-PCE set to: "+String.valueOf(IP));
+		this.pceScope = pcescope;
+	}
+
+	public PCEv4ScopeTLV getPCEscope() {
+		return pceScope;
+	}
+
+
+
+	public ArrayList<Inet4Address> getLocalASs() {
+		return localASs;
+	}
+
+	public void setLocalASs(ArrayList<Inet4Address> list) {
+		//log.info("MD-PCE set to: "+String.valueOf(IP));
+		this.localASs = list;
+	}
+	public ArrayList<Inet4Address> getNeighDomains() {
+		return NeighDomains;
+	}
+
+	public void setNeighDomains(ArrayList<Inet4Address> list) {
+		//log.info("MD-PCE set to: "+String.valueOf(IP));
+		this.NeighDomains = list;
+	}
+	public ArrayList<Inet4Address> getNeighASs() {
+		return NeighASs;
+	}
+
+	public void setNeighASs(ArrayList<Inet4Address> list) {
+		//log.info("MD-PCE set to: "+String.valueOf(IP));
+		this.NeighASs = list;
+	}
 }

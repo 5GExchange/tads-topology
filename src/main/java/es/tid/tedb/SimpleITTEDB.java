@@ -1,5 +1,6 @@
 package es.tid.tedb;
 
+import es.tid.bgp.bgp4.update.tlv.PCEv4ScopeTLV;
 import es.tid.ospf.ospfv2.lsa.tlv.subtlv.complexFields.BitmapLabelSet;
 import es.tid.pce.pcep.objects.tlvs.StorageTLV;
 import org.jgrapht.graph.SimpleDirectedWeightedGraph;
@@ -402,9 +403,75 @@ String topoString="";
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public PCEInfo getMDPCE() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setMDPCE(PCEInfo ip) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public ArrayList<Inet4Address> getLocalDomains(){
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setLocalDomains(ArrayList<Inet4Address> list){
+		// TODO Auto-generated method stu
+	}
+
+	@Override
+	public ArrayList<Inet4Address> getLocalASs(){
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setLocalASs(ArrayList<Inet4Address> list){
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public ArrayList<Inet4Address> getNeighDomains(){
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setNeighDomains(ArrayList<Inet4Address> list){
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public ArrayList<Inet4Address> getNeighASs(){
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setNeighASs(ArrayList<Inet4Address> list){
+		// TODO Auto-generated method stub
+	}
 
 
-	
-	
+	@Override
+	public PCEv4ScopeTLV getPCEscope(){
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setPCEScope(PCEv4ScopeTLV pcescope) {
+
+
+	}
+
+
 
 }

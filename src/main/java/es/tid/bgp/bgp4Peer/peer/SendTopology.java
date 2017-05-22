@@ -1,14 +1,10 @@
 package es.tid.bgp.bgp4Peer.peer;
 
+import com.google.common.base.Splitter;
 import es.tid.bgp.bgp4.messages.BGP4Update;
-import es.tid.bgp.bgp4.update.fields.ITNodeNLRI;
-import es.tid.bgp.bgp4.update.fields.LinkNLRI;
-import es.tid.bgp.bgp4.update.fields.NodeNLRI;
-import es.tid.bgp.bgp4.update.fields.PathAttribute;
+import es.tid.bgp.bgp4.update.fields.*;
 import es.tid.bgp.bgp4.update.fields.pathAttributes.*;
-import es.tid.bgp.bgp4.update.tlv.LocalNodeDescriptorsTLV;
-import es.tid.bgp.bgp4.update.tlv.ProtocolIDCodes;
-import es.tid.bgp.bgp4.update.tlv.RemoteNodeDescriptorsTLV;
+import es.tid.bgp.bgp4.update.tlv.*;
 import es.tid.bgp.bgp4.update.tlv.linkstate_attribute_tlvs.*;
 import es.tid.bgp.bgp4.update.tlv.node_link_prefix_descriptor_subTLVs.*;
 import es.tid.bgp.bgp4Peer.bgp4session.BGP4SessionsInformation;
@@ -25,8 +21,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.Inet4Address;
+import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.nio.ByteBuffer;
 import java.util.*;
+
+//import java.net.InetAddress;
 
 /**
  * Class to send periodically the topology. It sends the topology to the active BGP4 sessions.
@@ -40,7 +40,9 @@ public class SendTopology implements Runnable {
 	 * 0= L3
 	 */
 	private int identifier=1;
-
+	private static final int IPV4_PART_COUNT = 4;
+	private static final int IPV6_PART_COUNT = 8;
+	private static final Splitter IPV4_SPLITTER = Splitter.on('.').limit(IPV4_PART_COUNT);
 	//TEDBs 
 	 private Hashtable<String,TEDB> intraTEDBs;
 	
@@ -52,13 +54,14 @@ public class SendTopology implements Runnable {
 	private BGP4SessionsInformation bgp4SessionsInformation;
 	private Logger log;
 	private int instanceId=1;
+	private int layer=0; //0->IP, 1-> optical
 	private boolean sendIntraDomainLinks=false;
-
+	private int ASnumber=1;
+	private int LocalPref=100;
+	private boolean isASnumber= false;
 	private boolean send4AS=false;
 
 
-	
-	
 	private Inet4Address localBGPLSIdentifer;
 	private Inet4Address localAreaID;
 	
@@ -67,12 +70,33 @@ public class SendTopology implements Runnable {
 	}
 
 	public void configure( Hashtable<String,TEDB> intraTEDBs,BGP4SessionsInformation bgp4SessionsInformation,boolean sendTopology,int instanceId,boolean sendIntraDomainLinks, MultiDomainTEDB multiTED){
+		configure(intraTEDBs, bgp4SessionsInformation, sendTopology, instanceId,sendIntraDomainLinks,multiTED, false, 0, 0);
+
+	}
+
+	public void configure( Hashtable<String,TEDB> intraTEDBs,BGP4SessionsInformation bgp4SessionsInformation,boolean sendTopology,int instanceId,boolean sendIntraDomainLinks, MultiDomainTEDB multiTED, boolean test){
+		configure(intraTEDBs, bgp4SessionsInformation, sendTopology, instanceId,sendIntraDomainLinks,multiTED, test, 0, 0);
+
+	}
+
+
+
+	public void configure( Hashtable<String,TEDB> intraTEDBs,BGP4SessionsInformation bgp4SessionsInformation,boolean sendTopology,int instanceId,boolean sendIntraDomainLinks, MultiDomainTEDB multiTED, int AS, int pref){
+		configure(intraTEDBs, bgp4SessionsInformation, sendTopology, instanceId,sendIntraDomainLinks,multiTED, false,AS, pref);
+
+	}
+
+
+	public void configure( Hashtable<String,TEDB> intraTEDBs,BGP4SessionsInformation bgp4SessionsInformation,boolean sendTopology,int instanceId,boolean sendIntraDomainLinks, MultiDomainTEDB multiTED, boolean test, int AS, int localPref){
 		this.intraTEDBs=intraTEDBs;
 		this.bgp4SessionsInformation=bgp4SessionsInformation;
 		this.sendTopology= sendTopology;
 		this.instanceId = instanceId;
 		this.sendIntraDomainLinks=sendIntraDomainLinks;
 		this.multiDomainTEDB=multiTED;
+		if (AS != 0) this.ASnumber=AS;
+		this.isTest=test;
+		if (localPref!=0) this.LocalPref=localPref;
 		try {
 			this.localAreaID=(Inet4Address)Inet4Address.getByName("0.0.0.0");
 			this.localBGPLSIdentifer=(Inet4Address)Inet4Address.getByName("1.1.1.1");
@@ -84,7 +108,7 @@ public class SendTopology implements Runnable {
 	}
 
 
-	public void configure( Hashtable<String,TEDB> intraTEDBs,BGP4SessionsInformation bgp4SessionsInformation,boolean sendTopology,int instanceId,boolean sendIntraDomainLinks, MultiDomainTEDB multiTED, boolean test){
+	public void configure( Hashtable<String,TEDB> intraTEDBs,BGP4SessionsInformation bgp4SessionsInformation,boolean sendTopology,int instanceId,boolean sendIntraDomainLinks, MultiDomainTEDB multiTED, boolean test, int AS){
 		this.intraTEDBs=intraTEDBs;
 		this.bgp4SessionsInformation=bgp4SessionsInformation;
 		this.sendTopology= sendTopology;
@@ -92,6 +116,7 @@ public class SendTopology implements Runnable {
 		this.sendIntraDomainLinks=sendIntraDomainLinks;
 		this.multiDomainTEDB=multiTED;
 		this.isTest=test;
+		this.ASnumber=AS;
 		try {
 			this.localAreaID=(Inet4Address)Inet4Address.getByName("0.0.0.0");
 			this.localBGPLSIdentifer=(Inet4Address)Inet4Address.getByName("1.1.1.1");
@@ -129,19 +154,25 @@ public class SendTopology implements Runnable {
 					while (iter.hasMoreElements()){						
 						String domainID = iter.nextElement();
 						//Andrea
-						log.debug("Sending TED from domain "+domainID);
+						if (domainID != null) {
+							log.debug("Sending TED from domain " + domainID);
 
-						TEDB ted=intraTEDBs.get(domainID);
-						if (ted instanceof DomainTEDB) {
-							sendLinkNLRI( ((DomainTEDB)ted).getIntraDomainLinks(),domainID);
-							//log.info(" XXXX ted.getNodeTable():"+ted.getNodeTable());
-							sendNodeNLRI( ((DomainTEDB)ted).getIntraDomainLinksvertexSet(), ((DomainTEDB)ted).getNodeTable());
-							if (((DomainTEDB)ted).getItResources()!=null){
-								sendITNodeNLRI( domainID, ((DomainTEDB)ted).getItResources());
+							TEDB ted = intraTEDBs.get(domainID);
+							if (ted instanceof DomainTEDB) {
+								sendLinkNLRI(((DomainTEDB) ted).getIntraDomainLinks(), domainID);
+								//log.info(" XXXX ted.getNodeTable():"+ted.getNodeTable());
+								sendNodeNLRI(((DomainTEDB) ted).getIntraDomainLinksvertexSet(), ((DomainTEDB) ted).getNodeTable());
+								if (((DomainTEDB) ted).getItResources() != null) {
+									sendITNodeNLRI(domainID, ((DomainTEDB) ted).getItResources());
+								}
+
+								if (((DomainTEDB) ted).getMDPCE() != null && domainID != null) {
+									log.info("Sending MDPCE address for domain " + domainID + " with IP: " + ((DomainTEDB) ted).getMDPCE().getPCEipv4().getHostAddress());
+									sendMDPCENLRI(domainID, ((DomainTEDB) ted).getMDPCE());
+								}
+
 							}
-			
 						}
-				
 
 						
 					}
@@ -203,7 +234,7 @@ public class SendTopology implements Runnable {
 
 	private void sendITNodeNLRI(String domainID, IT_Resources itResources){
 		//Andrea
-		log.debug("Sending IT REsources");
+		log.debug("Sending IT Resources");
 		BGP4Update update = createMsgUpdateITNodeNLRI(domainID, itResources);
 		sendMessage(update);
 //		Iterator<Object> vertexIt = vertexSet.iterator();	
@@ -225,7 +256,32 @@ public class SendTopology implements Runnable {
 //
 //		}
 	}
-	
+
+	private void sendMDPCENLRI(String domainID, PCEInfo IP){
+		//Andrea
+		log.debug("Sending PCE Address");
+		BGP4Update update = createMsgUpdateMDPCENLRI(domainID, IP);
+		sendMessage(update);
+//		Iterator<Object> vertexIt = vertexSet.iterator();
+//		//Enviamos primero los nodos. Un Node NLRI por cada nodo.
+//		while (vertexIt.hasNext()){
+//			Inet4Address node = (Inet4Address)vertexIt.next();
+//			//log.info(" XXXX node: "+ node);
+//			Node_Info node_info = NodeTable.get(node);
+//			//log.info(" XXXX node_info: "+ node_info);
+//			if (node_info!=null){
+//				log.debug("Sending node: ("+node+")");
+//				//Mandamos NodeNLRI
+//				BGP4Update update = createMsgUpdateNodeNLRI(node_info);
+//				sendMessage(update);
+//			}else {
+//				log.error("Node "+node+ " HAS NO node_info in NodeTable");
+//			}
+//
+//
+//		}
+	}
+
 	/**
 	 * This function sends a BGP4 update message (encoded in a LinkNLRI) for each link in the list
 	 * @param interdomainLinks
@@ -353,11 +409,20 @@ public class SendTopology implements Runnable {
 			if (session==null) {
 				log.error("SESSION NULL");
 			}else {
+
 				if (session.getSendTo()) {
 					String destination = session.getRemotePeerIP().getHostAddress();
 					log.debug("BGP4 Update learnt from:" + update.getLearntFrom());
 					if (isTest){
 						log.debug("Sending BGP4 update to:" + destination+" with no check on the ID since it is test");
+						if (session.getMyAutonomousSystem()!= session.getRemoteAutonomousSystem()){
+							log.info ("size before: "+ String.valueOf(update.getPathAttributes().size()));
+							for (PathAttribute attr: update.getPathAttributes()){
+								if (attr.getTypeCode()== PathAttributesTypeCode.PATH_ATTRIBUTE_TYPECODE_LOCAL_PREF)
+									update.getPathAttributes().remove(attr);
+									log.info ("size after removing: "+ String.valueOf(update.getPathAttributes().size()));
+							}
+						}
 						session.sendBGP4Message(update);
 					}
 					else{
@@ -402,20 +467,22 @@ public class SendTopology implements Runnable {
 	private  BGP4Update createMsgUpdateNodeNLRI(Node_Info node_info){
 		try{
 			
-		
+
 				BGP4Update update= new BGP4Update();	
 				//Path Attributes
 				ArrayList<PathAttribute> pathAttributes = update.getPathAttributes();
+
 				//Origin
 				OriginAttribute or = new OriginAttribute(); 
 				or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
 				pathAttributes.add(or);
 				//AS_PATH
+
 				if (send4AS==true) {
 					AS4_Path_Attribute as_path = new AS4_Path_Attribute();
 					AS4_Path_Segment as_path_seg = new AS4_Path_Segment();
 					long[] segs = new long[1];
-					segs[0] = 65522;
+					segs[0] = ASnumber;
 					as_path_seg.setSegments(segs);
 					as_path.getAsPathSegments().add(as_path_seg);
 					pathAttributes.add(as_path);
@@ -424,13 +491,18 @@ public class SendTopology implements Runnable {
 					AS_Path_Attribute as_path = new AS_Path_Attribute();
 					AS_Path_Segment as_path_seg = new AS_Path_Segment();
 					int[] segs = new int[1];
-					segs[0] = 65522;
+					segs[0] = ASnumber;
 					as_path_seg.setSegments(segs);
 					as_path.getAsPathSegments().add(as_path_seg);
 					pathAttributes.add(as_path);
 				}
 
-			//Node Attribute
+						//LOCAL PREF Attribute
+			LOCAL_PREF_Attribute as_local_pref = new LOCAL_PREF_Attribute();
+			as_local_pref.setValue(LocalPref);
+			pathAttributes.add(as_local_pref);
+
+						//Node Attribute
 		
 				LinkStateAttribute  linkStateAttribute = new LinkStateAttribute();
 				boolean linkStateNeeded=false;
@@ -448,13 +520,13 @@ public class SendTopology implements Runnable {
 					pathAttributes.add(linkStateAttribute);
 				}
 		
-				//NLRI
+								//NLRI
 				NodeNLRI nodeNLRI = new NodeNLRI();
-				nodeNLRI.setProtocolID(ProtocolIDCodes.Unknown_Protocol_ID);	
+				nodeNLRI.setProtocolID(ProtocolIDCodes.Static_Protocol_ID);
 				nodeNLRI.setRoutingUniverseIdentifier(identifier);
 				LocalNodeDescriptorsTLV localNodeDescriptors = new LocalNodeDescriptorsTLV();
 		
-				//igp router id
+									//igp router id
 				if(node_info.getIpv4Address()!=null){
 					IGPRouterIDNodeDescriptorSubTLV igpRouterIDLNSubTLV = new IGPRouterIDNodeDescriptorSubTLV();
 					igpRouterIDLNSubTLV.setIpv4AddressOSPF(node_info.getIpv4Address());	
@@ -475,7 +547,8 @@ public class SendTopology implements Runnable {
 						localNodeDescriptors.setBGPLSIDSubTLV(bGPLSIDSubTLV);
 						AreaIDNodeDescriptorSubTLV areaID = new AreaIDNodeDescriptorSubTLV();
 						areaID.setAREA_ID(this.localAreaID);
-						localNodeDescriptors.setAreaID(areaID);
+					//commented for compliance with ODL
+					// localNodeDescriptors.setAreaID(areaID);
 				
 				nodeNLRI.setLocalNodeDescriptors(localNodeDescriptors);
 				BGP_LS_MP_Reach_Attribute ra= new BGP_LS_MP_Reach_Attribute();
@@ -511,7 +584,7 @@ public class SendTopology implements Runnable {
 				AS4_Path_Attribute as_path = new AS4_Path_Attribute();
 				AS4_Path_Segment as_path_seg = new AS4_Path_Segment();
 				long[] segs = new long[1];
-				segs[0] = 65522;
+				segs[0] = ASnumber;
 				as_path_seg.setSegments(segs);
 				as_path.getAsPathSegments().add(as_path_seg);
 				pathAttributes.add(as_path);
@@ -520,14 +593,16 @@ public class SendTopology implements Runnable {
 				AS_Path_Attribute as_path = new AS_Path_Attribute();
 				AS_Path_Segment as_path_seg = new AS_Path_Segment();
 				int[] segs = new int[1];
-				segs[0] = 65522;
+				segs[0] = ASnumber;
 				as_path_seg.setSegments(segs);
 				as_path.getAsPathSegments().add(as_path_seg);
 				pathAttributes.add(as_path);
 			}
 
-
-		
+					//LOCAL PREF Attribute
+			LOCAL_PREF_Attribute as_local_pref = new LOCAL_PREF_Attribute();
+			as_local_pref.setValue(LocalPref);
+			pathAttributes.add(as_local_pref);
 
 			//NLRI
 			ITNodeNLRI itNodeNLRI = new ITNodeNLRI();
@@ -560,7 +635,300 @@ public class SendTopology implements Runnable {
 			}
 		
 	}
-	
+
+	private  BGP4Update createMsgUpdateMDPCENLRI(String domainID, PCEInfo IP){
+		try{
+
+			String domainIDx= null;
+			BGP4Update update= new BGP4Update();
+			update.setLearntFrom(IP.getLearntFrom());
+			//Path Attributes
+			ArrayList<PathAttribute> pathAttributes = update.getPathAttributes();
+			//Origin
+			OriginAttribute or = new OriginAttribute();
+			or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
+			pathAttributes.add(or);
+			//AS_PATH
+			if (send4AS==true) {
+				AS4_Path_Attribute as_path = new AS4_Path_Attribute();
+				AS4_Path_Segment as_path_seg = new AS4_Path_Segment();
+				long[] segs = new long[1];
+				segs[0] = ASnumber;
+				as_path_seg.setSegments(segs);
+				as_path.getAsPathSegments().add(as_path_seg);
+				pathAttributes.add(as_path);
+			}
+			else {
+				AS_Path_Attribute as_path = new AS_Path_Attribute();
+				AS_Path_Segment as_path_seg = new AS_Path_Segment();
+				int[] segs = new int[1];
+				segs[0] = ASnumber;
+				as_path_seg.setSegments(segs);
+				as_path.getAsPathSegments().add(as_path_seg);
+				pathAttributes.add(as_path);
+			}
+				//LOCAL PREF Attribute
+				LOCAL_PREF_Attribute as_local_pref = new LOCAL_PREF_Attribute();
+				as_local_pref.setValue(LocalPref);
+				pathAttributes.add(as_local_pref);
+
+						//NLRI
+			PCENLRI pceNLRI = new PCENLRI();
+			pceNLRI.setProtocolID(ProtocolIDCodes.Static_Protocol_ID);
+			pceNLRI.setRoutingUniverseIdentifier(identifier);
+						//PCE descriptor
+			PCEv4DescriptorsTLV pcev4 = new PCEv4DescriptorsTLV();
+			pcev4.setPCEv4Address(IP.getPCEipv4());
+			pceNLRI.setPCEv4Descriptors(pcev4);
+
+					//PCE Scope SubTLV
+			PCEv4ScopeTLV pcev4scope= new PCEv4ScopeTLV();
+			pceNLRI.setPCEv4ScopeTLV(pcev4scope);
+			pcev4scope.setPre_L(5);
+			pcev4scope.setPre_R(3);
+			pcev4scope.setPre_S(4);
+			pcev4scope.setPre_Y(1);
+
+			
+			log.info("Creating PCE Update related to domain "+domainID);
+
+			//Domain TLV
+			PCEv4DomainTLV domTLV= new PCEv4DomainTLV();
+			AreaIDNodeDescriptorSubTLV domID =new AreaIDNodeDescriptorSubTLV();
+			domainIDx = domainID.replace("/", "");
+			log.info(domainIDx);
+			domID.setAREA_ID((Inet4Address) forString(domainIDx));
+			//domTLV.addAreaIDSubTLV(domID);
+
+			ArrayList<AreaIDNodeDescriptorSubTLV> list = new ArrayList<AreaIDNodeDescriptorSubTLV>();
+			list.add(domID);
+			domTLV.setAreaIDSubTLVs(list);
+			pceNLRI.setPCEv4DomainID(domTLV);
+
+			//add NLRI to BGP-LS
+			BGP_LS_MP_Reach_Attribute ra= new BGP_LS_MP_Reach_Attribute();
+			ra.setLsNLRI(pceNLRI);
+			pathAttributes.add(ra);
+			log.info(ra.toString());
+			return update;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
+	private static IllegalArgumentException formatIllegalArgumentException(String format, Object... args) {
+		return new IllegalArgumentException(String.format(Locale.ROOT, format, args));
+	}
+
+	public static InetAddress forString(String ipString) {
+		   byte[] addr = ipStringToBytes(ipString);
+		   // The argument was malformed, i.e. not an IP string literal.
+		   if (addr == null) {
+			   throw formatIllegalArgumentException("'%s' is not an IP string literal.", ipString);
+		   }
+		   return bytesToInetAddress(addr);
+	}
+	private static InetAddress bytesToInetAddress(byte[] addr) {
+		try {
+		     return InetAddress.getByAddress(addr);
+		} catch (UnknownHostException e) {
+			throw new AssertionError(e);
+		}
+	}
+
+	//@Nullable
+	private static byte[] ipStringToBytes(String ipString) {
+		// Make a first pass to categorize the characters in this string.
+		boolean hasColon = false;
+		boolean hasDot = false;
+		for (int i = 0; i < ipString.length(); i++) {
+			char c = ipString.charAt(i);
+			if (c == '.') {
+				hasDot = true;
+			} else if (c == ':') {
+				if (hasDot) {
+					return null; // Colons must not appear after dots.
+				}
+				hasColon = true;
+			} else if (Character.digit(c, 16) == -1) {
+				return null; // Everything else must be a decimal or hex digit.
+			}
+		}
+		// Now decide which address family to parse.
+		if (hasColon) {
+			if (hasDot) {
+				ipString = convertDottedQuadToHex(ipString);
+				if (ipString == null) {
+					return null;
+				}
+			}
+			return textToNumericFormatV6(ipString);
+		} else if (hasDot) {
+			return textToNumericFormatV4(ipString);
+		}
+		return null;
+	}
+
+	private static String convertDottedQuadToHex(String ipString) {
+		int lastColon = ipString.lastIndexOf(':');
+		String initialPart = ipString.substring(0, lastColon + 1);
+		String dottedQuad = ipString.substring(lastColon + 1);
+		byte[] quad = textToNumericFormatV4(dottedQuad);
+		if (quad == null) {
+			return null;
+		}
+		String penultimate = Integer.toHexString(((quad[0] & 0xff) << 8) | (quad[1] & 0xff));
+		String ultimate = Integer.toHexString(((quad[2] & 0xff) << 8) | (quad[3] & 0xff));
+		return initialPart + penultimate + ":" + ultimate;
+	}
+
+	private static byte[] textToNumericFormatV4(String ipString) {
+		byte[] bytes = new byte[IPV4_PART_COUNT];
+		int i = 0;
+		try {
+			for (String octet : IPV4_SPLITTER.split(ipString)) {
+				bytes[i++] = parseOctet(octet);
+			}
+		} catch (NumberFormatException ex) {
+			return null;
+		}
+
+		return i == IPV4_PART_COUNT ? bytes : null;
+	}
+
+	private static byte parseOctet(String ipPart) {
+	   // Note: we already verified that this string contains only hex digits.
+	    int octet = Integer.parseInt(ipPart);
+	    // Disallow leading zeroes, because no clear standard exists on
+	    // whether these should be interpreted as decimal or octal.
+	    if (octet > 255 || (ipPart.startsWith("0") && ipPart.length() > 1)) {
+	        throw new NumberFormatException();
+	    }
+	    return (byte) octet;
+	}
+
+    private static byte[] textToNumericFormatV6(String ipString) {
+        // An address can have [2..8] colons, and N colons make N+1 parts.
+		String[] parts = ipString.split(":", IPV6_PART_COUNT + 2);
+		if (parts.length < 3 || parts.length > IPV6_PART_COUNT + 1) {
+			return null;
+		}
+
+		int skipIndex = -1;
+		for (int i = 1; i < parts.length - 1; i++) {
+			if (parts[i].length() == 0) {
+			    if (skipIndex >= 0) {
+			        return null; // Can't have more than one ::
+			    }
+			    skipIndex = i;
+			}
+		}
+		int partsHi; // Number of parts to copy from above/before the "::"
+		int partsLo; // Number of parts to copy from below/after the "::"
+		if (skipIndex >= 0) {
+			// If we found a "::", then check if it also covers the endpoints.
+			partsHi = skipIndex;
+			partsLo = parts.length - skipIndex - 1;
+			if (parts[0].length() == 0 && --partsHi != 0) {
+				return null; // ^: requires ^::
+			}
+			if (parts[parts.length - 1].length() == 0 && --partsLo != 0) {
+				return null; // :$ requires ::$
+			}
+		} else {
+			partsHi = parts.length;
+			partsLo = 0;
+		}
+		int partsSkipped = IPV6_PART_COUNT - (partsHi + partsLo);
+		if (!(skipIndex >= 0 ? partsSkipped >= 1 : partsSkipped == 0)) {
+			  return null;
+		}
+		// Now parse the hextets into a byte array.
+		ByteBuffer rawBytes = ByteBuffer.allocate(2 * IPV6_PART_COUNT);
+		try {
+			for (int i = 0; i < partsHi; i++) {
+				rawBytes.putShort(parseHextet(parts[i]));
+			}
+			for (int i = 0; i < partsSkipped; i++) {
+				rawBytes.putShort((short) 0);
+			}
+			for (int i = partsLo; i > 0; i--) {
+				rawBytes.putShort(parseHextet(parts[parts.length - i]));
+			}
+		} catch (NumberFormatException ex) {
+			return null;
+		}
+		return rawBytes.array();
+	}
+
+
+	private static short parseHextet(String ipPart) {
+		// Note: we already verified that this string contains only hex digits.
+		int hextet = Integer.parseInt(ipPart, 16);
+		if (hextet > 0xffff) {
+			throw new NumberFormatException();
+		}
+		return (short) hextet;
+	}
+
+
+
+
+	/*
+	private  BGP4Update createMsgUpdateMDPCENLRI(String domainID, Inet4Address IP){
+		try{
+
+			BGP4Update update= new BGP4Update();
+			//Path Attributes
+			ArrayList<PathAttribute> pathAttributes = update.getPathAttributes();
+			//Origin
+			OriginAttribute or = new OriginAttribute();
+			or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
+			pathAttributes.add(or);
+
+			//AS_PATH
+			if (send4AS==true) {
+				AS4_Path_Attribute as_path = new AS4_Path_Attribute();
+				AS4_Path_Segment as_path_seg = new AS4_Path_Segment();
+				long[] segs = new long[1];
+				segs[0] = 65522;
+				as_path_seg.setSegments(segs);
+				as_path.getAsPathSegments().add(as_path_seg);
+				pathAttributes.add(as_path);
+			}
+			else {
+				AS_Path_Attribute as_path = new AS_Path_Attribute();
+				AS_Path_Segment as_path_seg = new AS_Path_Segment();
+				int[] segs = new int[1];
+				segs[0] = 65522;
+				as_path_seg.setSegments(segs);
+				as_path.getAsPathSegments().add(as_path_seg);
+				pathAttributes.add(as_path);
+			}
+
+			//NLRI
+			PCENLRI pceNLRI = new PCENLRI();
+			PCEv4DescriptorsTLV pcev4 = new PCEv4DescriptorsTLV();
+			pcev4.setPCEv4Address(IP);
+			//update.setLearntFrom(itResources.getLearntFrom());
+			log.info("Creating PCE Update related to domain "+domainID);
+			AreaIDNodeDescriptorSubTLV domID =new AreaIDNodeDescriptorSubTLV();
+			domID.setAREA_ID((Inet4Address) InetAddress.getByName(domainID));
+			pcev4.setAreaID(domID);
+			pceNLRI.setPCEv4Descriptors(pcev4);
+			return update;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}*/
+
+
 	/**
 	 * Function to create a BGP4 update message with a link NRLI field. To send the links.
 	 * 				
@@ -596,7 +964,7 @@ public class SendTopology implements Runnable {
 			AS4_Path_Attribute as_path = new AS4_Path_Attribute();
 			AS4_Path_Segment as_path_seg = new AS4_Path_Segment();
 			long[] segs = new long[1];
-			segs[0] = 65522;
+			segs[0] = ASnumber;
 			as_path_seg.setSegments(segs);
 			as_path.getAsPathSegments().add(as_path_seg);
 			pathAttributes.add(as_path);
@@ -605,13 +973,16 @@ public class SendTopology implements Runnable {
 			AS_Path_Attribute as_path = new AS_Path_Attribute();
 			AS_Path_Segment as_path_seg = new AS_Path_Segment();
 			int[] segs = new int[1];
-			segs[0] = 65522;
+			segs[0] = ASnumber;
 			as_path_seg.setSegments(segs);
 			as_path.getAsPathSegments().add(as_path_seg);
 			pathAttributes.add(as_path);
 		}
 
-
+		//LOCAL PREF Attribute
+		LOCAL_PREF_Attribute as_local_pref = new LOCAL_PREF_Attribute();
+		as_local_pref.setValue(LocalPref);
+		pathAttributes.add(as_local_pref);
 		//1.2. LINK-STATE
 		//MPLS
 		float maximumBandwidth = 0; 
@@ -735,8 +1106,8 @@ public class SendTopology implements Runnable {
 		}
 		//2. NLRI
 		LinkNLRI linkNLRI = new LinkNLRI();
-		linkNLRI.setProtocolID(ProtocolIDCodes.Unknown_Protocol_ID);
-		linkNLRI.setIdentifier(instanceId);
+		linkNLRI.setProtocolID(ProtocolIDCodes.Static_Protocol_ID);
+		linkNLRI.setIdentifier(layer);
 	
 		//2.1. Local Y Remote Descriptors
 		LocalNodeDescriptorsTLV localNodeDescriptors = new LocalNodeDescriptorsTLV();
@@ -753,7 +1124,8 @@ public class SendTopology implements Runnable {
 		localNodeDescriptors.setBGPLSIDSubTLV(bGPLSIDSubTLV);
 		AreaIDNodeDescriptorSubTLV areaID = new AreaIDNodeDescriptorSubTLV();
 		areaID.setAREA_ID(this.localAreaID);
-		localNodeDescriptors.setAreaID(areaID);
+		//commented for compliance with ODL
+		// localNodeDescriptors.setAreaID(areaID);
 
 		IGPRouterIDNodeDescriptorSubTLV igpRouterIDDNSubTLV = new IGPRouterIDNodeDescriptorSubTLV();
 		igpRouterIDDNSubTLV.setIpv4AddressOSPF(addressList.get(1));	
@@ -776,7 +1148,8 @@ public class SendTopology implements Runnable {
 		}
 		//Complete Dummy TLVs
 		remoteNodeDescriptors.setBGPLSIDSubTLV(bGPLSIDSubTLV);
-		remoteNodeDescriptors.setAreaID(areaID);
+		//commented for compliance with ODL
+		// remoteNodeDescriptors.setAreaID(areaID);
 
 		linkNLRI.setLocalNodeDescriptors(localNodeDescriptors);
 		linkNLRI.setRemoteNodeDescriptorsTLV(remoteNodeDescriptors);

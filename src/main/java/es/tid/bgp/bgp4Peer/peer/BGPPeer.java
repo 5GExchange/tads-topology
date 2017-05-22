@@ -143,6 +143,7 @@ public class BGPPeer {
 			params=new BGP4Parameters();
 		}
 		params.initialize();
+
 		peersToConnect = params.getPeersToConnect();
 		sendTopology = params.isSendTopology();
 		saveTopology = params.isSaveTopologyDB();
@@ -169,7 +170,7 @@ public class BGPPeer {
 //			e1.printStackTrace();
 //			System.exit(1);
 //		}
-			logServer.info("Inizializing BGP4 Peer");
+			logServer.info("Initalizing BGP4 Peer");
 		if (iTEDBs!= null) intraTEDBs=iTEDBs;
 		else intraTEDBs=new Hashtable<String,TEDB>();
 		
@@ -313,10 +314,10 @@ public class BGPPeer {
 	
 	public void startSendTopology(){
 		if (params.isTest()) {
-			sendTopologyTask.configure(intraTEDBs, bgp4SessionsInformation, sendTopology, params.getInstanceID(),params.isSendIntradomainLinks(),this.multiDomainTEDB, params.isTest());
+			sendTopologyTask.configure(intraTEDBs, bgp4SessionsInformation, sendTopology, params.getInstanceID(),params.isSendIntradomainLinks(),this.multiDomainTEDB, params.isTest(), params.getMyAutonomousSystem(), params.getMyLocalPref());
 		}
 		else{
-			sendTopologyTask.configure(intraTEDBs, bgp4SessionsInformation, sendTopology, params.getInstanceID(),params.isSendIntradomainLinks(),this.multiDomainTEDB);
+			sendTopologyTask.configure(intraTEDBs, bgp4SessionsInformation, sendTopology, params.getInstanceID(),params.isSendIntradomainLinks(),this.multiDomainTEDB, params.getMyAutonomousSystem(),params.getMyLocalPref());
 		}
 		executor.scheduleWithFixedDelay(sendTopologyTask, 0,params.getSendTopoDelay(), TimeUnit.MILLISECONDS);
 	}

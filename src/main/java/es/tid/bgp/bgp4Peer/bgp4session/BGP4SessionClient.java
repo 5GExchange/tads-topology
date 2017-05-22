@@ -29,7 +29,8 @@ public class BGP4SessionClient extends GenericBGP4Session{
 	
 	private boolean no_delay=true;
 	private String localBGP4Address;
-	private int localBGP4Port; 
+	private int localBGP4Port;
+
 	/**
 	 * Class to dispatch the BGP4 update messages. 
 	 * If a BGP5 update message is received, it is stored in a queue of UpdateDispatcher. 
@@ -37,14 +38,17 @@ public class BGP4SessionClient extends GenericBGP4Session{
 	private UpdateDispatcher updateDispatcher;
 	
 	public BGP4SessionClient(BGP4SessionsInformation bgp4SessionsInformation,UpdateDispatcher updateDispatcher, Inet4Address peerBGP_IPaddress, int peerBGP_port, int holdTime,Inet4Address BGPIdentifier,int version,int myAutonomousSystem, String localBGP4Address, int localBGP4Port,int keepAliveTimer){
-		super(bgp4SessionsInformation, holdTime, BGPIdentifier, version, myAutonomousSystem,keepAliveTimer);
+		super(bgp4SessionsInformation, holdTime, BGPIdentifier, version, myAutonomousSystem, keepAliveTimer);
 		timer=new Timer();
-		log = LoggerFactory.getLogger("BGP4Client");		
+		log = LoggerFactory.getLogger("BGP4Peer");
 		this.peerBGP_port = peerBGP_port;
 		this.updateDispatcher=updateDispatcher;
 		this.localBGP4Address=localBGP4Address;
 		this.localBGP4Port=localBGP4Port;
 		this.remotePeerIP = peerBGP_IPaddress;
+
+
+
 	}
 	/**
 	 * Initiates a Session between the local BGP Peer and the remote BGP Peer

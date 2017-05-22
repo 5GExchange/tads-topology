@@ -111,6 +111,9 @@ public class BGP4Parameters {
 	}
 	String BGPIdentifier = null;
 	int myAutonomousSystem=1;
+
+	private int LocalPref=100;
+
 	int version=0x04;
 	
 	/**
@@ -270,6 +273,10 @@ public class BGP4Parameters {
 					else if (qName.equalsIgnoreCase("myAutonomousSystem")){
 						myAutonomousSystem = Integer.parseInt(tempVal.trim());
 					}
+					else if (qName.equalsIgnoreCase("LocalPref")){
+						LocalPref = Integer.parseInt(tempVal.trim());
+					}
+
 					else if (qName.equalsIgnoreCase("localBGPAddress")){//El BGP Identifier es la local BGP Address.
 						//BGPIdentifier = tempVal.trim();
 						localBGPAddress=tempVal.trim();
@@ -413,20 +420,24 @@ public class BGP4Parameters {
 	public void setMyAutonomousSystem(int myAutonomousSystem) {
 		this.myAutonomousSystem = myAutonomousSystem;
 	}
+	public int getMyLocalPref() {
+		return LocalPref;
+	}
+	public void setMyLocalPref(int myLocalPref) {
+		this.LocalPref = myLocalPref;
+	}
 	public int getVersion() {
 		return version;
 	}
 	public void setVersion(int version) {
 		this.version = version;
 	}
-
 	public LinkedList<BGP4LSPeerInfo> getPeersToConnect() {
 		return peersToConnect;
 	}
 	public void setPeersToConnect(LinkedList<BGP4LSPeerInfo> peersToConnect) {
 		this.peersToConnect = peersToConnect;
 	}
-
 	public String getLearnTopology() {
 		return learnTopology;
 	}
@@ -439,7 +450,6 @@ public class BGP4Parameters {
 	public void setTopologyFile(String topologyFile) {
 		this.topologyFile = topologyFile;
 	}
-
 	public int getNumberTriesToConnect() {
 		return numberTriesToConnect;
 	}
@@ -479,7 +489,6 @@ public class BGP4Parameters {
 	public boolean isSendIntradomainLinks() {
 		return sendIntradomainLinks;
 	}
-	
 	public void setSendIntradomainLinks(boolean sendIntradomainLinks) {
 		this.sendIntradomainLinks = sendIntradomainLinks;
 	}

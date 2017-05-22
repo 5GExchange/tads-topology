@@ -13,6 +13,18 @@
 		<mdpce>
 			<ipv4>172.16.0.2</ipv4>
 		</mdpce>>
+
+
+		<it_resources>
+			<controller_it>http://wearehere.com</controller_it>
+			<cpu>100</cpu>
+			<mem>100GByte</mem>
+			<storage>100TBytes</storage>
+		</it_resources>>
+
+
+
+
 		<node>
 			<router_id>172.16.101.101</router_id>
 		</node>

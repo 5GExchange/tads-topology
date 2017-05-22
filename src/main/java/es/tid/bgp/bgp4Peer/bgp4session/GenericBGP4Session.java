@@ -173,6 +173,10 @@ public abstract class GenericBGP4Session extends Thread implements BGP4Session {
 	 * Autonomous System number of the sender
 	 */
 	protected int myAutonomousSystem;
+
+	protected int remoteAutonomousSystem;
+
+
 	/**
 	 * version indicates the protocol version number of the message
 	 * it must be 4
@@ -180,7 +184,7 @@ public abstract class GenericBGP4Session extends Thread implements BGP4Session {
 	protected int version;
 
 
-	public GenericBGP4Session(BGP4SessionsInformation bgp4SessionsInformation,int holdTime,Inet4Address BGPIdentifier,int version,int myAutonomousSystem,int mykeepAliveTimer) {
+	public GenericBGP4Session(BGP4SessionsInformation bgp4SessionsInformation,int holdTime,Inet4Address BGPIdentifier,int version,int myAutonomousSystem, int mykeepAliveTimer) {
 		log=LoggerFactory.getLogger("BGP4Parser");
 		this.BGP4SessionsInformation=bgp4SessionsInformation;
 		this.holdTime=holdTime;
@@ -580,8 +584,9 @@ public abstract class GenericBGP4Session extends Thread implements BGP4Session {
 								 */
 
 								this.BGPIdentifier=open_received.getBGPIdentifier();
-								this.myAutonomousSystem=open_received.getMyAutonomousSystem();
+								this.remoteAutonomousSystem=open_received.getMyAutonomousSystem();
 								this.holdTime=open_received.getHoldTime();
+
 //								if (open_received.getOptionalParameterLength() != 0){
 //									log.info("Tiene parametros opcionales");
 //								}
@@ -667,7 +672,7 @@ public abstract class GenericBGP4Session extends Thread implements BGP4Session {
 	   											KeepWait timer, and moves to the KeepWait state.
 								 */
 								this.BGPIdentifier=open_received.getBGPIdentifier();
-								this.myAutonomousSystem=open_received.getMyAutonomousSystem();
+								this.remoteAutonomousSystem=open_received.getMyAutonomousSystem();
 								this.holdTime=open_received.getHoldTime();
 //								if (open_received.getOptionalParameterLength() != 0){
 //									log.info("Tiene parametros opcionales");
@@ -797,6 +802,10 @@ public abstract class GenericBGP4Session extends Thread implements BGP4Session {
 
 	public int getMyAutonomousSystem() {
 		return myAutonomousSystem;
+	}
+
+	public int getRemoteAutonomousSystem() {
+		return remoteAutonomousSystem;
 	}
 
 	public void setMyAutonomousSystem(int myAutonomousSystem) {

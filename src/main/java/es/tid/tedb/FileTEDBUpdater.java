@@ -24,6 +24,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.net.Inet4Address;
+import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.LinkedList;
@@ -1267,6 +1268,7 @@ public class FileTEDBUpdater {
 		return TEDBs;
 	}
 
+	//used functions
 	public static Hashtable<String,TEDB> readMultipleDomainSimpleNetworks(String fileName, String layer,boolean allDomains,int lambdaIni, int lambdaEnd, boolean isSSONnetwork, String learntFrom) {
 		Logger log = LoggerFactory.getLogger("BGP4Peer");
 		Object router_id_addr = null;
@@ -1331,6 +1333,23 @@ public class FileTEDBUpdater {
 						log.info("Loading topology from domain " + domain_id);
 					}
 
+					PCEInfo pce= new PCEInfo();
+					NodeList mdPCE = element1.getElementsByTagName("mdpce");
+					for (int i = 0; i < mdPCE.getLength(); i++) {
+
+						Element element = (Element) mdPCE.item(i);
+
+						NodeList ipList = element.getElementsByTagName("ipv4");
+						Element ipElement = (Element) ipList.item(0);
+						String MDIP = getCharacterDataFromElement(ipElement);
+
+						log.info("load MDPCE of " + domain_id+" with IP "+ MDIP);
+						pce.setPCEipv4((Inet4Address) InetAddress.getByName(MDIP));
+						pce.setLearntFrom("local"); //to be confirmed
+						tedb.setMDPCE(pce);
+
+					}
+
 					NodeList itResourcesElement = element1.getElementsByTagName("it_resources");
 					for (int i = 0; i < itResourcesElement.getLength(); i++) {
 						Element element = (Element) itResourcesElement.item(i);
@@ -1360,7 +1379,7 @@ public class FileTEDBUpdater {
 						if (itResourcesMem!=null) itResources.setMem(itResourcesMem);
 						if (itResourcesStorage!=null) {
 							itResources.setStorage(itResourcesStorage);
-							log.info("set learn from for it resources "+ itResources.toString());
+							log.debug("set learn from for it resources "+ itResources.toString());
 						}
 
 						tedb.setItResources(itResources);

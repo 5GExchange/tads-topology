@@ -3,6 +3,10 @@ package es.tid.bgp.bgp4Peer.updateTEDB;
 import es.tid.bgp.bgp4.messages.BGP4Update;
 import es.tid.bgp.bgp4.update.fields.*;
 import es.tid.bgp.bgp4.update.fields.pathAttributes.*;
+import es.tid.bgp.bgp4.update.tlv.PCEv4DescriptorsTLV;
+import es.tid.bgp.bgp4.update.tlv.PCEv4DomainTLV;
+import es.tid.bgp.bgp4.update.tlv.PCEv4NeighboursTLV;
+import es.tid.bgp.bgp4.update.tlv.PCEv4ScopeTLV;
 import es.tid.bgp.bgp4.update.tlv.linkstate_attribute_tlvs.*;
 import es.tid.bgp.bgp4.update.tlv.node_link_prefix_descriptor_subTLVs.*;
 import es.tid.ospf.ospfv2.lsa.tlv.subtlv.*;
@@ -93,11 +97,10 @@ public class UpdateProccesorThread extends Thread {
 
 	public UpdateProccesorThread(LinkedBlockingQueue<BGP4Update> updateList,
 			MultiDomainTEDB multiTedb ,Hashtable<String,TEDB> intraTEDBs ){
-		log=LoggerFactory.getLogger("BGP4Server");
+		log=LoggerFactory.getLogger("BGP4Peer");
 		running=true;
 		this.updateList=updateList;
 		this.multiTedb = multiTedb;
-
 		this.intraTEDBs=intraTEDBs;
 		this.availableLabels= new AvailableLabels();
 		this.updateLinks=new LinkedList<UpdateLink>();
@@ -112,10 +115,11 @@ public class UpdateProccesorThread extends Thread {
 			try {
 				clearAttributes();
 				PathAttribute att_ls = null;
-				PathAttribute att_mpreach  = null; 
+				PathAttribute att_localpref = null;
+				PathAttribute att_mpreach = null;
 				PathAttribute att = null;
 				updateMsg= updateList.take();
-				log.debug("Update Procesor Thread Reading the message: \n"+ updateMsg.toString());
+				log.debug("Update Processor Thread Reading the message: \n"+ updateMsg.toString());
 				//Andrea To be checked
 				String learntFrom = updateMsg.getLearntFrom();
 				log.debug("Received from "+learntFrom);
@@ -138,8 +142,11 @@ public class UpdateProccesorThread extends Thread {
 						break;	
 					case PathAttributesTypeCode.PATH_ATTRIBUTE_TYPECODE_ORIGIN:
 						//log.info("We don't use ORIGIN");
-						break;	
-					default:
+						break;
+						case PathAttributesTypeCode.PATH_ATTRIBUTE_TYPECODE_LOCAL_PREF:
+							att_localpref= att;
+							break;
+						default:
 						//log.info("Attribute typecode " + typeCode +"unknown");
 						break;
 					}
@@ -151,6 +158,9 @@ public class UpdateProccesorThread extends Thread {
 					pathAttributeListUtil.add(att_ls);
 				if(att_mpreach!=null)
 					pathAttributeListUtil.add(att_mpreach);
+				if(att_localpref!=null)
+					pathAttributeListUtil.add(att_localpref);
+
 
 				if (pathAttributeListUtil != null){
 					for (int i=0;i<pathAttributeListUtil.size();i++){
@@ -159,7 +169,11 @@ public class UpdateProccesorThread extends Thread {
 						switch (typeCode){	
 						// cuando encontramos el link state attribute rellenamos las tlvs que nos llegan para luego
 						// meterlas en la te_info o en la node_info
-						case PathAttributesTypeCode.PATH_ATTRIBUTE_TYPECODE_BGP_LS_ATTRIBUTE:
+							case PathAttributesTypeCode.PATH_ATTRIBUTE_TYPECODE_LOCAL_PREF:
+								processAttributeLocalPref((LOCAL_PREF_Attribute) att);
+								continue;
+
+							case PathAttributesTypeCode.PATH_ATTRIBUTE_TYPECODE_BGP_LS_ATTRIBUTE:
 							processAttributeLinkState((LinkStateAttribute) att);
 							continue;
 							// cuando procesamos el mp_reach distinguimos entre nodo y link...
@@ -183,6 +197,10 @@ public class UpdateProccesorThread extends Thread {
 								case NLRITypes.IT_Node_NLRI:
 									fillITNodeInformation((ITNodeNLRI)(nlri), learntFrom);
 									continue;
+									case NLRITypes.PCE_NLRI:
+										log.info("Received PCE_NLRI");
+										fillMDPCEInformation((PCENLRI)(nlri), learntFrom);
+										continue;
 								default:
 									log.debug("Attribute Code unknown");
 								}
@@ -211,6 +229,19 @@ public class UpdateProccesorThread extends Thread {
 	/**
 	 * Function which process the attribute link State. It updates the fields passed by argument. 
 	 */
+
+
+
+	private void processAttributeLocalPref(LOCAL_PREF_Attribute localprefAtt) {
+
+		int localPref =0;
+		localPref = localprefAtt.getValue();
+		log.info("Received local preference= "+ String.valueOf(localPref));
+
+
+
+	}
+
 	private void processAttributeLinkState(LinkStateAttribute lsAtt){
 
 		if (lsAtt.getMaximumLinkBandwidthTLV() != null){
@@ -658,7 +689,123 @@ public class UpdateProccesorThread extends Thread {
 
 		return te_info;
 	}
-	
+
+	private void fillMDPCEInformation(PCENLRI pceNLRI, String learntFrom){
+/*		try {
+			Thread.sleep(2000);                 //1000 milliseconds is one second.
+		} catch(InterruptedException ex) {
+			Thread.currentThread().interrupt();
+		}
+	*/
+		DomainTEDB domainTEDB= null;
+		PCEInfo MDPCE= new PCEInfo();
+		PCEv4ScopeTLV pceScope= new PCEv4ScopeTLV();
+		Inet4Address PCEip = null;
+		Inet4Address domainID = null;
+		SimpleTEDB simpleTEDB=null;
+		int preR=0;
+		int preL=0;
+		int preS=0;
+		int preY=0;
+		ArrayList<Inet4Address> localDomains = new ArrayList<Inet4Address>();
+		ArrayList<Inet4Address> localASs = new ArrayList<Inet4Address>();
+		ArrayList<Inet4Address> NeighDomains = new ArrayList<Inet4Address>();
+		ArrayList<Inet4Address> NeighASs = new ArrayList<Inet4Address>();
+		StringBuffer sb=new StringBuffer(1000);
+
+		if (pceNLRI.getPCEv4Descriptors()!=null){
+			PCEv4DescriptorsTLV pceTLV= pceNLRI.getPCEv4Descriptors();
+			PCEip = pceTLV.getPCEv4Address();
+			MDPCE.setPCEipv4(PCEip);
+			MDPCE.setLearntFrom(learntFrom);
+		}
+
+		log.info("  Before PCE Scope:   ");
+
+		if (pceNLRI.getPCEv4ScopeTLV()!=null){
+			pceScope=pceNLRI.getPCEv4ScopeTLV();
+			preR= pceScope.getPre_R();
+			preL= pceScope.getPre_L();
+			preS= pceScope.getPre_S();
+			preY= pceScope.getPre_Y();
+			log.info("PCE Scope PreR:" +preR +"  PreL:" +preL + "PreS:" +preS + "PreY:" +preY);
+		}
+
+		if (pceNLRI.getPCEv4DomainID()!=null){
+			PCEv4DomainTLV domTLV= pceNLRI.getPCEv4DomainID();
+			//ArrayList<AreaIDNodeDescriptorSubTLV> arealist = ;
+			for (AreaIDNodeDescriptorSubTLV area: domTLV.getAreaIDSubTLVs()){
+				log.info("Area ID received: "+area.getAREA_ID().getHostAddress());
+				if (!localDomains.contains(area.getAREA_ID())){
+					log.info("not present, added");
+					sb.append("Local Area: "+area.toString());
+					localDomains.add(area.getAREA_ID());
+				}
+			}
+			for (AutonomousSystemNodeDescriptorSubTLV as: domTLV.getASSubTLVs()){
+				if (!localASs.contains(as.getAS_ID())){
+					localASs.add(as.getAS_ID());
+					sb.append("Local AS: "+as.toString());
+
+				}
+			}
+
+		}
+		if (pceNLRI.getPCEv4NeighbourID()!=null){
+			PCEv4NeighboursTLV NdomTLV= pceNLRI.getPCEv4NeighbourID();
+			//ArrayList<AreaIDNodeDescriptorSubTLV> arealist = ;
+			for (AreaIDNodeDescriptorSubTLV area: NdomTLV.getAreaIDSubTLVs()){
+				if (!NeighDomains.contains(area.getAREA_ID())){
+					NeighDomains.add(area.getAREA_ID());
+				}
+			}
+			for (AutonomousSystemNodeDescriptorSubTLV as: NdomTLV.getASSubTLVs()){
+				if (!NeighASs.contains(as.getAS_ID())){
+					NeighASs.add(as.getAS_ID());
+				}
+			}
+
+		}
+		log.info("Received PCE info for domain/AS "+sb.toString()+" from peer "+learntFrom+": "+MDPCE.getPCEipv4().getHostAddress());
+
+		for (Inet4Address domain: localDomains){
+
+
+			domainTEDB=(DomainTEDB)intraTEDBs.get(domain.getHostAddress());
+			if (domainTEDB instanceof SimpleTEDB){
+				simpleTEDB = (SimpleTEDB) domainTEDB;
+				simpleTEDB.setMDPCE(MDPCE);
+				simpleTEDB.setLocalDomains(localDomains);
+				simpleTEDB.setLocalASs(localASs);
+				simpleTEDB.setNeighASs(NeighASs);
+				simpleTEDB.setNeighDomains(NeighDomains);
+				simpleTEDB.setDomainID(domain);
+				simpleTEDB.setPCEScope(pceScope);
+
+
+			}else if (domainTEDB==null) {
+				simpleTEDB = new SimpleTEDB();
+				simpleTEDB.createGraph();
+				this.intraTEDBs.put(domain.getHostAddress(), simpleTEDB);
+				simpleTEDB.setMDPCE(MDPCE);
+				simpleTEDB.setLocalDomains(localDomains);
+				simpleTEDB.setLocalASs(localASs);
+				simpleTEDB.setNeighASs(NeighASs);
+				simpleTEDB.setNeighDomains(NeighDomains);
+				simpleTEDB.setDomainID(domain);
+				simpleTEDB.setPCEScope(pceScope);
+
+			}
+
+
+			else {
+				log.error("PROBLEM: TEDB not compatible");
+				return;
+			}
+		}
+
+	}
+
 
 	private void fillITNodeInformation(ITNodeNLRI itNodeNLRI, String learntFrom){
 /*		try {
