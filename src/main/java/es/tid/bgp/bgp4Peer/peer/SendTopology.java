@@ -54,6 +54,7 @@ public class SendTopology implements Runnable {
 	private BGP4SessionsInformation bgp4SessionsInformation;
 	private Logger log;
 	private int instanceId=1;
+	private int layer=0; //0->IP, 1-> optical
 	private boolean sendIntraDomainLinks=false;
 	private int ASnumber=1;
 	private int LocalPref=100;
@@ -521,7 +522,7 @@ public class SendTopology implements Runnable {
 		
 								//NLRI
 				NodeNLRI nodeNLRI = new NodeNLRI();
-				nodeNLRI.setProtocolID(ProtocolIDCodes.Unknown_Protocol_ID);	
+				nodeNLRI.setProtocolID(ProtocolIDCodes.Static_Protocol_ID);
 				nodeNLRI.setRoutingUniverseIdentifier(identifier);
 				LocalNodeDescriptorsTLV localNodeDescriptors = new LocalNodeDescriptorsTLV();
 		
@@ -546,7 +547,8 @@ public class SendTopology implements Runnable {
 						localNodeDescriptors.setBGPLSIDSubTLV(bGPLSIDSubTLV);
 						AreaIDNodeDescriptorSubTLV areaID = new AreaIDNodeDescriptorSubTLV();
 						areaID.setAREA_ID(this.localAreaID);
-						localNodeDescriptors.setAreaID(areaID);
+					//commented for compliance with ODL
+					// localNodeDescriptors.setAreaID(areaID);
 				
 				nodeNLRI.setLocalNodeDescriptors(localNodeDescriptors);
 				BGP_LS_MP_Reach_Attribute ra= new BGP_LS_MP_Reach_Attribute();
@@ -672,7 +674,7 @@ public class SendTopology implements Runnable {
 
 						//NLRI
 			PCENLRI pceNLRI = new PCENLRI();
-			pceNLRI.setProtocolID(ProtocolIDCodes.Unknown_Protocol_ID);
+			pceNLRI.setProtocolID(ProtocolIDCodes.Static_Protocol_ID);
 			pceNLRI.setRoutingUniverseIdentifier(identifier);
 						//PCE descriptor
 			PCEv4DescriptorsTLV pcev4 = new PCEv4DescriptorsTLV();
@@ -1104,8 +1106,8 @@ public class SendTopology implements Runnable {
 		}
 		//2. NLRI
 		LinkNLRI linkNLRI = new LinkNLRI();
-		linkNLRI.setProtocolID(ProtocolIDCodes.Unknown_Protocol_ID);
-		linkNLRI.setIdentifier(instanceId);
+		linkNLRI.setProtocolID(ProtocolIDCodes.Static_Protocol_ID);
+		linkNLRI.setIdentifier(layer);
 	
 		//2.1. Local Y Remote Descriptors
 		LocalNodeDescriptorsTLV localNodeDescriptors = new LocalNodeDescriptorsTLV();
@@ -1122,7 +1124,8 @@ public class SendTopology implements Runnable {
 		localNodeDescriptors.setBGPLSIDSubTLV(bGPLSIDSubTLV);
 		AreaIDNodeDescriptorSubTLV areaID = new AreaIDNodeDescriptorSubTLV();
 		areaID.setAREA_ID(this.localAreaID);
-		localNodeDescriptors.setAreaID(areaID);
+		//commented for compliance with ODL
+		// localNodeDescriptors.setAreaID(areaID);
 
 		IGPRouterIDNodeDescriptorSubTLV igpRouterIDDNSubTLV = new IGPRouterIDNodeDescriptorSubTLV();
 		igpRouterIDDNSubTLV.setIpv4AddressOSPF(addressList.get(1));	
@@ -1145,7 +1148,8 @@ public class SendTopology implements Runnable {
 		}
 		//Complete Dummy TLVs
 		remoteNodeDescriptors.setBGPLSIDSubTLV(bGPLSIDSubTLV);
-		remoteNodeDescriptors.setAreaID(areaID);
+		//commented for compliance with ODL
+		// remoteNodeDescriptors.setAreaID(areaID);
 
 		linkNLRI.setLocalNodeDescriptors(localNodeDescriptors);
 		linkNLRI.setRemoteNodeDescriptorsTLV(remoteNodeDescriptors);

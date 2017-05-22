@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <managementIP>localhost</managementIP>
+    <managementPort>5002</managementPort>
+
+    <XML_Plugin>
+        <mode>TM</mode>
+    	<XMLFileTopology>target/ODL/network.xml</XMLFileTopology>
+        <Identifier>2.2.2.2</Identifier>>
+    </XML_Plugin>
+     <InitFrom>
+        <Init>initFromXML</Init>
+    </InitFrom>
+    <!--WSOld>
+	<ip>localhost</ip>
+	<port>9876</port>
+    </WSOld-->
+    <UNIFY>
+        <serve_port>8088</serve_port>
+    </UNIFY>
+    <BGPLS>
+        <Reader>True</Reader>
+        <Writer>True</Writer>
+        <BGPLSconfigFile>target/ODL/BGPLS.xml</BGPLSconfigFile>
+    </BGPLS>
+   
+</config>
