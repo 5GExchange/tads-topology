@@ -91,7 +91,7 @@ public class BGP4SessionClientManager implements Runnable{
 		} else {
 			try{
 				bgp4SessionInformation.notifySessionStart(peerIP);		
-				log.info("Trying to establish new session with peer "+ peer.getPeerIP()+" on port "+peer.getPeerPort());
+				log.info("Trying to establish new session with peer  "+ peer.getPeerIP()+"  on Port "+peer.getPeerPort());
 				bgp4SessionClient = new BGP4SessionClient(bgp4SessionInformation,ud, peer.getPeerIP(), peer.getPeerPort(), holdTime, BGPIdentifier,
 						version,myAutonomousSystem,localBGP4Address,localBGP4Port ,keepAliveTimer);
 				bgp4SessionClient.setSendTo(sendTo);

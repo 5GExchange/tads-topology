@@ -1,5 +1,6 @@
 package es.tid.topologyModuleBase.plugins.reader;
 
+import java.io.IOException;
 import java.util.concurrent.locks.Lock;
 import java.util.logging.Logger;
 
@@ -26,8 +27,7 @@ public class TMReader
 		this.params = params;
 		this.lock = lock;
 	}
-	public void read()
-	{
+	public void read() throws IOException {
 		String[] initFrom = params.getInitFrom();
 		for (int i = 0; i < initFrom.length; i++)
 		{

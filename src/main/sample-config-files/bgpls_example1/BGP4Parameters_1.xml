@@ -28,6 +28,8 @@
          implementation MAY reject connections on the basis of the Hold Time.  The calculated value indicates the maximum number of
          seconds that may elapse between the receipt of successive KEEPALIVE and/or UPDATE messages from the sender. -->
 	<holdTime>180</holdTime><!-- Optional Parameter. Default value: 3. -->
+	<updateTime>10</updateTime><!--Check every 10 seconds if any update msg recieved from the BGP peer. If no update message received with
+	 in 10 second then delete the stored information in TEDB previously received from that Peer -->
 	<!-- RFC 4271. This 1-octet unsigned integer indicates the protocol version number of the message.  The current BGP version number is 4. -->
 	<version>4</version><!-- Optional Parameter. Default value: 4. -->
 	<!-- RFC 4271.  This 2-octet unsigned integer indicates the Autonomous System number of the sender.-->

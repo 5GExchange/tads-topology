@@ -1,0 +1,2729 @@
+Sep 11, 2017 4:19:58 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 0
+Sep 11, 2017 4:19:58 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: .........InterDomain Link..........
+Sep 11, 2017 4:19:58 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Source: /172.16.103.104  Destination:  /172.16.104.101
+Sep 11, 2017 4:19:58 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: New Inter-Domain Edge
+Sep 11, 2017 4:19:58 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing InterDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:19:58 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 15
+Sep 11, 2017 4:19:58 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: .........InterDomain Link..........
+Sep 11, 2017 4:19:58 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Source: /172.16.103.103  Destination:  /172.16.104.102
+Sep 11, 2017 4:19:58 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.104: 13 --> /172.16.104.101: 11
+ TED: UndirectionalLinkDelay [delay_ms=102]
+
+
+Sep 11, 2017 4:19:58 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Local router is Different!!!
+Sep 11, 2017 4:19:58 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: New Inter-Domain Edge
+Sep 11, 2017 4:19:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing InterDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:19:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 14
+Sep 11, 2017 4:19:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: .........InterDomain Link..........
+Sep 11, 2017 4:19:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Source: /172.16.105.104  Destination:  /172.16.106.101
+Sep 11, 2017 4:19:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.105.104: 13 --> /172.16.106.101: 11
+ TED: UndirectionalLinkDelay [delay_ms=102]
+
+
+Sep 11, 2017 4:19:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.105.103: 13 --> /172.16.106.102: 11
+ TED: UndirectionalLinkDelay [delay_ms=230]
+
+
+Sep 11, 2017 4:19:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Local router is Different!!!
+Sep 11, 2017 4:19:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 13
+Sep 11, 2017 4:19:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: .........InterDomain Link..........
+Sep 11, 2017 4:19:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Source: /172.16.105.103  Destination:  /172.16.106.102
+Sep 11, 2017 4:19:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.105.104: 13 --> /172.16.106.101: 11
+ TED: UndirectionalLinkDelay [delay_ms=102]
+
+
+Sep 11, 2017 4:19:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Local router is Different!!!
+Sep 11, 2017 4:19:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.105.103: 13 --> /172.16.106.102: 11
+ TED: UndirectionalLinkDelay [delay_ms=230]
+
+
+Sep 11, 2017 4:19:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 12
+Sep 11, 2017 4:19:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:19:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.101   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:19:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:19:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:19:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:19:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 11
+Sep 11, 2017 4:20:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:20:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.101
+Sep 11, 2017 4:20:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:20:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:20:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:20:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 40
+Sep 11, 2017 4:20:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: ------------- Stored IntraDomain Link Size: 2
+Sep 11, 2017 4:20:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.104<--->1<--->172.16.103.101<--->1
+Sep 11, 2017 4:20:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.101<--->1<--->172.16.103.104<--->1
+Sep 11, 2017 4:20:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: ------------- Stored InterDomain Link Size: 2
+Sep 11, 2017 4:20:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------InterDomain Link: 0.0.0.3<--->172.16.103.104<--->13<--->0.0.0.4<--->172.16.104.101<--->11
+Sep 11, 2017 4:20:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------InterDomain Link: 0.0.0.3<--->172.16.103.103<--->13<--->0.0.0.4<--->172.16.104.102<--->11
+Sep 11, 2017 4:20:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: ------------- Stored Domains Size: 1
+Sep 11, 2017 4:20:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.3
+Sep 11, 2017 4:20:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.6
+Sep 11, 2017 4:20:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.5
+Sep 11, 2017 4:20:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.4
+Sep 11, 2017 4:20:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Domain ID For Checking: 0.0.0.3
+Sep 11, 2017 4:20:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.3
+Sep 11, 2017 4:20:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Both Keys Match !!!!
+Sep 11, 2017 4:20:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: DomainID:  /0.0.0.3 Time Stored: 1505139609072 Time to Refresh: 1505139609102 Current time: 1505139611015
+Sep 11, 2017 4:20:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Domain TEDB Size: 4 Domain ID: es.tid.tedb.SimpleTEDB@af23b6e9
+Sep 11, 2017 4:20:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Before IntraDomain TEDB Size: 4
+Sep 11, 2017 4:20:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: After IntraDomain TEDB Size: 3  DomainUpdate Size: 0
+Sep 11, 2017 4:20:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:20:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.101   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:20:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:20:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:20:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:20:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 69
+Sep 11, 2017 4:20:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:20:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.101
+Sep 11, 2017 4:20:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:20:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:20:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:20:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 68
+Sep 11, 2017 4:20:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:20:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.103
+Sep 11, 2017 4:20:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:20:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:20:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:20:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 97
+Sep 11, 2017 4:20:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:20:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.103   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:20:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:20:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:20:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:20:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 96
+Sep 11, 2017 4:20:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:20:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.103   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:20:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:20:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:20:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:20:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 95
+Sep 11, 2017 4:20:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:20:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.103
+Sep 11, 2017 4:20:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:20:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:20:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:20:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 94
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 123
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 122
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: IT Resource:  null
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Received IT info for Domain 0.0.0.3 From Peer /172.17.11.202
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Existing IT Resource LearntFrom:  null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 121
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.4
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.104.101   RemoteIP:  /172.16.104.102
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 120
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: IT Resource:  null
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Received IT info for Domain 0.0.0.4 From Peer /172.17.11.202
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Existing IT Resource LearntFrom:  null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 119
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: .........InterDomain Link..........
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Source: /172.16.103.104  Destination:  /172.16.104.101
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.104: 13 --> /172.16.104.101: 11
+ TED: UndirectionalLinkDelay [delay_ms=102]
+
+
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.103: 13 --> /172.16.104.102: 11
+ TED: UndirectionalLinkDelay [delay_ms=230]
+
+
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Local router is Different!!!
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing InterDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 118
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: .........InterDomain Link..........
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Source: /172.16.103.103  Destination:  /172.16.104.102
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.104: 13 --> /172.16.104.101: 11
+ TED: UndirectionalLinkDelay [delay_ms=102]
+
+
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Local router is Different!!!
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.103: 13 --> /172.16.104.102: 11
+ TED: UndirectionalLinkDelay [delay_ms=230]
+
+
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing InterDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:20:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 117
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: ------------- Stored IntraDomain Link Size: 11
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.101<--->1<--->172.16.103.104<--->1
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: IntraDomainLink:  0.0.0.3<--->172.16.103.101<--->1<--->172.16.103.104<--->1 Time Stored: 1505139599054 Time to Refresh: 1505139599084 Current time: 1505139641021
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: IntraDomain TEDB Size: 11 Domain ID: /0.0.0.3
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Before IntraDomain TEDB Size: 11
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: After IntraDomain TEDB Size: 11
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.102<--->2<--->172.16.103.103<--->1
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.103<--->1<--->172.16.103.102<--->2
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.102<--->3<--->172.16.103.104<--->3
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.104<--->2<--->172.16.103.103<--->2
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.103<--->2<--->172.16.103.104<--->2
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.104<--->3<--->172.16.103.102<--->3
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.104<--->1<--->172.16.103.101<--->1
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.4<--->172.16.104.101<--->2<--->172.16.104.102<--->1
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.101<--->2<--->172.16.103.102<--->1
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.102<--->1<--->172.16.103.101<--->2
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: ------------- Stored InterDomain Link Size: 2
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------InterDomain Link: 0.0.0.3<--->172.16.103.104<--->13<--->0.0.0.4<--->172.16.104.101<--->11
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------InterDomain Link: 0.0.0.3<--->172.16.103.103<--->13<--->0.0.0.4<--->172.16.104.102<--->11
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: ...........Node IT Information TEDS Size: 2
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------Domain ID: Domain ID: /0.0.0.3<--->Node ID: 0.0.0.3
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Node ID:  0.0.0.3 Time Stored: 1505139639203 Time to Refresh : 1505139639233 Current time: 1505139641031
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Node IT Information Size: 2 Domain ID: /0.0.0.3
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Before Node IT Info TEDB Size: 2
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: IT Information Size: https://openstack.5Gex.com/url	100	100Gbyte	100Tbyte	
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: After Node IT Info TEDB Size: 1
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------Domain ID: Domain ID: /0.0.0.4<--->Node ID: 0.0.0.4
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Node ID:  0.0.0.4 Time Stored: 1505139639231 Time to Refresh : 1505139639261 Current time: 1505139641034
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Node IT Information Size: 1 Domain ID: /0.0.0.4
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Before Node IT Info TEDB Size: 1
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: IT Information Size: https://UC3MController.5Gex.com/url	222	222Gbyte	222Tbyte	
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: After Node IT Info TEDB Size: 0
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: ------------- Stored Domains Size: 2
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.3
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.6
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.5
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.4
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Domain ID For Checking: 0.0.0.4
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.3
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.6
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.5
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.4
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Both Keys Match !!!!
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: DomainID:  /0.0.0.4 Time Stored: 1505139639231 Time to Refresh: 1505139639261 Current time: 1505139641040
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Domain TEDB Size: 4 Domain ID: es.tid.tedb.SimpleTEDB@7a37a08f
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Before IntraDomain TEDB Size: 4
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: After IntraDomain TEDB Size: 3  DomainUpdate Size: 1
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Domain ID For Checking: 0.0.0.3
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.3
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Both Keys Match !!!!
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: DomainID:  /0.0.0.3 Time Stored: 1505139639240 Time to Refresh: 1505139639270 Current time: 1505139641042
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Domain TEDB Size: 3 Domain ID: es.tid.tedb.SimpleTEDB@9b5618bc
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Before IntraDomain TEDB Size: 3
+Sep 11, 2017 4:20:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: After IntraDomain TEDB Size: 2  DomainUpdate Size: 0
+Sep 11, 2017 4:20:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:20:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.101   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:20:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:20:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:20:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:20:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 146
+Sep 11, 2017 4:20:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:20:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.101
+Sep 11, 2017 4:20:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:20:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:20:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:20:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 145
+Sep 11, 2017 4:20:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:20:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.101   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:20:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:20:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:20:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:20:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 144
+Sep 11, 2017 4:20:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:20:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.101
+Sep 11, 2017 4:20:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:20:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:20:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:20:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 158
+Sep 11, 2017 4:20:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:20:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.103
+Sep 11, 2017 4:20:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:20:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:20:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:20:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 157
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.103   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 156
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.103   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 155
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.103
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 154
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 153
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 152
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: IT Resource:  null
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Received IT info for Domain 0.0.0.3 From Peer /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Existing IT Resource LearntFrom:  null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 151
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.4
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.104.101   RemoteIP:  /172.16.104.102
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 150
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: IT Resource:  null
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Received IT info for Domain 0.0.0.4 From Peer /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Existing IT Resource LearntFrom:  null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 149
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: .........InterDomain Link..........
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Source: /172.16.103.104  Destination:  /172.16.104.101
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.104: 13 --> /172.16.104.101: 11
+ TED: UndirectionalLinkDelay [delay_ms=102]
+
+
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.103: 13 --> /172.16.104.102: 11
+ TED: UndirectionalLinkDelay [delay_ms=230]
+
+
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Local router is Different!!!
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing InterDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 148
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: .........InterDomain Link..........
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Source: /172.16.103.103  Destination:  /172.16.104.102
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.104: 13 --> /172.16.104.101: 11
+ TED: UndirectionalLinkDelay [delay_ms=102]
+
+
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Local router is Different!!!
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.103: 13 --> /172.16.104.102: 11
+ TED: UndirectionalLinkDelay [delay_ms=230]
+
+
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing InterDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 147
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.101   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 146
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.101
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 145
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.101   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 144
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.101
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 143
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.103
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 142
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.103   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 141
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.103   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 140
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.103
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 139
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 138
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 137
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: IT Resource:  https://openstack.5Gex.com/url	100	100Gbyte	100Tbyte	
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Received IT info for Domain 0.0.0.3 From Peer /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Existing IT Resource LearntFrom:  /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 136
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.4
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.104.101   RemoteIP:  /172.16.104.102
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 135
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: IT Resource:  https://UC3MController.5Gex.com/url	222	222Gbyte	222Tbyte	
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Received IT info for Domain 0.0.0.4 From Peer /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Existing IT Resource LearntFrom:  /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 134
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: .........InterDomain Link..........
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Source: /172.16.103.104  Destination:  /172.16.104.101
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.104: 13 --> /172.16.104.101: 11
+ TED: UndirectionalLinkDelay [delay_ms=102]
+
+
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.103: 13 --> /172.16.104.102: 11
+ TED: UndirectionalLinkDelay [delay_ms=230]
+
+
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Local router is Different!!!
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing InterDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 133
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: .........InterDomain Link..........
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Source: /172.16.103.103  Destination:  /172.16.104.102
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.104: 13 --> /172.16.104.101: 11
+ TED: UndirectionalLinkDelay [delay_ms=102]
+
+
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Local router is Different!!!
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.103: 13 --> /172.16.104.102: 11
+ TED: UndirectionalLinkDelay [delay_ms=230]
+
+
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing InterDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 132
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.101   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 131
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.101
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 130
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.101   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 129
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.101
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 128
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.103
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 127
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.103   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 126
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.103   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 125
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.103
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 124
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 123
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 122
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: IT Resource:  https://openstack.5Gex.com/url	100	100Gbyte	100Tbyte	
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Received IT info for Domain 0.0.0.3 From Peer /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Existing IT Resource LearntFrom:  /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 121
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.4
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.104.101   RemoteIP:  /172.16.104.102
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 120
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: IT Resource:  https://UC3MController.5Gex.com/url	222	222Gbyte	222Tbyte	
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Received IT info for Domain 0.0.0.4 From Peer /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Existing IT Resource LearntFrom:  /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 119
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: .........InterDomain Link..........
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Source: /172.16.103.104  Destination:  /172.16.104.101
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.104: 13 --> /172.16.104.101: 11
+ TED: UndirectionalLinkDelay [delay_ms=102]
+
+
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.103: 13 --> /172.16.104.102: 11
+ TED: UndirectionalLinkDelay [delay_ms=230]
+
+
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Local router is Different!!!
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing InterDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 118
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: .........InterDomain Link..........
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Source: /172.16.103.103  Destination:  /172.16.104.102
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.104: 13 --> /172.16.104.101: 11
+ TED: UndirectionalLinkDelay [delay_ms=102]
+
+
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Local router is Different!!!
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.103: 13 --> /172.16.104.102: 11
+ TED: UndirectionalLinkDelay [delay_ms=230]
+
+
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing InterDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 117
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.101   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 116
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.101
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 115
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.101   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 114
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.101
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 113
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.103
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 112
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.103   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 111
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.103   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 110
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.103
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 109
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 108
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 107
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: IT Resource:  https://openstack.5Gex.com/url	100	100Gbyte	100Tbyte	
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Received IT info for Domain 0.0.0.3 From Peer /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Existing IT Resource LearntFrom:  /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 106
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.4
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.104.101   RemoteIP:  /172.16.104.102
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 105
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: IT Resource:  https://UC3MController.5Gex.com/url	222	222Gbyte	222Tbyte	
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Received IT info for Domain 0.0.0.4 From Peer /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Existing IT Resource LearntFrom:  /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 104
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: .........InterDomain Link..........
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Source: /172.16.103.104  Destination:  /172.16.104.101
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.104: 13 --> /172.16.104.101: 11
+ TED: UndirectionalLinkDelay [delay_ms=102]
+
+
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.103: 13 --> /172.16.104.102: 11
+ TED: UndirectionalLinkDelay [delay_ms=230]
+
+
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Local router is Different!!!
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing InterDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 103
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: .........InterDomain Link..........
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Source: /172.16.103.103  Destination:  /172.16.104.102
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.104: 13 --> /172.16.104.101: 11
+ TED: UndirectionalLinkDelay [delay_ms=102]
+
+
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Local router is Different!!!
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.103: 13 --> /172.16.104.102: 11
+ TED: UndirectionalLinkDelay [delay_ms=230]
+
+
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing InterDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 102
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.101   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 101
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.101
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 100
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.101   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 99
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.101
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 98
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.103
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 97
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.103   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 96
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.103   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 95
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.103
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 94
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 93
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 92
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: IT Resource:  https://openstack.5Gex.com/url	100	100Gbyte	100Tbyte	
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Received IT info for Domain 0.0.0.3 From Peer /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Existing IT Resource LearntFrom:  /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 91
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.4
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.104.101   RemoteIP:  /172.16.104.102
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 90
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: IT Resource:  https://UC3MController.5Gex.com/url	222	222Gbyte	222Tbyte	
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Received IT info for Domain 0.0.0.4 From Peer /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Existing IT Resource LearntFrom:  /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 89
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: .........InterDomain Link..........
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Source: /172.16.103.104  Destination:  /172.16.104.101
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.104: 13 --> /172.16.104.101: 11
+ TED: UndirectionalLinkDelay [delay_ms=102]
+
+
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.103: 13 --> /172.16.104.102: 11
+ TED: UndirectionalLinkDelay [delay_ms=230]
+
+
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Local router is Different!!!
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing InterDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 88
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: .........InterDomain Link..........
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Source: /172.16.103.103  Destination:  /172.16.104.102
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.104: 13 --> /172.16.104.101: 11
+ TED: UndirectionalLinkDelay [delay_ms=102]
+
+
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Local router is Different!!!
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.103: 13 --> /172.16.104.102: 11
+ TED: UndirectionalLinkDelay [delay_ms=230]
+
+
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing InterDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 87
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.101   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 86
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.101
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 85
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.101   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 84
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.101
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 83
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.103
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 82
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.103   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 81
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.103   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:09 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 80
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: ------------- Stored IntraDomain Link Size: 11
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.103<--->2<--->172.16.103.104<--->2
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.102<--->3<--->172.16.103.104<--->3
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.104<--->1<--->172.16.103.101<--->1
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.102<--->1<--->172.16.103.101<--->2
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.4<--->172.16.104.101<--->2<--->172.16.104.102<--->1
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.104<--->3<--->172.16.103.102<--->3
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.103<--->1<--->172.16.103.102<--->2
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.101<--->1<--->172.16.103.104<--->1
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.101<--->2<--->172.16.103.102<--->1
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.104<--->2<--->172.16.103.103<--->2
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.102<--->2<--->172.16.103.103<--->1
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: ------------- Stored InterDomain Link Size: 2
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------InterDomain Link: 0.0.0.3<--->172.16.103.104<--->13<--->0.0.0.4<--->172.16.104.101<--->11
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------InterDomain Link: 0.0.0.3<--->172.16.103.103<--->13<--->0.0.0.4<--->172.16.104.102<--->11
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: ...........Node IT Information TEDS Size: 2
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------Domain ID: Domain ID: /0.0.0.4<--->Node ID: 0.0.0.4
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Node ID:  0.0.0.4 Time Stored: 1505139669745 Time to Refresh : 1505139669775 Current time: 1505139671050
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Node IT Information Size: 2 Domain ID: /0.0.0.4
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Before Node IT Info TEDB Size: 2
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: IT Information Size: https://UC3MController.5Gex.com/url	222	222Gbyte	222Tbyte	
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: After Node IT Info TEDB Size: 1
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------Domain ID: Domain ID: /0.0.0.3<--->Node ID: 0.0.0.3
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Node ID:  0.0.0.3 Time Stored: 1505139669728 Time to Refresh : 1505139669758 Current time: 1505139671051
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Node IT Information Size: 1 Domain ID: /0.0.0.3
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Before Node IT Info TEDB Size: 1
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: IT Information Size: https://openstack.5Gex.com/url	100	100Gbyte	100Tbyte	
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: After Node IT Info TEDB Size: 0
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: ------------- Stored Domains Size: 2
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.3
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.6
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.5
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.4
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Domain ID For Checking: 0.0.0.3
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.3
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Both Keys Match !!!!
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: DomainID:  /0.0.0.3 Time Stored: 1505139669778 Time to Refresh: 1505139669808 Current time: 1505139671053
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Domain TEDB Size: 4 Domain ID: es.tid.tedb.SimpleTEDB@ed5e771a
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Before IntraDomain TEDB Size: 4
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: After IntraDomain TEDB Size: 3  DomainUpdate Size: 1
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Domain ID For Checking: 0.0.0.4
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.6
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.5
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.4
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Both Keys Match !!!!
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: DomainID:  /0.0.0.4 Time Stored: 1505139669745 Time to Refresh: 1505139669775 Current time: 1505139671055
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Domain TEDB Size: 3 Domain ID: es.tid.tedb.SimpleTEDB@8b646fc7
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Before IntraDomain TEDB Size: 3
+Sep 11, 2017 4:21:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: After IntraDomain TEDB Size: 2  DomainUpdate Size: 0
+Sep 11, 2017 4:21:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.103
+Sep 11, 2017 4:21:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:21:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:21:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 79
+Sep 11, 2017 4:21:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:21:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:21:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:21:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 78
+Sep 11, 2017 4:21:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:21:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:21:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:21:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 77
+Sep 11, 2017 4:21:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: IT Resource:  null
+Sep 11, 2017 4:21:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Received IT info for Domain 0.0.0.3 From Peer /172.17.11.202
+Sep 11, 2017 4:21:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Existing IT Resource LearntFrom:  null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:19 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 76
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.4
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.104.101   RemoteIP:  /172.16.104.102
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 75
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: IT Resource:  null
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Received IT info for Domain 0.0.0.4 From Peer /172.17.11.202
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Existing IT Resource LearntFrom:  null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 74
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: .........InterDomain Link..........
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Source: /172.16.103.104  Destination:  /172.16.104.101
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.104: 13 --> /172.16.104.101: 11
+ TED: UndirectionalLinkDelay [delay_ms=102]
+
+
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.103: 13 --> /172.16.104.102: 11
+ TED: UndirectionalLinkDelay [delay_ms=230]
+
+
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Local router is Different!!!
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing InterDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 73
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: .........InterDomain Link..........
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Source: /172.16.103.103  Destination:  /172.16.104.102
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.104: 13 --> /172.16.104.101: 11
+ TED: UndirectionalLinkDelay [delay_ms=102]
+
+
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Local router is Different!!!
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.103: 13 --> /172.16.104.102: 11
+ TED: UndirectionalLinkDelay [delay_ms=230]
+
+
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing InterDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 72
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.101   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 71
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.101
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:21:29 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 70
+Sep 11, 2017 4:21:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.101   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:21:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:21:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:21:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 69
+Sep 11, 2017 4:21:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.101
+Sep 11, 2017 4:21:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:21:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:21:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 68
+Sep 11, 2017 4:21:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.103
+Sep 11, 2017 4:21:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:21:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:21:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 67
+Sep 11, 2017 4:21:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.103   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:21:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:21:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:21:39 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 66
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: ------------- Stored IntraDomain Link Size: 11
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.101<--->1<--->172.16.103.104<--->1
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.4<--->172.16.104.101<--->2<--->172.16.104.102<--->1
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.103<--->1<--->172.16.103.102<--->2
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.101<--->2<--->172.16.103.102<--->1
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.103<--->2<--->172.16.103.104<--->2
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.102<--->3<--->172.16.103.104<--->3
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.104<--->1<--->172.16.103.101<--->1
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.102<--->1<--->172.16.103.101<--->2
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.104<--->3<--->172.16.103.102<--->3
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.102<--->2<--->172.16.103.103<--->1
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.104<--->2<--->172.16.103.103<--->2
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: ------------- Stored InterDomain Link Size: 2
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------InterDomain Link: 0.0.0.3<--->172.16.103.104<--->13<--->0.0.0.4<--->172.16.104.101<--->11
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------InterDomain Link: 0.0.0.3<--->172.16.103.103<--->13<--->0.0.0.4<--->172.16.104.102<--->11
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: ...........Node IT Information TEDS Size: 2
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------Domain ID: Domain ID: /0.0.0.4<--->Node ID: 0.0.0.4
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Node ID:  0.0.0.4 Time Stored: 1505139689817 Time to Refresh : 1505139689847 Current time: 1505139701063
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Node IT Information Size: 2 Domain ID: /0.0.0.4
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Before Node IT Info TEDB Size: 2
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: IT Information Size: https://UC3MController.5Gex.com/url	222	222Gbyte	222Tbyte	
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: After Node IT Info TEDB Size: 1
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------Domain ID: Domain ID: /0.0.0.3<--->Node ID: 0.0.0.3
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Node ID:  0.0.0.3 Time Stored: 1505139679804 Time to Refresh : 1505139679834 Current time: 1505139701066
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Node IT Information Size: 1 Domain ID: /0.0.0.3
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Before Node IT Info TEDB Size: 1
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: IT Information Size: https://openstack.5Gex.com/url	100	100Gbyte	100Tbyte	
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: After Node IT Info TEDB Size: 0
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: ------------- Stored Domains Size: 2
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.3
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.6
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.5
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.4
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Domain ID For Checking: 0.0.0.3
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.3
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Both Keys Match !!!!
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: DomainID:  /0.0.0.3 Time Stored: 1505139699864 Time to Refresh: 1505139699894 Current time: 1505139701071
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Domain TEDB Size: 4 Domain ID: es.tid.tedb.SimpleTEDB@b745eaf5
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Before IntraDomain TEDB Size: 4
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: After IntraDomain TEDB Size: 3  DomainUpdate Size: 1
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Domain ID For Checking: 0.0.0.4
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.6
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.5
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.4
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Both Keys Match !!!!
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: DomainID:  /0.0.0.4 Time Stored: 1505139689817 Time to Refresh: 1505139689847 Current time: 1505139701074
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Domain TEDB Size: 3 Domain ID: es.tid.tedb.SimpleTEDB@cb2f29c2
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Before IntraDomain TEDB Size: 3
+Sep 11, 2017 4:21:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: After IntraDomain TEDB Size: 2  DomainUpdate Size: 0
+Sep 11, 2017 4:21:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.103   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:21:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:21:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:21:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 65
+Sep 11, 2017 4:21:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.103
+Sep 11, 2017 4:21:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:21:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:21:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 64
+Sep 11, 2017 4:21:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:21:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:21:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:21:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 63
+Sep 11, 2017 4:21:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:21:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:21:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:21:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 62
+Sep 11, 2017 4:21:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: IT Resource:  null
+Sep 11, 2017 4:21:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Received IT info for Domain 0.0.0.3 From Peer /172.17.11.202
+Sep 11, 2017 4:21:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Existing IT Resource LearntFrom:  null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:49 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 61
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.4
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.104.101   RemoteIP:  /172.16.104.102
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 60
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: IT Resource:  null
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Received IT info for Domain 0.0.0.4 From Peer /172.17.11.202
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Existing IT Resource LearntFrom:  null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 59
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: .........InterDomain Link..........
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Source: /172.16.103.104  Destination:  /172.16.104.101
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.104: 13 --> /172.16.104.101: 11
+ TED: UndirectionalLinkDelay [delay_ms=102]
+
+
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.103: 13 --> /172.16.104.102: 11
+ TED: UndirectionalLinkDelay [delay_ms=230]
+
+
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Local router is Different!!!
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing InterDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 58
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: .........InterDomain Link..........
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Source: /172.16.103.103  Destination:  /172.16.104.102
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.104: 13 --> /172.16.104.101: 11
+ TED: UndirectionalLinkDelay [delay_ms=102]
+
+
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Local router is Different!!!
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.103: 13 --> /172.16.104.102: 11
+ TED: UndirectionalLinkDelay [delay_ms=230]
+
+
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing InterDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 57
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.101   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 56
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.101
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 55
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.101   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 54
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.101
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 53
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.103
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 52
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.103   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain IntraDomain Edge
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: null  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph does not contain intra-edge
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 51
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.103   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 50
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.103
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 49
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 48
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 47
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: IT Resource:  https://openstack.5Gex.com/url	100	100Gbyte	100Tbyte	
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Received IT info for Domain 0.0.0.3 From Peer /172.17.11.202
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Existing IT Resource LearntFrom:  /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 46
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.4
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.104.101   RemoteIP:  /172.16.104.102
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 45
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: IT Resource:  https://UC3MController.5Gex.com/url	222	222Gbyte	222Tbyte	
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Received IT info for Domain 0.0.0.4 From Peer /172.17.11.202
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Existing IT Resource LearntFrom:  /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 44
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: .........InterDomain Link..........
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Source: /172.16.103.104  Destination:  /172.16.104.101
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.104: 13 --> /172.16.104.101: 11
+ TED: UndirectionalLinkDelay [delay_ms=102]
+
+
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.103: 13 --> /172.16.104.102: 11
+ TED: UndirectionalLinkDelay [delay_ms=230]
+
+
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Local router is Different!!!
+Sep 11, 2017 4:21:59 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing InterDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 43
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: .........InterDomain Link..........
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Source: /172.16.103.103  Destination:  /172.16.104.102
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.104: 13 --> /172.16.104.101: 11
+ TED: UndirectionalLinkDelay [delay_ms=102]
+
+
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Local router is Different!!!
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.103: 13 --> /172.16.104.102: 11
+ TED: UndirectionalLinkDelay [delay_ms=230]
+
+
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing InterDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 42
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.101   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 41
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.101
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 40
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.101   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 39
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.101
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 38
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.103
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 37
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.103   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 36
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.103   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 35
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.103
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 34
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 33
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 32
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: IT Resource:  https://openstack.5Gex.com/url	100	100Gbyte	100Tbyte	
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Received IT info for Domain 0.0.0.3 From Peer /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Existing IT Resource LearntFrom:  /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 31
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.4
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.104.101   RemoteIP:  /172.16.104.102
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 30
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: IT Resource:  https://UC3MController.5Gex.com/url	222	222Gbyte	222Tbyte	
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Received IT info for Domain 0.0.0.4 From Peer /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Existing IT Resource LearntFrom:  /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 29
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: .........InterDomain Link..........
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Source: /172.16.103.104  Destination:  /172.16.104.101
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.104: 13 --> /172.16.104.101: 11
+ TED: UndirectionalLinkDelay [delay_ms=102]
+
+
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.103: 13 --> /172.16.104.102: 11
+ TED: UndirectionalLinkDelay [delay_ms=230]
+
+
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Local router is Different!!!
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing InterDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 28
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: .........InterDomain Link..........
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Source: /172.16.103.103  Destination:  /172.16.104.102
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.104: 13 --> /172.16.104.101: 11
+ TED: UndirectionalLinkDelay [delay_ms=102]
+
+
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Local router is Different!!!
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.103: 13 --> /172.16.104.102: 11
+ TED: UndirectionalLinkDelay [delay_ms=230]
+
+
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing InterDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 27
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.101   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 26
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.101
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 25
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.101   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 24
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.101
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 23
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.103
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 22
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.103   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 21
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.103   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 20
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.103
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 19
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 18
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 17
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: IT Resource:  https://openstack.5Gex.com/url	100	100Gbyte	100Tbyte	
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Received IT info for Domain 0.0.0.3 From Peer /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Existing IT Resource LearntFrom:  /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 16
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.4
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.104.101   RemoteIP:  /172.16.104.102
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 15
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: IT Resource:  https://UC3MController.5Gex.com/url	222	222Gbyte	222Tbyte	
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Received IT info for Domain 0.0.0.4 From Peer /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Existing IT Resource LearntFrom:  /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 14
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: .........InterDomain Link..........
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Source: /172.16.103.104  Destination:  /172.16.104.101
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.104: 13 --> /172.16.104.101: 11
+ TED: UndirectionalLinkDelay [delay_ms=102]
+
+
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.103: 13 --> /172.16.104.102: 11
+ TED: UndirectionalLinkDelay [delay_ms=230]
+
+
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Local router is Different!!!
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing InterDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 13
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: .........InterDomain Link..........
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Source: /172.16.103.103  Destination:  /172.16.104.102
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.104: 13 --> /172.16.104.101: 11
+ TED: UndirectionalLinkDelay [delay_ms=102]
+
+
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Local router is Different!!!
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing Edge: /172.16.103.103: 13 --> /172.16.104.102: 11
+ TED: UndirectionalLinkDelay [delay_ms=230]
+
+
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing InterDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 12
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.101   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 11
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.101
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 10
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.101   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 9
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.101
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 8
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.103
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 7
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.103   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 6
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.103   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 5
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.103
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 4
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.102   RemoteIP:  /172.16.103.104
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.3
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.103.104   RemoteIP:  /172.16.103.102
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 2
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: IT Resource:  https://openstack.5Gex.com/url	100	100Gbyte	100Tbyte	
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Received IT info for Domain 0.0.0.3 From Peer /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Existing IT Resource LearntFrom:  /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 1
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: ........IntraDomain......for domain:  0.0.0.4
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: LocalIP:  /172.16.104.101   RemoteIP:  /172.16.104.102
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: IntraDomain Edge Already Exist in the TEDB
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Existing IntraDomain Edge LearntFrom: /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread processLinkNLRI
+INFO: Graph contains Intra-edge
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread run
+INFO: Update Msg Received from /172.17.11.202  Queue size: 0
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: IT Resource:  https://UC3MController.5Gex.com/url	222	222Gbyte	222Tbyte	
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Received IT info for Domain 0.0.0.4 From Peer /172.17.11.202
+Sep 11, 2017 4:22:00 PM es.tid.bgp.bgp4Peer.updateTEDB.UpdateProccesorThread fillITNodeInformation
+INFO: Existing IT Resource LearntFrom:  /172.17.11.202  New LearntFrom:  /172.17.11.202
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: ------------- Stored IntraDomain Link Size: 11
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.101<--->1<--->172.16.103.104<--->1
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.104<--->2<--->172.16.103.103<--->2
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.101<--->2<--->172.16.103.102<--->1
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.103<--->1<--->172.16.103.102<--->2
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.102<--->2<--->172.16.103.103<--->1
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.104<--->3<--->172.16.103.102<--->3
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.103<--->2<--->172.16.103.104<--->2
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.104<--->1<--->172.16.103.101<--->1
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.102<--->3<--->172.16.103.104<--->3
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.4<--->172.16.104.101<--->2<--->172.16.104.102<--->1
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.102<--->1<--->172.16.103.101<--->2
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: ------------- Stored InterDomain Link Size: 2
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------InterDomain Link: 0.0.0.3<--->172.16.103.103<--->13<--->0.0.0.4<--->172.16.104.102<--->11
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------InterDomain Link: 0.0.0.3<--->172.16.103.104<--->13<--->0.0.0.4<--->172.16.104.101<--->11
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: ...........Node IT Information TEDS Size: 2
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------Domain ID: Domain ID: /0.0.0.3<--->Node ID: 0.0.0.3
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Node ID:  0.0.0.3 Time Stored: 1505139720214 Time to Refresh : 1505139720244 Current time: 1505139731082
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Node IT Information Size: 2 Domain ID: /0.0.0.3
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Before Node IT Info TEDB Size: 2
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: IT Information Size: https://openstack.5Gex.com/url	100	100Gbyte	100Tbyte	
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: After Node IT Info TEDB Size: 1
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------Domain ID: Domain ID: /0.0.0.4<--->Node ID: 0.0.0.4
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Node ID:  0.0.0.4 Time Stored: 1505139720231 Time to Refresh : 1505139720261 Current time: 1505139731084
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Node IT Information Size: 1 Domain ID: /0.0.0.4
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Before Node IT Info TEDB Size: 1
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: IT Information Size: https://UC3MController.5Gex.com/url	222	222Gbyte	222Tbyte	
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: After Node IT Info TEDB Size: 0
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: ------------- Stored Domains Size: 2
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.3
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.6
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.5
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.4
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Domain ID For Checking: 0.0.0.4
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.3
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.6
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.5
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.4
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Both Keys Match !!!!
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: DomainID:  /0.0.0.4 Time Stored: 1505139720231 Time to Refresh: 1505139720261 Current time: 1505139731087
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Domain TEDB Size: 4 Domain ID: es.tid.tedb.SimpleTEDB@edb7abad
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Before IntraDomain TEDB Size: 4
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: After IntraDomain TEDB Size: 3  DomainUpdate Size: 1
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Domain ID For Checking: 0.0.0.3
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO:  Key for IntraTEDs:  0.0.0.3
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Both Keys Match !!!!
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: DomainID:  /0.0.0.3 Time Stored: 1505139720214 Time to Refresh: 1505139720244 Current time: 1505139731089
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Domain TEDB Size: 3 Domain ID: es.tid.tedb.SimpleTEDB@8bbb7ec5
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Before IntraDomain TEDB Size: 3
+Sep 11, 2017 4:22:11 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: After IntraDomain TEDB Size: 2  DomainUpdate Size: 0
+Sep 11, 2017 4:22:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: ------------- Stored IntraDomain Link Size: 11
+Sep 11, 2017 4:22:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: -------------IntraDomain Link: 0.0.0.3<--->172.16.103.101<--->1<--->172.16.103.104<--->1
+Sep 11, 2017 4:22:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: IntraDomainLink:  0.0.0.3<--->172.16.103.101<--->1<--->172.16.103.104<--->1 Time Stored: 1505139720160 Time to Refresh: 1505139720190 Current time: 1505139761092
+Sep 11, 2017 4:22:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: IntraDomain TEDB Size: 11 Domain ID: /0.0.0.3
+Sep 11, 2017 4:22:41 PM es.tid.bgp.bgp4Peer.peer.UpdateDomainStatus run
+INFO: Before IntraDomain TEDB Size: 11

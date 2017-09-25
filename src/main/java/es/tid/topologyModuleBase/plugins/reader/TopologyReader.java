@@ -1,5 +1,6 @@
 package es.tid.topologyModuleBase.plugins.reader;
 
+import java.io.IOException;
 import java.util.concurrent.locks.Lock;
 import java.util.logging.Logger;
 
@@ -29,6 +30,6 @@ public abstract class TopologyReader implements TMPlugin
 		this.lock = lock;
 	}
 	
-	abstract public void readTopology();
+	abstract public void readTopology() throws IOException;
 	
 }

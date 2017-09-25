@@ -9,7 +9,15 @@
 			<ipv4_address>172.16.101.0</ipv4_address>
 			<prefix>29</prefix>
 		</reachability_entry>
-
+		<it_resources>
+			<controller_it>https://openstack.5Gex.com/url</controller_it>
+			<cpu>100</cpu>
+			<mem>100Gbyte</mem>
+			<storage>100Tbyte</storage>
+		</it_resources>
+		<mdpce>
+			<ipv4>172.16.0.2</ipv4>
+		</mdpce>>
 		<node>
 			<router_id>172.16.101.101</router_id>
 		</node>

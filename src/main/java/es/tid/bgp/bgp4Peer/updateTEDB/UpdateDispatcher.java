@@ -1,17 +1,17 @@
 package es.tid.bgp.bgp4Peer.updateTEDB;
 
-import java.net.Inet4Address;
-import java.util.Hashtable;
-import java.util.concurrent.LinkedBlockingQueue;
+import es.tid.bgp.bgp4.messages.BGP4Update;
+import es.tid.bgp.bgp4Peer.peer.BGP4Parameters;
+import es.tid.bgp.bgp4Peer.peer.DomainUpdateTime;
+import es.tid.bgp.bgp4Peer.peer.MDPCEinfoUpdateTime;
+import es.tid.tedb.MultiDomainTEDB;
+import es.tid.tedb.TEDB;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import es.tid.bgp.bgp4.messages.BGP4Update;
-import es.tid.bgp.bgp4Peer.tedb.IntraTEDBS;
-import es.tid.tedb.DomainTEDB;
-import es.tid.tedb.MultiDomainTEDB;
-import es.tid.tedb.SimpleTEDB;
-import es.tid.tedb.TEDB;
+import java.net.Inet4Address;
+import java.util.Hashtable;
+import java.util.concurrent.LinkedBlockingQueue;
 
 
 /**
@@ -26,17 +26,49 @@ public class UpdateDispatcher {
 	private LinkedBlockingQueue<BGP4Update> updateList;
 	private UpdateProccesorThread upt;
 
-	
-	public UpdateDispatcher(MultiDomainTEDB multiTedb,Hashtable<String,TEDB> intraTEDBs ){
+
+
+	public UpdateDispatcher(MultiDomainTEDB multiTedb, Hashtable<String, TEDB> intraTEDBs, Hashtable<DomainUpdateTime, Long> domainUpdate, Hashtable<IntraDomainLinkUpdateTime, Long> intraDomainLinkUpdate, Hashtable<InterDomainLinkUpdateTime, Long> interDomainLinkUpdate, Hashtable<NodeITinfoUpdateTime, Long> nodeITinfoUpdate, Hashtable<NodeinfoUpdateTime, Long> nodeinfoUpdate, Hashtable<MDPCEinfoUpdateTime, Long> MDPCEinfoUpdate, BGP4Parameters params){
+
+
+		//log=LoggerFactory.getLogger("BGP4Server");
 		this.updateList=new LinkedBlockingQueue<BGP4Update>();
-		this.upt=new UpdateProccesorThread(updateList, multiTedb,intraTEDBs );		
+		this.upt=new UpdateProccesorThread(updateList, multiTedb,intraTEDBs,intraDomainLinkUpdate,interDomainLinkUpdate,nodeITinfoUpdate,nodeinfoUpdate,MDPCEinfoUpdate,domainUpdate );
 		upt.start();
-		log=LoggerFactory.getLogger("BGP4Server");
+		
 	}
+
+
+
 	public void dispatchRequests(BGP4Update updateMessage){
 		updateList.add(updateMessage);
 	}
 
+
+	public void UpdateMsgQueue(Inet4Address remotePeerIP) {
+
+		log= LoggerFactory.getLogger("BGP4Peer");
+
+
+		BGP4Update update= null;
+
+		log.info("Length before Removal "+updateList.size());
+
+		for(BGP4Update up: updateList)
+		{
+			//log.info("Get Learn From "+up.getLearntFrom() +"  Remote IP : " +remotePeerIP.getHostAddress());
+
+			if((up.getLearntFrom()).equals(remotePeerIP.getHostAddress())){
+				//update = updateList.take();
+				updateList.remove(up);
+
+			}
+
+		}
+
+		log.info("Length After Removal "+updateList.size());
+
+	}
 
 
 }

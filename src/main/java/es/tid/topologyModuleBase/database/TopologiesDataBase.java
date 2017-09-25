@@ -19,7 +19,7 @@ public class TopologiesDataBase implements TopologyTEDB
 	
 	/**
 	 * Used when there is only one ted
-	 * This is used so ther user doent have to introuce an identifier if there is only TEDB
+	 * Users do not have to introduce an identifier if there is only TEDB
 	 */
 	DomainTEDB ted = null;
 	

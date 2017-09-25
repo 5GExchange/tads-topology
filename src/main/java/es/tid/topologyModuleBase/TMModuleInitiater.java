@@ -53,10 +53,10 @@ public class TMModuleInitiater {
 			if (actualLittleParams.isXML())
 			{
 				TMPlugin p = new TopologyReaderXML(ted, actualLittleParams,lock);
-				System.out.println("Andrea............................................Topology reader");
+				System.out.println("Andrea............................................Topology Reader");
 				executor.execute(p);
 				pluginsList.add(p);
-				//log.info("topology readed from file. State:\n"+ted.printTopology());
+				//log.info("Topology Read from file. State:\n"+ted.printTopology());
 			}
 			
 			

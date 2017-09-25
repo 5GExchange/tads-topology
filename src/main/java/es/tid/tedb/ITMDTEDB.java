@@ -28,7 +28,10 @@ public class ITMDTEDB implements MultiDomainTEDB {
 	private Hashtable <Object,Object> it_site_id_domain_ed;
 	private Hashtable <Object,Object> resource_id_domain_ed;
 	private Hashtable <Object,Object> resource_id_it_site_ed;
-	
+
+
+
+
 	private Logger log;
 	
 	private boolean addBidirectional;
@@ -261,6 +264,11 @@ public class ITMDTEDB implements MultiDomainTEDB {
 			Inet4Address aggregatedIPRange, int prefix) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public DirectedWeightedMultigraph<Object, InterDomainEdge> getNetworkDomainGraph() {
+		return null;
 	}
 
 

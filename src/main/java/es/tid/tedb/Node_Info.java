@@ -177,7 +177,7 @@ public class Node_Info {
 		if(as_number!=null)
 			ret = ret + "as_num:" + this.getAs_number() +"\t";
 		if(bgpls_ident != null)
-			ret = ret + "BGPLS-ident:" + this.getBgpls_ident() +"\t";
+			ret = ret + "BGPLS-identifer:" + this.getBgpls_ident() +"\t";
 		if(name != null)
 			ret = ret + "Name :" + this.getName() +"\t";
 		if(ipv4AddressLocalNode!=null)

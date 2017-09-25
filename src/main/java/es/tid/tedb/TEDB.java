@@ -1,5 +1,9 @@
 package es.tid.tedb;
 
+import com.google.common.collect.HashBasedTable;
+
+import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.LinkedList;
 
 /**
@@ -19,5 +23,9 @@ public interface TEDB {
 	public String printTopology();
 
 	public LinkedList<InterDomainEdge> getInterDomainLinks();
+
+
+
+
 
 }

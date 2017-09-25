@@ -1,8 +1,10 @@
 package es.tid.bgp.bgp4Peer.tedb;
 
+import es.tid.tedb.AsInfo;
 import es.tid.tedb.InterDomainEdge;
 
 import java.net.Inet4Address;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.LinkedList;
 
@@ -37,6 +39,8 @@ public class BGP4IntradomainTEDB implements IntraTEDBS {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 
 	@Override
 	public void addIntradomainEdge() {

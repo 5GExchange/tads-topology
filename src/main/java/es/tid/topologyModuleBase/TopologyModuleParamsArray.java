@@ -131,7 +131,8 @@ public class TopologyModuleParamsArray
 				littleParams.setModexml(getCharacterDataFromElement(((Element) nodes_xml.getElementsByTagName("mode").item(0))));
 				littleParams.setNetworkDescriptionFile(getCharacterDataFromElement(((Element) nodes_xml.getElementsByTagName("XMLFileTopology").item(0))));
 				littleParams.setXML(true);
-				if (littleParams.getModexml()=="TM") littleParams.setIdentifier(getCharacterDataFromElement(((Element) nodes_xml.getElementsByTagName("Identifier").item(0))));
+				if (littleParams.getModexml()=="TM")
+					littleParams.setIdentifier(getCharacterDataFromElement(((Element) nodes_xml.getElementsByTagName("Identifier").item(0))));
 
 				log.info("..................................................XML configured with file: "+littleParams.getNetworkDescriptionFile());
 				paramList.add(littleParams);

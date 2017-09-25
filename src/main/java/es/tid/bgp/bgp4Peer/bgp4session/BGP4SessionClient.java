@@ -55,7 +55,7 @@ public class BGP4SessionClient extends GenericBGP4Session{
 	 */
 	public void run() {
 	
-		log.info("Opening new BGP4 Session with host "+ this.remotePeerIP.getHostAddress() + " on port " + this.peerBGP_port);
+		log.info("Opening new BGP4 Session with host "+ this.remotePeerIP.getHostAddress() + " on Port " + this.peerBGP_port);
 		log.debug("Do we want to update from peer?" + updateFrom);
 		log.debug("Do we want to send to peer?" + sendTo);
 		try {
@@ -68,7 +68,7 @@ public class BGP4SessionClient extends GenericBGP4Session{
 			}
 			
 		} catch (IOException e) {
-			log.info("Connection refused trying to connect " + remotePeerIP.getHostAddress() + " on port " + peerBGP_port);
+			log.info("Connection refused trying to connect " + remotePeerIP.getHostAddress() + " on Port " + peerBGP_port);
 			//As there is not yet a session added (it is added in the beginning of initializeBGP4Session());
 			//endSession();
 			return;
@@ -76,7 +76,7 @@ public class BGP4SessionClient extends GenericBGP4Session{
 
 		try {
 			initializeBGP4Session();
-			log.info("BGP4 Session established with peer "+this.remotePeerIP);
+			log.info("BGP4 Session Established with peer "+this.remotePeerIP);
 			this.keepAliveT= new KeepAliveThread(this.getOut(),this.keepAliveTimer);
 			keepAliveT.start();
 		} catch (BGP4Exception e2) {
@@ -109,7 +109,7 @@ public class BGP4SessionClient extends GenericBGP4Session{
 						in.close();
 						out.close();
 					} catch (Exception e1) {
-						log.warn("problem closing sockets");
+						log.warn("Problem closing sockets");
 					}
 					log.debug("Finishing BGP4 Session abruptly!");
 					return;
@@ -157,9 +157,12 @@ public class BGP4SessionClient extends GenericBGP4Session{
 					}
 				} 
 			}
-		}finally{
+		}
+
+		finally{
 			//log.error("SESSION "+ internalSessionID+" IS KILLED");
 			log.info("BGP4 session with peer "+this.remotePeerIP+" has been closed");
+			updateDispatcher.UpdateMsgQueue(remotePeerIP);
 			cancelDeadTimer();
 			cancelKeepAlive();
 			this.FSMstate=BGP4StateSession.BGP4_STATE_IDLE;

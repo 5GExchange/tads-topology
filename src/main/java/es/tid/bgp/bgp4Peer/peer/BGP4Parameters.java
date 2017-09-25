@@ -6,12 +6,16 @@ import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+
 import java.net.Inet4Address;
 import java.net.UnknownHostException;
 import java.util.LinkedList;
+import java.io.IOException;
 
 /**
  * Parameters to configure the BGP4 session
@@ -81,11 +85,13 @@ public class BGP4Parameters {
 	 * OPEN PARAMENTERS
 	 */
 	int holdTime=90;
+
+	long BGPupdateTime;
 	/**
 	 * OPEN PARAMENTERS
 	 */
 
-	private boolean isTest=false;
+	private boolean isTest=true;
 
 	/**
 	 * Time between sending keepalives
@@ -145,39 +151,37 @@ public class BGP4Parameters {
 	 * Instance identifier for NodeNLRI (Types defined in class InstanceIDTypes)
 	 */
 	private int instanceID=0;
+
 	/**
 	 * Constructor 
 	 */
-	BGP4Parameters(){
+	BGP4Parameters() throws IOException {
 		confFile="BGP4Parameters.xml";
 		peersToConnect =new LinkedList<BGP4LSPeerInfo>();
 	}
+
 	/**
 	 * Constructor 
 	 */
-	BGP4Parameters(String confFile){
+	BGP4Parameters(String confFile) throws IOException {
 		peersToConnect =new LinkedList<BGP4LSPeerInfo>();
 
 		if (confFile!=null){
 			this.confFile=confFile;
+			File Identifier= new File("src/main/sample-config-files/BGPIdentifier").getAbsoluteFile();
+			BufferedReader br = new BufferedReader(new FileReader(String.valueOf(Identifier)));
+			BGPIdentifier = br.readLine();
 		}else {
 			confFile="BGP4Parameters.xml";
 		}
-		
 	}
-		
-	
-	
+
 	public void initialize(){
 		
 		try {
-
 			System.out.println("Parsing Config File::"+confFile);
-			
 			SAXParserFactory factory = SAXParserFactory.newInstance();
 			SAXParser saxParser = factory.newSAXParser();
-			
-
 			DefaultHandler handler = new DefaultHandler() {
 				boolean peer = false;
 				boolean send = false;
@@ -233,6 +237,7 @@ public class BGP4Parameters {
 					}
 					else if (qName.equalsIgnoreCase("isTest")) {
 						isTest=Boolean.parseBoolean(tempVal.trim());
+						log.info("Test:  " +isTest);
 					}
 
 					else if (qName.equalsIgnoreCase("setTraces")) {
@@ -259,8 +264,12 @@ public class BGP4Parameters {
 						sendIntradomainLinks=Boolean.parseBoolean(tempVal.trim());
 						sendTopology = true;//si se envian los intradomain entonces se enviara la topologia entera
 					}
-			
-					
+
+
+					else if(qName.equalsIgnoreCase("updateTime")) {
+						BGPupdateTime=Integer.parseInt(tempVal.trim());
+					}
+
 					else if(qName.equalsIgnoreCase("holdTime")) {
 						holdTime=Integer.parseInt(tempVal.trim());
 					}
@@ -281,8 +290,14 @@ public class BGP4Parameters {
 						//BGPIdentifier = tempVal.trim();
 						localBGPAddress=tempVal.trim();
 					}
+
+					//else if ((qName.equalsIgnoreCase("BGPIdentifier"))&&(BGPIdentifier.equals(null))){//El BGP Identifier es la local BGP Address.
 					else if (qName.equalsIgnoreCase("BGPIdentifier")){//El BGP Identifier es la local BGP Address.
-						BGPIdentifier = tempVal.trim();
+
+							if(isTest)
+							BGPIdentifier = tempVal.trim();
+
+					log.info("BGP Identifier:  " +BGPIdentifier +" Test: " +isTest);
 					}
 					else if (qName.equalsIgnoreCase("delay")){
 						delay = Long.parseLong(tempVal.trim());
@@ -492,8 +507,15 @@ public class BGP4Parameters {
 	public void setSendIntradomainLinks(boolean sendIntradomainLinks) {
 		this.sendIntradomainLinks = sendIntradomainLinks;
 	}
-	
-		
+
+	public void setBGPupdateTime(int BGPupdateTime){
+		this.BGPupdateTime= BGPupdateTime;
+	}
+
+	public Long getBGPupdateTime(){
+
+		return this.BGPupdateTime;
+	}
 	public String getLocalBGPAddress() {
 		return localBGPAddress;
 	}

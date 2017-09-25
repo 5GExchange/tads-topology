@@ -60,7 +60,7 @@ public abstract class GenericBGP4Session extends Thread implements BGP4Session {
 	protected DeadTimerThread deadTimerT = null; 
 
 	/**
-	 * Value of the deadtimer that the PCC sends. It is used in the PCC in the thread
+	 * Value of the dead timer that the PCC sends. It is used in the PCC in the thread
 	 */
 	protected int deadTimerPeer;
 
@@ -83,7 +83,7 @@ public abstract class GenericBGP4Session extends Thread implements BGP4Session {
 
 
 	/**
-	 * DataInputStream to receive messages from PCC
+	 * DataInputStream to receive messages from PC
 	 */
 	protected DataInputStream in=null;//
 	/**
@@ -890,7 +890,7 @@ public abstract class GenericBGP4Session extends Thread implements BGP4Session {
 			}
 		}
 		else {
-			log.info("TODO NUL!! en el equals!");
+			log.info("Null!! en el equals!");
 		}
 		return false;
 	}

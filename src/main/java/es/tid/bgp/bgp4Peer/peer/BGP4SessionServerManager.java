@@ -86,8 +86,6 @@ public class BGP4SessionServerManager implements Runnable {
 	@Override
 	public void run() {
 
-		
-
 		ServerSocket serverSocket = null;
 		boolean listening = true;
 		try {

@@ -4,7 +4,7 @@
 	<domain>
 		<layer type="transport" ></layer>
 
-		<domain_id>0.0.0.1</domain_id>
+		<domain_id>0.0.0.5</domain_id>
 		<reachability_entry>
 			<ipv4_address>172.16.101.0</ipv4_address>
 			<prefix>24</prefix>
@@ -18,24 +18,24 @@
         </it_resources>
 
 		<node>
-			<router_id>172.16.101.101</router_id>
+			<router_id>172.16.105.101</router_id>
 		</node>
 		<node>
-			<router_id>172.16.101.102</router_id>
+			<router_id>172.16.105.102</router_id>
 		</node>
 		<node>
-			<router_id>172.16.101.103</router_id>
+			<router_id>172.16.105.103</router_id>
 		</node>
 		<node>
-			<router_id>172.16.101.104</router_id>
+			<router_id>172.16.105.104</router_id>
 		</node>
 		<edge>
 			<source>
-				<router_id>172.16.101.101</router_id>
+				<router_id>172.16.105.101</router_id>
 				<if_id>1</if_id>
 			</source>			
 			<destination>
-				<router_id>172.16.101.104</router_id>
+				<router_id>172.16.105.104</router_id>
 				<if_id>1</if_id>
 			</destination>	
 			<undir_delay_link>99</undir_delay_link>
@@ -46,11 +46,11 @@
 		</edge>
 		<edge>
 			<source>
-				<router_id>172.16.101.104</router_id>
+				<router_id>172.16.105.104</router_id>
 				<if_id>1</if_id>
 			</source>			
 			<destination>
-				<router_id>172.16.101.101</router_id>
+				<router_id>172.16.105.101</router_id>
 				<if_id>1</if_id>
 			</destination>		
 			<undir_delay_link>99</undir_delay_link>
@@ -61,11 +61,11 @@
 		</edge>
 		<edge>
 			<source>
-				<router_id>172.16.101.101</router_id>
+				<router_id>172.16.105.101</router_id>
 				<if_id>2</if_id>
 			</source>			
 			<destination>
-				<router_id>172.16.101.102</router_id>
+				<router_id>172.16.105.102</router_id>
 				<if_id>1</if_id>
 			</destination>		
 			<undir_delay_link>3000</undir_delay_link>
@@ -76,11 +76,11 @@
 			</edge>
 		<edge>
 			<source>
-				<router_id>172.16.101.102</router_id>
+				<router_id>172.16.105.102</router_id>
 				<if_id>1</if_id>
 			</source>			
 			<destination>
-				<router_id>172.16.101.101</router_id>
+				<router_id>172.16.105.101</router_id>
 				<if_id>2</if_id>
 			</destination>		
 			<undir_delay_link>3000</undir_delay_link>
@@ -91,11 +91,11 @@
 			</edge>
 		<edge>
 			<source>
-				<router_id>172.16.101.102</router_id>
+				<router_id>172.16.105.102</router_id>
 				<if_id>2</if_id>
 			</source>			
 			<destination>
-				<router_id>172.16.101.103</router_id>
+				<router_id>172.16.105.103</router_id>
 				<if_id>1</if_id>
 			</destination>	
 			<undir_delay_link>1003</undir_delay_link>
@@ -106,11 +106,11 @@
 		</edge>
 		<edge>
 			<source>
-				<router_id>172.16.101.103</router_id>
+				<router_id>172.16.105.103</router_id>
 				<if_id>1</if_id>
 			</source>			
 			<destination>
-				<router_id>172.16.101.102</router_id>
+				<router_id>172.16.105.102</router_id>
 				<if_id>2</if_id>
 			</destination>				
 			<undir_delay_link>1003</undir_delay_link>
@@ -121,11 +121,11 @@
 			</edge>
 		<edge>
 			<source>
-				<router_id>172.16.101.103</router_id>
+				<router_id>172.16.105.103</router_id>
 				<if_id>2</if_id>
 			</source>			
 			<destination>
-				<router_id>172.16.101.104</router_id>
+				<router_id>172.16.105.104</router_id>
 				<if_id>2</if_id>
 			</destination>	
 			<undir_delay_link>323</undir_delay_link>
@@ -136,11 +136,11 @@
 		</edge>
 		<edge>
 			<source>
-				<router_id>172.16.101.104</router_id>
+				<router_id>172.16.105.104</router_id>
 				<if_id>2</if_id>
 			</source>			
 			<destination>
-				<router_id>172.16.101.103</router_id>
+				<router_id>172.16.105.103</router_id>
 				<if_id>2</if_id>
 			</destination>				
 			<undir_delay_link>323</undir_delay_link>
@@ -151,11 +151,11 @@
 		</edge>
 		<edge>
 			<source>
-				<router_id>172.16.101.102</router_id>
+				<router_id>172.16.105.102</router_id>
 				<if_id>3</if_id>
 			</source>			
 			<destination>
-				<router_id>172.16.101.104</router_id>
+				<router_id>172.16.105.104</router_id>
 				<if_id>3</if_id>
 			</destination>
 			<undir_delay_link>2232</undir_delay_link>
@@ -166,11 +166,11 @@
 		</edge>
 		<edge>
 			<source>
-				<router_id>172.16.101.104</router_id>
+				<router_id>172.16.105.104</router_id>
 				<if_id>3</if_id>
 			</source>			
 			<destination>
-				<router_id>172.16.101.102</router_id>
+				<router_id>172.16.105.102</router_id>
 				<if_id>3</if_id>
 			</destination>			
 			<undir_delay_link>2232</undir_delay_link>
@@ -181,22 +181,22 @@
 		</edge>
 		<edge>
 			<source>
-				<router_id>172.16.101.104</router_id>
+				<router_id>172.16.105.104</router_id>
 				<if_id>13</if_id>
 			</source>			
 			<destination>
-				<router_id>172.16.102.101</router_id>
+				<router_id>172.16.106.101</router_id>
 				<if_id>11</if_id>
 			</destination>	
 			<undir_delay_link>102</undir_delay_link>		
 		</edge>
 		<edge>
 			<source>
-				<router_id>172.16.101.103</router_id>
+				<router_id>172.16.105.103</router_id>
 				<if_id>13</if_id>
 			</source>			
 			<destination>
-				<router_id>172.16.102.102</router_id>
+				<router_id>172.16.106.102</router_id>
 				<if_id>11</if_id>
 			</destination>	
 			<undir_delay_link>230</undir_delay_link>		
@@ -209,16 +209,16 @@
 	<domain>
 		<layer type="transport" ></layer>
 
-		<domain_id>0.0.0.2</domain_id>
+		<domain_id>0.0.0.6</domain_id>
 		<reachability_entry>
-			<ipv4_address>172.16.102.0</ipv4_address>
+			<ipv4_address>172.16.106.0</ipv4_address>
 			<prefix>24</prefix>
 		</reachability_entry>
         <node>
-			<router_id>172.16.102.101</router_id>
+			<router_id>172.16.106.101</router_id>
 		</node>
 		<node>
-			<router_id>172.16.102.102</router_id>
+			<router_id>172.16.106.102</router_id>
 		</node>
 	</domain>
 

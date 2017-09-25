@@ -56,8 +56,6 @@ public class BGP4PeerInitiatedSession extends GenericBGP4Session{
 		this.newSessionId();
 
 		this.remotePeerIP =(Inet4Address) ((InetSocketAddress) socket.getRemoteSocketAddress()).getAddress();
-
-			
 		timer=new Timer();
 		this.updateDispatcher = updateDispatcher;
 		//this.keepAliveLocal=params.getKeepAliveTimer();
@@ -146,14 +144,19 @@ public class BGP4PeerInitiatedSession extends GenericBGP4Session{
 					}
 				} 
 			}
-		}finally{
+		}
+		finally
+		{
 			log.error("BGP4 session with peer "+this.remotePeerIP+" has been closed");
+			updateDispatcher.UpdateMsgQueue(remotePeerIP);
 			cancelDeadTimer();
 			cancelKeepAlive();
 			this.FSMstate=BGP4StateSession.BGP4_STATE_IDLE;
 			endSession();
 		}
 	}
+
+
 
 	@Override
 	public void close() {
@@ -167,6 +170,7 @@ public class BGP4PeerInitiatedSession extends GenericBGP4Session{
 	protected void endSession() {
 		// TODO Auto-generated method stub
 		log.debug("Ending session with id "+this.getSessionId()+" from peer "+this.remotePeerIP);
+		updateDispatcher.UpdateMsgQueue(remotePeerIP);
 		BGP4SessionsInformation.deleteSession(this.getSessionId());
 	}
 

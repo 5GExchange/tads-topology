@@ -1,5 +1,6 @@
 package es.tid.topologyModuleBase.plugins.writer;
 
+import java.io.IOException;
 import java.util.concurrent.locks.Lock;
 
 import es.tid.bgp.bgp4Peer.peer.BGPPeer;
@@ -18,8 +19,7 @@ public class TopologyServerBGPLS extends TopologyServer
 	}
 
 	@Override
-	public void serveTopology() 
-	{
+	public void serveTopology() throws IOException {
 		log.info("Acting as BGP Peer");
 		BGPPeer bgpPeer = new BGPPeer();		
 
@@ -63,6 +63,10 @@ public class TopologyServerBGPLS extends TopologyServer
 
 	@Override
 	public void run() {
-		serveTopology();
+		try {
+			serveTopology();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

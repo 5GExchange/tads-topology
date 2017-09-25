@@ -48,7 +48,7 @@ public class TopologyReaderXML extends TopologyReader
 				log.info("Andrea.........................................Inside TM");
 				ted.initializeFromFile(params.getNetworkDescriptionFile(), params.getIdentifier(), true);
 			}
-			else log.warning("Unknow Mode");
+			else log.warning("Unknown Mode");
 		}
 		else if(params.ITcapable==true){
 			log.info("Initializing IT capable TEDB");

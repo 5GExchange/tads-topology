@@ -1,5 +1,6 @@
 package es.tid.topologyModuleBase.plugins.writer;
 
+import java.io.IOException;
 import java.util.concurrent.locks.Lock;
 import java.util.logging.Logger;
 
@@ -32,5 +33,5 @@ public abstract class TopologyServer implements TMPlugin
 		infRetriever = new InformationRetriever(ted, params, lock);
 	}
 	
-	abstract void serveTopology();
+	abstract void serveTopology() throws IOException;
 }

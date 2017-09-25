@@ -5,6 +5,7 @@ import es.tid.topologyModuleBase.database.TopologiesDataBase;
 import es.tid.topologyModuleBase.plugins.TMPlugin;
 import es.tid.topologyModuleBase.plugins.writer.InformationRetriever;
 
+import java.io.IOException;
 import java.util.concurrent.locks.Lock;
 import java.util.logging.Logger;
 
@@ -42,5 +43,5 @@ public abstract class TopologyReaderWriter implements TMPlugin {
      *
      * @// TODO: 23/09/2016 Write javadoc constructor fields description.
      */
-    abstract public void readServeTopology();
+    abstract public void readServeTopology() throws IOException;
 }

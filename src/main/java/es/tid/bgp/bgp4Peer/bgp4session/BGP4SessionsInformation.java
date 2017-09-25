@@ -11,7 +11,7 @@ import java.util.Hashtable;
 
 
 /**
- * Class where the oppened BGP4 sessions are stored.
+ * Class where the opened BGP4 sessions are stored.
  * 
  * @author mcs
  *
@@ -109,9 +109,7 @@ public class BGP4SessionsInformation {
 			return "session "+sessionId+" does not exist";
 		}
 	}
-	
-	
-	 
+
 	public DataOutputStream getOut() {
 		return out;
 	}
@@ -126,6 +124,8 @@ public class BGP4SessionsInformation {
 	public void setSessionList(Hashtable<Long, GenericBGP4Session> sessionList) {
 		this.sessionList = sessionList;
 	}
+
+
 
 	
 }

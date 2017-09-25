@@ -350,6 +350,9 @@ public class SimpleTEDB implements DomainTEDB{
 	public LinkedList<InterDomainEdge> getInterDomainLinks() {
 		return interDomainLinks;
 	}
+
+
+
 	public void setInterDomainLinks(LinkedList<InterDomainEdge> interDomainLinks) {
 		this.interDomainLinks = interDomainLinks;
 	}
@@ -465,7 +468,7 @@ public class SimpleTEDB implements DomainTEDB{
 			for (int i=0;i<sourceVertexList.size();++i){		
 				IntraDomainEdge edge=networkGraph.getEdge(sourceVertexList.get(i), targetVertexList.get(i));
 				edge.getTE_info().setWavelengthReserved(wavelength);
-				log.info("Reservo: "+sourceVertexList.get(i).toString() + "-"+ targetVertexList.get(i).toString() +" wavelength: "+wavelength+" bidirectional"+bidirectional);
+				log.info("Reserve: "+sourceVertexList.get(i).toString() + "-"+ targetVertexList.get(i).toString() +" wavelength: "+wavelength+" bidirectional"+bidirectional);
 				if (bidirectional == true){
 					edge=networkGraph.getEdge(targetVertexList.get(i), sourceVertexList.get(i));
 					edge.getTE_info().setWavelengthReserved(wavelength);

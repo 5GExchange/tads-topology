@@ -4,6 +4,7 @@ import es.tid.bgp.bgp4Peer.peer.BGPPeer;
 import es.tid.topologyModuleBase.TopologyModuleParams;
 import es.tid.topologyModuleBase.database.TopologiesDataBase;
 
+import java.io.IOException;
 import java.util.concurrent.locks.Lock;
 
 /**
@@ -32,7 +33,7 @@ public class TopologyReaderWriterBGPLS extends TopologyReaderWriter{
      * @// TODO: 23/09/2016 Write javadoc constructor fields description.
      */
     @Override
-    public void readServeTopology() {
+    public void readServeTopology() throws IOException {
         // @// TODO: 23/09/2016
         log.info("Acting as BGP Peer");
         BGPPeer bgpPeer = new BGPPeer();
@@ -84,6 +85,10 @@ public class TopologyReaderWriterBGPLS extends TopologyReaderWriter{
      */
     @Override
     public void run() {
-        readServeTopology();
+        try {
+            readServeTopology();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

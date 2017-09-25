@@ -10,7 +10,7 @@ import java.util.Set;
 //import es.tid.pce.computingEngine.algorithms.ComputingAlgorithmPreComputationSSON;
 
 /**
- * It's just like DomainTEDB and TEDB but every function has an identifier with it.
+ * It's just like DomainTEDB and TEDB but every function/Method has an identifier with it.
  * It's thought for you to have a list of TEDB and apply the function on a particular TEDB depending
  * on the identifier.
  * @author jaume

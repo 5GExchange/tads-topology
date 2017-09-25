@@ -6,9 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.Inet4Address;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Base de datos de ingenieria de trafico
@@ -20,6 +18,9 @@ public class MDTEDB implements MultiDomainTEDB {
 	private long graphId;
 	private DirectedWeightedMultigraph<Object,InterDomainEdge> networkDomainGraph;
 	public SimpleDirectedWeightedGraph<Object,IntraDomainEdge> networkGraph;
+
+
+
 	
 	//private LinkedList<InterDomainEdge> interDomainLinks;  
 		
@@ -37,7 +38,7 @@ public class MDTEDB implements MultiDomainTEDB {
 	public MDTEDB(){
 		log=LoggerFactory.getLogger("BGP4Peer");
 		networkDomainGraph=new DirectedWeightedMultigraph<Object,InterDomainEdge> (InterDomainEdge.class);
-		addBidirectional=true;//FIXME: ESTO ES UN APA�O TEMPORAL
+		addBidirectional=true;
 		reachability=new LinkedList<ReachabilityEntry>();
 		//interDomainLinks = new LinkedList<InterDomainEdge>();
 	}
@@ -116,9 +117,9 @@ public class MDTEDB implements MultiDomainTEDB {
 				}
 			}else {
 				log.debug("Local router is NOT the same!!!");
-			}			
+			}
 		}
-		
+
 		if (edgeFound==false) {
 			InterDomainEdge newInterDomainEdge =new InterDomainEdge();
 			newInterDomainEdge.setSrc_router_id(localRouterASBR);
@@ -130,13 +131,13 @@ public class MDTEDB implements MultiDomainTEDB {
 			if (te_info != null)
 				newInterDomainEdge.setTE_info(te_info);
 			networkDomainGraph.addEdge(localDomainID, remoteDomainID, newInterDomainEdge);
-			log.info("New interdomain edge between "+localDomainID+" and "+remoteDomainID+" received");
+			log.info("New InterDomain edge between "+localDomainID+" and "+remoteDomainID+" received");
 
 		}else {
-			
+
 			if (te_info != null){
 				//FIXME: Update of TE info to be optimized
-				log.debug("TE_info updated");
+				log.info("TE_info updated");
 				interDomainEdgeFound.setTE_info(te_info);
 			}
 			
@@ -251,6 +252,5 @@ public class MDTEDB implements MultiDomainTEDB {
 	public void setReachability(LinkedList<ReachabilityEntry> reachability) {
 		this.reachability = reachability;
 	}
-	
-	
+
 }

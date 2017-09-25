@@ -2,16 +2,23 @@
 <config>
 	<!-- TCP port where the BGP is listening for incoming bgp4 connections. Optional Parameter. Default value: 179 (BGP Port)  --> 
 	<BGP4Port>179</BGP4Port>
-	<BGPIdentifier>172.17.11.201</BGPIdentifier>
+	<BGPIdentifier>172.17.11.203</BGPIdentifier>
 <!-- TCP port to connect to manage the BGP connection. Default value: 1112 -->
 	<BGP4ManagementPort>1111</BGP4ManagementPort> 
 	<!-- Peers to which this Peer is going to establish connection -->
 	<configPeer>
-                <peer>172.17.11.202</peer>
+                <peer>172.17.11.201</peer>
                 <export>true</export>
                 <import>true</import>
                 <peerPort>179</peerPort>
  	</configPeer>
+	<configPeer>
+		<peer>172.17.11.202</peer>
+		<export>true</export>
+		<import>true</import>
+		<peerPort>179</peerPort>
+	</configPeer>
+
 	<!-- Ficheros log (servidor, protocolo PCEP y OSPF). Campos opcionales-->
 	<BGP4LogFile>BGP4Parser-BGPLS1.log</BGP4LogFile><!-- Default value: BGP4Parser.log -->
 	<BGP4LogFileClient>BGP4Client-BGPLS1.log</BGP4LogFileClient><!-- Default value: BGP4Client.log-->
@@ -29,10 +36,12 @@
          implementation MAY reject connections on the basis of the Hold Time.  The calculated value indicates the maximum number of
          seconds that may elapse between the receipt of successive KEEPALIVE and/or UPDATE messages from the sender. -->
 	<holdTime>180</holdTime><!-- Optional Parameter. Default value: 3. -->
+	<updateTime>30</updateTime><!--Check every 10 seconds if any update msg recieved from the BGP peer. If no update message received with
+	 in 10 second then delete the stored information in TEDB previously received from that Peer -->
 	<!-- RFC 4271. This 1-octet unsigned integer indicates the protocol version number of the message.  The current BGP version number is 4. -->
 	<version>4</version><!-- Optional Parameter. Default value: 4. -->
 	<!-- RFC 4271.  This 2-octet unsigned integer indicates the Autonomous System number of the sender.-->
-	<myAutonomousSystem>1</myAutonomousSystem>
+	<myAutonomousSystem>2</myAutonomousSystem>
 	<!-- RFC 4271. This 4-octet unsigned integer indicates the BGP Identifier of the sender.  A given BGP speaker sets the value of its BGP
          Identifier to an IP address that is assigned to that BGP speaker.  The value of the BGP Identifier is determined upon
          startup and is the same for every local interface and BGP peer. --> 
@@ -44,9 +53,9 @@
 	<!-- If the peer is in charge of sending its whole topology to the other BGP peer it is connected to. Default: false -->
 	<sendIntradomainLinks>true</sendIntradomainLinks>
 	<!-- Optional Parameter. How to learn the topology. Possibilities: fromXML, fromBGP. Default: fromBGP -->
-	<learnTopology>fromBGP</learnTopology>	
+	<learnTopology>fromXML</learnTopology>
 	<!-- Topology network to read. It is mandatory if and only if learnTopology parameter is fromXML. -->
-	<!--topologyFile>conf/network1.xml</topologyFile-->
+	<topologyFile>target/conf2waysReal/network1.xml</topologyFile>
 	<!-- Optional Parameter. Instance Identifier for node and link NLRI. See rfc 6549. Default value: 0-->
 	<!--<instanceID>0</instanceID>-->
 	<!-- Optional Parameter. Default value: localhost -->

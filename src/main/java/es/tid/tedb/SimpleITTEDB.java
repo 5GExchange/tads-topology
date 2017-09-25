@@ -139,6 +139,8 @@ public class SimpleITTEDB implements DomainTEDB{
 		return interDomainLinks;
 	}
 
+
+
 	public void setInterDomainLinks(LinkedList<InterDomainEdge> interDomainLinks) {
 		this.interDomainLinks = interDomainLinks;
 	}

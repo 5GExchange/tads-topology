@@ -13,17 +13,17 @@ public class BGP4LSPeerInfo {
 	 * Default port is 179
 	 * For testing and development, alternative ports are allowed.
 	 */
-	private int peerPort;
+	 private int peerPort;
 	
 	/**
 	 * If the remote peer is a consumer and we need to send the topology
 	 */
-	private boolean sendToPeer;
+	 private boolean sendToPeer;
 	
 	/**
 	 * If the remote peer is a generator of topology and we are consumers
 	 */
-	private boolean updateFromPeer;
+	 private boolean updateFromPeer;
 	
 	
 

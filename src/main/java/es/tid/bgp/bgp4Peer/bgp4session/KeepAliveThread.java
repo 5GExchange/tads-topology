@@ -25,7 +25,7 @@ public class KeepAliveThread extends Thread {
 		}
 		
 		/**
-		 * Starts the Keepalive process
+		 * Starts the Keep alive process
 		 */
 		public void run() {
 			running=true;
@@ -54,13 +54,13 @@ public class KeepAliveThread extends Thread {
 		
 		/**
 		 * Sets the running variable to false. After this, an interrupt will cause 
-		 * the KeepaliveThread to end.
+		 * the Keep aliveThread to end.
 		 */
 		public void stopRunning(){
 			running=false;
 		}
 		/**
-		 * Sends KeepAlive Message. It does not wait for any response.
+		 * Sends Keep Alive Message. It does not wait for any response.
 		 */
 		private void sendKeepAlive() {
 			BGP4Keepalive p_ka= new BGP4Keepalive();

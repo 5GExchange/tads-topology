@@ -2,11 +2,12 @@ package es.tid.bgp.bgp4Peer.peer;
 
 import es.tid.bgp.bgp4Peer.bgp4session.BGP4SessionsInformation;
 import es.tid.bgp.bgp4Peer.management.BGP4ManagementServer;
-import es.tid.bgp.bgp4Peer.updateTEDB.UpdateDispatcher;
+import es.tid.bgp.bgp4Peer.updateTEDB.*;
 import es.tid.tedb.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -94,7 +95,27 @@ public class BGPPeer {
 	 * List of peers to establish connections.
 	 */
 	private LinkedList<BGP4LSPeerInfo> peersToConnect;
-	
+
+	private LinkedList<BGP4LSPeerInfo> newPeersToConnect= new LinkedList<BGP4LSPeerInfo>();
+
+
+	private Hashtable<DomainUpdateTime, Long> DomainUpdate= new Hashtable<DomainUpdateTime, Long>();
+
+	private Hashtable<IntraDomainLinkUpdateTime, Long> intraDomainLinkUpdate= new Hashtable<IntraDomainLinkUpdateTime, Long>();
+
+	private Hashtable<InterDomainLinkUpdateTime, Long> interDomainLinkUpdate= new Hashtable<InterDomainLinkUpdateTime, Long>();
+
+	private Hashtable<NodeITinfoUpdateTime, Long> NodeITinfoUpdate= new Hashtable<NodeITinfoUpdateTime, Long>();
+
+	private Hashtable<NodeinfoUpdateTime, Long> NodeinfoUpdate= new Hashtable<NodeinfoUpdateTime, Long>();
+
+	private Hashtable<MDPCEinfoUpdateTime, Long> MDPCEinfoUpdate= new Hashtable<MDPCEinfoUpdateTime, Long>();
+
+
+
+	private UpdateDomainStatus updomainstatus;
+
+
 	//Whitelist and blacklist not yet implemented
 	
 	/**
@@ -107,6 +128,9 @@ public class BGPPeer {
 	 * Class to read and process the BGP4 update messages
 	 */
 	private UpdateDispatcher ud;
+
+
+
 	/**
 	 * Executor. To execute the session server, to execute periodically the session client.
 	 */
@@ -115,7 +139,7 @@ public class BGPPeer {
 	/**
 	 * Function to configure the BGP4 Peer without specifying the file. It will read a file with name: BGP4Parameters.xml
 	 */
-	public void  configure (){
+	public void  configure () throws IOException {
 		this.configure (null);
 	}
 	
@@ -124,18 +148,18 @@ public class BGPPeer {
 	 * It created the loggers, the executor, 
 	 * @param nameParametersFile Name of the Parameters File
 	 */
-	public void configure(String nameParametersFile){
+	public void configure(String nameParametersFile) throws IOException {
 		configure(nameParametersFile, null, null);
 	}
 	
 	/**
 	 * Function to configure the BGP4 peer. 
-	 * It created the loggers, the executor, 
+	 * It created the loggers, the executor,
 	 * @param nameParametersFile Name of the Parameters File
 	 * @param multiTEDB multidomain database
 	 * @param iTEDBs internal domains database 
 	 */
-	public void configure(String nameParametersFile, MultiDomainTEDB multiTEDB, Hashtable<String,TEDB> iTEDBs){
+	public void configure(String nameParametersFile, MultiDomainTEDB multiTEDB, Hashtable<String,TEDB> iTEDBs) throws IOException {
 		//First of all, read the parameters
 		if (nameParametersFile != null){
 			params=new BGP4Parameters(nameParametersFile);
@@ -170,7 +194,7 @@ public class BGPPeer {
 //			e1.printStackTrace();
 //			System.exit(1);
 //		}
-			logServer.info("Initalizing BGP4 Peer");
+		logServer.info("Initalizing BGP4 Peer");
 		if (iTEDBs!= null) intraTEDBs=iTEDBs;
 		else intraTEDBs=new Hashtable<String,TEDB>();
 		
@@ -183,10 +207,8 @@ public class BGPPeer {
 			//intraTEDBs = FileTEDBUpdater.readMultipleDomainSimpleNetworks(params.getTopologyFile(), null, false,0,Integer.MAX_VALUE, false);
 			logParser.info("BGPIdentifier: "+params.getBGPIdentifier());
 			intraTEDBs = FileTEDBUpdater.readMultipleDomainSimpleNetworks(params.getTopologyFile(), null, false,0,Integer.MAX_VALUE, false, params.getBGPIdentifier());
-
 			//multiDomainTEDB.initializeFromFile(params.getTopologyFile());
 			multiDomainTEDB.initializeFromFile(params.getTopologyFile(), params.getBGPIdentifier());
-
 		}
 		// Create Thread executor
 		//FIXME: Actualizar n�mero de threads que se crean
@@ -236,9 +258,19 @@ public class BGPPeer {
 	}
 	public void createUpdateDispatcher(){
 		//Updater dispatcher
-		ud = new UpdateDispatcher(multiDomainTEDB,intraTEDBs);
+		ud = new UpdateDispatcher(multiDomainTEDB,intraTEDBs, DomainUpdate,intraDomainLinkUpdate,interDomainLinkUpdate,NodeITinfoUpdate, NodeinfoUpdate,MDPCEinfoUpdate, params);
+
 	}
-	
+
+	public void CheckUpdateTime(){
+		updomainstatus= new UpdateDomainStatus();
+		updomainstatus.configure(multiDomainTEDB, intraTEDBs,DomainUpdate,intraDomainLinkUpdate,interDomainLinkUpdate,NodeITinfoUpdate, NodeinfoUpdate,MDPCEinfoUpdate, params);
+		executor.scheduleWithFixedDelay(updomainstatus,params.getBGPupdateTime(), params.getBGPupdateTime(), TimeUnit.SECONDS );
+
+	}
+
+
+
 	/**
 	 * Function to create the TEDBs of the peer.
 	 * @param nameParametersFile Name of the Parameters File
@@ -250,7 +282,8 @@ public class BGPPeer {
 	 */
 	public void startManagementServer(){
 		logServer.debug("Initializing Management Server");
-		BGP4ManagementServer bms=new BGP4ManagementServer(params.getBGP4ManagementPort(),multiDomainTEDB,intraTEDBs,bgp4SessionsInformation,sendTopologyTask);	
+		//BGP4ManagementServer bms=new BGP4ManagementServer(params.getPeersToConnect(), params.getBGP4ManagementPort(),multiDomainTEDB,intraTEDBs,bgp4SessionsInformation,sendTopologyTask);
+		BGP4ManagementServer bms=new BGP4ManagementServer(executor, ud,params,multiDomainTEDB,intraTEDBs,bgp4SessionsInformation,sendTopologyTask);
 		bms.start();
 	}
 	/**
@@ -258,7 +291,7 @@ public class BGPPeer {
 	 * It starts a new process for each peer.  
 	 */
 	public void startClient(){
-		logClient.debug("Initializing Session Manager to connect as client");
+		logClient.debug("Initializing Session Manager to connect as Client");
 		if (params.getBGPIdentifier() != null){
 			Inet4Address BGPIdentifier=null;
 			try {
@@ -268,9 +301,10 @@ public class BGPPeer {
 				e.printStackTrace();
 				return;
 			}
-			for (int i =0;i<peersToConnect.size();i++){		
+			for (int i =0;i<peersToConnect.size();i++){
+				logClient.info(String.format("Number of Peers to Connect:%d", peersToConnect.size()));
 				bgp4SessionClientManager=new BGP4SessionClientManager(bgp4SessionsInformation,ud, peersToConnect.get(i), params.getBGP4Port(),params.getLocalBGPAddress(),params.getLocalBGPPort(),params.getHoldTime(),BGPIdentifier,params.getVersion(),params.getMyAutonomousSystem(),params.getKeepAliveTimer());
-				//FIXME: Ver si dejamos delay fijo o variable	
+				//FIXME: Ver si dejamos delay fijo o variable
 				executor.scheduleWithFixedDelay(bgp4SessionClientManager, 0,params.getDelay(), TimeUnit.MILLISECONDS);
 			}
 		}
@@ -280,6 +314,8 @@ public class BGPPeer {
 		}
 		
 	}
+
+
 	/**
 	 * Function which starts the peer (listening BGP4 protocol) as a server.
 	 * It starts once the session server manager.
@@ -320,6 +356,16 @@ public class BGPPeer {
 			sendTopologyTask.configure(intraTEDBs, bgp4SessionsInformation, sendTopology, params.getInstanceID(),params.isSendIntradomainLinks(),this.multiDomainTEDB, params.getMyAutonomousSystem(),params.getMyLocalPref());
 		}
 		executor.scheduleWithFixedDelay(sendTopologyTask, 0,params.getSendTopoDelay(), TimeUnit.MILLISECONDS);
+
+        // Copied lines -- LANNION
+        logServer.info("Before new UpdateDomainStatus()");
+		updomainstatus= new UpdateDomainStatus();
+        logServer.info("Before updomainstatus.configure");
+		updomainstatus.configure(multiDomainTEDB, intraTEDBs,DomainUpdate,intraDomainLinkUpdate,interDomainLinkUpdate,NodeITinfoUpdate, NodeinfoUpdate,MDPCEinfoUpdate, params);
+        logServer.info("Before executor.scheduleWithFixedDelay");
+		executor.scheduleWithFixedDelay(updomainstatus, 30, 30, TimeUnit.SECONDS );
+		// executor.scheduleWithFixedDelay(updomainstatus,params.getBGPupdateTime(), params.getBGPupdateTime(), TimeUnit.SECONDS );
+        // Copied lines -----------
 	}
 	
 	
@@ -385,9 +431,12 @@ public class BGPPeer {
 	public void setMultiDomainTEDB(MultiDomainTEDB multiDomainTEDB) {
 		this.multiDomainTEDB = multiDomainTEDB;
 	}
-	
-	
-	
-	
-	
+
+	public LinkedList<BGP4LSPeerInfo> getnewPeersToConnect() {
+		return newPeersToConnect;
+	}
+	public void setnewPeersToConnect(LinkedList<BGP4LSPeerInfo> newPeersToConnect) {
+		this.newPeersToConnect = newPeersToConnect;
+	}
+
 }
