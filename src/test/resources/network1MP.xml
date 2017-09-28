@@ -78,8 +78,18 @@
 			<destination>
 				<router_id>172.16.101.101</router_id>
 				<if_id>1</if_id>
-			</destination>		
-		</edge>
+			</destination>
+			<maximum_bandwidth>3.35</maximum_bandwidth>
+			<undir_delay_link>99</undir_delay_link>
+			<undir_min_max_delay>
+				<min>23</min>
+				<max>43</max>
+			</undir_min_max_delay>
+			<undir_delay_variation>1</undir_delay_variation>
+			<undir_link_loss>102</undir_link_loss>
+			<undir_residual_bandwidth>802</undir_residual_bandwidth>
+			<undir_available_bandwidth>500</undir_available_bandwidth>
+			<undir_utilized_bandwidth>436</undir_utilized_bandwidth>		</edge>
 		<edge>
 			<source>
 				<router_id>172.16.101.101</router_id>
@@ -88,7 +98,18 @@
 			<destination>
 				<router_id>172.16.101.102</router_id>
 				<if_id>1</if_id>
-			</destination>		
+			</destination>
+			<maximum_bandwidth>3.35</maximum_bandwidth>
+			<undir_delay_link>99</undir_delay_link>
+			<undir_min_max_delay>
+				<min>23</min>
+				<max>43</max>
+			</undir_min_max_delay>
+			<undir_delay_variation>1</undir_delay_variation>
+			<undir_link_loss>102</undir_link_loss>
+			<undir_residual_bandwidth>802</undir_residual_bandwidth>
+			<undir_available_bandwidth>500</undir_available_bandwidth>
+			<undir_utilized_bandwidth>436</undir_utilized_bandwidth>
 		</edge>
 		<edge>
 			<source>
@@ -98,8 +119,18 @@
 			<destination>
 				<router_id>172.16.101.101</router_id>
 				<if_id>2</if_id>
-			</destination>		
-		</edge>
+			</destination>
+			<maximum_bandwidth>3.35</maximum_bandwidth>
+			<undir_delay_link>99</undir_delay_link>
+			<undir_min_max_delay>
+				<min>23</min>
+				<max>43</max>
+			</undir_min_max_delay>
+			<undir_delay_variation>1</undir_delay_variation>
+			<undir_link_loss>102</undir_link_loss>
+			<undir_residual_bandwidth>802</undir_residual_bandwidth>
+			<undir_available_bandwidth>500</undir_available_bandwidth>
+			<undir_utilized_bandwidth>436</undir_utilized_bandwidth></edge>
 		<edge>
 			<source>
 				<router_id>172.16.101.102</router_id>
@@ -108,8 +139,18 @@
 			<destination>
 				<router_id>172.16.101.103</router_id>
 				<if_id>1</if_id>
-			</destination>	
-			<undir_delay_link>102103</undir_delay_link>
+			</destination>
+			<maximum_bandwidth>3.35</maximum_bandwidth>
+			<undir_delay_link>99</undir_delay_link>
+			<undir_min_max_delay>
+				<min>23</min>
+				<max>43</max>
+			</undir_min_max_delay>
+			<undir_delay_variation>1</undir_delay_variation>
+			<undir_link_loss>102</undir_link_loss>
+			<undir_residual_bandwidth>802</undir_residual_bandwidth>
+			<undir_available_bandwidth>500</undir_available_bandwidth>
+			<undir_utilized_bandwidth>436</undir_utilized_bandwidth>
 		</edge>
 		<edge>
 			<source>
@@ -119,7 +160,18 @@
 			<destination>
 				<router_id>172.16.101.102</router_id>
 				<if_id>2</if_id>
-			</destination>				
+			</destination>
+			<maximum_bandwidth>3.35</maximum_bandwidth>
+			<undir_delay_link>99</undir_delay_link>
+			<undir_min_max_delay>
+				<min>23</min>
+				<max>43</max>
+			</undir_min_max_delay>
+			<undir_delay_variation>1</undir_delay_variation>
+			<undir_link_loss>102</undir_link_loss>
+			<undir_residual_bandwidth>802</undir_residual_bandwidth>
+			<undir_available_bandwidth>500</undir_available_bandwidth>
+			<undir_utilized_bandwidth>436</undir_utilized_bandwidth>
 		</edge>
 		<edge>
 			<source>
@@ -129,7 +181,18 @@
 			<destination>
 				<router_id>172.16.101.104</router_id>
 				<if_id>2</if_id>
-			</destination>	
+			</destination>
+			<maximum_bandwidth>3.35</maximum_bandwidth>
+			<undir_delay_link>99</undir_delay_link>
+			<undir_min_max_delay>
+				<min>23</min>
+				<max>43</max>
+			</undir_min_max_delay>
+			<undir_delay_variation>1</undir_delay_variation>
+			<undir_link_loss>102</undir_link_loss>
+			<undir_residual_bandwidth>802</undir_residual_bandwidth>
+			<undir_available_bandwidth>500</undir_available_bandwidth>
+			<undir_utilized_bandwidth>436</undir_utilized_bandwidth>
 		</edge>
 		<edge>
 			<source>
@@ -139,7 +202,18 @@
 			<destination>
 				<router_id>172.16.101.103</router_id>
 				<if_id>2</if_id>
-			</destination>				
+			</destination>
+			<maximum_bandwidth>3.35</maximum_bandwidth>
+			<undir_delay_link>99</undir_delay_link>
+			<undir_min_max_delay>
+				<min>23</min>
+				<max>43</max>
+			</undir_min_max_delay>
+			<undir_delay_variation>1</undir_delay_variation>
+			<undir_link_loss>102</undir_link_loss>
+			<undir_residual_bandwidth>802</undir_residual_bandwidth>
+			<undir_available_bandwidth>500</undir_available_bandwidth>
+			<undir_utilized_bandwidth>436</undir_utilized_bandwidth>
 		</edge>
 
 		<edge>
@@ -150,7 +224,18 @@
 			<destination>
 				<router_id>172.16.101.104</router_id>
 				<if_id>3</if_id>
-			</destination>	
+			</destination>
+			<maximum_bandwidth>3.35</maximum_bandwidth>
+			<undir_delay_link>99</undir_delay_link>
+			<undir_min_max_delay>
+				<min>23</min>
+				<max>43</max>
+			</undir_min_max_delay>
+			<undir_delay_variation>1</undir_delay_variation>
+			<undir_link_loss>102</undir_link_loss>
+			<undir_residual_bandwidth>802</undir_residual_bandwidth>
+			<undir_available_bandwidth>500</undir_available_bandwidth>
+			<undir_utilized_bandwidth>436</undir_utilized_bandwidth>
 		</edge>
 		<edge>
 			<source>
@@ -160,9 +245,19 @@
 			<destination>
 				<router_id>172.16.101.102</router_id>
 				<if_id>3</if_id>
-			</destination>				
+			</destination>
+			<maximum_bandwidth>3.35</maximum_bandwidth>
+			<undir_delay_link>99</undir_delay_link>
+			<undir_min_max_delay>
+				<min>23</min>
+				<max>43</max>
+			</undir_min_max_delay>
+			<undir_delay_variation>1</undir_delay_variation>
+			<undir_link_loss>102</undir_link_loss>
+			<undir_residual_bandwidth>802</undir_residual_bandwidth>
+			<undir_available_bandwidth>500</undir_available_bandwidth>
+			<undir_utilized_bandwidth>436</undir_utilized_bandwidth>
 		</edge>
-
 		<edge>
 			<source>
 				<router_id>172.16.101.104</router_id>
@@ -171,9 +266,18 @@
 			<destination>
 				<router_id>172.16.102.101</router_id>
 				<if_id>11</if_id>
-			</destination>	
-			<undir_delay_link>1</undir_delay_link>		
-		</edge>
+			</destination>
+			<maximum_bandwidth>3.35</maximum_bandwidth>
+			<undir_delay_link>99</undir_delay_link>
+			<undir_min_max_delay>
+				<min>23</min>
+				<max>43</max>
+			</undir_min_max_delay>
+			<undir_delay_variation>1</undir_delay_variation>
+			<undir_link_loss>102</undir_link_loss>
+			<undir_residual_bandwidth>802</undir_residual_bandwidth>
+			<undir_available_bandwidth>500</undir_available_bandwidth>
+			<undir_utilized_bandwidth>436</undir_utilized_bandwidth>		</edge>
 	</domain>
 
 
@@ -213,6 +317,17 @@
 			</destination>	
 			<undir_delay_link>2</undir_delay_link>			
 		</edge>
+		<maximum_bandwidth>3.35</maximum_bandwidth>
+		<undir_delay_link>99</undir_delay_link>
+		<undir_min_max_delay>
+			<min>23</min>
+			<max>43</max>
+		</undir_min_max_delay>
+		<undir_delay_variation>1</undir_delay_variation>
+		<undir_link_loss>102</undir_link_loss>
+		<undir_residual_bandwidth>802</undir_residual_bandwidth>
+		<undir_available_bandwidth>500</undir_available_bandwidth>
+		<undir_utilized_bandwidth>436</undir_utilized_bandwidth>
 	</domain>
 
 </network>

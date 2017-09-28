@@ -1268,7 +1268,7 @@ public class FileTEDBUpdater {
 		return TEDBs;
 	}
 
-	//used functions
+	//Andrea function used to read conf
 	public static Hashtable<String,TEDB> readMultipleDomainSimpleNetworks(String fileName, String layer,boolean allDomains,int lambdaIni, int lambdaEnd, boolean isSSONnetwork, String learntFrom) {
 		Logger log = LoggerFactory.getLogger("BGP4Peer");
 		Object router_id_addr = null;

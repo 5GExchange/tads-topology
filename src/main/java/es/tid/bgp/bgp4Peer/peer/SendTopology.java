@@ -1082,6 +1082,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 
 			linkStateNeeded=true;
 		}
+
 		//1.2.5 metric
 //		if (metric != 0){
 //			DefaultTEMetricLinkAttribTLV defaultMetric = new DefaultTEMetricLinkAttribTLV();
@@ -1107,8 +1108,63 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			linkStateAttribute.setMF_OTPAttribTLV(mfOTPTLV);
 			linkStateNeeded=true;
 		}
-		
+
+
+		//new TE metrics
+		//2.2.3 LinkDelay
+		if (te_info != null){
+			if(te_info.getUndirLinkDelay() != null){
+				int undirLinkDelay = te_info.getUndirLinkDelay().getDelay();
+				UndirectionalLinkDelayDescriptorSubTLV uSTLV =new UndirectionalLinkDelayDescriptorSubTLV();
+				uSTLV.setDelay(undirLinkDelay);
+				linkStateAttribute.setUndirectionalLinkDelayTLV(uSTLV);
+			}
+			if(te_info.getUndirDelayVar() != null){
+				int undirDelayVar = te_info.getUndirDelayVar().getDelayVar();
+				UndirectionalDelayVariationDescriptorSubTLV uSTLV =new UndirectionalDelayVariationDescriptorSubTLV();
+				uSTLV.setDelayVar(undirDelayVar);
+				linkStateAttribute.setUndirectionalDelayVariationTLV(uSTLV);
+			}
+			if(te_info.getMinMaxUndirLinkDelay() != null){
+				int minDelay = te_info.getMinMaxUndirLinkDelay().getLowDelay();
+				int maxDelay = te_info.getMinMaxUndirLinkDelay().getHighDelay();
+				MinMaxUndirectionalLinkDelayDescriptorSubTLV uSTLV =new MinMaxUndirectionalLinkDelayDescriptorSubTLV();
+				uSTLV.setHighDelay(maxDelay);
+				uSTLV.setLowDelay(minDelay);
+				linkStateAttribute.setMinMaxUndirectionalLinkDelayTLV(uSTLV);
+			}
+			if(te_info.getUndirLinkLoss() != null){
+				int linkLoss = te_info.getUndirLinkLoss().getLinkLoss();
+				UndirectionalLinkLossDescriptorSubTLV uSTLV =new UndirectionalLinkLossDescriptorSubTLV();
+				uSTLV.setLinkLoss(linkLoss);
+				linkStateAttribute.setUndirectionalLinkLossTLV(uSTLV);
+			}
+			if(te_info.getUndirResidualBw() != null){
+				int resBw = te_info.getUndirResidualBw().getResidualBw();
+				UndirectionalResidualBandwidthDescriptorSubTLV uSTLV =new UndirectionalResidualBandwidthDescriptorSubTLV();
+				uSTLV.setResidualBw(resBw);
+				linkStateAttribute.setUndirectionalResidualBwTLV(uSTLV);
+			}
+			if(te_info.getUndirAvailableBw() != null){
+				int availableBw = te_info.getUndirAvailableBw().getAvailableBw();
+				UndirectionalAvailableBandwidthDescriptorSubTLV uSTLV =new UndirectionalAvailableBandwidthDescriptorSubTLV();
+				uSTLV.setAvailableBw(availableBw);
+				linkStateAttribute.setUndirectionalAvailableBwTLV(uSTLV);
+			}
+			if(te_info.getUndirUtilizedBw() != null){
+				int utilizedBw = te_info.getUndirUtilizedBw().getUtilizedBw();
+				UndirectionalUtilizedBandwidthDescriptorSubTLV uSTLV =new UndirectionalUtilizedBandwidthDescriptorSubTLV();
+				uSTLV.setUtilizedBw(utilizedBw);
+				linkStateAttribute.setUndirectionalUtilizedBwTLV(uSTLV);
+			}
+
+		}
+
+
+
+
 		if (linkStateNeeded){
+			log.info("Andrea: link state needed");
 			pathAttributes.add(linkStateAttribute);
 		}
 		//2. NLRI
@@ -1179,6 +1235,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		}
 		
 		//2.2.3 LinkDelay
+		/*
 		if (te_info != null){
 			if(te_info.getUndirLinkDelay() != null){
 				int undirLinkDelay = te_info.getUndirLinkDelay().getDelay();
@@ -1226,11 +1283,13 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			}
 			
 		}
+		 */
 		linkNLRI.setIdentifier(this.identifier);
 		BGP_LS_MP_Reach_Attribute ra= new BGP_LS_MP_Reach_Attribute();
 		ra.setLsNLRI(linkNLRI);
-		
-		pathAttributes.add(ra);		
+
+		pathAttributes.add(ra);
+
 		return update;
 	}
 	/**

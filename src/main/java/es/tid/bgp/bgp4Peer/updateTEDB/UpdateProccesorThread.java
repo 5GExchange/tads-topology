@@ -14,20 +14,17 @@ import es.tid.bgp.bgp4Peer.peer.MDPCEinfoUpdateTime;
 import es.tid.ospf.ospfv2.lsa.tlv.subtlv.*;
 import es.tid.ospf.ospfv2.lsa.tlv.subtlv.complexFields.BitmapLabelSet;
 import es.tid.tedb.*;
-import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-
-import java.io.IOException;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.*;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.logging.FileHandler;
+
 //import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 /**
  * This class process the update messages updating the TEDB.
@@ -163,7 +160,6 @@ public class UpdateProccesorThread extends Thread {
 				PathAttribute att = null;
 				updateMsg= updateList.take();
 				//log.info("Update Processor Thread Reading the Message: \n"+ updateMsg.toString());
-				//Andrea To be checked
 				String learntFrom = updateMsg.getLearntFrom();
 				log.info("Update Msg Received from "+learntFrom +"  Queue size: " +updateList.size());
 				ArrayList<PathAttribute> pathAttributeList = updateMsg.getPathAttributes();
@@ -385,6 +381,29 @@ if (AsInfo_DB.containsKey(learntFrom))
 			this.transceiverClassAndAppATLV =lsAtt.getTransceiverClassAndApp();
 		}
 
+		//New TE metrics
+		if(lsAtt.getUndirectionalLinkDelayTLV()!=null){
+			linkDelay = lsAtt.getUndirectionalLinkDelayTLV().getDelay();
+		}
+		if(lsAtt.getUndirectionalDelayVariationTLV()!=null){
+			linkDelayVar = lsAtt.getUndirectionalDelayVariationTLV().getDelayVar();
+		}
+		if(lsAtt.getMinMaxUndirectionalLinkDelayTLV()!=null){
+			maxDelay = lsAtt.getMinMaxUndirectionalLinkDelayTLV().getHighDelay();
+			minDelay = lsAtt.getMinMaxUndirectionalLinkDelayTLV().getLowDelay();
+		}
+		if(lsAtt.getUndirectionalLinkLossTLV()!=null){
+			linkLoss = lsAtt.getUndirectionalLinkLossTLV().getLinkLoss();
+		}
+		if(lsAtt.getUndirectionalResidualBwTLV()!=null){
+			residualBw = lsAtt.getUndirectionalResidualBwTLV().getResidualBw();
+		}
+		if(lsAtt.getUndirectionalAvailableBwTLV()!=null){
+			availableBw = lsAtt.getUndirectionalAvailableBwTLV().getAvailableBw();
+		}
+		if(lsAtt.getUndirectionalUtilizedBwTLV()!=null){
+			utilizedBw = lsAtt.getUndirectionalUtilizedBwTLV().getUtilizedBw();
+		}
 	}
 	/**
 	 * Function which process the link NLRI. It updates the fields passed by argument.
