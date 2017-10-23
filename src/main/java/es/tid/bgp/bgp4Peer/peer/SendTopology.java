@@ -1140,19 +1140,19 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 				linkStateAttribute.setUndirectionalLinkLossTLV(uSTLV);
 			}
 			if(te_info.getUndirResidualBw() != null){
-				int resBw = te_info.getUndirResidualBw().getResidualBw();
+				float resBw = te_info.getUndirResidualBw().getResidualBw();
 				UndirectionalResidualBandwidthDescriptorSubTLV uSTLV =new UndirectionalResidualBandwidthDescriptorSubTLV();
 				uSTLV.setResidualBw(resBw);
 				linkStateAttribute.setUndirectionalResidualBwTLV(uSTLV);
 			}
 			if(te_info.getUndirAvailableBw() != null){
-				int availableBw = te_info.getUndirAvailableBw().getAvailableBw();
+				float availableBw = te_info.getUndirAvailableBw().getAvailableBw();
 				UndirectionalAvailableBandwidthDescriptorSubTLV uSTLV =new UndirectionalAvailableBandwidthDescriptorSubTLV();
 				uSTLV.setAvailableBw(availableBw);
 				linkStateAttribute.setUndirectionalAvailableBwTLV(uSTLV);
 			}
 			if(te_info.getUndirUtilizedBw() != null){
-				int utilizedBw = te_info.getUndirUtilizedBw().getUtilizedBw();
+				float utilizedBw = te_info.getUndirUtilizedBw().getUtilizedBw();
 				UndirectionalUtilizedBandwidthDescriptorSubTLV uSTLV =new UndirectionalUtilizedBandwidthDescriptorSubTLV();
 				uSTLV.setUtilizedBw(utilizedBw);
 				linkStateAttribute.setUndirectionalUtilizedBwTLV(uSTLV);

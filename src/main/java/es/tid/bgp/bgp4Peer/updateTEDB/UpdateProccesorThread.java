@@ -82,9 +82,9 @@ public class UpdateProccesorThread extends Thread {
 	int minDelay;
 	int maxDelay;
 	int linkLoss;
-	int residualBw;
-	int availableBw;
-	int utilizedBw;
+	float residualBw;
+	float availableBw;
+	float utilizedBw;
 	/** NODE ATTRIBUTE TLVs 
 	 * Ipv4 of local node link attribute TLV also used
 	 * 

@@ -23,7 +23,7 @@
 			<router_id>172.16.102.104</router_id>
 		</node>
 	
-		<edgeCommon>
+		<!--edgeCommon>
 			<maximum_bandwidth>1000</maximum_bandwidth>
 			<default_te_metric>10</default_te_metric>
    			<undir_delay_link>99</undir_delay_link>
@@ -36,7 +36,7 @@
    			<undir_residual_bandwidth>802</undir_residual_bandwidth>
    			<undir_available_bandwidth>500</undir_available_bandwidth>
    			<undir_utilized_bandwidth>436</undir_utilized_bandwidth>
-		</edgeCommon>
+		</edgeCommon-->
 		<edge>
 			<source>
 				<router_id>172.16.102.101</router_id>
