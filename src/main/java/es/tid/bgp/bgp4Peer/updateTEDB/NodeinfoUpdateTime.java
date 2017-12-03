@@ -1,11 +1,12 @@
 package es.tid.bgp.bgp4Peer.updateTEDB;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.net.Inet4Address;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Objects;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Created by Ajmal on 2017-08-08.
@@ -14,6 +15,7 @@ public class NodeinfoUpdateTime {
 
     Inet4Address localDomainID;
     Inet4Address localnodeID;
+    int localISISid=0;
     Long NodeupdateTime;
     String LearntFrom=null;
     private Logger log;
@@ -49,11 +51,48 @@ public NodeinfoUpdateTime(Hashtable<NodeinfoUpdateTime, Long> nodeinfoUpdate, In
     }
 }
 
+public NodeinfoUpdateTime(Hashtable<NodeinfoUpdateTime, Long> nodeinfoUpdate, Inet4Address localDomainID, int id, Long NodeupdateTime){
+
+        this.localDomainID=localDomainID;
+        this.localISISid=id;
+        this.NodeupdateTime=NodeupdateTime;
+        log= LoggerFactory.getLogger("BGP4Peer");
+
+        if(nodeinfoUpdate.size()==0)
+            nodeinfoUpdate.put(new NodeinfoUpdateTime(localDomainID, localISISid),NodeupdateTime);
+
+        else{
+            int indicator=0;
+            NodeinfoUpdateTime key;
+            Enumeration Node_ID =nodeinfoUpdate.keys();
+            while(Node_ID.hasMoreElements()) {
+                key = (NodeinfoUpdateTime) Node_ID.nextElement();
+                if(key.equals(new NodeinfoUpdateTime(localDomainID,localISISid)))
+                {
+                    nodeinfoUpdate.remove(key);
+                    nodeinfoUpdate.put(new NodeinfoUpdateTime(localDomainID, localISISid), NodeupdateTime);
+                    log.info("Node Info Update Match Found " +key.toString() +"   with: " +(new NodeinfoUpdateTime(localDomainID,localISISid).toString()));
+                    indicator++;
+                    break;
+                }
+            }
+            if(indicator==0)
+                nodeinfoUpdate.put(new NodeinfoUpdateTime(localDomainID, localISISid),NodeupdateTime);
+        }
+    }
+
+
+
 
 public NodeinfoUpdateTime(Inet4Address localDomainID, Inet4Address localnodeID)
 {
     this.localDomainID=localDomainID;
     this.localnodeID=localnodeID;
+}
+
+public NodeinfoUpdateTime(Inet4Address localDomainID, int id) {
+        this.localDomainID=localDomainID;
+        this.localISISid=id;
 }
 
 

@@ -494,24 +494,33 @@ public class SendTopology implements Runnable {
 					pathAttributes.add(as_path);
 				}
 
-						//LOCAL PREF Attribute
-			LOCAL_PREF_Attribute as_local_pref = new LOCAL_PREF_Attribute();
-			as_local_pref.setValue(LocalPref);
-			pathAttributes.add(as_local_pref);
+				//LOCAL PREF Attribute
+			    LOCAL_PREF_Attribute as_local_pref = new LOCAL_PREF_Attribute();
+			    as_local_pref.setValue(LocalPref);
+			    pathAttributes.add(as_local_pref);
 
-						//Node Attribute
+			    //Node Attribute
 		
-				LinkStateAttribute  linkStateAttribute = new LinkStateAttribute();
-				boolean linkStateNeeded=false;
+			    LinkStateAttribute  linkStateAttribute = new LinkStateAttribute();
+			    boolean linkStateNeeded=false;
 				
-				if (node_info.getSid()!=0){
+			    if (node_info.getSid()!=0){
 					int sid = node_info.getSid();
 					SidLabelNodeAttribTLV sidLabelTLV = new SidLabelNodeAttribTLV();
 					sidLabelTLV.setSid(sid);
 					linkStateAttribute.setSidLabelTLV(sidLabelTLV);			
 					linkStateNeeded=true;
 				}
-		
+
+
+				//linkStateAttribute.setNodeNameTLV();
+				NodeNameNodeAttribTLV nna = new NodeNameNodeAttribTLV();
+				//nna.setName();
+
+
+
+
+
 				if (linkStateNeeded){
 					log.info("Node Attribute added....");
 					pathAttributes.add(linkStateAttribute);

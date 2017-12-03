@@ -2,7 +2,7 @@
 <config>
 	<!-- TCP port where the BGP is listening for incoming bgp4 connections. Optional Parameter. Default value: 179 (BGP Port)  --> 
 	<BGP4Port>179</BGP4Port>
-	<BGPIdentifier>2.2.2.2</BGPIdentifier>
+	<BGPIdentifier>10.10.10.37</BGPIdentifier>
 <!-- TCP port to connect to manage the BGP connection. Default value: 1112 -->
 	<BGP4ManagementPort>1112</BGP4ManagementPort> 
 	<!-- Peers to which this Peer is going to establish connection -->
@@ -13,11 +13,11 @@
                 <peerPort>44179</peerPort>
     </configPeer-->
 	<configPeer>
-                <peer>10.0.0.2</peer>
-                <export>true</export>
+                <peer>10.10.10.110</peer>
+                <export>false</export>
                 <import>true</import>
-                <peerPort>1790</peerPort>
-    </configPeer>
+                <peerPort>179</peerPort>
+        </configPeer>
 	<!-- Ficheros log (servidor, protocolo PCEP y OSPF). Campos opcionales-->
 	<BGP4LogFile>BGP4Parser-BGPLS2.log</BGP4LogFile><!-- Default value: BGP4Parser.log -->
 	<BGP4LogFileClient>BGP4Client-BGPLS2.log</BGP4LogFileClient><!-- Default value: BGP4Client.log-->
@@ -38,7 +38,7 @@
 	<!-- RFC 4271. This 1-octet unsigned integer indicates the protocol version number of the message.  The current BGP version number is 4. -->
 	<version>4</version><!-- Optional Parameter. Default value: 4. -->
 	<!-- RFC 4271.  This 2-octet unsigned integer indicates the Autonomous System number of the sender.-->
-	<myAutonomousSystem>65522</myAutonomousSystem>
+	<myAutonomousSystem>3</myAutonomousSystem>
 	<!-- RFC 4271. This 4-octet unsigned integer indicates the BGP Identifier of the sender.  A given BGP speaker sets the value of its BGP
          Identifier to an IP address that is assigned to that BGP speaker.  The value of the BGP Identifier is determined upon
          startup and is the same for every local interface and BGP peer. --> 

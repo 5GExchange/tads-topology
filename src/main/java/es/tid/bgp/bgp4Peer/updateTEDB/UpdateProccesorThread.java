@@ -236,7 +236,7 @@ public class UpdateProccesorThread extends Thread {
 									continue;
 								case NLRITypes.Node_NLRI:
 									fillNodeInformation((NodeNLRI)(nlri), learntFrom);
-									//log.debug("Node Information Learnt From: "+learntFrom +">-----<" +nlri.toString());
+									log.info("Node Information Learnt From: "+learntFrom +">-----<" +nlri.toString());
 									continue;
 								case NLRITypes.Prefix_v4_NLRI://POR HACER...
 									fillPrefixNLRI((PrefixNLRI)nlri, igpFlagBitsTLV, OSPFForwardingAddrTLV, prefixMetricTLV, routeTagTLV);
@@ -427,12 +427,16 @@ if (AsInfo_DB.containsKey(learntFrom))
 		//Domains
 		Inet4Address localDomainID= null ;
 		Inet4Address remoteDomainID = null ;
-
+		int IGP_type;
+		int localISISid=0;
+		int remoteISISid=0;
 		Inet4Address areaID= null ;
 		Inet4Address bgplsID = null;
 
 		Inet4Address LocalNodeIGPId = null;
 		Inet4Address RemoteNodeIGPId = null;
+
+		IGP_type = linkNLRI.getLocalNodeDescriptors().getIGPRouterID().getIGP_router_id_type();
 
 		//Local Node Descriptors
 		if (linkNLRI.getLocalNodeDescriptors().getAutonomousSystemSubTLV()!=null){
@@ -444,42 +448,56 @@ if (AsInfo_DB.containsKey(learntFrom))
 		if (linkNLRI.getLocalNodeDescriptors().getBGPLSIDSubTLV()!=null) {
 			bgplsID=linkNLRI.getLocalNodeDescriptors().getBGPLSIDSubTLV().getBGPLS_ID();
 		}
-		if (linkNLRI.getLocalNodeDescriptors().getIGPRouterID()!=null){
-			LocalNodeIGPId=linkNLRI.getLocalNodeDescriptors().getIGPRouterID().getIpv4AddressOSPF();
-		}
 
-		if (linkNLRI.getRemoteNodeDescriptorsTLV().getAutonomousSystemSubTLV()!=null) {
-			remoteDomainID=linkNLRI.getRemoteNodeDescriptorsTLV().getAutonomousSystemSubTLV().getAS_ID();
+		if (IGP_type==3){
+			if (linkNLRI.getLocalNodeDescriptors().getIGPRouterID()!=null){
+				LocalNodeIGPId=linkNLRI.getLocalNodeDescriptors().getIGPRouterID().getIpv4AddressOSPF();
+			}
 		}
-		if (linkNLRI.getRemoteNodeDescriptorsTLV().getAreaID()!=null) {
-			areaID =linkNLRI.getRemoteNodeDescriptorsTLV().getAreaID().getAREA_ID();
+		if (IGP_type==1) {
+			if (linkNLRI.getLocalNodeDescriptors().getIGPRouterID() != null) {
+				localISISid = linkNLRI.getLocalNodeDescriptors().getIGPRouterID().getISIS_ISO_NODE_ID();
+			}
 		}
-		if (linkNLRI.getRemoteNodeDescriptorsTLV().getBGPLSIDSubTLV()!=null) {
-			bgplsID=linkNLRI.getRemoteNodeDescriptorsTLV().getBGPLSIDSubTLV().getBGPLS_ID();
+		if (linkNLRI.getRemoteNodeDescriptorsTLV().getAutonomousSystemSubTLV() != null) {
+			remoteDomainID = linkNLRI.getRemoteNodeDescriptorsTLV().getAutonomousSystemSubTLV().getAS_ID();
 		}
-		if (linkNLRI.getRemoteNodeDescriptorsTLV().getIGPRouterID()!=null) {
-			RemoteNodeIGPId = linkNLRI.getRemoteNodeDescriptorsTLV().getIGPRouterID().getIpv4AddressOSPF();
+		if (linkNLRI.getRemoteNodeDescriptorsTLV().getAreaID() != null) {
+			areaID = linkNLRI.getRemoteNodeDescriptorsTLV().getAreaID().getAREA_ID();
 		}
-		if(linkNLRI.getUndirectionalLinkDelayTLV()!=null){
+		if (linkNLRI.getRemoteNodeDescriptorsTLV().getBGPLSIDSubTLV() != null) {
+			bgplsID = linkNLRI.getRemoteNodeDescriptorsTLV().getBGPLSIDSubTLV().getBGPLS_ID();
+		}
+		if (IGP_type == 3) {
+			if (linkNLRI.getRemoteNodeDescriptorsTLV().getIGPRouterID() != null) {
+				RemoteNodeIGPId = linkNLRI.getRemoteNodeDescriptorsTLV().getIGPRouterID().getIpv4AddressOSPF();
+			}
+		}
+		if (IGP_type == 1) {
+			if (linkNLRI.getRemoteNodeDescriptorsTLV().getIGPRouterID() != null) {
+				remoteISISid = linkNLRI.getRemoteNodeDescriptorsTLV().getIGPRouterID().getISIS_ISO_NODE_ID();
+			}
+		}
+		if (linkNLRI.getUndirectionalLinkDelayTLV() != null) {
 			linkDelay = linkNLRI.getUndirectionalLinkDelayTLV().getDelay();
 		}
-		if(linkNLRI.getUndirectionalDelayVariationTLV()!=null){
+		if (linkNLRI.getUndirectionalDelayVariationTLV() != null) {
 			linkDelayVar = linkNLRI.getUndirectionalDelayVariationTLV().getDelayVar();
 		}
-		if(linkNLRI.getMinMaxUndirectionalLinkDelayTLV()!=null){
+		if (linkNLRI.getMinMaxUndirectionalLinkDelayTLV() != null) {
 			maxDelay = linkNLRI.getMinMaxUndirectionalLinkDelayTLV().getHighDelay();
 			minDelay = linkNLRI.getMinMaxUndirectionalLinkDelayTLV().getLowDelay();
 		}
-		if(linkNLRI.getUndirectionalLinkLossTLV()!=null){
+		if (linkNLRI.getUndirectionalLinkLossTLV() != null) {
 			linkLoss = linkNLRI.getUndirectionalLinkLossTLV().getLinkLoss();
 		}
-		if(linkNLRI.getUndirectionalResidualBwTLV()!=null){
+		if (linkNLRI.getUndirectionalResidualBwTLV() != null) {
 			residualBw = linkNLRI.getUndirectionalResidualBwTLV().getResidualBw();
 		}
-		if(linkNLRI.getUndirectionalAvailableBwTLV()!=null){
+		if (linkNLRI.getUndirectionalAvailableBwTLV() != null) {
 			availableBw = linkNLRI.getUndirectionalAvailableBwTLV().getAvailableBw();
 		}
-		if(linkNLRI.getUndirectionalUtilizedBwTLV()!=null){
+		if (linkNLRI.getUndirectionalUtilizedBwTLV() != null) {
 			utilizedBw = linkNLRI.getUndirectionalUtilizedBwTLV().getUtilizedBw();
 		}
 		/**Creamos el grafo*/
@@ -487,10 +505,15 @@ if (AsInfo_DB.containsKey(learntFrom))
 		//log.info("as_local "+localDomainID);
 		//log.info("as_remote "+remoteDomainID);
 
-		if(localDomainID.equals(remoteDomainID)){
-			log.debug("........IntraDomain......for domain:  " +localDomainID.getCanonicalHostName());
-			IntraDomainEdge intraEdge=null;
-			log.debug("LocalIP:  " +LocalNodeIGPId  +"   RemoteIP:  " +RemoteNodeIGPId);
+		if (localDomainID.equals(remoteDomainID)) {
+			log.debug("........IntraDomain......for domain:  " + localDomainID.getCanonicalHostName());
+			IntraDomainEdge intraEdge = null;
+			if (IGP_type == 3) {
+				log.debug("LocalIP:  " + LocalNodeIGPId + "   RemoteIP:  " + RemoteNodeIGPId);
+			}
+			else if (IGP_type == 1){
+				log.debug("LocalISISid:  " + localISISid + "   RemoteISISid:  " + remoteISISid);
+			}
 
 			DomainTEDB domainTEDB=(DomainTEDB)intraTEDBs.get(localDomainID.getHostAddress());
 			SimpleTEDB simpleTEDBxx=null;
@@ -505,14 +528,25 @@ if (AsInfo_DB.containsKey(learntFrom))
 				log.debug("PROBLEM: TEDB not Compatible");
 				return;
 			}
-
-            if(simpleTEDBxx.getNetworkGraph().containsEdge(LocalNodeIGPId, RemoteNodeIGPId)) {
-				intraEdge = simpleTEDBxx.getNetworkGraph().getEdge(LocalNodeIGPId, RemoteNodeIGPId);
-				log.debug("IntraDomain Edge Already Exist in the TEDB");
+			if (IGP_type == 3) {
+				if(simpleTEDBxx.getNetworkGraph().containsEdge(LocalNodeIGPId, RemoteNodeIGPId)) {
+					intraEdge = simpleTEDBxx.getNetworkGraph().getEdge(LocalNodeIGPId, RemoteNodeIGPId);
+					log.debug("IntraDomain Edge Already Exist in the TEDB");
+				}
+				else {
+						intraEdge = new IntraDomainEdge();
+						log.debug("Graph does not contain IntraDomain Edge");
+				}
 			}
-			else {
+			if (IGP_type == 1) {
+				if(simpleTEDBxx.getNetworkGraph().containsEdge(localISISid, remoteISISid)) {
+					intraEdge = simpleTEDBxx.getNetworkGraph().getEdge(localISISid, remoteISISid);
+					log.debug("IntraDomain Edge Already Exist in the TEDB");
+				}
+				else {
 					intraEdge = new IntraDomainEdge();
 					log.debug("Graph does not contain IntraDomain Edge");
+				}
 			}
 
 			if (linkNLRI.getLinkIdentifiersTLV() != null) {
@@ -524,58 +558,116 @@ if (AsInfo_DB.containsKey(learntFrom))
 				te_info = createTE_Info(simpleTEDBxx);
 				intraEdge.setTE_info(te_info);
 				intraEdge.setLearntFrom(learntFrom);
-				setIntraDomainEdgeUpdateTime (localDomainID, LocalNodeIGPId,RemoteNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(),linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(),System.currentTimeMillis());
+				if (IGP_type == 3) {
+					setIntraDomainEdgeUpdateTime (localDomainID, LocalNodeIGPId,RemoteNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(),linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(),System.currentTimeMillis());
+				}
+				if (IGP_type == 1) {
+					setIntraDomainEdgeUpdateTime (localDomainID, localISISid,remoteISISid, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(),linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(),System.currentTimeMillis());
+				}
 
 				//log.info(" After IntraDomian Edge LearntFrom: " +intraEdge.getLearntFrom());
 
 
 
-							/*Adding Local and Remote Nodes to TED*/
-
-				if (!(simpleTEDBxx.getNetworkGraph().containsVertex(LocalNodeIGPId))) {
+				/*Adding Local and Remote Nodes to TED*/
+				//OSPF IGP
+				if (IGP_type == 3) {
+					if (!(simpleTEDBxx.getNetworkGraph().containsVertex(LocalNodeIGPId))) {
 					simpleTEDBxx.getNetworkGraph().addVertex(LocalNodeIGPId);//add vertex ya comprueba si existe el nodo en la ted-->se puede hacer mas limpio
 					simpleTEDBxx.notifyNewVertex(LocalNodeIGPId);
 					//log.info("Source Vertex :" +simpleTEDBxx.getNetworkGraph().containsVertex(LocalNodeIGPId) +"is Just Added");
 
+					}
+					//			else{
+					//				log.info("Local Vertex: "+LocalNodeIGPId.toString() +" already present in TED...");
+					//			}
+
+					if (!(simpleTEDBxx.getNetworkGraph().containsVertex(RemoteNodeIGPId))) {
+						//log.info("Not containing dst vertex");
+						simpleTEDBxx.getNetworkGraph().addVertex(RemoteNodeIGPId);
+						simpleTEDBxx.notifyNewVertex(RemoteNodeIGPId);
+						//log.info("Destination Vertex :" +simpleTEDBxx.getNetworkGraph().containsVertex(RemoteNodeIGPId) +"is Just Added");
+
+					}
+					//			else {
+					//				log.info("Remote Vertex: "+RemoteNodeIGPId.toString() +" already present in TED...");
+					//			}
+
+					if (!(simpleTEDBxx.getNetworkGraph().containsEdge(LocalNodeIGPId, RemoteNodeIGPId))) {
+						log.debug("Graph does not contain intra-edge");
+						//log.info("Adding information of local node to edge..." + simpleTEDBxx.getNodeTable().get(LocalNodeIGPId));
+						intraEdge.setLocal_Node_Info(simpleTEDBxx.getNodeTable().get(LocalNodeIGPId));
+						//log.info("Adding information of remote node to edge..." + simpleTEDBxx.getNodeTable().get(RemoteNodeIGPId));
+						intraEdge.setRemote_Node_Info(simpleTEDBxx.getNodeTable().get(RemoteNodeIGPId));
+						//log.info("Adding Edge from Origin Vertex" + LocalNodeIGPId.toString() + " to Destination Vertex" + RemoteNodeIGPId.toString());
+						simpleTEDBxx.getNetworkGraph().addEdge(LocalNodeIGPId, RemoteNodeIGPId, intraEdge);
+						simpleTEDBxx.notifyNewEdge(LocalNodeIGPId, RemoteNodeIGPId);
+						simpleTEDBxx.getNetworkGraph().getEdge(LocalNodeIGPId, RemoteNodeIGPId).setNumberFibers(1);
+						IntraDomainEdge edge = simpleTEDBxx.getNetworkGraph().getEdge(LocalNodeIGPId, RemoteNodeIGPId);
+						if (intraEdge.getTE_info().getAvailableLabels() != null)
+							((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).initializeReservation(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitMap());
+					} else {
+						log.debug("Graph contains Intra-edge");
+						IntraDomainEdge edge;
+						edge = simpleTEDBxx.getNetworkGraph().getEdge(LocalNodeIGPId, RemoteNodeIGPId);
+						if (this.availableLabels != null) {
+							if (((BitmapLabelSet) this.availableLabels.getLabelSet()).getDwdmWavelengthLabel() != null) {
+								((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).arraycopyBytesBitMap(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitMap());
+
+								if (((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitmapReserved() != null) {
+									((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).arraycopyReservedBytesBitMap(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitmapReserved());
+								}
+							}
+						}
+					}
 				}
-				//			else{
-				//				log.info("Local Vertex: "+LocalNodeIGPId.toString() +" already present in TED...");
-				//			}
+				//ISIS IGP
+				if (IGP_type == 1) {
+					if (!(simpleTEDBxx.getNetworkGraph().containsVertex(localISISid))) {
+						simpleTEDBxx.getNetworkGraph().addVertex(localISISid);//add vertex ya comprueba si existe el nodo en la ted-->se puede hacer mas limpio
+						simpleTEDBxx.notifyNewVertex(localISISid);
+						//log.info("Source Vertex :" +simpleTEDBxx.getNetworkGraph().containsVertex(LocalNodeIGPId) +"is Just Added");
 
-				if (!(simpleTEDBxx.getNetworkGraph().containsVertex(RemoteNodeIGPId))) {
-					//log.info("Not containing dst vertex");
-					simpleTEDBxx.getNetworkGraph().addVertex(RemoteNodeIGPId);
-					simpleTEDBxx.notifyNewVertex(RemoteNodeIGPId);
-					//log.info("Destination Vertex :" +simpleTEDBxx.getNetworkGraph().containsVertex(RemoteNodeIGPId) +"is Just Added");
+					}
+					//			else{
+					//				log.info("Local Vertex: "+LocalNodeIGPId.toString() +" already present in TED...");
+					//			}
 
-				}
-				//			else {
-				//				log.info("Remote Vertex: "+RemoteNodeIGPId.toString() +" already present in TED...");
-				//			}
+					if (!(simpleTEDBxx.getNetworkGraph().containsVertex(remoteISISid))) {
+						//log.info("Not containing dst vertex");
+						simpleTEDBxx.getNetworkGraph().addVertex(remoteISISid);
+						simpleTEDBxx.notifyNewVertex(remoteISISid);
+						//log.info("Destination Vertex :" +simpleTEDBxx.getNetworkGraph().containsVertex(remoteISISid) +"is Just Added");
 
-				if (!(simpleTEDBxx.getNetworkGraph().containsEdge(LocalNodeIGPId, RemoteNodeIGPId))) {
-					log.debug("Graph does not contain intra-edge");
-					//log.info("Adding information of local node to edge..." + simpleTEDBxx.getNodeTable().get(LocalNodeIGPId));
-					intraEdge.setLocal_Node_Info(simpleTEDBxx.getNodeTable().get(LocalNodeIGPId));
-					//log.info("Adding information of remote node to edge..." + simpleTEDBxx.getNodeTable().get(RemoteNodeIGPId));
-					intraEdge.setRemote_Node_Info(simpleTEDBxx.getNodeTable().get(RemoteNodeIGPId));
-					//log.info("Adding Edge from Origin Vertex" + LocalNodeIGPId.toString() + " to Destination Vertex" + RemoteNodeIGPId.toString());
-					simpleTEDBxx.getNetworkGraph().addEdge(LocalNodeIGPId, RemoteNodeIGPId, intraEdge);
-					simpleTEDBxx.notifyNewEdge(LocalNodeIGPId, RemoteNodeIGPId);
-					simpleTEDBxx.getNetworkGraph().getEdge(LocalNodeIGPId, RemoteNodeIGPId).setNumberFibers(1);
-					IntraDomainEdge edge = simpleTEDBxx.getNetworkGraph().getEdge(LocalNodeIGPId, RemoteNodeIGPId);
-					if (intraEdge.getTE_info().getAvailableLabels() != null)
-						((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).initializeReservation(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitMap());
-				} else {
-					log.debug("Graph contains Intra-edge");
-					IntraDomainEdge edge;
-					edge = simpleTEDBxx.getNetworkGraph().getEdge(LocalNodeIGPId, RemoteNodeIGPId);
-					if (this.availableLabels != null) {
-						if (((BitmapLabelSet) this.availableLabels.getLabelSet()).getDwdmWavelengthLabel() != null) {
-							((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).arraycopyBytesBitMap(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitMap());
+					}
+					//			else {
+					//				log.info("Remote Vertex: "+remoteISISid.toString() +" already present in TED...");
+					//			}
 
-							if (((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitmapReserved() != null) {
-								((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).arraycopyReservedBytesBitMap(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitmapReserved());
+					if (!(simpleTEDBxx.getNetworkGraph().containsEdge(localISISid, remoteISISid))) {
+						log.debug("Graph does not contain intra-edge");
+						//log.info("Adding information of local node to edge..." + simpleTEDBxx.getNodeTable().get(LocalNodeIGPId));
+						intraEdge.setLocal_Node_Info(simpleTEDBxx.getNodeTable().get(localISISid));
+						//log.info("Adding information of remote node to edge..." + simpleTEDBxx.getNodeTable().get(RemoteNodeIGPId));
+						intraEdge.setRemote_Node_Info(simpleTEDBxx.getNodeTable().get(remoteISISid));
+						//log.info("Adding Edge from Origin Vertex" + LocalNodeIGPId.toString() + " to Destination Vertex" + RemoteNodeIGPId.toString());
+						simpleTEDBxx.getNetworkGraph().addEdge(localISISid, remoteISISid, intraEdge);
+						simpleTEDBxx.notifyNewEdge(localISISid, remoteISISid);
+						simpleTEDBxx.getNetworkGraph().getEdge(localISISid, remoteISISid).setNumberFibers(1);
+						IntraDomainEdge edge = simpleTEDBxx.getNetworkGraph().getEdge(localISISid, remoteISISid);
+						if (intraEdge.getTE_info().getAvailableLabels() != null)
+							((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).initializeReservation(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitMap());
+					} else {
+						log.debug("Graph contains Intra-edge");
+						IntraDomainEdge edge;
+						edge = simpleTEDBxx.getNetworkGraph().getEdge(localISISid, remoteISISid);
+						if (this.availableLabels != null) {
+							if (((BitmapLabelSet) this.availableLabels.getLabelSet()).getDwdmWavelengthLabel() != null) {
+								((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).arraycopyBytesBitMap(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitMap());
+
+								if (((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitmapReserved() != null) {
+									((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).arraycopyReservedBytesBitMap(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitmapReserved());
+								}
 							}
 						}
 					}
@@ -998,6 +1090,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 		Inet4Address bgplsID = null;
 		int IGP_type = 0;
 		Inet4Address IGPID = null;
+		int IGPIDint=0;
 		Node_Info node_info = null;
 		Hashtable<Object, Node_Info> NodeTable;
 
@@ -1029,96 +1122,196 @@ if (AsInfo_DB.containsKey(learntFrom))
 
 
 		NodeTable =simpleTEDB.getNodeTable();
-		if(simpleTEDB.getNodeTable().containsKey(nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getIpv4AddressOSPF()))
-		{
-			node_info= simpleTEDB.getNodeTable().get(nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getIpv4AddressOSPF());
-			log.info("Node_info object for AS Already Exist:  " +nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getIpv4AddressOSPF());
+		//if OSPF
+		if( nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getIpv4AddressOSPF() !=null  ){
+
+			if(simpleTEDB.getNodeTable().containsKey(nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getIpv4AddressOSPF()))
+			{
+				node_info= simpleTEDB.getNodeTable().get(nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getIpv4AddressOSPF());
+				log.info("Node_info object for AS Already Exist:  " +nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getIpv4AddressOSPF());
+			}
+			else {
+
+				log.info("........New Node Info Object........");
+				node_info = new Node_Info();
+				node_info.setAs_number(as_number);
+			}
+
+			if(node_info.getLearntFrom()==null || node_info.getLearntFrom().equals(learntFrom)) {
+				log.info("Existing Learnt From: " + node_info.getLearntFrom() + "  New Learnt From: " + learntFrom);
+
+				if (nodeNLRI.getLocalNodeDescriptors().getAreaID() != null) {
+					areaID = nodeNLRI.getLocalNodeDescriptors().getAreaID().getAREA_ID();
+				}
+				if (nodeNLRI.getLocalNodeDescriptors().getBGPLSIDSubTLV() != null) {
+					bgplsID = nodeNLRI.getLocalNodeDescriptors().getBGPLSIDSubTLV().getBGPLS_ID();
+				}
+				if (nodeNLRI.getLocalNodeDescriptors().getIGPRouterID() != null) {
+					IGP_type = nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getIGP_router_id_type();
+					switch (IGP_type) {
+						case 3:
+							IGPID = nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getIpv4AddressOSPF();
+
+							node_info.setIpv4Address(IGPID);
+							break;
+						default:
+							log.info("IGP Identifier ");
+					}
+				}
+
+				if (iPv4RouterIDLocalNodeLATLV != null) {
+					//log.debug("........Adding IPv4 of Local Node to Table........");
+					node_info.setIpv4AddressLocalNode(iPv4RouterIDLocalNodeLATLV.getIpv4Address());
+				}
+				if (nodeFlagBitsTLV != null) {
+					//log.debug("Adding flags of Local Node to table...");
+					node_info.setAbr_bit(nodeFlagBitsTLV.isAbr_bit());
+					node_info.setAttached_bit(nodeFlagBitsTLV.isAttached_bit());
+					node_info.setExternal_bit(nodeFlagBitsTLV.isExternal_bit());
+					node_info.setOverload_bit(nodeFlagBitsTLV.isOverload_bit());
+				}
+
+				if (nodeNameTLV != null) {
+					//log.debug("Adding name of Local Node to Table....");
+					node_info.setName(nodeNameTLV.getName());
+				}
+
+				if (areaIDTLV != null) {
+					//log.debug("Adding AreaID of Local node to table....");
+					node_info.setIpv4areaIDs(areaIDTLV.getIpv4areaIDs());
+				}
+
+				if (sidTLV != null) {
+					//log.debug("Adding SID of Local node to table....");
+					node_info.setSID(sidTLV.getSid());
+				}
+
+										//.... finally we set the 'learnt from' Attribute
+				node_info.setLearntFrom(learntFrom);
+				log.info("Value for Setting Learnt from: " + node_info.getLearntFrom());
+
+
+
+				if (NodeTable != null) {
+					if (!NodeTable.containsKey(IGPID)) {
+						NodeTable.remove(IGPID);
+						NodeTable.put(IGPID, node_info);
+					}
+				}
+
+									//NodeTable.put(IGPID, node_info);
+
+				simpleTEDB.setNodeTable(NodeTable);
+				if (this.multiTedb != null) {
+					if (node_info.getIpv4Address() != null) {
+						this.multiTedb.addReachabilityIPv4(as_number, node_info.getIpv4Address(), 32);
+					}
+
+				}
+				log.info("Node Table:" + NodeTable.toString());
+				log.info("Node Information Table Updated....");
+
+
+			setNodeInfoUpdateTime (as_number, IGPID, learntFrom, System.currentTimeMillis());
+			}
 		}
+		//if ISIS
 		else {
-
-			log.info("........New Node Info Object........");
-			node_info = new Node_Info();
-			node_info.setAs_number(as_number);
-		}
-
-		if(node_info.getLearntFrom()==null || node_info.getLearntFrom().equals(learntFrom)) {
-			log.info("Existing Learnt From: " + node_info.getLearntFrom() + "  New Learnt From: " + learntFrom);
-
-			if (nodeNLRI.getLocalNodeDescriptors().getAreaID() != null) {
-				areaID = nodeNLRI.getLocalNodeDescriptors().getAreaID().getAREA_ID();
+			if(simpleTEDB.getNodeTable().containsKey(nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getISIS_ISO_NODE_ID()))
+			{
+				node_info= simpleTEDB.getNodeTable().get(nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getISIS_ISO_NODE_ID());
+				log.info("Node_info object for AS Already Exist:  " +nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getISIS_ISO_NODE_ID());
 			}
-			if (nodeNLRI.getLocalNodeDescriptors().getBGPLSIDSubTLV() != null) {
-				bgplsID = nodeNLRI.getLocalNodeDescriptors().getBGPLSIDSubTLV().getBGPLS_ID();
-			}
-			if (nodeNLRI.getLocalNodeDescriptors().getIGPRouterID() != null) {
-				IGP_type = nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getIGP_router_id_type();
-				switch (IGP_type) {
-					case 3:
-						IGPID = nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getIpv4AddressOSPF();
+			else {
 
-						node_info.setIpv4Address(IGPID);
-						break;
-					default:
-						log.info("IGP Identifier ");
+				log.info("........New Node Info Object........");
+				node_info = new Node_Info();
+				node_info.setAs_number(as_number);
+			}
+
+			if(node_info.getLearntFrom()==null || node_info.getLearntFrom().equals(learntFrom)) {
+				log.info("Existing Learnt From: " + node_info.getLearntFrom() + "  New Learnt From: " + learntFrom);
+
+				if (nodeNLRI.getLocalNodeDescriptors().getAreaID() != null) {
+					areaID = nodeNLRI.getLocalNodeDescriptors().getAreaID().getAREA_ID();
 				}
-			}
-
-			if (iPv4RouterIDLocalNodeLATLV != null) {
-				//log.debug("........Adding IPv4 of Local Node to Table........");
-				node_info.setIpv4AddressLocalNode(iPv4RouterIDLocalNodeLATLV.getIpv4Address());
-			}
-			if (nodeFlagBitsTLV != null) {
-				//log.debug("Adding flags of Local Node to table...");
-				node_info.setAbr_bit(nodeFlagBitsTLV.isAbr_bit());
-				node_info.setAttached_bit(nodeFlagBitsTLV.isAttached_bit());
-				node_info.setExternal_bit(nodeFlagBitsTLV.isExternal_bit());
-				node_info.setOverload_bit(nodeFlagBitsTLV.isOverload_bit());
-			}
-
-			if (nodeNameTLV != null) {
-				//log.debug("Adding name of Local Node to Table....");
-				node_info.setName(nodeNameTLV.getName());
-			}
-
-			if (areaIDTLV != null) {
-				//log.debug("Adding AreaID of Local node to table....");
-				node_info.setIpv4areaIDs(areaIDTLV.getIpv4areaIDs());
-			}
-
-			if (sidTLV != null) {
-				//log.debug("Adding SID of Local node to table....");
-				node_info.setSID(sidTLV.getSid());
-			}
-
-									//.... finally we set the 'learnt from' Attribute
-			node_info.setLearntFrom(learntFrom);
-			log.info("Value for Setting Learnt from: " + node_info.getLearntFrom());
-
-
-
-			if (NodeTable != null) {
-				if (!NodeTable.containsKey(IGPID)) {
-					NodeTable.remove(IGPID);
-					NodeTable.put(IGPID, node_info);
+				if (nodeNLRI.getLocalNodeDescriptors().getBGPLSIDSubTLV() != null) {
+					bgplsID = nodeNLRI.getLocalNodeDescriptors().getBGPLSIDSubTLV().getBGPLS_ID();
 				}
-			}
+				if (nodeNLRI.getLocalNodeDescriptors().getIGPRouterID() != null) {
+					IGP_type = nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getIGP_router_id_type();
+					switch (IGP_type) {
+						case 1: //IIGP_ROUTER_ID_TYPE_IS_IS_NON_PSEUDO
+							IGPIDint = nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getISIS_ISO_NODE_ID();
 
-								//NodeTable.put(IGPID, node_info);
+							node_info.setISISID(IGPIDint);
 
-			simpleTEDB.setNodeTable(NodeTable);
-			if (this.multiTedb != null) {
-				if (node_info.getIpv4Address() != null) {
-					this.multiTedb.addReachabilityIPv4(as_number, node_info.getIpv4Address(), 32);
+						default:
+							log.info("IGP Identifier ");
+					}
 				}
 
+				if (iPv4RouterIDLocalNodeLATLV != null) {
+					//log.debug("........Adding IPv4 of Local Node to Table........");
+					node_info.setIpv4AddressLocalNode(iPv4RouterIDLocalNodeLATLV.getIpv4Address());
+				}
+				if (nodeFlagBitsTLV != null) {
+					//log.debug("Adding flags of Local Node to table...");
+					node_info.setAbr_bit(nodeFlagBitsTLV.isAbr_bit());
+					node_info.setAttached_bit(nodeFlagBitsTLV.isAttached_bit());
+					node_info.setExternal_bit(nodeFlagBitsTLV.isExternal_bit());
+					node_info.setOverload_bit(nodeFlagBitsTLV.isOverload_bit());
+				}
+
+				if (nodeNameTLV != null) {
+					//log.debug("Adding name of Local Node to Table....");
+					node_info.setName(nodeNameTLV.getName());
+				}
+
+				if (areaIDTLV != null) {
+					//log.debug("Adding AreaID of Local node to table....");
+					node_info.setIpv4areaIDs(areaIDTLV.getIpv4areaIDs());
+				}
+
+				if (sidTLV != null) {
+					//log.debug("Adding SID of Local node to table....");
+					node_info.setSID(sidTLV.getSid());
+				}
+
+				//.... finally we set the 'learnt from' Attribute
+				node_info.setLearntFrom(learntFrom);
+				log.info("Value for Setting Learnt from: " + node_info.getLearntFrom());
+
+
+
+				if (NodeTable != null) {
+					if (IGPIDint!=0){
+						if (!NodeTable.containsKey(IGPIDint)) {
+							NodeTable.remove(IGPIDint);
+							NodeTable.put(IGPIDint, node_info);
+						}
+					}
+					else log.info("IGPint==0");
+				}
+
+				//NodeTable.put(IGPID, node_info);
+
+				simpleTEDB.setNodeTable(NodeTable);
+				if (this.multiTedb != null) {
+					if (node_info.getIpv4Address() != null) {
+						this.multiTedb.addReachabilityIPv4(as_number, node_info.getIpv4Address(), 32);
+					}
+
+				}
+				log.info("Node Table:" + NodeTable.toString());
+				log.info("Node Information Table Updated....");
+
+
+				setNodeInfoUpdateTime (as_number, IGPIDint, learntFrom, System.currentTimeMillis());
 			}
-			log.info("Node Table:" + NodeTable.toString());
-			log.info("Node Information Table Updated....");
-
-
-		setNodeInfoUpdateTime (as_number, IGPID, learntFrom, System.currentTimeMillis());
 		}
 	}
+
 	private void clearAttributes(){
 		maximumLinkBandwidthTLV= null;
 		maxReservableBandwidthTLV= null;
@@ -1150,6 +1343,12 @@ if (AsInfo_DB.containsKey(learntFrom))
 		//log.info("..................Added Intra-Domain Link : " +intraDom_linkUpdate   + "   Time of Update:  " + LinkUpdateTime);
 	}
 
+	public void setIntraDomainEdgeUpdateTime(Inet4Address localDomainID, int LocalNodeIGPId, int RemoteNodeIGPId, long LocalIdentifier, long RemoteIdentifier, long LinkUpdateTime) {
+		DomainUpdateTime domain_update = new DomainUpdateTime(DomainUpdate, localDomainID, LinkUpdateTime);
+		IntraDomainLinkUpdateTime intraDom_linkUpdate= new IntraDomainLinkUpdateTime(intraDomainLinkUpdate, localDomainID, LocalNodeIGPId,LocalIdentifier,RemoteNodeIGPId,RemoteIdentifier, LinkUpdateTime);
+		//log.info("Domain ID : " +String.valueOf(localDomainID)  +"DomainTEDS Size:  " +DomainUpdate.size() + "   Time of Update:  " + LinkUpdateTime);
+		//log.info("..................Added Intra-Domain Link : " +intraDom_linkUpdate   + "   Time of Update:  " + LinkUpdateTime);
+	}
 
 
 
@@ -1161,7 +1360,14 @@ if (AsInfo_DB.containsKey(learntFrom))
 		//log.info("..................Added InterDomain Link : " +interDom_linkUpdate.toString()   + "   Time of Update:  " + LinkUpdateTime);
 		
 	}
+	public void setInterDomainEdgeUpdateTime(Inet4Address localDomainID,int LocalNodeIGPId, Long LinkLocalIdentifier, Inet4Address remoteDomainID, int RemoteNodeIGPId, Long LinkRemoteIdentifier, long LinkUpdateTime) {
 
+		DomainUpdateTime domain_update = new DomainUpdateTime(DomainUpdate, localDomainID, LinkUpdateTime);
+		//log.info("Domain Id : " +String.valueOf(localDomainID) +"DomainTEDS Size:  " +DomainUpdate.size()  + "   Time of Update:  " + LinkUpdateTime);
+		InterDomainLinkUpdateTime interDom_linkUpdate= new InterDomainLinkUpdateTime(interDomainLinkUpdate, localDomainID, LocalNodeIGPId,LinkLocalIdentifier,remoteDomainID,RemoteNodeIGPId,LinkRemoteIdentifier, LinkUpdateTime);
+		//log.info("..................Added InterDomain Link : " +interDom_linkUpdate.toString()   + "   Time of Update:  " + LinkUpdateTime);
+
+	}
 	private void SetnodeITinfoUpdate(Inet4Address DomainID, String nodeId, String learntFrom, long UpdateTime) {
 
 		DomainUpdateTime domain_update = new DomainUpdateTime(DomainUpdate, DomainID, UpdateTime);
@@ -1173,6 +1379,16 @@ if (AsInfo_DB.containsKey(learntFrom))
 	}
 
 	public void setNodeInfoUpdateTime(Inet4Address DomainID, Inet4Address localnodeID, String learntFrom, long UpdateTime) throws UnknownHostException {
+
+		DomainUpdateTime domain_update = new DomainUpdateTime(DomainUpdate, DomainID, UpdateTime);
+		//log.info("Domain Id : " +String.valueOf(DomainID) +"DomainTEDS Size:  " +DomainUpdate.size()  + "   Time of Update:  " +UpdateTime);
+		NodeinfoUpdateTime node_updateTime= new NodeinfoUpdateTime(nodeinfoUpdate,DomainID,localnodeID,UpdateTime);
+		//log.info("Node Information Update Time  DomainID:" +DomainID  +" Local node Address: "  +localnodeID);
+		node_updateTime.setlearntfrom(learntFrom);
+		//log.info("..................Added Node Info : " +node_updateTime  +"  Learnt From:" +node_updateTime.getlearntfrom() + "   Time of Update:  " + UpdateTime);
+	}
+
+	public void setNodeInfoUpdateTime(Inet4Address DomainID, int localnodeID, String learntFrom, long UpdateTime) throws UnknownHostException {
 
 		DomainUpdateTime domain_update = new DomainUpdateTime(DomainUpdate, DomainID, UpdateTime);
 		//log.info("Domain Id : " +String.valueOf(DomainID) +"DomainTEDS Size:  " +DomainUpdate.size()  + "   Time of Update:  " +UpdateTime);

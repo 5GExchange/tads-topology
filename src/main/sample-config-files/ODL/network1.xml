@@ -4,7 +4,7 @@
 	<domain>
 		<layer type="transport" ></layer>
 
-		<domain_id>0.0.0.3</domain_id>
+		<domain_id>0.0.0.2</domain_id>
 		<reachability_entry>
 			<ipv4_address>172.16.102.0</ipv4_address>
 			<prefix>24</prefix>
@@ -12,24 +12,19 @@
 
 		<node>
 			<router_id>172.16.102.101</router_id>
-			<sid>10001</sid>
 		</node>
 		<node>
 			<router_id>172.16.102.102</router_id>
-			<sid>10002</sid>
 		</node>
 		<node>
 			<router_id>172.16.102.103</router_id>
-			<sid>10003</sid>
 		</node>
 		<node>
 			<router_id>172.16.102.104</router_id>
-			<sid>10004</sid>
 		</node>
 	
 		<edgeCommon>
 			<maximum_bandwidth>1000</maximum_bandwidth>
-			<unreserved_bandwidth priority="0">1000</unreserved_bandwidth>
 			<default_te_metric>10</default_te_metric>
    			<undir_delay_link>99</undir_delay_link>
  			<undir_min_max_delay>

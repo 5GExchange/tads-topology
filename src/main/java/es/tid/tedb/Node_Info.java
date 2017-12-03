@@ -1,9 +1,9 @@
 package es.tid.tedb;
 
+import es.tid.of.DataPathID;
+
 import java.net.Inet4Address;
 import java.util.LinkedList;
-
-import es.tid.of.DataPathID;
 
 public class Node_Info {
 
@@ -23,6 +23,7 @@ public class Node_Info {
 	private byte[] name;
 	private LinkedList <Inet4Address> ipv4areaIDs = new LinkedList <Inet4Address>();
 	private int sid;
+	private int ISIS_ISO_NODE_ID;
 
 
 
@@ -167,6 +168,14 @@ public class Node_Info {
 	}
 
 	public int getSid(){
+		return ISIS_ISO_NODE_ID;
+	}
+
+	public void setISISID(int sid) {
+		this.ISIS_ISO_NODE_ID = sid;
+	}
+
+	public int getISISid(){
 		return sid;
 	}
 	public String toString(){

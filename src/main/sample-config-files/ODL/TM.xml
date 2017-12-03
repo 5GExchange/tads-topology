@@ -6,7 +6,7 @@
     <XML_Plugin>
         <mode>TM</mode>
     	<XMLFileTopology>target/ODL/network.xml</XMLFileTopology>
-        <Identifier>2.2.2.2</Identifier>>
+        <Identifier>10.10.10.37</Identifier>>
     </XML_Plugin>
      <InitFrom>
         <Init>initFromXML</Init>

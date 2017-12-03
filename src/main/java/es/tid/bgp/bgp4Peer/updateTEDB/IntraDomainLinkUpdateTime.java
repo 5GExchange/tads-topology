@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.Inet4Address;
-import java.net.Inet6Address;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Objects;
@@ -17,6 +16,8 @@ public class IntraDomainLinkUpdateTime {
     Inet4Address localDomainID;
     Inet4Address LocalNodeIGPId;
     Inet4Address RemoteNodeIGPId;
+    int localISISid=0;
+    int remoteISISid=0;
     Long LocalIdentifier;
     Long RemoteIdentifier;
     Long linkUpdateTime;
@@ -65,6 +66,50 @@ public IntraDomainLinkUpdateTime(Inet4Address localDomainID, Inet4Address LocalN
     this.RemoteNodeIGPId=RemoteNodeIGPId;
     this.LocalIdentifier= LocalIdentifier;
     this.RemoteIdentifier=RemoteIdentifier;
+
+}
+
+public IntraDomainLinkUpdateTime(Hashtable<IntraDomainLinkUpdateTime, Long> intraDomainLinkUpdate, Inet4Address localDomainID, int LocalNodeIGPId, Long LocalIdentifier, int RemoteNodeIGPId, Long RemoteIdentifier, long linkUpdateTime){
+
+        this.localDomainID=localDomainID;
+        this.localISISid=LocalNodeIGPId;
+        this.remoteISISid=RemoteNodeIGPId;
+        this.LocalIdentifier= LocalIdentifier;
+        this.RemoteIdentifier=RemoteIdentifier;
+        this.linkUpdateTime=linkUpdateTime;
+        log= LoggerFactory.getLogger("BGP4Peer");
+
+
+        if(intraDomainLinkUpdate.size()==0)
+            intraDomainLinkUpdate.put(new IntraDomainLinkUpdateTime(localDomainID,LocalNodeIGPId,LocalIdentifier,RemoteNodeIGPId ,RemoteIdentifier), linkUpdateTime);
+        else{
+
+            int indicator=0;
+            IntraDomainLinkUpdateTime key;
+            Enumeration link_ID =intraDomainLinkUpdate.keys();
+            while(link_ID.hasMoreElements()) {
+                key = (IntraDomainLinkUpdateTime) link_ID.nextElement();
+                if(key.equals(new IntraDomainLinkUpdateTime(localDomainID,LocalNodeIGPId,LocalIdentifier,RemoteNodeIGPId ,RemoteIdentifier)))
+                {
+                    intraDomainLinkUpdate.remove(key);
+                    intraDomainLinkUpdate.put(new IntraDomainLinkUpdateTime(localDomainID,LocalNodeIGPId,LocalIdentifier,RemoteNodeIGPId,RemoteIdentifier), linkUpdateTime);
+                    log.info("Intra-Domain Link Match Found " +key.toString() +"   with: " +(new IntraDomainLinkUpdateTime(localDomainID,LocalNodeIGPId,LocalIdentifier,RemoteNodeIGPId ,RemoteIdentifier).toString()));
+                    indicator++;
+                    break;
+                }
+            }
+            if(indicator==0)
+                intraDomainLinkUpdate.put(new IntraDomainLinkUpdateTime(localDomainID,LocalNodeIGPId,LocalIdentifier,RemoteNodeIGPId ,RemoteIdentifier), linkUpdateTime);
+        }
+}
+
+public IntraDomainLinkUpdateTime(Inet4Address localDomainID, int LocalNodeIGPId, Long LocalIdentifier, int RemoteNodeIGPId, Long RemoteIdentifier)
+{
+        this.localDomainID=localDomainID;
+        this.localISISid=LocalNodeIGPId;
+        this.remoteISISid=RemoteNodeIGPId;
+        this.LocalIdentifier= LocalIdentifier;
+        this.RemoteIdentifier=RemoteIdentifier;
 
 }
 
