@@ -1272,7 +1272,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 			}
 
 			if(node_info.getLearntFrom()==null || node_info.getLearntFrom().equals(learntFrom)) {
-				//log.info("Existing Learnt From: " + node_info.getLearntFrom() + "  New Learnt From: " + learntFrom);
+				log.info("Existing Learnt From: " + node_info.getLearntFrom() + "  New Learnt From: " + learntFrom);
 
 				if (nodeNLRI.getLocalNodeDescriptors().getAreaID() != null) {
 					areaID = nodeNLRI.getLocalNodeDescriptors().getAreaID().getAREA_ID();
@@ -1288,12 +1288,13 @@ if (AsInfo_DB.containsKey(learntFrom))
 							IGPIDint = nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getISIS_ISO_NODE_ID();
 							node_info.setISISID(IGPIDint);
 							log.info("IGP type case==1 is " + String.valueOf(IGP_type));
+							log.info("The value of node_info is \n"+node_info.toString());
 						}
-						case 2: {//IIGP_ROUTER_ID_TYPE_IS_IS_PSEUDO
-							IGPIDint = nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getISIS_ISO_NODE_ID();
-							node_info.setISISID(IGPIDint);
-							log.info("IGP type case==2 is  " + String.valueOf(IGP_type));
-						}
+						//case 2: {//IIGP_ROUTER_ID_TYPE_IS_IS_PSEUDO
+						//	IGPIDint = nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getISIS_ISO_NODE_ID();
+						//	node_info.setISISID(IGPIDint);
+						//	log.info("IGP type case==2 is  " + String.valueOf(IGP_type));
+						//}
 						//default:
 						//	log.info("IGP Identifier ");
 						//	log.info("IGP type "+ String.valueOf(IGP_type));
