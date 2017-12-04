@@ -528,20 +528,22 @@ if (AsInfo_DB.containsKey(learntFrom))
 				log.debug("PROBLEM: TEDB not Compatible");
 				return;
 			}
-			if (IGP_type == 3) {
-				if(simpleTEDBxx.getNetworkGraph().containsEdge(LocalNodeIGPId, RemoteNodeIGPId)) {
-					intraEdge = simpleTEDBxx.getNetworkGraph().getEdge(LocalNodeIGPId, RemoteNodeIGPId);
-					log.debug("IntraDomain Edge Already Exist in the TEDB");
-				}
-				else {
-						intraEdge = new IntraDomainEdge();
-						log.debug("Graph does not contain IntraDomain Edge");
-				}
-			}
+
 			if (IGP_type == 1) {
 				simpleTEDBxx.setIGPType(1);
 				if(simpleTEDBxx.getNetworkGraph().containsEdge(localISISid, remoteISISid)) {
 					intraEdge = simpleTEDBxx.getNetworkGraph().getEdge(localISISid, remoteISISid);
+					log.debug("IntraDomain Edge Already Exist in the TEDB");
+				}
+				else {
+					intraEdge = new IntraDomainEdge();
+					log.debug("Graph does not contain IntraDomain Edge");
+				}
+			}
+			// (IGP_type == 3)
+			else {
+				if(simpleTEDBxx.getNetworkGraph().containsEdge(LocalNodeIGPId, RemoteNodeIGPId)) {
+					intraEdge = simpleTEDBxx.getNetworkGraph().getEdge(LocalNodeIGPId, RemoteNodeIGPId);
 					log.debug("IntraDomain Edge Already Exist in the TEDB");
 				}
 				else {
@@ -554,127 +556,132 @@ if (AsInfo_DB.containsKey(learntFrom))
 				intraEdge.setSrc_if_id(linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier());
 				intraEdge.setDst_if_id(linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier());
 			}
-			if((intraEdge.getLearntFrom()==null || intraEdge.getLearntFrom().equals(learntFrom)) && (learntFrom!=null)) {
-				log.debug("Existing IntraDomain Edge LearntFrom: " + intraEdge.getLearntFrom() + "  New LearntFrom:  " + learntFrom);
-				te_info = createTE_Info(simpleTEDBxx);
-				intraEdge.setTE_info(te_info);
-				intraEdge.setLearntFrom(learntFrom);
-				if (IGP_type == 3) {
-					setIntraDomainEdgeUpdateTime (localDomainID, LocalNodeIGPId,RemoteNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(),linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(),System.currentTimeMillis());
-				}
-				if (IGP_type == 1) {
-					//setIntraDomainEdgeUpdateTime (localDomainID, localISISid,remoteISISid, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(),linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(),System.currentTimeMillis());
-				}
 
-				//log.info(" After IntraDomian Edge LearntFrom: " +intraEdge.getLearntFrom());
-
-
-
-				/*Adding Local and Remote Nodes to TED*/
-				//OSPF IGP
-				if (IGP_type == 3) {
-					if (!(simpleTEDBxx.getNetworkGraph().containsVertex(LocalNodeIGPId))) {
-					simpleTEDBxx.getNetworkGraph().addVertex(LocalNodeIGPId);//add vertex ya comprueba si existe el nodo en la ted-->se puede hacer mas limpio
-					simpleTEDBxx.notifyNewVertex(LocalNodeIGPId);
-					//log.info("Source Vertex :" +simpleTEDBxx.getNetworkGraph().containsVertex(LocalNodeIGPId) +"is Just Added");
-
+			if (learntFrom!=null) {
+				if(intraEdge.getLearntFrom()==null || intraEdge.getLearntFrom().equals(learntFrom)) {
+					log.debug("Existing IntraDomain Edge LearntFrom: " + intraEdge.getLearntFrom() + "  New LearntFrom:  " + learntFrom);
+					te_info = createTE_Info(simpleTEDBxx);
+					intraEdge.setTE_info(te_info);
+					intraEdge.setLearntFrom(learntFrom);
+					if (IGP_type == 1) {
+						//setIntraDomainEdgeUpdateTime (localDomainID, localISISid,remoteISISid, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(),linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(),System.currentTimeMillis());
 					}
-					//			else{
-					//				log.info("Local Vertex: "+LocalNodeIGPId.toString() +" already present in TED...");
-					//			}
-
-					if (!(simpleTEDBxx.getNetworkGraph().containsVertex(RemoteNodeIGPId))) {
-						//log.info("Not containing dst vertex");
-						simpleTEDBxx.getNetworkGraph().addVertex(RemoteNodeIGPId);
-						simpleTEDBxx.notifyNewVertex(RemoteNodeIGPId);
-						//log.info("Destination Vertex :" +simpleTEDBxx.getNetworkGraph().containsVertex(RemoteNodeIGPId) +"is Just Added");
-
+					//if (IGP_type == 3) {
+					else{
+						setIntraDomainEdgeUpdateTime (localDomainID, LocalNodeIGPId,RemoteNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(),linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(),System.currentTimeMillis());
 					}
-					//			else {
-					//				log.info("Remote Vertex: "+RemoteNodeIGPId.toString() +" already present in TED...");
-					//			}
 
-					if (!(simpleTEDBxx.getNetworkGraph().containsEdge(LocalNodeIGPId, RemoteNodeIGPId))) {
-						log.debug("Graph does not contain intra-edge");
-						//log.info("Adding information of local node to edge..." + simpleTEDBxx.getNodeTable().get(LocalNodeIGPId));
-						intraEdge.setLocal_Node_Info(simpleTEDBxx.getNodeTable().get(LocalNodeIGPId));
-						//log.info("Adding information of remote node to edge..." + simpleTEDBxx.getNodeTable().get(RemoteNodeIGPId));
-						intraEdge.setRemote_Node_Info(simpleTEDBxx.getNodeTable().get(RemoteNodeIGPId));
-						//log.info("Adding Edge from Origin Vertex" + LocalNodeIGPId.toString() + " to Destination Vertex" + RemoteNodeIGPId.toString());
-						simpleTEDBxx.getNetworkGraph().addEdge(LocalNodeIGPId, RemoteNodeIGPId, intraEdge);
-						simpleTEDBxx.notifyNewEdge(LocalNodeIGPId, RemoteNodeIGPId);
-						simpleTEDBxx.getNetworkGraph().getEdge(LocalNodeIGPId, RemoteNodeIGPId).setNumberFibers(1);
-						IntraDomainEdge edge = simpleTEDBxx.getNetworkGraph().getEdge(LocalNodeIGPId, RemoteNodeIGPId);
-						if (intraEdge.getTE_info().getAvailableLabels() != null)
-							((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).initializeReservation(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitMap());
-					} else {
-						log.debug("Graph contains Intra-edge");
-						IntraDomainEdge edge;
-						edge = simpleTEDBxx.getNetworkGraph().getEdge(LocalNodeIGPId, RemoteNodeIGPId);
-						if (this.availableLabels != null) {
-							if (((BitmapLabelSet) this.availableLabels.getLabelSet()).getDwdmWavelengthLabel() != null) {
-								((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).arraycopyBytesBitMap(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitMap());
+					//log.info(" After IntraDomian Edge LearntFrom: " +intraEdge.getLearntFrom());
 
-								if (((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitmapReserved() != null) {
-									((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).arraycopyReservedBytesBitMap(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitmapReserved());
+	
+					//ISIS IGP
+					if (IGP_type == 1) {
+						if (!(simpleTEDBxx.getNetworkGraph().containsVertex(localISISid))) {
+							simpleTEDBxx.getNetworkGraph().addVertex(localISISid);//add vertex ya comprueba si existe el nodo en la ted-->se puede hacer mas limpio
+							simpleTEDBxx.notifyNewVertex(localISISid);
+							//log.info("Source Vertex :" +simpleTEDBxx.getNetworkGraph().containsVertex(LocalNodeIGPId) +"is Just Added");
+
+						}
+						//			else{
+						//				log.info("Local Vertex: "+LocalNodeIGPId.toString() +" already present in TED...");
+						//			}
+
+						if (!(simpleTEDBxx.getNetworkGraph().containsVertex(remoteISISid))) {
+							//log.info("Not containing dst vertex");
+							simpleTEDBxx.getNetworkGraph().addVertex(remoteISISid);
+							simpleTEDBxx.notifyNewVertex(remoteISISid);
+							//log.info("Destination Vertex :" +simpleTEDBxx.getNetworkGraph().containsVertex(remoteISISid) +"is Just Added");
+
+						}
+						//			else {
+						//				log.info("Remote Vertex: "+remoteISISid.toString() +" already present in TED...");
+						//			}
+
+						if (!(simpleTEDBxx.getNetworkGraph().containsEdge(localISISid, remoteISISid))) {
+							log.debug("Graph does not contain intra-edge");
+							//log.info("Adding information of local node to edge..." + simpleTEDBxx.getNodeTable().get(LocalNodeIGPId));
+							intraEdge.setLocal_Node_Info(simpleTEDBxx.getNodeTable().get(localISISid));
+							//log.info("Adding information of remote node to edge..." + simpleTEDBxx.getNodeTable().get(RemoteNodeIGPId));
+							intraEdge.setRemote_Node_Info(simpleTEDBxx.getNodeTable().get(remoteISISid));
+							//log.info("Adding Edge from Origin Vertex" + LocalNodeIGPId.toString() + " to Destination Vertex" + RemoteNodeIGPId.toString());
+							//temporary commented Andrea ISIS
+							// simpleTEDBxx.getNetworkGraph().addEdge(localISISid, remoteISISid, intraEdge);
+							simpleTEDBxx.notifyNewEdge(localISISid, remoteISISid);
+							//simpleTEDBxx.getNetworkGraph().getEdge(localISISid, remoteISISid).setNumberFibers(1);
+							IntraDomainEdge edge = simpleTEDBxx.getNetworkGraph().getEdge(localISISid, remoteISISid);
+							if (intraEdge.getTE_info().getAvailableLabels() != null)
+								((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).initializeReservation(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitMap());
+						} else {
+							log.debug("Graph contains Intra-edge");
+							IntraDomainEdge edge;
+							edge = simpleTEDBxx.getNetworkGraph().getEdge(localISISid, remoteISISid);
+							if (this.availableLabels != null) {
+								if (((BitmapLabelSet) this.availableLabels.getLabelSet()).getDwdmWavelengthLabel() != null) {
+									((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).arraycopyBytesBitMap(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitMap());
+
+									if (((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitmapReserved() != null) {
+										((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).arraycopyReservedBytesBitMap(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitmapReserved());
+									}
 								}
 							}
 						}
 					}
-				}
-				//ISIS IGP
-				if (IGP_type == 1) {
-					if (!(simpleTEDBxx.getNetworkGraph().containsVertex(localISISid))) {
-						simpleTEDBxx.getNetworkGraph().addVertex(localISISid);//add vertex ya comprueba si existe el nodo en la ted-->se puede hacer mas limpio
-						simpleTEDBxx.notifyNewVertex(localISISid);
+					/*Adding Local and Remote Nodes to TED*/
+					//OSPF IGP
+					//if (IGP_type == 3) {
+					else{
+						if (!(simpleTEDBxx.getNetworkGraph().containsVertex(LocalNodeIGPId))) {
+						simpleTEDBxx.getNetworkGraph().addVertex(LocalNodeIGPId);//add vertex ya comprueba si existe el nodo en la ted-->se puede hacer mas limpio
+						simpleTEDBxx.notifyNewVertex(LocalNodeIGPId);
 						//log.info("Source Vertex :" +simpleTEDBxx.getNetworkGraph().containsVertex(LocalNodeIGPId) +"is Just Added");
 
-					}
-					//			else{
-					//				log.info("Local Vertex: "+LocalNodeIGPId.toString() +" already present in TED...");
-					//			}
+						}
+						//			else{
+						//				log.info("Local Vertex: "+LocalNodeIGPId.toString() +" already present in TED...");
+						//			}
 
-					if (!(simpleTEDBxx.getNetworkGraph().containsVertex(remoteISISid))) {
-						//log.info("Not containing dst vertex");
-						simpleTEDBxx.getNetworkGraph().addVertex(remoteISISid);
-						simpleTEDBxx.notifyNewVertex(remoteISISid);
-						//log.info("Destination Vertex :" +simpleTEDBxx.getNetworkGraph().containsVertex(remoteISISid) +"is Just Added");
+						if (!(simpleTEDBxx.getNetworkGraph().containsVertex(RemoteNodeIGPId))) {
+							//log.info("Not containing dst vertex");
+							simpleTEDBxx.getNetworkGraph().addVertex(RemoteNodeIGPId);
+							simpleTEDBxx.notifyNewVertex(RemoteNodeIGPId);
+							//log.info("Destination Vertex :" +simpleTEDBxx.getNetworkGraph().containsVertex(RemoteNodeIGPId) +"is Just Added");
 
-					}
-					//			else {
-					//				log.info("Remote Vertex: "+remoteISISid.toString() +" already present in TED...");
-					//			}
+						}
+						//			else {
+						//				log.info("Remote Vertex: "+RemoteNodeIGPId.toString() +" already present in TED...");
+						//			}
 
-					if (!(simpleTEDBxx.getNetworkGraph().containsEdge(localISISid, remoteISISid))) {
-						log.debug("Graph does not contain intra-edge");
-						//log.info("Adding information of local node to edge..." + simpleTEDBxx.getNodeTable().get(LocalNodeIGPId));
-						intraEdge.setLocal_Node_Info(simpleTEDBxx.getNodeTable().get(localISISid));
-						//log.info("Adding information of remote node to edge..." + simpleTEDBxx.getNodeTable().get(RemoteNodeIGPId));
-						intraEdge.setRemote_Node_Info(simpleTEDBxx.getNodeTable().get(remoteISISid));
-						//log.info("Adding Edge from Origin Vertex" + LocalNodeIGPId.toString() + " to Destination Vertex" + RemoteNodeIGPId.toString());
-						//temporary commented Andrea ISIS
-						// simpleTEDBxx.getNetworkGraph().addEdge(localISISid, remoteISISid, intraEdge);
-						simpleTEDBxx.notifyNewEdge(localISISid, remoteISISid);
-						//simpleTEDBxx.getNetworkGraph().getEdge(localISISid, remoteISISid).setNumberFibers(1);
-						IntraDomainEdge edge = simpleTEDBxx.getNetworkGraph().getEdge(localISISid, remoteISISid);
-						if (intraEdge.getTE_info().getAvailableLabels() != null)
-							((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).initializeReservation(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitMap());
-					} else {
-						log.debug("Graph contains Intra-edge");
-						IntraDomainEdge edge;
-						edge = simpleTEDBxx.getNetworkGraph().getEdge(localISISid, remoteISISid);
-						if (this.availableLabels != null) {
-							if (((BitmapLabelSet) this.availableLabels.getLabelSet()).getDwdmWavelengthLabel() != null) {
-								((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).arraycopyBytesBitMap(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitMap());
+						if (!(simpleTEDBxx.getNetworkGraph().containsEdge(LocalNodeIGPId, RemoteNodeIGPId))) {
+							log.debug("Graph does not contain intra-edge");
+							//log.info("Adding information of local node to edge..." + simpleTEDBxx.getNodeTable().get(LocalNodeIGPId));
+							intraEdge.setLocal_Node_Info(simpleTEDBxx.getNodeTable().get(LocalNodeIGPId));
+							//log.info("Adding information of remote node to edge..." + simpleTEDBxx.getNodeTable().get(RemoteNodeIGPId));
+							intraEdge.setRemote_Node_Info(simpleTEDBxx.getNodeTable().get(RemoteNodeIGPId));
+							//log.info("Adding Edge from Origin Vertex" + LocalNodeIGPId.toString() + " to Destination Vertex" + RemoteNodeIGPId.toString());
+							simpleTEDBxx.getNetworkGraph().addEdge(LocalNodeIGPId, RemoteNodeIGPId, intraEdge);
+							simpleTEDBxx.notifyNewEdge(LocalNodeIGPId, RemoteNodeIGPId);
+							simpleTEDBxx.getNetworkGraph().getEdge(LocalNodeIGPId, RemoteNodeIGPId).setNumberFibers(1);
+							IntraDomainEdge edge = simpleTEDBxx.getNetworkGraph().getEdge(LocalNodeIGPId, RemoteNodeIGPId);
+							if (intraEdge.getTE_info().getAvailableLabels() != null)
+								((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).initializeReservation(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitMap());
+						} else {
+							log.debug("Graph contains Intra-edge");
+							IntraDomainEdge edge;
+							edge = simpleTEDBxx.getNetworkGraph().getEdge(LocalNodeIGPId, RemoteNodeIGPId);
+							if (this.availableLabels != null) {
+								if (((BitmapLabelSet) this.availableLabels.getLabelSet()).getDwdmWavelengthLabel() != null) {
+									((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).arraycopyBytesBitMap(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitMap());
 
-								if (((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitmapReserved() != null) {
-									((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).arraycopyReservedBytesBitMap(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitmapReserved());
+									if (((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitmapReserved() != null) {
+										((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).arraycopyReservedBytesBitMap(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitmapReserved());
+									}
 								}
 							}
 						}
 					}
+
 				}
-			}
+		    }
 			/*
 			Enumeration el3 = intraTEDBs.keys();
 			while (el3.hasMoreElements()) {
