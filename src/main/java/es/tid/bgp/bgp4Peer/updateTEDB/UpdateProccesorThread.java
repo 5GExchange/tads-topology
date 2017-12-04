@@ -1286,13 +1286,15 @@ if (AsInfo_DB.containsKey(learntFrom))
 						case 1: //IIGP_ROUTER_ID_TYPE_IS_IS_NON_PSEUDO
 							IGPIDint = nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getISIS_ISO_NODE_ID();
 							node_info.setISISID(IGPIDint);
+							log.info("IGP type case==1 is "+ String.valueOf(IGP_type));
 						case 2: //IIGP_ROUTER_ID_TYPE_IS_IS_PSEUDO
 							IGPIDint = nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getISIS_ISO_NODE_ID();
 							node_info.setISISID(IGPIDint);
+							log.info("IGP type case==2 is  "+ String.valueOf(IGP_type));
 
-						default:
-							log.info("IGP Identifier ");
-							log.info("IGP type "+ String.valueOf(IGP_type));
+						//default:
+						//	log.info("IGP Identifier ");
+						//	log.info("IGP type "+ String.valueOf(IGP_type));
 					}
 				}
 
@@ -1331,6 +1333,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 
 				if (NodeTable != null) {
 					log.info("IGPidInt="+ String.valueOf(IGPIDint));
+					log.info("The value of node_info is \n"+node_info.toString());
 					if (IGPIDint!=0){
 						if (!NodeTable.containsKey(IGPIDint)) {
 							NodeTable.remove(IGPIDint);
