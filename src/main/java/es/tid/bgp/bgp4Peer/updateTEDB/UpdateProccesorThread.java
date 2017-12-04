@@ -1173,8 +1173,9 @@ if (AsInfo_DB.containsKey(learntFrom))
 					switch (IGP_type) {
 						case 1: //IIGP_ROUTER_ID_TYPE_IS_IS_NON_PSEUDO
 							IGPIDint = nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getISIS_ISO_NODE_ID();
-							node_info.setISISID(IGPIDint);
+							node_info.setISISid(IGPIDint);
 							log.info("IGP ISIS ");
+							break;
 						case 3:
 							IGPID = nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getIpv4AddressOSPF();
 
@@ -1283,21 +1284,17 @@ if (AsInfo_DB.containsKey(learntFrom))
 				if (nodeNLRI.getLocalNodeDescriptors().getIGPRouterID() != null) {
 					IGP_type = nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getIGP_router_id_type();
 					log.info("IGP type = "+ String.valueOf(IGP_type));
-					switch (IGP_type) {
-						case 1: {//IIGP_ROUTER_ID_TYPE_IS_IS_NON_PSEUDO
+					if (IGP_type==1) {
+						//IIGP_ROUTER_ID_TYPE_IS_IS_NON_PSEUDO
 							IGPIDint = nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getISIS_ISO_NODE_ID();
-							node_info.setISISID(IGPIDint);
-							log.info("IGP type case==1 is " + String.valueOf(IGP_type));
+							node_info.setISISid(IGPIDint);
+							//log.info("IGP type case==1 is " + String.valueOf(IGP_type));
 							log.info("The value of node_info is \n"+node_info.toString());
-						}
 						//case 2: {//IIGP_ROUTER_ID_TYPE_IS_IS_PSEUDO
 						//	IGPIDint = nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getISIS_ISO_NODE_ID();
-						//	node_info.setISISID(IGPIDint);
+						//	node_info.setISISid(IGPIDint);
 						//	log.info("IGP type case==2 is  " + String.valueOf(IGP_type));
 						//}
-						//default:
-						//	log.info("IGP Identifier ");
-						//	log.info("IGP type "+ String.valueOf(IGP_type));
 					}
 				}
 

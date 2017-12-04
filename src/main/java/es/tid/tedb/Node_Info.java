@@ -23,7 +23,7 @@ public class Node_Info {
 	private byte[] name;
 	private LinkedList <Inet4Address> ipv4areaIDs = new LinkedList <Inet4Address>();
 	private int sid;
-	private int ISIS_ISO_NODE_ID;
+	private int ISIS_ISO_NODE_ID=0;
 
 
 
@@ -171,13 +171,14 @@ public class Node_Info {
 		return sid;
 	}
 
-	public void setISISID(int sid) {
-		this.ISIS_ISO_NODE_ID = sid;
+	public void setISISid(int id) {
+		this.ISIS_ISO_NODE_ID = id;
 	}
 
 	public int getISISid(){
-		return ISIS_ISO_NODE_ID;
+		return this.ISIS_ISO_NODE_ID;
 	}
+
 	public String toString(){
 		String ret = "";
 
