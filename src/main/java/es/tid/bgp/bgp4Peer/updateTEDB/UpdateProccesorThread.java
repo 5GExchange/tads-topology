@@ -554,7 +554,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 				intraEdge.setSrc_if_id(linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier());
 				intraEdge.setDst_if_id(linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier());
 			}
-			if(intraEdge.getLearntFrom()==null || intraEdge.getLearntFrom().equals(learntFrom)) {
+			if((intraEdge.getLearntFrom()==null || intraEdge.getLearntFrom().equals(learntFrom)) && (learntFrom!=null)) {
 				log.debug("Existing IntraDomain Edge LearntFrom: " + intraEdge.getLearntFrom() + "  New LearntFrom:  " + learntFrom);
 				te_info = createTE_Info(simpleTEDBxx);
 				intraEdge.setTE_info(te_info);
