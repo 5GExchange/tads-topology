@@ -1060,11 +1060,11 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 				availableLabels = te_info.getAvailableLabels();
 			if(te_info.getDefaultTEMetric()!=null){
 				metric = (int) te_info.getDefaultTEMetric().getLinkMetric();
-				log.info("Metric en el metodo sendLinkNLRI es: " + metric);
+				log.debug("Metric en el metodo sendLinkNLRI es: " + metric);
 			}
 			if(te_info.getTrafficEngineeringMetric()!=null){
 				te_metric = (int) te_info.getTrafficEngineeringMetric().getLinkMetric() ;
-				log.info("Metric en el metodo sendLinkNLRI es: " + metric);
+				log.debug("Metric en el metodo sendLinkNLRI es: " + metric);
 			}
 			if(te_info.getMfOTF()!=null){
 				mfOTP =  te_info.getMfOTF();
@@ -1203,7 +1203,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 
 
 		if (linkStateNeeded){
-			log.info("Andrea: link state needed");
+			//log.debug("Link state needed");
 			pathAttributes.add(linkStateAttribute);
 		}
 		//2. NLRI
