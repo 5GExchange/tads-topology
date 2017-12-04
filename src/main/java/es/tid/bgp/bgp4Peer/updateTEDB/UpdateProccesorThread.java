@@ -564,12 +564,12 @@ if (AsInfo_DB.containsKey(learntFrom))
 					intraEdge.setTE_info(te_info);
 					intraEdge.setLearntFrom(learntFrom);
 					if (IGP_type == 1) {
-						if ((localDomainID!=null)&& (localISISid!=0)&&(remoteISISid!=0)&&(linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier()!=0)&&(linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier()!=0))
+						if ((localDomainID!=null)&& (localISISid!=0)&&(remoteISISid!=0)&&(linkNLRI.getLinkIdentifiersTLV()!=null))
 							setIntraDomainEdgeUpdateTime (localDomainID, localISISid,remoteISISid, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(),linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(),System.currentTimeMillis());
 					}
 					//if (IGP_type == 3) {
 					else{
-						if ((localDomainID!=null)&& (LocalNodeIGPId!=null)&&(RemoteNodeIGPId!=null)&&(linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier()!=0)&&(linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier()!=0))
+						if ((localDomainID!=null)&& (LocalNodeIGPId!=null)&&(RemoteNodeIGPId!=null)&&(linkNLRI.getLinkIdentifiersTLV()!=null))
 							setIntraDomainEdgeUpdateTime (localDomainID, LocalNodeIGPId,RemoteNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(),linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(),System.currentTimeMillis());
 					}
 
