@@ -168,7 +168,7 @@ public class Node_Info {
 	}
 
 	public int getSid(){
-		return ISIS_ISO_NODE_ID;
+		return sid;
 	}
 
 	public void setISISID(int sid) {
@@ -176,7 +176,7 @@ public class Node_Info {
 	}
 
 	public int getISISid(){
-		return sid;
+		return ISIS_ISO_NODE_ID;
 	}
 	public String toString(){
 		String ret = "";
