@@ -246,7 +246,7 @@ public class SendTopology implements Runnable {
 			if (node_info!=null){
 				log.info("Sending node: ("+node+")");
 				//Mandamos NodeNLRI
-				BGP4Update update = createMsgUpdateNodeNLRI(node_info);
+				BGP4Update update = createMsgUpdateNodeNLRIISIS(node_info);
 				sendMessage(update);
 			}else {
 				log.info("Node "+node+ " HAS No Node_info in NodeTable");
@@ -598,6 +598,119 @@ public class SendTopology implements Runnable {
 			}
 		
 		}
+	private  BGP4Update createMsgUpdateNodeNLRIISIS(Node_Info node_info){
+		try{
+
+
+			BGP4Update update= new BGP4Update();
+			//Path Attributes
+			ArrayList<PathAttribute> pathAttributes = update.getPathAttributes();
+
+			//Origin
+			OriginAttribute or = new OriginAttribute();
+			or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
+			pathAttributes.add(or);
+			//AS_PATH
+
+			if (send4AS==true) {
+				AS4_Path_Attribute as_path = new AS4_Path_Attribute();
+				AS4_Path_Segment as_path_seg = new AS4_Path_Segment();
+				long[] segs = new long[1];
+				segs[0] = ASnumber;
+				as_path_seg.setSegments(segs);
+				as_path.getAsPathSegments().add(as_path_seg);
+				pathAttributes.add(as_path);
+			}
+			else {
+				AS_Path_Attribute as_path = new AS_Path_Attribute();
+				AS_Path_Segment as_path_seg = new AS_Path_Segment();
+				int[] segs = new int[1];
+				segs[0] = ASnumber;
+				as_path_seg.setSegments(segs);
+				as_path.getAsPathSegments().add(as_path_seg);
+				pathAttributes.add(as_path);
+			}
+
+			//LOCAL PREF Attribute
+			LOCAL_PREF_Attribute as_local_pref = new LOCAL_PREF_Attribute();
+			as_local_pref.setValue(LocalPref);
+			pathAttributes.add(as_local_pref);
+
+			//Node Attribute
+
+			LinkStateAttribute  linkStateAttribute = new LinkStateAttribute();
+			boolean linkStateNeeded=false;
+
+			if (node_info.getSid()!=0){
+				int sid = node_info.getSid();
+				SidLabelNodeAttribTLV sidLabelTLV = new SidLabelNodeAttribTLV();
+				sidLabelTLV.setSid(sid);
+				linkStateAttribute.setSidLabelTLV(sidLabelTLV);
+				linkStateNeeded=true;
+			}
+			//da sistemare
+			if (node_info.getIpv4Address()!=null){
+				Inet4Address ip = node_info.getIpv4Address();
+				IPv4RouterIDLocalNodeNodeAttribTLV ipv4Id = new IPv4RouterIDLocalNodeNodeAttribTLV();
+				ipv4Id.setIpv4Address(ip);
+				linkStateAttribute.setIPv4RouterIDLocalNodeNATLV(ipv4Id);
+				linkStateNeeded=true;
+			}
+			//linkStateAttribute.setNodeNameTLV();
+			NodeNameNodeAttribTLV nna = new NodeNameNodeAttribTLV();
+			//nna.setName();
+
+
+
+
+
+			if (linkStateNeeded){
+				log.debug("Node Attribute added....");
+				pathAttributes.add(linkStateAttribute);
+			}
+
+			//NLRI
+			NodeNLRI nodeNLRI = new NodeNLRI();
+			nodeNLRI.setProtocolID(ProtocolIDCodes.IS_IS_Level2_Protocol_ID);
+			nodeNLRI.setRoutingUniverseIdentifier(identifier);
+			LocalNodeDescriptorsTLV localNodeDescriptors = new LocalNodeDescriptorsTLV();
+
+			//igp router id
+			if(node_info.getISISid()!=0){
+				IGPRouterIDNodeDescriptorSubTLV igpRouterIDLNSubTLV = new IGPRouterIDNodeDescriptorSubTLV();
+				igpRouterIDLNSubTLV.setISIS_ISO_NODE_ID(node_info.getISISid());
+				igpRouterIDLNSubTLV.setIGP_router_id_type(IGPRouterIDNodeDescriptorSubTLV.IGP_ROUTER_ID_TYPE_IS_IS_NON_PSEUDO);
+				localNodeDescriptors.setIGPRouterID(igpRouterIDLNSubTLV);
+
+			}
+
+			//as number
+			if(node_info.getAs_number()!=null){
+				AutonomousSystemNodeDescriptorSubTLV asNodeDescrSubTLV = new AutonomousSystemNodeDescriptorSubTLV();
+				asNodeDescrSubTLV.setAS_ID(node_info.getAs_number());
+				localNodeDescriptors.setAutonomousSystemSubTLV(asNodeDescrSubTLV);
+			}
+			//Complete Dummy TLVs
+			BGPLSIdentifierNodeDescriptorSubTLV bGPLSIDSubTLV =new BGPLSIdentifierNodeDescriptorSubTLV();
+			bGPLSIDSubTLV.setBGPLS_ID(this.localBGPLSIdentifer);
+			localNodeDescriptors.setBGPLSIDSubTLV(bGPLSIDSubTLV);
+			AreaIDNodeDescriptorSubTLV areaID = new AreaIDNodeDescriptorSubTLV();
+			areaID.setAREA_ID(this.localAreaID);
+			//commented for compliance with ODL
+			// localNodeDescriptors.setAreaID(areaID);
+
+			nodeNLRI.setLocalNodeDescriptors(localNodeDescriptors);
+			BGP_LS_MP_Reach_Attribute ra= new BGP_LS_MP_Reach_Attribute();
+			ra.setLsNLRI(nodeNLRI);
+			pathAttributes.add(ra);
+			update.setLearntFrom(node_info.getLearntFrom());
+			return update;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
 
 	/**
 	 * This function create a BGP4 Message with NodeNLRI field
