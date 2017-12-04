@@ -1110,7 +1110,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 		Inet4Address as_number = null;
 		Inet4Address areaID= null ;
 		Inet4Address bgplsID = null;
-		int IGP_type = 0;
+		int IGP_type = 3;
 		Inet4Address IGPID = null;
 		int IGPIDint=0;
 		Node_Info node_info = null;
@@ -1171,13 +1171,18 @@ if (AsInfo_DB.containsKey(learntFrom))
 				if (nodeNLRI.getLocalNodeDescriptors().getIGPRouterID() != null) {
 					IGP_type = nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getIGP_router_id_type();
 					switch (IGP_type) {
+						case 1: //IIGP_ROUTER_ID_TYPE_IS_IS_NON_PSEUDO
+							IGPIDint = nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getISIS_ISO_NODE_ID();
+							node_info.setISISID(IGPIDint);
+							log.info("IGP ISIS ");
 						case 3:
 							IGPID = nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getIpv4AddressOSPF();
 
 							node_info.setIpv4Address(IGPID);
+							log.info("IGP OSPF ");
 							break;
 						default:
-							log.info("IGP Identifier ");
+							log.info("No IS no OSPF ");
 					}
 				}
 
@@ -1215,9 +1220,20 @@ if (AsInfo_DB.containsKey(learntFrom))
 
 
 				if (NodeTable != null) {
-					if (!NodeTable.containsKey(IGPID)) {
-						NodeTable.remove(IGPID);
-						NodeTable.put(IGPID, node_info);
+					if (IGP_type==1){
+						if (IGPIDint!=0){
+							if (!NodeTable.containsKey(IGPIDint)) {
+								NodeTable.remove(IGPIDint);
+								NodeTable.put(IGPIDint, node_info);
+							}
+						}
+					}
+
+					else	{
+						if (!NodeTable.containsKey(IGPID)) {
+							NodeTable.remove(IGPID);
+							NodeTable.put(IGPID, node_info);
+						}
 					}
 				}
 
@@ -1234,11 +1250,15 @@ if (AsInfo_DB.containsKey(learntFrom))
 				log.info("Node Information Table Updated....");
 
 
-			setNodeInfoUpdateTime (as_number, IGPID, learntFrom, System.currentTimeMillis());
+				if (IGP_type==1)
+					setNodeInfoUpdateTime (as_number, IGPIDint, learntFrom, System.currentTimeMillis());
+				else
+					setNodeInfoUpdateTime (as_number, IGPID, learntFrom, System.currentTimeMillis());
 			}
 		}
 		//if ISIS
 		else {
+			log.info("Entrato dove non deve");
 			if(simpleTEDB.getNodeTable().containsKey(nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getISIS_ISO_NODE_ID()))
 			{
 				node_info= simpleTEDB.getNodeTable().get(nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getISIS_ISO_NODE_ID());

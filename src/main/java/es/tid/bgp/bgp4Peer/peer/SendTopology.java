@@ -552,7 +552,7 @@ public class SendTopology implements Runnable {
 
 
 				if (linkStateNeeded){
-					log.info("Node Attribute added....");
+					log.debug("Node Attribute added....");
 					pathAttributes.add(linkStateAttribute);
 				}
 		
