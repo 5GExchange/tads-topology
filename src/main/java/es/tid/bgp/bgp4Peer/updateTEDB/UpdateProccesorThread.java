@@ -655,7 +655,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 						//temporary commented Andrea ISIS
 						// simpleTEDBxx.getNetworkGraph().addEdge(localISISid, remoteISISid, intraEdge);
 						simpleTEDBxx.notifyNewEdge(localISISid, remoteISISid);
-						simpleTEDBxx.getNetworkGraph().getEdge(localISISid, remoteISISid).setNumberFibers(1);
+						//simpleTEDBxx.getNetworkGraph().getEdge(localISISid, remoteISISid).setNumberFibers(1);
 						IntraDomainEdge edge = simpleTEDBxx.getNetworkGraph().getEdge(localISISid, remoteISISid);
 						if (intraEdge.getTE_info().getAvailableLabels() != null)
 							((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).initializeReservation(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitMap());
