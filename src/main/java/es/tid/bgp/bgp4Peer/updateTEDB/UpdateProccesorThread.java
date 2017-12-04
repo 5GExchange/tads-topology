@@ -1258,7 +1258,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 		}
 		//if ISIS
 		else {
-			log.info("Entrato dove non deve");
+			log.info("ISIS IGP");
 			if(simpleTEDB.getNodeTable().containsKey(nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getISIS_ISO_NODE_ID()))
 			{
 				node_info= simpleTEDB.getNodeTable().get(nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getISIS_ISO_NODE_ID());
@@ -1292,6 +1292,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 
 						default:
 							log.info("IGP Identifier ");
+							log.info("IGP type "+ String.valueOf(IGP_type));
 					}
 				}
 
