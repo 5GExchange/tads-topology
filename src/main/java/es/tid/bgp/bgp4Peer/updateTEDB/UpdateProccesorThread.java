@@ -603,7 +603,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 						//log.info("Adding Edge from Origin Vertex" + LocalNodeIGPId.toString() + " to Destination Vertex" + RemoteNodeIGPId.toString());
 						simpleTEDBxx.getNetworkGraph().addEdge(LocalNodeIGPId, RemoteNodeIGPId, intraEdge);
 						simpleTEDBxx.notifyNewEdge(LocalNodeIGPId, RemoteNodeIGPId);
-						simpleTEDBxx.getNetworkGraph().getEdge(LocalNodeIGPId, RemoteNodeIGPId).setNumberFibers(1);
+						//simpleTEDBxx.getNetworkGraph().getEdge(LocalNodeIGPId, RemoteNodeIGPId).setNumberFibers(1);
 						IntraDomainEdge edge = simpleTEDBxx.getNetworkGraph().getEdge(LocalNodeIGPId, RemoteNodeIGPId);
 						if (intraEdge.getTE_info().getAvailableLabels() != null)
 							((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).initializeReservation(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitMap());
