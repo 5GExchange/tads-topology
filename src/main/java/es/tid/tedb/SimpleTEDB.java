@@ -27,7 +27,7 @@ public class SimpleTEDB implements DomainTEDB{
 
 	//private Inet4Address MDPCE;
 	private PCEInfo MDPCE;
-
+	private Integer IGPType=3;
 	ArrayList<Inet4Address> localDomains = new ArrayList<Inet4Address>();
 	ArrayList<Inet4Address> localASs = new ArrayList<Inet4Address>();
 	ArrayList<Inet4Address> NeighDomains = new ArrayList<Inet4Address>();
@@ -844,4 +844,13 @@ public class SimpleTEDB implements DomainTEDB{
 		//log.info("MD-PCE set to: "+String.valueOf(IP));
 		this.NeighASs = list;
 	}
+	public void setIGPType(Integer type) {
+		//log.info("MD-PCE set to: "+String.valueOf(IP));
+		this.IGPType = type;
+	}
+	public Integer getIGPType() {
+		return this.IGPType;
+	}
+
+
 }

@@ -525,6 +525,13 @@ public class MultiLayerTEDB implements DomainTEDB {
 
 
 	}
+	@Override
+	public void setIGPType(Integer type) {
 
-
+	}
+	@Override
+	public Integer getIGPType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

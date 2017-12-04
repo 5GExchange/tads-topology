@@ -539,6 +539,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 				}
 			}
 			if (IGP_type == 1) {
+				simpleTEDBxx.setIGPType(1);
 				if(simpleTEDBxx.getNetworkGraph().containsEdge(localISISid, remoteISISid)) {
 					intraEdge = simpleTEDBxx.getNetworkGraph().getEdge(localISISid, remoteISISid);
 					log.debug("IntraDomain Edge Already Exist in the TEDB");
@@ -562,7 +563,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 					setIntraDomainEdgeUpdateTime (localDomainID, LocalNodeIGPId,RemoteNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(),linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(),System.currentTimeMillis());
 				}
 				if (IGP_type == 1) {
-					setIntraDomainEdgeUpdateTime (localDomainID, localISISid,remoteISISid, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(),linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(),System.currentTimeMillis());
+					//setIntraDomainEdgeUpdateTime (localDomainID, localISISid,remoteISISid, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(),linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(),System.currentTimeMillis());
 				}
 
 				//log.info(" After IntraDomian Edge LearntFrom: " +intraEdge.getLearntFrom());
@@ -651,7 +652,8 @@ if (AsInfo_DB.containsKey(learntFrom))
 						//log.info("Adding information of remote node to edge..." + simpleTEDBxx.getNodeTable().get(RemoteNodeIGPId));
 						intraEdge.setRemote_Node_Info(simpleTEDBxx.getNodeTable().get(remoteISISid));
 						//log.info("Adding Edge from Origin Vertex" + LocalNodeIGPId.toString() + " to Destination Vertex" + RemoteNodeIGPId.toString());
-						simpleTEDBxx.getNetworkGraph().addEdge(localISISid, remoteISISid, intraEdge);
+						//temporary commented Andrea ISIS
+						// simpleTEDBxx.getNetworkGraph().addEdge(localISISid, remoteISISid, intraEdge);
 						simpleTEDBxx.notifyNewEdge(localISISid, remoteISISid);
 						simpleTEDBxx.getNetworkGraph().getEdge(localISISid, remoteISISid).setNumberFibers(1);
 						IntraDomainEdge edge = simpleTEDBxx.getNetworkGraph().getEdge(localISISid, remoteISISid);
@@ -1297,6 +1299,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 				//NodeTable.put(IGPID, node_info);
 
 				simpleTEDB.setNodeTable(NodeTable);
+				simpleTEDB.setIGPType(1);
 				if (this.multiTedb != null) {
 					if (node_info.getIpv4Address() != null) {
 						this.multiTedb.addReachabilityIPv4(as_number, node_info.getIpv4Address(), 32);

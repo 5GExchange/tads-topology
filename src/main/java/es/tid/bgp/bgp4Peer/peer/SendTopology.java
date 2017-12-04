@@ -161,7 +161,12 @@ public class SendTopology implements Runnable {
 							if (ted instanceof DomainTEDB) {
 								sendLinkNLRI(((DomainTEDB) ted).getIntraDomainLinks(), domainID);
 								//log.info(" XXXX ted.getNodeTable():"+ted.getNodeTable());
-								sendNodeNLRI(((DomainTEDB) ted).getIntraDomainLinksvertexSet(), ((DomainTEDB) ted).getNodeTable());
+								if (((DomainTEDB) ted).getIGPType()==1){
+									sendNodeNLRIISIS(((DomainTEDB) ted).getIntraDomainLinksvertexSet(), ((DomainTEDB) ted).getNodeTable());
+								}
+								else{
+									sendNodeNLRI(((DomainTEDB) ted).getIntraDomainLinksvertexSet(), ((DomainTEDB) ted).getNodeTable());
+								}
 								if (((DomainTEDB) ted).getItResources() != null) {
 									sendITNodeNLRI(domainID, ((DomainTEDB) ted).getItResources());
 								}
@@ -194,25 +199,21 @@ public class SendTopology implements Runnable {
 	private void sendNodeNLRI(Set<Object> vertexSet, Hashtable<Object , Node_Info> NodeTable){
 		Iterator<Object> vertexIt = vertexSet.iterator();	
 		//Enviamos primero los nodos. Un Node NLRI por cada nodo.
-		while (vertexIt.hasNext()){		
+		while (vertexIt.hasNext()){
 			Inet4Address node=null;
 			Object v = vertexIt.next();
 			if( v instanceof es.tid.tedb.elements.Node){
 				try {
-					node = (Inet4Address)Inet4Address.getByName(((es.tid.tedb.elements.Node)v).getAddress().get(0));
+				node = (Inet4Address)Inet4Address.getByName(((es.tid.tedb.elements.Node)v).getAddress().get(0));
 				} catch (UnknownHostException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+
 			}else{
 				 node = (Inet4Address)v;
 			}
-				
-			
-			//log.info(" XXXX node: "+ node);
 			Node_Info node_info = NodeTable.get(node);
-			//log.info(" XXXX node_info: "+ node_info);
 			if (node_info!=null){
 				log.info("Sending node: ("+node+")");
 				//Mandamos NodeNLRI
@@ -224,7 +225,36 @@ public class SendTopology implements Runnable {
 
 		}
 	}
-	
+
+	private void sendNodeNLRIISIS(Set<Object> vertexSet, Hashtable<Object , Node_Info> NodeTable){
+		Iterator<Object> vertexIt = vertexSet.iterator();
+		//Enviamos primero los nodos. Un Node NLRI por cada nodo.
+		while (vertexIt.hasNext()){
+			Integer node=0;
+			Object v = vertexIt.next();
+			if( v instanceof es.tid.tedb.elements.Node){
+				node= Integer.valueOf(((es.tid.tedb.elements.Node)v).getAddress().get(0));
+
+			}else{
+				node = (Integer)v;
+			}
+
+
+			//log.info(" XXXX node: "+ node);
+			Node_Info node_info = NodeTable.get(node);
+			//log.info(" XXXX node_info: "+ node_info);
+			if (node_info!=null){
+				log.info("Sending node: ("+node+")");
+				//Mandamos NodeNLRI
+				BGP4Update update = createMsgUpdateNodeNLRI(node_info);
+				sendMessage(update);
+			}else {
+				log.info("Node "+node+ " HAS No Node_info in NodeTable");
+			}
+
+		}
+	}
+
 	/**
 	 * This function sends a BGP4 update message (encoded in a ITNodeNLRI) for each node in the set 
 	 * @param vertexIt

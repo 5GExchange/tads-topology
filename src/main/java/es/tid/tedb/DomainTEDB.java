@@ -14,7 +14,7 @@ import java.util.Set;
 public interface DomainTEDB extends TEDB {
 	
 	public Inet4Address getDomainID();
-	 
+	public Integer IGPType=3;
 	
 	public boolean belongsToDomain(Object addr);
 
@@ -88,6 +88,8 @@ public interface DomainTEDB extends TEDB {
 
 	public void setPCEScope(PCEv4ScopeTLV pcescope);
 	public PCEv4ScopeTLV getPCEscope();
+	public void setIGPType(Integer type);
+	public Integer getIGPType();
 
 }
 
