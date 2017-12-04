@@ -1272,7 +1272,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 			}
 
 			if(node_info.getLearntFrom()==null || node_info.getLearntFrom().equals(learntFrom)) {
-				log.info("Existing Learnt From: " + node_info.getLearntFrom() + "  New Learnt From: " + learntFrom);
+				//log.info("Existing Learnt From: " + node_info.getLearntFrom() + "  New Learnt From: " + learntFrom);
 
 				if (nodeNLRI.getLocalNodeDescriptors().getAreaID() != null) {
 					areaID = nodeNLRI.getLocalNodeDescriptors().getAreaID().getAREA_ID();
@@ -1285,7 +1285,9 @@ if (AsInfo_DB.containsKey(learntFrom))
 					switch (IGP_type) {
 						case 1: //IIGP_ROUTER_ID_TYPE_IS_IS_NON_PSEUDO
 							IGPIDint = nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getISIS_ISO_NODE_ID();
-
+							node_info.setISISID(IGPIDint);
+						case 2: //IIGP_ROUTER_ID_TYPE_IS_IS_PSEUDO
+							IGPIDint = nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getISIS_ISO_NODE_ID();
 							node_info.setISISID(IGPIDint);
 
 						default:
@@ -1322,11 +1324,12 @@ if (AsInfo_DB.containsKey(learntFrom))
 
 				//.... finally we set the 'learnt from' Attribute
 				node_info.setLearntFrom(learntFrom);
-				log.info("Value for Setting Learnt from: " + node_info.getLearntFrom());
+				//log.info("Value for Setting Learnt from: " + node_info.getLearntFrom());
 
 
 
 				if (NodeTable != null) {
+					log.info("IGPidInt="+ String.valueOf(IGPIDint));
 					if (IGPIDint!=0){
 						if (!NodeTable.containsKey(IGPIDint)) {
 							NodeTable.remove(IGPIDint);
