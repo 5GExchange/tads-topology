@@ -659,28 +659,34 @@ if (AsInfo_DB.containsKey(learntFrom))
 						//			}
 
 						if (!(simpleTEDBxx.getNetworkGraph().containsEdge(LocalNodeIGPId, RemoteNodeIGPId))) {
-							log.debug("Graph does not contain intra-edge");
-							//log.info("Adding information of local node to edge..." + simpleTEDBxx.getNodeTable().get(LocalNodeIGPId));
-							intraEdge.setLocal_Node_Info(simpleTEDBxx.getNodeTable().get(LocalNodeIGPId));
-							//log.info("Adding information of remote node to edge..." + simpleTEDBxx.getNodeTable().get(RemoteNodeIGPId));
-							intraEdge.setRemote_Node_Info(simpleTEDBxx.getNodeTable().get(RemoteNodeIGPId));
-							//log.info("Adding Edge from Origin Vertex" + LocalNodeIGPId.toString() + " to Destination Vertex" + RemoteNodeIGPId.toString());
-							simpleTEDBxx.getNetworkGraph().addEdge(LocalNodeIGPId, RemoteNodeIGPId, intraEdge);
-							simpleTEDBxx.notifyNewEdge(LocalNodeIGPId, RemoteNodeIGPId);
-							simpleTEDBxx.getNetworkGraph().getEdge(LocalNodeIGPId, RemoteNodeIGPId).setNumberFibers(1);
-							IntraDomainEdge edge = simpleTEDBxx.getNetworkGraph().getEdge(LocalNodeIGPId, RemoteNodeIGPId);
-							if (intraEdge.getTE_info().getAvailableLabels() != null)
-								((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).initializeReservation(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitMap());
+							if ((LocalNodeIGPId!=null)&&(RemoteNodeIGPId!=null)){
+								log.debug("Graph does not contain intra-edge");
+
+								//log.info("Adding information of local node to edge..." + simpleTEDBxx.getNodeTable().get(LocalNodeIGPId));
+								intraEdge.setLocal_Node_Info(simpleTEDBxx.getNodeTable().get(LocalNodeIGPId));
+								//log.info("Adding information of remote node to edge..." + simpleTEDBxx.getNodeTable().get(RemoteNodeIGPId));
+
+								intraEdge.setRemote_Node_Info(simpleTEDBxx.getNodeTable().get(RemoteNodeIGPId));
+								//log.info("Adding Edge from Origin Vertex" + LocalNodeIGPId.toString() + " to Destination Vertex" + RemoteNodeIGPId.toString());
+								simpleTEDBxx.getNetworkGraph().addEdge(LocalNodeIGPId, RemoteNodeIGPId, intraEdge);
+								simpleTEDBxx.notifyNewEdge(LocalNodeIGPId, RemoteNodeIGPId);
+								simpleTEDBxx.getNetworkGraph().getEdge(LocalNodeIGPId, RemoteNodeIGPId).setNumberFibers(1);
+								IntraDomainEdge edge = simpleTEDBxx.getNetworkGraph().getEdge(LocalNodeIGPId, RemoteNodeIGPId);
+								if (intraEdge.getTE_info().getAvailableLabels() != null)
+									((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).initializeReservation(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitMap());
+							}
 						} else {
 							log.debug("Graph contains Intra-edge");
 							IntraDomainEdge edge;
-							edge = simpleTEDBxx.getNetworkGraph().getEdge(LocalNodeIGPId, RemoteNodeIGPId);
-							if (this.availableLabels != null) {
-								if (((BitmapLabelSet) this.availableLabels.getLabelSet()).getDwdmWavelengthLabel() != null) {
-									((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).arraycopyBytesBitMap(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitMap());
+							if ((LocalNodeIGPId!=null)&&(RemoteNodeIGPId!=null)){
+								edge = simpleTEDBxx.getNetworkGraph().getEdge(LocalNodeIGPId, RemoteNodeIGPId);
+								if (this.availableLabels != null) {
+									if (((BitmapLabelSet) this.availableLabels.getLabelSet()).getDwdmWavelengthLabel() != null) {
+										((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).arraycopyBytesBitMap(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitMap());
 
-									if (((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitmapReserved() != null) {
-										((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).arraycopyReservedBytesBitMap(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitmapReserved());
+										if (((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitmapReserved() != null) {
+											((BitmapLabelSet) edge.getTE_info().getAvailableLabels().getLabelSet()).arraycopyReservedBytesBitMap(((BitmapLabelSet) intraEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitmapReserved());
+										}
 									}
 								}
 							}
