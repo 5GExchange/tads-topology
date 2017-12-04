@@ -193,6 +193,8 @@ public class Node_Info {
 			ret = ret +"Local Node IP Address: " + this.getIpv4AddressLocalNode() + "\t";
 		if(sid!=0)
 			ret = ret + "SID:" + this.getSid() +"\t";
+		if(ISIS_ISO_NODE_ID!=0)
+			ret = ret + "IS-IS id:" + this.getISISid() +"\t";
 
 		return ret;
 
