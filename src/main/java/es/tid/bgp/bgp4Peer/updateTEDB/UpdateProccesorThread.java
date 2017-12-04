@@ -633,9 +633,12 @@ if (AsInfo_DB.containsKey(learntFrom))
 					//if (IGP_type == 3) {
 					else{
 						if (!(simpleTEDBxx.getNetworkGraph().containsVertex(LocalNodeIGPId))) {
-						simpleTEDBxx.getNetworkGraph().addVertex(LocalNodeIGPId);//add vertex ya comprueba si existe el nodo en la ted-->se puede hacer mas limpio
-						simpleTEDBxx.notifyNewVertex(LocalNodeIGPId);
-						//log.info("Source Vertex :" +simpleTEDBxx.getNetworkGraph().containsVertex(LocalNodeIGPId) +"is Just Added");
+
+							if (LocalNodeIGPId!=null){
+								simpleTEDBxx.getNetworkGraph().addVertex(LocalNodeIGPId);//add vertex ya comprueba si existe el nodo en la ted-->se puede hacer mas limpio
+							    simpleTEDBxx.notifyNewVertex(LocalNodeIGPId);
+							    //log.info("Source Vertex :" +simpleTEDBxx.getNetworkGraph().containsVertex(LocalNodeIGPId) +"is Just Added");
+							}
 
 						}
 						//			else{
@@ -644,9 +647,11 @@ if (AsInfo_DB.containsKey(learntFrom))
 
 						if (!(simpleTEDBxx.getNetworkGraph().containsVertex(RemoteNodeIGPId))) {
 							//log.info("Not containing dst vertex");
-							simpleTEDBxx.getNetworkGraph().addVertex(RemoteNodeIGPId);
-							simpleTEDBxx.notifyNewVertex(RemoteNodeIGPId);
-							//log.info("Destination Vertex :" +simpleTEDBxx.getNetworkGraph().containsVertex(RemoteNodeIGPId) +"is Just Added");
+							if (RemoteNodeIGPId!=null) {
+								simpleTEDBxx.getNetworkGraph().addVertex(RemoteNodeIGPId);
+								simpleTEDBxx.notifyNewVertex(RemoteNodeIGPId);
+								//log.info("Destination Vertex :" +simpleTEDBxx.getNetworkGraph().containsVertex(RemoteNodeIGPId) +"is Just Added");
+							}
 
 						}
 						//			else {
