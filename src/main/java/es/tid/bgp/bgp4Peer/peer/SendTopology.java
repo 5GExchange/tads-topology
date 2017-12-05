@@ -159,9 +159,13 @@ public class SendTopology implements Runnable {
 
 							TEDB ted = intraTEDBs.get(domainID);
 							if (ted instanceof DomainTEDB) {
-								sendLinkNLRI(((DomainTEDB) ted).getIntraDomainLinks(), domainID);
-								//log.info(" XXXX ted.getNodeTable():"+ted.getNodeTable());
-								if (((DomainTEDB) ted).getIGPType()==1){
+								if ((((DomainTEDB) ted).getIGPType()==1)||(((DomainTEDB) ted).getIGPType()==2)) {
+									sendLinkNLRIISIS(((DomainTEDB) ted).getIntraDomainLinks(), domainID);
+								}
+								else {
+									sendLinkNLRI(((DomainTEDB) ted).getIntraDomainLinks(), domainID);
+								}//log.info(" XXXX ted.getNodeTable():"+ted.getNodeTable());
+								if ((((DomainTEDB) ted).getIGPType()==1)||(((DomainTEDB) ted).getIGPType()==2)){
 									sendNodeNLRIISIS(((DomainTEDB) ted).getIntraDomainLinksvertexSet(), ((DomainTEDB) ted).getNodeTable());
 								}
 								else{
@@ -311,6 +315,11 @@ public class SendTopology implements Runnable {
 //		}
 	}
 
+
+
+
+
+
 	/**
 	 * This function sends a BGP4 update message (encoded in a LinkNLRI) for each link in the list
 	 * @param interdomainLinks
@@ -422,6 +431,82 @@ public class SendTopology implements Runnable {
 		}
 
 	}
+
+	/**
+	 * This function sends a BGP4 update message (encoded in a LinkNLRI) for each link in the set
+	 * @param edgeIt
+	 */
+	private void sendLinkNLRIISIS(Set<IntraDomainEdge> edgeSet, String domainID){
+		int lanID = 1; ///INVENTADOO
+		ArrayList<Integer> addressList = new ArrayList<Integer>();
+		Iterator<IntraDomainEdge> edgeIt = edgeSet.iterator();
+		while (edgeIt.hasNext()){
+
+			IntraDomainEdge edge = edgeIt.next();
+			int source=0;
+			/*
+						Object v = vertexIt.next();
+			if( v instanceof es.tid.tedb.elements.Node){
+				node= Integer.valueOf(((es.tid.tedb.elements.Node)v).getAddress().get(0));
+
+			}else{
+				node = (Integer)v;
+			}
+
+			 */
+			if(edge.getSource() instanceof  es.tid.tedb.elements.Node){
+
+					source=Integer.valueOf(((es.tid.tedb.elements.Node)edge.getSource()).getAddress().get(0));
+
+			}else{
+				source = (Integer)edge.getSource();
+			}
+
+			int dst=0;
+			if(edge.getTarget() instanceof  es.tid.tedb.elements.Node){
+				dst=Integer.valueOf(((es.tid.tedb.elements.Node)edge.getTarget()).getAddress().get(0));
+
+			}else{
+				dst = (Integer)edge.getTarget();
+			}
+			log.info("Sending: ("+String.valueOf(source) +","+String.valueOf(dst)+")");
+			addressList = new ArrayList<Integer>();
+			addressList.add(0,source);
+			addressList.add(1,dst);
+			//Link Local Remote Identifiers
+			ArrayList<Long> localRemoteIfList =null;
+			localRemoteIfList= new ArrayList<Long> ();
+			localRemoteIfList.add(0,((IntraDomainEdge) edge).getSrc_if_id());//te_info.getLinkLocalRemoteIdentifiers().getLinkLocalIdentifier());
+			localRemoteIfList.add(1,((IntraDomainEdge) edge).getDst_if_id());//te_info.getLinkLocalRemoteIdentifiers().getLinkRemoteIdentifier());
+
+			//MPLS
+			float maximumBandwidth = 0;
+			float[] unreservedBandwidth = null;
+			float maximumReservableBandwidth = 0;
+			int undirLinkDelay = 0;
+			int metric = 0;
+			long te_metric =0;
+
+			//GMPLS
+			AvailableLabels availableLabels = null;
+			MF_OTPAttribTLV mfOTP = null;
+
+
+			TE_Information te_info = ((IntraDomainEdge) edge).getTE_info();
+			Inet4Address local=((IntraDomainEdge) edge).getLocalInterfaceIPv4();
+			Inet4Address neighbor=((IntraDomainEdge) edge).getNeighborIPv4();
+
+			ArrayList<String> domainList = new ArrayList<String>(2);
+			domainList.add(domainID);
+			domainList.add(domainID);
+			BGP4Update update = createMsgUpdateLinkNLRIISIS(addressList,localRemoteIfList, lanID, domainList, true, te_info, edge.getLearntFrom(), local, neighbor);
+			update.setLearntFrom(edge.getLearntFrom());
+			sendMessage(update);
+
+		}
+
+	}
+
 	/**
 	 * Function to send a BGP4 update message to the connected peers. 
 	 * @param update
@@ -1444,6 +1529,367 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 
 		return update;
 	}
+
+	private BGP4Update createMsgUpdateLinkNLRIISIS(ArrayList<Integer> addressList, ArrayList<Long> localRemoteIfList, int lanID, ArrayList<String> domainList, boolean intradomain, TE_Information te_info, String learntFrom, Inet4Address local, Inet4Address neighbor){
+		BGP4Update update= new BGP4Update();
+		//1. Path Attributes
+		ArrayList<PathAttribute> pathAttributes = update.getPathAttributes();
+		//1.1. Origin
+		OriginAttribute or = new OriginAttribute();
+		if (intradomain)
+			or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
+		else
+			or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_EGP);
+		pathAttributes.add(or);
+		///Andrea
+		//update.setLearntFrom("192.168.0.1");
+		//1.2. AS-PATH
+
+/*
+if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
+{
+	log.info("AsInfo Key: " + learntFrom);
+	for(AsInfo As : multiDomainTEDB.getAsInfo_DB().get(learntFrom))
+		log.info("SegmentType: " + As.getType() + "SegmentNumber" + As.getsegmentNumbers() + "SegmentValue " + As.getsegmentValue());
+}
+*/
+
+		if (send4AS==true) {
+
+			AS4_Path_Attribute as_path = new AS4_Path_Attribute();
+			AS4_Path_Segment as_path_seg = new AS4_Path_Segment();
+			long[] segs = new long[1];
+			segs[0] = ASnumber;
+			as_path_seg.setSegments(segs);
+			as_path.getAsPathSegments().add(as_path_seg);
+			pathAttributes.add(as_path);
+			//log.info("Learnt From: " +learntFrom   +  " SegmentValue: " + String.valueOf(as_path_seg.getSegments()));
+		}
+		else {
+			AS_Path_Attribute as_path = new AS_Path_Attribute();
+			AS_Path_Segment as_path_seg = new AS_Path_Segment();
+			int[] segs = new int[1];
+			segs[0] = ASnumber;
+			as_path_seg.setSegments(segs);
+			as_path.getAsPathSegments().add(as_path_seg);
+			pathAttributes.add(as_path);
+			//log.info("Learnt From: " +learntFrom   +  " SegmentValue: " + String.valueOf(as_path_seg.getSegments()));
+
+		}
+
+		//LOCAL PREF Attribute
+		LOCAL_PREF_Attribute as_local_pref = new LOCAL_PREF_Attribute();
+		as_local_pref.setValue(LocalPref);
+		pathAttributes.add(as_local_pref);
+		//1.2. LINK-STATE
+		//MPLS
+		float maximumBandwidth = 0;
+		float[] unreservedBandwidth = null;
+		float maximumReservableBandwidth = 0;
+
+		//GMPLS
+		AvailableLabels availableLabels = null;
+		MF_OTPAttribTLV mfOTP = null;
+
+		int metric = 0;
+		int te_metric = 0;
+
+
+		if (te_info != null){
+			if (te_info.getLinkLocalRemoteIdentifiers() != null){
+
+			}
+			//MPLS
+			if (te_info.getMaximumBandwidth() != null) {
+				maximumBandwidth = te_info.getMaximumBandwidth().getMaximumBandwidth();
+			}
+			if (te_info.getUnreservedBandwidth() != null)
+				unreservedBandwidth = te_info.getUnreservedBandwidth().getUnreservedBandwidth();
+			if (te_info.getMaximumReservableBandwidth() != null)
+				maximumReservableBandwidth = te_info.getMaximumReservableBandwidth().getMaximumReservableBandwidth();
+			//GMPLS
+			if (te_info.getAvailableLabels() != null)
+				availableLabels = te_info.getAvailableLabels();
+			if(te_info.getDefaultTEMetric()!=null){
+				metric = (int) te_info.getDefaultTEMetric().getLinkMetric();
+				log.debug("Metric en el metodo sendLinkNLRI es: " + metric);
+			}
+			if(te_info.getTrafficEngineeringMetric()!=null){
+				te_metric = (int) te_info.getTrafficEngineeringMetric().getLinkMetric() ;
+				log.debug("Metric en el metodo sendLinkNLRI es: " + metric);
+			}
+			if(te_info.getMfOTF()!=null){
+				mfOTP =  te_info.getMfOTF();
+			}
+
+		}else{
+			log.info("TE_Info is Null");
+		}
+
+
+		boolean linkStateNeeded = false;
+		LinkStateAttribute  linkStateAttribute = new LinkStateAttribute();
+		//1.2.1. MaxReservableBandwidth
+		if (maximumReservableBandwidth != 0){
+			MaxReservableBandwidthLinkAttribTLV maxReservableBandwidthTLV = new MaxReservableBandwidthLinkAttribTLV();
+			maxReservableBandwidthTLV.setMaximumReservableBandwidth(maximumReservableBandwidth);
+			linkStateAttribute.setMaxReservableBandwidthTLV(maxReservableBandwidthTLV);
+			linkStateNeeded=true;
+		}
+		//1.2.2. maxBandwidth
+		if (maximumBandwidth != 0){
+			MaximumLinkBandwidthLinkAttribTLV maximumLinkBandwidthTLV = new MaximumLinkBandwidthLinkAttribTLV();
+			maximumLinkBandwidthTLV.setMaximumBandwidth(maximumBandwidth);
+			linkStateAttribute.setMaximumLinkBandwidthTLV(maximumLinkBandwidthTLV);
+			linkStateNeeded=true;
+		}
+		//1.2.3. unreservedBandwidth
+		if (unreservedBandwidth != null){
+			UnreservedBandwidthLinkAttribTLV unreservedBandwidthTLV = new UnreservedBandwidthLinkAttribTLV();
+			unreservedBandwidthTLV.setUnreservedBandwidth(unreservedBandwidth);
+			linkStateAttribute.setUnreservedBandwidthTLV(unreservedBandwidthTLV);
+			linkStateNeeded=true;
+		}
+		//1.2.4. AvailableLabels
+		if (availableLabels != null){
+			log.info("Available labels fields: "+availableLabels.getLabelSet().getNumLabels());
+			AvailableLabels al = new AvailableLabels();
+
+			BitmapLabelSet bl = new BitmapLabelSet();
+			bl.setBytesBitmap(((BitmapLabelSet)availableLabels.getLabelSet()).getBytesBitMap());
+			bl.setNumLabels(availableLabels.getLabelSet().getNumLabels());
+			bl.setDwdmWavelengthLabel(((BitmapLabelSet)availableLabels.getLabelSet()).getDwdmWavelengthLabel());
+
+			bl.setBytesBitmapReserved(((BitmapLabelSet)availableLabels.getLabelSet()).getBytesBitmapReserved());
+
+			al.setLabelSet(bl);
+
+			log.debug("Campo BytesBitmap: "+Integer.toHexString(((int)bl.getBytesBitMap()[0])&0xFF));
+			log.debug("Campo DwdmWavelengthLabel: "+bl.getDwdmWavelengthLabel());
+			if (bl.getBytesBitmapReserved()!=null){
+				log.debug("Campo BytesBitmapReserved: "+bl.getBytesBitmapReserved()[0]);
+			}
+			linkStateAttribute.setAvailableLabels(al);
+
+			linkStateNeeded=true;
+		}
+
+		//1.2.5 metric
+//		if (metric != 0){
+//			DefaultTEMetricLinkAttribTLV defaultMetric = new DefaultTEMetricLinkAttribTLV();
+//			defaultMetric.setLinkMetric(metric);
+//			log.info("Metric en el metodo createMsgUpdateLinkNLRI es: " + metric);
+//			linkStateAttribute.setTEMetricTLV(defaultMetric);
+//			linkStateNeeded=true;
+//		}
+
+		if (te_metric != 0){
+			DefaultTEMetricLinkAttribTLV defaultMetric = new DefaultTEMetricLinkAttribTLV();
+			//defaultMetric.setLinkMetric(metric);
+			defaultMetric.setLinkMetric(te_metric);
+			log.debug("Metric en el metodo createMsgUpdateLinkNLRI es: " + te_metric);
+			linkStateAttribute.setTEMetricTLV(defaultMetric);
+			linkStateNeeded=true;
+		}
+
+		//1.2.6 MF_OPT
+		if (mfOTP != null){
+			MF_OTPAttribTLV mfOTPTLV = mfOTP.duplicate();
+			log.debug("SENDING MFOTP OSCAR");
+			linkStateAttribute.setMF_OTPAttribTLV(mfOTPTLV);
+			linkStateNeeded=true;
+		}
+
+
+		//new TE metrics
+		//2.2.3 LinkDelay
+		if (te_info != null){
+			if(te_info.getUndirLinkDelay() != null){
+				int undirLinkDelay = te_info.getUndirLinkDelay().getDelay();
+				UndirectionalLinkDelayDescriptorSubTLV uSTLV =new UndirectionalLinkDelayDescriptorSubTLV();
+				uSTLV.setDelay(undirLinkDelay);
+				linkStateAttribute.setUndirectionalLinkDelayTLV(uSTLV);
+			}
+			if(te_info.getUndirDelayVar() != null){
+				int undirDelayVar = te_info.getUndirDelayVar().getDelayVar();
+				UndirectionalDelayVariationDescriptorSubTLV uSTLV =new UndirectionalDelayVariationDescriptorSubTLV();
+				uSTLV.setDelayVar(undirDelayVar);
+				linkStateAttribute.setUndirectionalDelayVariationTLV(uSTLV);
+			}
+			if(te_info.getMinMaxUndirLinkDelay() != null){
+				int minDelay = te_info.getMinMaxUndirLinkDelay().getLowDelay();
+				int maxDelay = te_info.getMinMaxUndirLinkDelay().getHighDelay();
+				MinMaxUndirectionalLinkDelayDescriptorSubTLV uSTLV =new MinMaxUndirectionalLinkDelayDescriptorSubTLV();
+				uSTLV.setHighDelay(maxDelay);
+				uSTLV.setLowDelay(minDelay);
+				linkStateAttribute.setMinMaxUndirectionalLinkDelayTLV(uSTLV);
+			}
+			if(te_info.getUndirLinkLoss() != null){
+				int linkLoss = te_info.getUndirLinkLoss().getLinkLoss();
+				UndirectionalLinkLossDescriptorSubTLV uSTLV =new UndirectionalLinkLossDescriptorSubTLV();
+				uSTLV.setLinkLoss(linkLoss);
+				linkStateAttribute.setUndirectionalLinkLossTLV(uSTLV);
+			}
+			if(te_info.getUndirResidualBw() != null){
+				float resBw = te_info.getUndirResidualBw().getResidualBw();
+				UndirectionalResidualBandwidthDescriptorSubTLV uSTLV =new UndirectionalResidualBandwidthDescriptorSubTLV();
+				uSTLV.setResidualBw(resBw);
+				linkStateAttribute.setUndirectionalResidualBwTLV(uSTLV);
+			}
+			if(te_info.getUndirAvailableBw() != null){
+				float availableBw = te_info.getUndirAvailableBw().getAvailableBw();
+				UndirectionalAvailableBandwidthDescriptorSubTLV uSTLV =new UndirectionalAvailableBandwidthDescriptorSubTLV();
+				uSTLV.setAvailableBw(availableBw);
+				linkStateAttribute.setUndirectionalAvailableBwTLV(uSTLV);
+			}
+			if(te_info.getUndirUtilizedBw() != null){
+				float utilizedBw = te_info.getUndirUtilizedBw().getUtilizedBw();
+				UndirectionalUtilizedBandwidthDescriptorSubTLV uSTLV =new UndirectionalUtilizedBandwidthDescriptorSubTLV();
+				uSTLV.setUtilizedBw(utilizedBw);
+				linkStateAttribute.setUndirectionalUtilizedBwTLV(uSTLV);
+			}
+
+		}
+
+
+
+
+		if (linkStateNeeded){
+			//log.debug("Link state needed");
+			pathAttributes.add(linkStateAttribute);
+		}
+		//2. NLRI
+		LinkNLRI linkNLRI = new LinkNLRI();
+		linkNLRI.setProtocolID(ProtocolIDCodes.Static_Protocol_ID);
+		linkNLRI.setIdentifier(layer);
+
+		//2.1. Local Y Remote Descriptors
+		LocalNodeDescriptorsTLV localNodeDescriptors = new LocalNodeDescriptorsTLV();
+		RemoteNodeDescriptorsTLV remoteNodeDescriptors = new RemoteNodeDescriptorsTLV();
+
+		//2.1.1. IPv4
+		IGPRouterIDNodeDescriptorSubTLV igpRouterIDLNSubTLV = new IGPRouterIDNodeDescriptorSubTLV();
+		//igpRouterIDLNSubTLV.setIpv4AddressOSPF(addressList.get(0));
+		igpRouterIDLNSubTLV.setISIS_ISO_NODE_ID(addressList.get(0));
+		igpRouterIDLNSubTLV.setIGP_router_id_type(IGPRouterIDNodeDescriptorSubTLV.IGP_ROUTER_ID_TYPE_IS_IS_NON_PSEUDO);
+		localNodeDescriptors.setIGPRouterID(igpRouterIDLNSubTLV);
+		//Complete Dummy TLVs
+		BGPLSIdentifierNodeDescriptorSubTLV bGPLSIDSubTLV =new BGPLSIdentifierNodeDescriptorSubTLV();
+		bGPLSIDSubTLV.setBGPLS_ID(this.localBGPLSIdentifer);
+		localNodeDescriptors.setBGPLSIDSubTLV(bGPLSIDSubTLV);
+		AreaIDNodeDescriptorSubTLV areaID = new AreaIDNodeDescriptorSubTLV();
+		areaID.setAREA_ID(this.localAreaID);
+		//commented for compliance with ODL
+		// localNodeDescriptors.setAreaID(areaID);
+
+		IGPRouterIDNodeDescriptorSubTLV igpRouterIDDNSubTLV = new IGPRouterIDNodeDescriptorSubTLV();
+		igpRouterIDDNSubTLV.setISIS_ISO_NODE_ID(addressList.get(1));
+		igpRouterIDDNSubTLV.setIGP_router_id_type(IGPRouterIDNodeDescriptorSubTLV.IGP_ROUTER_ID_TYPE_IS_IS_NON_PSEUDO);
+		remoteNodeDescriptors.setIGPRouterID(igpRouterIDDNSubTLV);
+		//2.1.2. AS
+		if (domainList != null){
+			AutonomousSystemNodeDescriptorSubTLV as_local = new AutonomousSystemNodeDescriptorSubTLV();
+			try {
+				as_local.setAS_ID((Inet4Address) Inet4Address.getByName(domainList.get(0)));
+				localNodeDescriptors.setAutonomousSystemSubTLV(as_local);
+				AutonomousSystemNodeDescriptorSubTLV as_remote = new AutonomousSystemNodeDescriptorSubTLV();
+				as_remote.setAS_ID((Inet4Address) Inet4Address.getByName(domainList.get(1)));
+				remoteNodeDescriptors.setAutonomousSystemSubTLV(as_remote);
+			} catch (UnknownHostException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		//Complete Dummy TLVs
+		remoteNodeDescriptors.setBGPLSIDSubTLV(bGPLSIDSubTLV);
+		//commented for compliance with ODL
+		// remoteNodeDescriptors.setAreaID(areaID);
+
+		linkNLRI.setLocalNodeDescriptors(localNodeDescriptors);
+		linkNLRI.setRemoteNodeDescriptorsTLV(remoteNodeDescriptors);
+
+		//2.2. Link NLRI TLVs
+		//2.2.1. Ipv4 interface and neighbour address
+		if (local!=null) {
+			IPv4InterfaceAddressLinkDescriptorsSubTLV ipv4InterfaceAddressTLV = new IPv4InterfaceAddressLinkDescriptorsSubTLV();
+			ipv4InterfaceAddressTLV.setIpv4Address(local);
+			linkNLRI.setIpv4InterfaceAddressTLV(ipv4InterfaceAddressTLV);
+			if (neighbor!=null) {
+				IPv4NeighborAddressLinkDescriptorSubTLV ipv4NeighborAddressTLV = new IPv4NeighborAddressLinkDescriptorSubTLV();
+				ipv4NeighborAddressTLV.setIpv4Address(neighbor);
+				linkNLRI.setIpv4NeighborAddressTLV(ipv4NeighborAddressTLV);
+			}
+		}
+		//2.2.2. Link Local/Remote identifiers TLV
+		if (localRemoteIfList !=  null){
+			LinkLocalRemoteIdentifiersLinkDescriptorSubTLV linkIdentifiersTLV = new LinkLocalRemoteIdentifiersLinkDescriptorSubTLV();
+			linkIdentifiersTLV.setLinkLocalIdentifier(localRemoteIfList.get(0));
+			linkIdentifiersTLV.setLinkRemoteIdentifier(localRemoteIfList.get(1));
+			linkNLRI.setLinkIdentifiersTLV(linkIdentifiersTLV);
+		}
+
+		//2.2.3 LinkDelay
+		/*
+		if (te_info != null){
+			if(te_info.getUndirLinkDelay() != null){
+				int undirLinkDelay = te_info.getUndirLinkDelay().getDelay();
+				UndirectionalLinkDelayDescriptorSubTLV uSTLV =new UndirectionalLinkDelayDescriptorSubTLV();
+				uSTLV.setDelay(undirLinkDelay);
+				linkNLRI.setUndirectionalLinkDelayTLV(uSTLV);
+			}
+			if(te_info.getUndirDelayVar() != null){
+				int undirDelayVar = te_info.getUndirDelayVar().getDelayVar();
+				UndirectionalDelayVariationDescriptorSubTLV uSTLV =new UndirectionalDelayVariationDescriptorSubTLV();
+				uSTLV.setDelayVar(undirDelayVar);
+				linkNLRI.setUndirectionalDelayVariationTLV(uSTLV);
+			}
+			if(te_info.getMinMaxUndirLinkDelay() != null){
+				int minDelay = te_info.getMinMaxUndirLinkDelay().getLowDelay();
+				int maxDelay = te_info.getMinMaxUndirLinkDelay().getHighDelay();
+				MinMaxUndirectionalLinkDelayDescriptorSubTLV uSTLV =new MinMaxUndirectionalLinkDelayDescriptorSubTLV();
+				uSTLV.setHighDelay(maxDelay);
+				uSTLV.setLowDelay(minDelay);
+				linkNLRI.setMinMaxUndirectionalLinkDelayTLV(uSTLV);
+			}
+			if(te_info.getUndirLinkLoss() != null){
+				int linkLoss = te_info.getUndirLinkLoss().getLinkLoss();
+				UndirectionalLinkLossDescriptorSubTLV uSTLV =new UndirectionalLinkLossDescriptorSubTLV();
+				uSTLV.setLinkLoss(linkLoss);
+				linkNLRI.setUndirectionalLinkLossTLV(uSTLV);
+			}
+			if(te_info.getUndirResidualBw() != null){
+				int resBw = te_info.getUndirResidualBw().getResidualBw();
+				UndirectionalResidualBandwidthDescriptorSubTLV uSTLV =new UndirectionalResidualBandwidthDescriptorSubTLV();
+				uSTLV.setResidualBw(resBw);
+				linkNLRI.setUndirectionalResidualBwTLV(uSTLV);
+			}
+			if(te_info.getUndirAvailableBw() != null){
+				int availableBw = te_info.getUndirAvailableBw().getAvailableBw();
+				UndirectionalAvailableBandwidthDescriptorSubTLV uSTLV =new UndirectionalAvailableBandwidthDescriptorSubTLV();
+				uSTLV.setAvailableBw(availableBw);
+				linkNLRI.setUndirectionalAvailableBwTLV(uSTLV);
+			}
+			if(te_info.getUndirUtilizedBw() != null){
+				int utilizedBw = te_info.getUndirUtilizedBw().getUtilizedBw();
+				UndirectionalUtilizedBandwidthDescriptorSubTLV uSTLV =new UndirectionalUtilizedBandwidthDescriptorSubTLV();
+				uSTLV.setUtilizedBw(utilizedBw);
+				linkNLRI.setUndirectionalUtilizedBwTLV(uSTLV);
+			}
+
+		}
+		 */
+		linkNLRI.setIdentifier(this.identifier);
+		BGP_LS_MP_Reach_Attribute ra= new BGP_LS_MP_Reach_Attribute();
+		ra.setLsNLRI(linkNLRI);
+
+		pathAttributes.add(ra);
+
+		return update;
+	}
+
+
+
 	/**
 	 * Funcion que crea un mensaje OSPF inventado desde cero.
 	 * Solo se meten en el mensaje los campos:

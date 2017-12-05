@@ -4,6 +4,8 @@ import org.jgrapht.graph.DefaultWeightedEdge;
 
 import es.tid.tedb.elements.Bandwidth;
 
+import java.net.Inet4Address;
+
 
 /**
  * IntraDomain Edge of a Traffic Engineering Database.
@@ -57,6 +59,9 @@ public class IntraDomainEdge extends DefaultWeightedEdge {
 	 * 
 	 */
 	public Node_Info Local_Node_Info;
+	public Inet4Address localInterfaceIP;
+
+	public Inet4Address neighborIP;
 
 	/** 
 	 * Characterization of remote node
@@ -243,6 +248,24 @@ public class IntraDomainEdge extends DefaultWeightedEdge {
 	public void setDst_sid(int dst_sid) {
 		this.dst_sid = dst_sid;
 	}
+
+	public Inet4Address getLocalInterfaceIPv4() {
+		return localInterfaceIP;
+	}
+
+	public void setLocalInterfaceIPv4 (Inet4Address ip) {
+		this.localInterfaceIP = ip;
+	}
+
+
+	public Inet4Address getNeighborIPv4() {
+		return neighborIP;
+	}
+
+	public void setNeighborIPv4 (Inet4Address ip) {
+		this.neighborIP = ip;
+	}
+
 
 	public String toString(){
 		String ret=this.getSource()+":"+this.getSrc_if_id()+"-->"+this.getTarget()+":"+this.getDst_if_id()+" NumFibers = "+numFibers;

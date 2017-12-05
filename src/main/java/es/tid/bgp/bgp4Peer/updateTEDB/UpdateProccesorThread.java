@@ -432,6 +432,9 @@ if (AsInfo_DB.containsKey(learntFrom))
 		int remoteISISid=0;
 		Inet4Address areaID= null ;
 		Inet4Address bgplsID = null;
+		Inet4Address localinterface=null;
+		Inet4Address neighborIP=null;
+
 
 		Inet4Address LocalNodeIGPId = null;
 		Inet4Address RemoteNodeIGPId = null;
@@ -503,6 +506,17 @@ if (AsInfo_DB.containsKey(learntFrom))
 		if (linkNLRI.getUndirectionalUtilizedBwTLV() != null) {
 			utilizedBw = linkNLRI.getUndirectionalUtilizedBwTLV().getUtilizedBw();
 		}
+
+		if (linkNLRI.getIpv4InterfaceAddressTLV()!=null){
+			localinterface=linkNLRI.getIpv4InterfaceAddressTLV().getIpv4Address();
+
+		}
+
+		if (linkNLRI.getIpv4NeighborAddressTLV()!=null){
+			neighborIP=linkNLRI.getIpv4NeighborAddressTLV().getIpv4Address();
+
+		}
+
 		/**Creamos el grafo*/
 		//Let's see if our link is intradomain or interdomain...
 		//log.info("as_local "+localDomainID);
@@ -558,6 +572,12 @@ if (AsInfo_DB.containsKey(learntFrom))
 			if (linkNLRI.getLinkIdentifiersTLV() != null) {
 				intraEdge.setSrc_if_id(linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier());
 				intraEdge.setDst_if_id(linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier());
+			}
+			if (linkNLRI.getIpv4InterfaceAddressTLV()!=null){
+				intraEdge.setLocalInterfaceIPv4(linkNLRI.getIpv4InterfaceAddressTLV().getIpv4Address());
+			}
+			if (linkNLRI.getIpv4NeighborAddressTLV()!=null){
+				intraEdge.setNeighborIPv4(linkNLRI.getIpv4NeighborAddressTLV().getIpv4Address());
 			}
 
 			if (learntFrom!=null) {
