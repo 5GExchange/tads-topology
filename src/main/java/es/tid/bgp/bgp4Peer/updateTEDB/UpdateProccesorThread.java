@@ -435,6 +435,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 
 		Inet4Address LocalNodeIGPId = null;
 		Inet4Address RemoteNodeIGPId = null;
+		log.info(".........................Fill Link Information.........................");
 
 		IGP_type = linkNLRI.getLocalNodeDescriptors().getIGPRouterID().getIGP_router_id_type();
 
