@@ -455,7 +455,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 				LocalNodeIGPId=linkNLRI.getLocalNodeDescriptors().getIGPRouterID().getIpv4AddressOSPF();
 			}
 		}
-		if (IGP_type==1) {
+		if ((IGP_type == 1)||(IGP_type == 2)) {
 			if (linkNLRI.getLocalNodeDescriptors().getIGPRouterID() != null) {
 				localISISid = linkNLRI.getLocalNodeDescriptors().getIGPRouterID().getISIS_ISO_NODE_ID();
 				log.info("Local ISIS id is "+ String.valueOf(localISISid));
@@ -475,7 +475,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 				RemoteNodeIGPId = linkNLRI.getRemoteNodeDescriptorsTLV().getIGPRouterID().getIpv4AddressOSPF();
 			}
 		}
-		if (IGP_type == 1) {
+		if ((IGP_type == 1)||(IGP_type == 2)) {
 			if (linkNLRI.getRemoteNodeDescriptorsTLV().getIGPRouterID() != null) {
 				remoteISISid = linkNLRI.getRemoteNodeDescriptorsTLV().getIGPRouterID().getISIS_ISO_NODE_ID();
 				log.info("Remote ISIS id is "+ String.valueOf(remoteISISid));
@@ -514,7 +514,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 			if (IGP_type == 3) {
 				log.debug("LocalIP:  " + LocalNodeIGPId + "   RemoteIP:  " + RemoteNodeIGPId);
 			}
-			else if (IGP_type == 1){
+			else if ((IGP_type == 1)||(IGP_type == 2)) {
 				log.debug("LocalISISid:  " + localISISid + "   RemoteISISid:  " + remoteISISid);
 			}
 
@@ -532,7 +532,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 				return;
 			}
 
-			if (IGP_type == 1) {
+			if ((IGP_type == 1)||(IGP_type == 2)) {
 				simpleTEDBxx.setIGPType(1);
 				if(simpleTEDBxx.getNetworkGraph().containsEdge(localISISid, remoteISISid)) {
 					intraEdge = simpleTEDBxx.getNetworkGraph().getEdge(localISISid, remoteISISid);
@@ -566,7 +566,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 					te_info = createTE_Info(simpleTEDBxx);
 					intraEdge.setTE_info(te_info);
 					intraEdge.setLearntFrom(learntFrom);
-					if (IGP_type == 1) {
+					if ((IGP_type == 1)||(IGP_type == 2)) {
 						log.info("ISIS");
 						if ((localDomainID!=null)&& (localISISid!=0)&&(remoteISISid!=0)&&(linkNLRI.getLinkIdentifiersTLV()!=null))
 							setIntraDomainEdgeUpdateTime (localDomainID, localISISid,remoteISISid, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(),linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(),System.currentTimeMillis());
@@ -582,7 +582,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 
 	
 					//ISIS IGP
-					if (IGP_type == 1) {
+					if ((IGP_type == 1)||(IGP_type == 2)) {
 
 						if (!(simpleTEDBxx.getNetworkGraph().containsVertex(localISISid))) {
 							log.info("ISIS localnode "+String.valueOf(localISISid)+" not present");
