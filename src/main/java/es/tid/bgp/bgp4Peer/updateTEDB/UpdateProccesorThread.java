@@ -573,12 +573,19 @@ if (AsInfo_DB.containsKey(learntFrom))
 				intraEdge.setSrc_if_id(linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier());
 				intraEdge.setDst_if_id(linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier());
 			}
-			if (linkNLRI.getIpv4InterfaceAddressTLV()!=null){
+			if (linkNLRI.getIpv4InterfaceAddressTLV()!=null) {
 				intraEdge.setLocalInterfaceIPv4(linkNLRI.getIpv4InterfaceAddressTLV().getIpv4Address());
+				log.info("Ipv4 of local interface" + linkNLRI.getIpv4InterfaceAddressTLV().getIpv4Address().toString());
 			}
+			else
+				log.info("Ipv4 of local interface null");
 			if (linkNLRI.getIpv4NeighborAddressTLV()!=null){
 				intraEdge.setNeighborIPv4(linkNLRI.getIpv4NeighborAddressTLV().getIpv4Address());
+				log.info("Ipv4 of neighbor interface"+linkNLRI.getIpv4NeighborAddressTLV().getIpv4Address().toString());
 			}
+			else
+				log.info("Ipv4 of neighbor interface null");
+
 
 			if (learntFrom!=null) {
 				if(intraEdge.getLearntFrom()==null || intraEdge.getLearntFrom().equals(learntFrom)) {

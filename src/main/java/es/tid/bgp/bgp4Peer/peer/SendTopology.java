@@ -495,7 +495,14 @@ public class SendTopology implements Runnable {
 			TE_Information te_info = ((IntraDomainEdge) edge).getTE_info();
 			Inet4Address local=((IntraDomainEdge) edge).getLocalInterfaceIPv4();
 			Inet4Address neighbor=((IntraDomainEdge) edge).getNeighborIPv4();
-
+			if (local!=null && neighbor!=null)
+					log.info("IPv4 addresses: source->"+local.toString() +"///// dest->"+neighbor.toString()+")");
+			else {
+				if (local==null)
+					log.info("local==null");
+				if (neighbor==null)
+					log.info("neighbor==null");
+			}
 			ArrayList<String> domainList = new ArrayList<String>(2);
 			domainList.add(domainID);
 			domainList.add(domainID);
