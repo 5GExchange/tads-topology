@@ -741,13 +741,13 @@ public class SendTopology implements Runnable {
 				linkStateNeeded=true;
 			}
 			//da sistemare
-			if (node_info.getIpv4Address()!=null){
+			/*if (node_info.getIpv4Address()!=null){
 				Inet4Address ip = node_info.getIpv4Address();
 				IPv4RouterIDLocalNodeNodeAttribTLV ipv4Id = new IPv4RouterIDLocalNodeNodeAttribTLV();
 				ipv4Id.setIpv4Address(ip);
 				linkStateAttribute.setIPv4RouterIDLocalNodeNATLV(ipv4Id);
 				linkStateNeeded=true;
-			}
+			}*/
 			//linkStateAttribute.setNodeNameTLV();
 			NodeNameNodeAttribTLV nna = new NodeNameNodeAttribTLV();
 			//nna.setName();
@@ -769,6 +769,7 @@ public class SendTopology implements Runnable {
 
 			//igp router id
 			if(node_info.getISISid()!=0){
+				log.info("ISIS node id set in TED!!!!   ->   "+String.valueOf(node_info.getISISid()));
 				IGPRouterIDNodeDescriptorSubTLV igpRouterIDLNSubTLV = new IGPRouterIDNodeDescriptorSubTLV();
 				igpRouterIDLNSubTLV.setISIS_ISO_NODE_ID(node_info.getISISid());
 				igpRouterIDLNSubTLV.setIGP_router_id_type(IGPRouterIDNodeDescriptorSubTLV.IGP_ROUTER_ID_TYPE_IS_IS_NON_PSEUDO);
@@ -1780,6 +1781,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		igpRouterIDLNSubTLV.setISIS_ISO_NODE_ID(addressList.get(0));
 		igpRouterIDLNSubTLV.setIGP_router_id_type(IGPRouterIDNodeDescriptorSubTLV.IGP_ROUTER_ID_TYPE_IS_IS_NON_PSEUDO);
 		localNodeDescriptors.setIGPRouterID(igpRouterIDLNSubTLV);
+		log.info("Local node link descriptior->"+localNodeDescriptors.toString());
 		//Complete Dummy TLVs
 		BGPLSIdentifierNodeDescriptorSubTLV bGPLSIDSubTLV =new BGPLSIdentifierNodeDescriptorSubTLV();
 		bGPLSIDSubTLV.setBGPLS_ID(this.localBGPLSIdentifer);
@@ -1793,6 +1795,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		igpRouterIDDNSubTLV.setISIS_ISO_NODE_ID(addressList.get(1));
 		igpRouterIDDNSubTLV.setIGP_router_id_type(IGPRouterIDNodeDescriptorSubTLV.IGP_ROUTER_ID_TYPE_IS_IS_NON_PSEUDO);
 		remoteNodeDescriptors.setIGPRouterID(igpRouterIDDNSubTLV);
+		log.info("Remote node link descriptior->"+remoteNodeDescriptors.toString());
 		//2.1.2. AS
 		if (domainList != null){
 			AutonomousSystemNodeDescriptorSubTLV as_local = new AutonomousSystemNodeDescriptorSubTLV();
