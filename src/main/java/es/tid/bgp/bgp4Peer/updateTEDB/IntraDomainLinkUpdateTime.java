@@ -129,9 +129,18 @@ public boolean equals (Object o) {
 
     public String toString()
     {
-        String ret= this.localDomainID.getHostAddress() +"<--->" +this.LocalNodeIGPId.getHostAddress() +"<--->" +this.LocalIdentifier +"<--->"
-                +this.RemoteNodeIGPId.getHostAddress() +"<--->"  +RemoteIdentifier;
-        return ret;
+        if((this.LocalNodeIGPId.getHostAddress()!=null)&&(this.localDomainID.getHostAddress()!=null)&&(this.RemoteNodeIGPId.getHostAddress()!=null)) {
+            String ret = this.localDomainID.getHostAddress() + "<--->" + this.LocalNodeIGPId.getHostAddress() + "<--->" + this.LocalIdentifier + "<--->"
+                    + this.RemoteNodeIGPId.getHostAddress() + "<--->" + RemoteIdentifier;
+            return ret;
+        }
+        else {
+            String ret = this.localDomainID.getHostAddress() + "<--->" + String.valueOf(this.localISISid) + "<--->" + this.LocalIdentifier + "<--->"
+                    + String.valueOf(this.remoteISISid) + "<--->" + RemoteIdentifier;
+            return ret;
+
+        }
+
     }
 
 

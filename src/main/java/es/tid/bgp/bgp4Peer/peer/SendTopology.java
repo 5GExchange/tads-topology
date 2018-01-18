@@ -1414,7 +1414,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		}
 		//2. NLRI
 		LinkNLRI linkNLRI = new LinkNLRI();
-		linkNLRI.setProtocolID(ProtocolIDCodes.Static_Protocol_ID);
+		linkNLRI.setProtocolID(ProtocolIDCodes.OSPF_Protocol_ID);
 		linkNLRI.setIdentifier(layer);
 	
 		//2.1. Local Y Remote Descriptors
@@ -1539,6 +1539,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 	}
 
 	private BGP4Update createMsgUpdateLinkNLRIISIS(ArrayList<Integer> addressList, ArrayList<Long> localRemoteIfList, int lanID, ArrayList<String> domainList, boolean intradomain, TE_Information te_info, String learntFrom, Inet4Address local, Inet4Address neighbor){
+		log.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXAndrea Sending link NLRI ISIS ");
 		BGP4Update update= new BGP4Update();
 		//1. Path Attributes
 		ArrayList<PathAttribute> pathAttributes = update.getPathAttributes();
@@ -1604,6 +1605,8 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 
 
 		if (te_info != null){
+			log.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXAndrea TE info link NLRI ISIS not null");
+
 			if (te_info.getLinkLocalRemoteIdentifiers() != null){
 
 			}
@@ -1764,11 +1767,13 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 
 		if (linkStateNeeded){
 			//log.debug("Link state needed");
+			log.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX link NLRI ISIS link state needed");
+
 			pathAttributes.add(linkStateAttribute);
 		}
 		//2. NLRI
 		LinkNLRI linkNLRI = new LinkNLRI();
-		linkNLRI.setProtocolID(ProtocolIDCodes.Static_Protocol_ID);
+		linkNLRI.setProtocolID(ProtocolIDCodes.IS_IS_Level2_Protocol_ID);
 		linkNLRI.setIdentifier(layer);
 
 		//2.1. Local Y Remote Descriptors
