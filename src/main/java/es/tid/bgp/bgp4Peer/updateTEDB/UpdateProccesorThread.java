@@ -427,13 +427,13 @@ if (AsInfo_DB.containsKey(learntFrom))
 		//Domains
 		Inet4Address localDomainID= null ;
 		Inet4Address remoteDomainID = null ;
+		Inet4Address IPv4InterfaceAddress = null ;
+		Inet4Address IPv4RemoteAddress = null ;
 		int IGP_type;
 		int localISISid=0;
 		int remoteISISid=0;
 		Inet4Address areaID= null ;
 		Inet4Address bgplsID = null;
-		Inet4Address localinterface=null;
-		Inet4Address neighborIP=null;
 
 
 		Inet4Address LocalNodeIGPId = null;
@@ -508,14 +508,19 @@ if (AsInfo_DB.containsKey(learntFrom))
 		}
 
 		if (linkNLRI.getIpv4InterfaceAddressTLV()!=null){
-			localinterface=linkNLRI.getIpv4InterfaceAddressTLV().getIpv4Address();
-
+			IPv4InterfaceAddress=linkNLRI.getIpv4InterfaceAddressTLV().getIpv4Address();
+			log.info("Ipv4 Interface Address:  " + IPv4InterfaceAddress.getHostAddress());
 		}
 
 		if (linkNLRI.getIpv4NeighborAddressTLV()!=null){
-			neighborIP=linkNLRI.getIpv4NeighborAddressTLV().getIpv4Address();
-
+			IPv4RemoteAddress=linkNLRI.getIpv4NeighborAddressTLV().getIpv4Address();
+			log.info("Ipv4 Remote Address:  " + IPv4RemoteAddress.getHostAddress());
 		}
+
+		if (linkNLRI.getIpv4InterfaceAddressTLV() != null) {
+			remoteDomainID = linkNLRI.getRemoteNodeDescriptorsTLV().getAutonomousSystemSubTLV().getAS_ID();
+		}
+
 
 		/**Creamos el grafo*/
 		//Let's see if our link is intradomain or interdomain...
@@ -575,13 +580,13 @@ if (AsInfo_DB.containsKey(learntFrom))
 			}
 			if (linkNLRI.getIpv4InterfaceAddressTLV()!=null) {
 				intraEdge.setLocalInterfaceIPv4(linkNLRI.getIpv4InterfaceAddressTLV().getIpv4Address());
-				log.info("Ipv4 of local interface" + linkNLRI.getIpv4InterfaceAddressTLV().getIpv4Address().toString());
+				log.info("Ipv4 of local interface" + linkNLRI.getIpv4InterfaceAddressTLV().getIpv4Address().getHostAddress());
 			}
 			else
 				log.info("Ipv4 of local interface null");
 			if (linkNLRI.getIpv4NeighborAddressTLV()!=null){
 				intraEdge.setNeighborIPv4(linkNLRI.getIpv4NeighborAddressTLV().getIpv4Address());
-				log.info("Ipv4 of neighbor interface"+linkNLRI.getIpv4NeighborAddressTLV().getIpv4Address().toString());
+				log.info("Ipv4 of neighbor interface"+linkNLRI.getIpv4NeighborAddressTLV().getIpv4Address().getHostAddress());
 			}
 			else
 				log.info("Ipv4 of neighbor interface null");

@@ -353,7 +353,7 @@ public class SendTopology implements Runnable {
 				//System.out.println("SRC Domain is "+((Inet4Address)edge.getDomain_src_router()).getHostAddress().toString() );
 				domainList.add( ((Inet4Address)edge.getDomain_dst_router()).getHostAddress().toString());
 				log.info("Source Domain is "+(Inet4Address)edge.getDomain_dst_router());
-				BGP4Update update = createMsgUpdateLinkNLRI(addressList,localRemoteIfList, lanID, domainList, false, te_info,edge.getLearntFrom()
+				BGP4Update update = createMsgUpdateLinkNLRI(null,addressList,localRemoteIfList, lanID, domainList, false, te_info,edge.getLearntFrom()
 				);
 				update.setLearntFrom(edge.getLearntFrom());
 				log.info("Update message Created for Edge: " +edge.toString());
@@ -424,7 +424,7 @@ public class SendTopology implements Runnable {
 			ArrayList<String> domainList = new ArrayList<String>(2);	
 			domainList.add(domainID);
 			domainList.add(domainID);
-			BGP4Update update = createMsgUpdateLinkNLRI(addressList,localRemoteIfList, lanID, domainList, true, te_info, edge.getLearntFrom());
+			BGP4Update update = createMsgUpdateLinkNLRI(edge, addressList,localRemoteIfList, lanID, domainList, true, te_info, edge.getLearntFrom());
 			update.setLearntFrom(edge.getLearntFrom());
 			sendMessage(update);
 
@@ -506,7 +506,8 @@ public class SendTopology implements Runnable {
 			ArrayList<String> domainList = new ArrayList<String>(2);
 			domainList.add(domainID);
 			domainList.add(domainID);
-			BGP4Update update = createMsgUpdateLinkNLRIISIS(addressList,localRemoteIfList, lanID, domainList, true, te_info, edge.getLearntFrom(), local, neighbor);
+
+			BGP4Update update = createMsgUpdateLinkNLRIISIS(edge, addressList,localRemoteIfList, lanID, domainList, true, te_info, edge.getLearntFrom(), local, neighbor);
 			update.setLearntFrom(edge.getLearntFrom());
 			sendMessage(update);
 
@@ -1184,7 +1185,7 @@ public class SendTopology implements Runnable {
 	 * @param intradomain
 	 * @param learntFrom
 	 */
-	private BGP4Update createMsgUpdateLinkNLRI(ArrayList<Inet4Address> addressList, ArrayList<Long> localRemoteIfList, int lanID, ArrayList<String> domainList, boolean intradomain, TE_Information te_info, String learntFrom){
+	private BGP4Update createMsgUpdateLinkNLRI(IntraDomainEdge edgex, ArrayList<Inet4Address> addressList, ArrayList<Long> localRemoteIfList, int lanID, ArrayList<String> domainList, boolean intradomain, TE_Information te_info, String learntFrom){
 		BGP4Update update= new BGP4Update();	
 		//1. Path Attributes
 		ArrayList<PathAttribute> pathAttributes = update.getPathAttributes();
@@ -1464,13 +1465,24 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 
 		//2.2. Link NLRI TLVs 
 		//2.2.1. Ipv4 interface and neighbour address
-		IPv4InterfaceAddressLinkDescriptorsSubTLV ipv4InterfaceAddressTLV = new IPv4InterfaceAddressLinkDescriptorsSubTLV();
-		IPv4NeighborAddressLinkDescriptorSubTLV ipv4NeighborAddressTLV = new IPv4NeighborAddressLinkDescriptorSubTLV();
-		ipv4InterfaceAddressTLV.setIpv4Address(addressList.get(0));
-		ipv4NeighborAddressTLV.setIpv4Address(addressList.get(1));
-		linkNLRI.setIpv4InterfaceAddressTLV(ipv4InterfaceAddressTLV);
-		linkNLRI.setIpv4NeighborAddressTLV(ipv4NeighborAddressTLV);
-
+		//IPv4InterfaceAddressLinkDescriptorsSubTLV ipv4InterfaceAddressTLV = new IPv4InterfaceAddressLinkDescriptorsSubTLV();
+		//IPv4NeighborAddressLinkDescriptorSubTLV ipv4NeighborAddressTLV = new IPv4NeighborAddressLinkDescriptorSubTLV();
+		//ipv4InterfaceAddressTLV.setIpv4Address(addressList.get(0));
+		//ipv4NeighborAddressTLV.setIpv4Address(addressList.get(1));
+		//linkNLRI.setIpv4InterfaceAddressTLV(ipv4InterfaceAddressTLV);
+		//linkNLRI.setIpv4NeighborAddressTLV(ipv4NeighborAddressTLV);
+		if ((edgex!=null)&&(edgex.getLocalInterfaceIPv4()!=null)) {
+			IPv4InterfaceAddressLinkDescriptorsSubTLV ipv4InterfaceAddressTLV = new IPv4InterfaceAddressLinkDescriptorsSubTLV();
+			ipv4InterfaceAddressTLV.setIpv4Address(edgex.getLocalInterfaceIPv4());
+			linkNLRI.setIpv4InterfaceAddressTLV(ipv4InterfaceAddressTLV);
+			log.debug("Added interface ip link descriptior->"+ipv4InterfaceAddressTLV.toString());
+			if ((edgex!=null)&&(edgex.getNeighborIPv4()!=null)) {
+				IPv4NeighborAddressLinkDescriptorSubTLV ipv4NeighborAddressTLV = new IPv4NeighborAddressLinkDescriptorSubTLV();
+				ipv4NeighborAddressTLV.setIpv4Address(edgex.getNeighborIPv4());
+				linkNLRI.setIpv4NeighborAddressTLV(ipv4NeighborAddressTLV);
+				log.debug("Added remote ip link descriptior->"+ipv4NeighborAddressTLV.toString());
+			}
+		}
 		//2.2.2. Link Local/Remote identifiers TLV
 		if (localRemoteIfList !=  null){
 			LinkLocalRemoteIdentifiersLinkDescriptorSubTLV linkIdentifiersTLV = new LinkLocalRemoteIdentifiersLinkDescriptorSubTLV();
@@ -1538,7 +1550,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		return update;
 	}
 
-	private BGP4Update createMsgUpdateLinkNLRIISIS(ArrayList<Integer> addressList, ArrayList<Long> localRemoteIfList, int lanID, ArrayList<String> domainList, boolean intradomain, TE_Information te_info, String learntFrom, Inet4Address local, Inet4Address neighbor){
+	private BGP4Update createMsgUpdateLinkNLRIISIS(IntraDomainEdge edgex, ArrayList<Integer> addressList, ArrayList<Long> localRemoteIfList, int lanID, ArrayList<String> domainList, boolean intradomain, TE_Information te_info, String learntFrom, Inet4Address local, Inet4Address neighbor){
 		log.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXAndrea Sending link NLRI ISIS ");
 		BGP4Update update= new BGP4Update();
 		//1. Path Attributes
@@ -1636,6 +1648,8 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		}else{
 			log.info("TE_Info is Null");
 		}
+
+
 
 
 		boolean linkStateNeeded = false;
@@ -1767,7 +1781,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 
 		if (linkStateNeeded){
 			//log.debug("Link state needed");
-			log.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX link NLRI ISIS link state needed");
+			log.debug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX link NLRI ISIS link state needed");
 
 			pathAttributes.add(linkStateAttribute);
 		}
@@ -1823,17 +1837,18 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 
 		linkNLRI.setLocalNodeDescriptors(localNodeDescriptors);
 		linkNLRI.setRemoteNodeDescriptorsTLV(remoteNodeDescriptors);
-
 		//2.2. Link NLRI TLVs
 		//2.2.1. Ipv4 interface and neighbour address
-		if (local!=null) {
+		if (edgex.getLocalInterfaceIPv4()!=null) {
 			IPv4InterfaceAddressLinkDescriptorsSubTLV ipv4InterfaceAddressTLV = new IPv4InterfaceAddressLinkDescriptorsSubTLV();
-			ipv4InterfaceAddressTLV.setIpv4Address(local);
+			ipv4InterfaceAddressTLV.setIpv4Address(edgex.getLocalInterfaceIPv4());
 			linkNLRI.setIpv4InterfaceAddressTLV(ipv4InterfaceAddressTLV);
-			if (neighbor!=null) {
+			log.debug("Added interface ip link descriptior->"+ipv4InterfaceAddressTLV.toString());
+			if (edgex.getNeighborIPv4()!=null) {
 				IPv4NeighborAddressLinkDescriptorSubTLV ipv4NeighborAddressTLV = new IPv4NeighborAddressLinkDescriptorSubTLV();
-				ipv4NeighborAddressTLV.setIpv4Address(neighbor);
+				ipv4NeighborAddressTLV.setIpv4Address(edgex.getNeighborIPv4());
 				linkNLRI.setIpv4NeighborAddressTLV(ipv4NeighborAddressTLV);
+				log.debug("Added remote ip link descriptior->"+ipv4NeighborAddressTLV.toString());
 			}
 		}
 		//2.2.2. Link Local/Remote identifiers TLV
@@ -1843,6 +1858,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			linkIdentifiersTLV.setLinkRemoteIdentifier(localRemoteIfList.get(1));
 			linkNLRI.setLinkIdentifiersTLV(linkIdentifiersTLV);
 		}
+		
 
 		//2.2.3 LinkDelay
 		/*
@@ -1895,6 +1911,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		}
 		 */
 		linkNLRI.setIdentifier(this.identifier);
+		log.debug("The Link NLRI is:"+linkNLRI.toString());
 		BGP_LS_MP_Reach_Attribute ra= new BGP_LS_MP_Reach_Attribute();
 		ra.setLsNLRI(linkNLRI);
 
