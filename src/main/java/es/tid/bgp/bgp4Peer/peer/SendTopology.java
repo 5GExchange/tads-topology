@@ -172,7 +172,7 @@ public class SendTopology implements Runnable {
 									}
 
 									if (((DomainTEDB) ted).getMDPCE() != null && domainID != null) {
-										log.info("Sending MDPCE address for Domain " + domainID + " with IP: " + ((DomainTEDB) ted).getMDPCE().getPCEipv4().getHostAddress());
+										log.debug("Sending MDPCE address for Domain " + domainID + " with IP: " + ((DomainTEDB) ted).getMDPCE().getPCEipv4().getHostAddress());
 										sendMDPCENLRI(domainID, ((DomainTEDB) ted).getMDPCE());
 									}
 
@@ -246,7 +246,7 @@ public class SendTopology implements Runnable {
 			Node_Info node_info = NodeTable.get(node);
 			//log.info(" XXXX node_info: "+ node_info);
 			if (node_info != null) {
-				log.info("Sending node: (" + node + ")");
+				log.debug("Sending node: (" + node + ")");
 				//Mandamos NodeNLRI
 				BGP4Update update = createMsgUpdateNodeNLRIISIS(node_info);
 				sendMessage(update);
@@ -266,7 +266,7 @@ public class SendTopology implements Runnable {
 
 	private void sendITNodeNLRI(String domainID, IT_Resources itResources) {
 		//Andrea
-		log.info("Sending IT Resources");
+		log.debug("Sending IT Resources");
 		BGP4Update update = createMsgUpdateITNodeNLRI(domainID, itResources);
 		sendMessage(update);
 //		Iterator<Object> vertexIt = vertexSet.iterator();	
@@ -291,7 +291,7 @@ public class SendTopology implements Runnable {
 
 	private void sendMDPCENLRI(String domainID, PCEInfo IP) {
 		//Andrea
-		log.info("Sending PCE Address");
+		log.debug("Sending PCE Address");
 		BGP4Update update = createMsgUpdateMDPCENLRI(domainID, IP);
 		sendMessage(update);
 //		Iterator<Object> vertexIt = vertexSet.iterator();
@@ -330,7 +330,7 @@ public class SendTopology implements Runnable {
 				InterDomainEdge edge = edgeIt.next();
 				Inet4Address source = (Inet4Address) edge.getSrc_router_id();
 				Inet4Address dst = (Inet4Address) edge.getDst_router_id();
-				log.info("Sending ID Edge: (" + source.toString() + ":" + ((InterDomainEdge) edge).getSrc_if_id() + "," + dst.toString() + ")");
+				log.debug("Sending ID Edge: (" + source.toString() + ":" + ((InterDomainEdge) edge).getSrc_if_id() + "," + dst.toString() + ")");
 				addressList = new ArrayList<Inet4Address>();
 				addressList.add(0, source);
 				addressList.add(1, dst);
@@ -394,7 +394,7 @@ public class SendTopology implements Runnable {
 			} else {
 				dst = (Inet4Address) edge.getTarget();
 			}
-			log.info("Sending: (" + source.toString() + "," + dst.toString() + ")");
+			log.debug("Sending: (" + source.toString() + "," + dst.toString() + ")");
 			addressList = new ArrayList<Inet4Address>();
 			addressList.add(0, source);
 			addressList.add(1, dst);
@@ -468,7 +468,7 @@ public class SendTopology implements Runnable {
 			} else {
 				dst = (Integer) edge.getTarget();
 			}
-			log.info("Sending: (" + String.valueOf(source) + "," + String.valueOf(dst) + ")");
+			log.debug("Sending: (" + String.valueOf(source) + "," + String.valueOf(dst) + ")");
 			addressList = new ArrayList<Integer>();
 			addressList.add(0, source);
 			addressList.add(1, dst);
@@ -550,8 +550,8 @@ public class SendTopology implements Runnable {
 								//log.info(update.getLearntFrom().substring(1));
 								if (!destination.equals(update.getLearntFrom().substring(1))) {
 									//log.info("id da getLearnt "+ update.getLearntFrom());
-									log.info("Sending update to destination " + destination + " for info learnt from " + update.getLearntFrom().substring(1));
-									log.info("Sending BGP4 update to:" + destination);
+									log.debug("Sending update to destination " + destination + " for info learnt from " + update.getLearntFrom().substring(1));
+									//log.info("Sending BGP4 update to:" + destination);
 									session.sendBGP4Message(update);
 
 								} else
@@ -561,11 +561,11 @@ public class SendTopology implements Runnable {
 							} else {
 								if (!destination.equals(update.getLearntFrom())) {
 									//log.info("id da getLearnt "+ update.getLearntFrom());
-									log.info("Sending update to destination " + destination + " for info learnt from " + update.getLearntFrom());
-									log.info("Sending BGP4 update to:" + destination);
+									log.debug("Sending update to destination " + destination + " for info learnt from " + update.getLearntFrom());
+									//log.info("Sending BGP4 update to:" + destination);
 									session.sendBGP4Message(update);
 								} else
-									log.info("destination " + destination + " and source of information " + update.getLearntFrom() + " are equal");
+									log.debug("destination " + destination + " and source of information " + update.getLearntFrom() + " are equal");
 							}
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -1546,7 +1546,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 	}
 
 	private BGP4Update createMsgUpdateLinkNLRIISIS(IntraDomainEdge edgex, ArrayList<Integer> addressList, ArrayList<Long> localRemoteIfList, int lanID, ArrayList<String> domainList, boolean intradomain, TE_Information te_info, String learntFrom, Inet4Address local, Inet4Address neighbor){
-		log.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXAndrea Sending link NLRI ISIS ");
+		log.debug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXAndrea Sending link NLRI ISIS ");
 		BGP4Update update= new BGP4Update();
 		//1. Path Attributes
 		ArrayList<PathAttribute> pathAttributes = update.getPathAttributes();
