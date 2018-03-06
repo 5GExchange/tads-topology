@@ -168,12 +168,12 @@ public class SendTopology implements Runnable {
 										sendNodeNLRI(((DomainTEDB) ted).getIntraDomainLinksvertexSet(), ((DomainTEDB) ted).getNodeTable());
 									}
 									if (((DomainTEDB) ted).getItResources() != null) {
-										sendITNodeNLRI(domainID, ((DomainTEDB) ted).getItResources());
+										sendITNodeNLRI(domainID, ((DomainTEDB) ted).getItResources(),  ((DomainTEDB) ted).getItResources().getLearntFrom());
 									}
 
 									if (((DomainTEDB) ted).getMDPCE() != null && domainID != null) {
 										log.debug("Sending MDPCE address for Domain " + domainID + " with IP: " + ((DomainTEDB) ted).getMDPCE().getPCEipv4().getHostAddress());
-										sendMDPCENLRI(domainID, ((DomainTEDB) ted).getMDPCE());
+										sendMDPCENLRI(domainID, ((DomainTEDB) ted).getMDPCE(), ((DomainTEDB) ted).getMDPCE().getLearntFrom());
 									}
 
 								}
@@ -219,7 +219,7 @@ public class SendTopology implements Runnable {
 			if (node_info != null) {
 				log.info("Sending node: (" + node + ")");
 				//Mandamos NodeNLRI
-				BGP4Update update = createMsgUpdateNodeNLRI(node_info);
+				BGP4Update update = createMsgUpdateNodeNLRI(node_info,  NodeTable.get(node).getLearntFrom());
 				sendMessage(update);
 			} else {
 				log.info("Node " + node + " HAS No Node_info in NodeTable");
@@ -248,7 +248,7 @@ public class SendTopology implements Runnable {
 			if (node_info != null) {
 				log.debug("Sending node: (" + node + ")");
 				//Mandamos NodeNLRI
-				BGP4Update update = createMsgUpdateNodeNLRIISIS(node_info);
+				BGP4Update update = createMsgUpdateNodeNLRIISIS(node_info, NodeTable.get(node).getLearntFrom());
 				sendMessage(update);
 			} else {
 				log.info("Node " + node + " HAS No Node_info in NodeTable");
@@ -264,10 +264,10 @@ public class SendTopology implements Runnable {
 	 */
 
 
-	private void sendITNodeNLRI(String domainID, IT_Resources itResources) {
+	private void sendITNodeNLRI(String domainID, IT_Resources itResources, String learntFrom) {
 		//Andrea
 		log.debug("Sending IT Resources");
-		BGP4Update update = createMsgUpdateITNodeNLRI(domainID, itResources);
+		BGP4Update update = createMsgUpdateITNodeNLRI(domainID, itResources, learntFrom);
 		sendMessage(update);
 //		Iterator<Object> vertexIt = vertexSet.iterator();	
 //		//Enviamos primero los nodos. Un Node NLRI por cada nodo.
@@ -289,10 +289,10 @@ public class SendTopology implements Runnable {
 //		}
 	}
 
-	private void sendMDPCENLRI(String domainID, PCEInfo IP) {
+	private void sendMDPCENLRI(String domainID, PCEInfo IP, String learntFrom) {
 		//Andrea
 		log.debug("Sending PCE Address");
-		BGP4Update update = createMsgUpdateMDPCENLRI(domainID, IP);
+		BGP4Update update = createMsgUpdateMDPCENLRI(domainID, IP, learntFrom);
 		sendMessage(update);
 //		Iterator<Object> vertexIt = vertexSet.iterator();
 //		//Enviamos primero los nodos. Un Node NLRI por cada nodo.
@@ -582,7 +582,7 @@ public class SendTopology implements Runnable {
 	 *
 	 * @param node_info
 	 */
-	private BGP4Update createMsgUpdateNodeNLRI(Node_Info node_info) {
+	private BGP4Update createMsgUpdateNodeNLRI(Node_Info node_info, String learntFrom) {
 		try {
 
 
@@ -596,6 +596,7 @@ public class SendTopology implements Runnable {
 			pathAttributes.add(or);
 			//AS_PATH
 
+			/*
 			if (send4AS == true) {
 				AS4_Path_Attribute as_path = new AS4_Path_Attribute();
 				AS4_Path_Segment as_path_seg = new AS4_Path_Segment();
@@ -613,6 +614,7 @@ public class SendTopology implements Runnable {
 				as_path.getAsPathSegments().add(as_path_seg);
 				pathAttributes.add(as_path);
 			}
+			 */
 
 			//LOCAL PREF Attribute
 			LOCAL_PREF_Attribute as_local_pref = new LOCAL_PREF_Attribute();
@@ -664,9 +666,9 @@ public class SendTopology implements Runnable {
 				localNodeDescriptors.setAutonomousSystemSubTLV(asNodeDescrSubTLV);
 			}
 			//Complete Dummy TLVs
-			BGPLSIdentifierNodeDescriptorSubTLV bGPLSIDSubTLV = new BGPLSIdentifierNodeDescriptorSubTLV();
-			bGPLSIDSubTLV.setBGPLS_ID(this.localBGPLSIdentifer);
-			localNodeDescriptors.setBGPLSIDSubTLV(bGPLSIDSubTLV);
+			//BGPLSIdentifierNodeDescriptorSubTLV bGPLSIDSubTLV = new BGPLSIdentifierNodeDescriptorSubTLV();
+			//bGPLSIDSubTLV.setBGPLS_ID(this.localBGPLSIdentifer);
+			//localNodeDescriptors.setBGPLSIDSubTLV(bGPLSIDSubTLV);
 			AreaIDNodeDescriptorSubTLV areaID = new AreaIDNodeDescriptorSubTLV();
 			areaID.setAREA_ID(this.localAreaID);
 			//commented for compliance with ODL
@@ -675,9 +677,10 @@ public class SendTopology implements Runnable {
 			nodeNLRI.setLocalNodeDescriptors(localNodeDescriptors);
 			BGP_LS_MP_Reach_Attribute ra = new BGP_LS_MP_Reach_Attribute();
 			ra.setLsNLRI(nodeNLRI);
-			if (node_info.getIpv4Address() != null) {
-				//ra.setNextHop((Inet4Address) InetAddress.getByName(node_info.getLearntFrom()));
-				ra.setNextHop(node_info.getIpv4Address());
+			try {
+				ra.setNextHop(InetAddress.getByName(learntFrom));
+			} catch (UnknownHostException e) {
+				e.printStackTrace();
 			}
 			pathAttributes.add(ra);
 			update.setLearntFrom(node_info.getLearntFrom());
@@ -690,7 +693,7 @@ public class SendTopology implements Runnable {
 	}
 
 
-	private  BGP4Update createMsgUpdateNodeNLRIISIS(Node_Info node_info){
+	private  BGP4Update createMsgUpdateNodeNLRIISIS(Node_Info node_info, String learntFrom){
 		try{
 
 
@@ -703,7 +706,7 @@ public class SendTopology implements Runnable {
 			or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
 			pathAttributes.add(or);
 			//AS_PATH
-
+			/*
 			if (send4AS==true) {
 				AS4_Path_Attribute as_path = new AS4_Path_Attribute();
 				AS4_Path_Segment as_path_seg = new AS4_Path_Segment();
@@ -722,6 +725,7 @@ public class SendTopology implements Runnable {
 				as_path.getAsPathSegments().add(as_path_seg);
 				pathAttributes.add(as_path);
 			}
+			*/
 
 			//LOCAL PREF Attribute
 			LOCAL_PREF_Attribute as_local_pref = new LOCAL_PREF_Attribute();
@@ -780,9 +784,9 @@ public class SendTopology implements Runnable {
 				localNodeDescriptors.setAutonomousSystemSubTLV(asNodeDescrSubTLV);
 			}
 			//Complete Dummy TLVs
-			BGPLSIdentifierNodeDescriptorSubTLV bGPLSIDSubTLV =new BGPLSIdentifierNodeDescriptorSubTLV();
-			bGPLSIDSubTLV.setBGPLS_ID(this.localBGPLSIdentifer);
-			localNodeDescriptors.setBGPLSIDSubTLV(bGPLSIDSubTLV);
+			//BGPLSIdentifierNodeDescriptorSubTLV bGPLSIDSubTLV =new BGPLSIdentifierNodeDescriptorSubTLV();
+			//bGPLSIDSubTLV.setBGPLS_ID(this.localBGPLSIdentifer);
+			//localNodeDescriptors.setBGPLSIDSubTLV(bGPLSIDSubTLV);
 			AreaIDNodeDescriptorSubTLV areaID = new AreaIDNodeDescriptorSubTLV();
 			areaID.setAREA_ID(this.localAreaID);
 			//commented for compliance with ODL
@@ -791,7 +795,11 @@ public class SendTopology implements Runnable {
 			nodeNLRI.setLocalNodeDescriptors(localNodeDescriptors);
 			BGP_LS_MP_Reach_Attribute ra= new BGP_LS_MP_Reach_Attribute();
 			ra.setLsNLRI(nodeNLRI);
-			pathAttributes.add(ra);
+			try {
+				ra.setNextHop(InetAddress.getByName(learntFrom));
+			} catch (UnknownHostException e) {
+				e.printStackTrace();
+			}pathAttributes.add(ra);
 			update.setLearntFrom(node_info.getLearntFrom());
 			return update;
 		} catch (Exception e) {
@@ -806,7 +814,7 @@ public class SendTopology implements Runnable {
 	 * @param addressList 
 	 * @param node_info
 	 */
-	private  BGP4Update createMsgUpdateITNodeNLRI(String domainID, IT_Resources itResources){
+	private  BGP4Update createMsgUpdateITNodeNLRI(String domainID, IT_Resources itResources, String learntFrom){
 		try{
 	
 			BGP4Update update= new BGP4Update();	
@@ -818,6 +826,7 @@ public class SendTopology implements Runnable {
 			pathAttributes.add(or);
 
 			//AS_PATH
+			/*
 			if (send4AS==true) {
 				AS4_Path_Attribute as_path = new AS4_Path_Attribute();
 				AS4_Path_Segment as_path_seg = new AS4_Path_Segment();
@@ -836,8 +845,9 @@ public class SendTopology implements Runnable {
 				as_path.getAsPathSegments().add(as_path_seg);
 				pathAttributes.add(as_path);
 			}
+			*/
 
-					//LOCAL PREF Attribute
+			//LOCAL PREF Attribute
 			LOCAL_PREF_Attribute as_local_pref = new LOCAL_PREF_Attribute();
 			as_local_pref.setValue(LocalPref);
 			pathAttributes.add(as_local_pref);
@@ -854,9 +864,9 @@ public class SendTopology implements Runnable {
 			LocalNodeDescriptorsTLV localNodeDescriptors = new LocalNodeDescriptorsTLV();
 			
 			//Complete Dummy TLVs
-			BGPLSIdentifierNodeDescriptorSubTLV bGPLSIDSubTLV =new BGPLSIdentifierNodeDescriptorSubTLV();
-			bGPLSIDSubTLV.setBGPLS_ID(this.localBGPLSIdentifer);
-			localNodeDescriptors.setBGPLSIDSubTLV(bGPLSIDSubTLV);
+			//BGPLSIdentifierNodeDescriptorSubTLV bGPLSIDSubTLV =new BGPLSIdentifierNodeDescriptorSubTLV();
+			//bGPLSIDSubTLV.setBGPLS_ID(this.localBGPLSIdentifer);
+			//localNodeDescriptors.setBGPLSIDSubTLV(bGPLSIDSubTLV);
 			AreaIDNodeDescriptorSubTLV areaID = new AreaIDNodeDescriptorSubTLV();
 			areaID.setAREA_ID(this.localAreaID);
 			localNodeDescriptors.setAreaID(areaID);
@@ -864,6 +874,11 @@ public class SendTopology implements Runnable {
 			//itNodeNLRI.setLocalNodeDescriptors(localNodeDescriptors);
 			BGP_LS_MP_Reach_Attribute ra= new BGP_LS_MP_Reach_Attribute();
 			ra.setLsNLRI(itNodeNLRI);
+			try {
+				ra.setNextHop(InetAddress.getByName(learntFrom));
+			} catch (UnknownHostException e) {
+				e.printStackTrace();
+			}
 			pathAttributes.add(ra);
 			return update;
 		
@@ -874,7 +889,7 @@ public class SendTopology implements Runnable {
 		
 	}
 
-	private  BGP4Update createMsgUpdateMDPCENLRI(String domainID, PCEInfo IP){
+	private  BGP4Update createMsgUpdateMDPCENLRI(String domainID, PCEInfo IP, String learntFrom){
 		try{
 
 			String domainIDx= null;
@@ -887,7 +902,9 @@ public class SendTopology implements Runnable {
 			or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
 			pathAttributes.add(or);
 			//AS_PATH
+			/*
 			if (send4AS==true) {
+
 				AS4_Path_Attribute as_path = new AS4_Path_Attribute();
 				AS4_Path_Segment as_path_seg = new AS4_Path_Segment();
 				long[] segs = new long[1];
@@ -909,8 +926,9 @@ public class SendTopology implements Runnable {
 				LOCAL_PREF_Attribute as_local_pref = new LOCAL_PREF_Attribute();
 				as_local_pref.setValue(LocalPref);
 				pathAttributes.add(as_local_pref);
+			 */
 
-						   //NLRI
+			//NLRI
 			PCENLRI pceNLRI = new PCENLRI();
 			pceNLRI.setProtocolID(ProtocolIDCodes.Static_Protocol_ID);
 			pceNLRI.setRoutingUniverseIdentifier(identifier);
@@ -944,6 +962,11 @@ public class SendTopology implements Runnable {
 								//add NLRI to BGP-LS
 			BGP_LS_MP_Reach_Attribute ra= new BGP_LS_MP_Reach_Attribute();
 			ra.setLsNLRI(pceNLRI);
+			try {
+				ra.setNextHop(InetAddress.getByName(learntFrom));
+			} catch (UnknownHostException e) {
+				e.printStackTrace();
+			}
 			pathAttributes.add(ra);
 			log.info(ra.toString());
 			return update;
@@ -1203,7 +1226,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		log.info("SegmentType: " + As.getType() + "SegmentNumber" + As.getsegmentNumbers() + "SegmentValue " + As.getsegmentValue());
 }
 */
-
+		/*
 		if (send4AS==true) {
 
 			AS4_Path_Attribute as_path = new AS4_Path_Attribute();
@@ -1226,6 +1249,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			//log.info("Learnt From: " +learntFrom   +  " SegmentValue: " + String.valueOf(as_path_seg.getSegments()));
 
 		}
+		 */
 
 		//LOCAL PREF Attribute
 		LOCAL_PREF_Attribute as_local_pref = new LOCAL_PREF_Attribute();
@@ -1423,9 +1447,9 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		igpRouterIDLNSubTLV.setIGP_router_id_type(IGPRouterIDNodeDescriptorSubTLV.IGP_ROUTER_ID_TYPE_OSPF_NON_PSEUDO);
 		localNodeDescriptors.setIGPRouterID(igpRouterIDLNSubTLV);
 		//Complete Dummy TLVs
-		BGPLSIdentifierNodeDescriptorSubTLV bGPLSIDSubTLV =new BGPLSIdentifierNodeDescriptorSubTLV();
-		bGPLSIDSubTLV.setBGPLS_ID(this.localBGPLSIdentifer);
-		localNodeDescriptors.setBGPLSIDSubTLV(bGPLSIDSubTLV);
+		//BGPLSIdentifierNodeDescriptorSubTLV bGPLSIDSubTLV =new BGPLSIdentifierNodeDescriptorSubTLV();
+		//bGPLSIDSubTLV.setBGPLS_ID(this.localBGPLSIdentifer);
+		//localNodeDescriptors.setBGPLSIDSubTLV(bGPLSIDSubTLV);
 		AreaIDNodeDescriptorSubTLV areaID = new AreaIDNodeDescriptorSubTLV();
 		areaID.setAREA_ID(this.localAreaID);
 		//commented for compliance with ODL
@@ -1451,7 +1475,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			
 		}
 		//Complete Dummy TLVs
-		remoteNodeDescriptors.setBGPLSIDSubTLV(bGPLSIDSubTLV);
+		//remoteNodeDescriptors.setBGPLSIDSubTLV(bGPLSIDSubTLV);
 		//commented for compliance with ODL
 		// remoteNodeDescriptors.setAreaID(areaID);
 
@@ -1539,7 +1563,11 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		linkNLRI.setIdentifier(this.identifier);
 		BGP_LS_MP_Reach_Attribute ra= new BGP_LS_MP_Reach_Attribute();
 		ra.setLsNLRI(linkNLRI);
-
+		try {
+			ra.setNextHop(InetAddress.getByName(learntFrom));
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
 		pathAttributes.add(ra);
 
 		return update;
@@ -1570,7 +1598,9 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 }
 */
 
+		/*
 		if (send4AS==true) {
+
 
 			AS4_Path_Attribute as_path = new AS4_Path_Attribute();
 			AS4_Path_Segment as_path_seg = new AS4_Path_Segment();
@@ -1592,6 +1622,8 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			//log.info("Learnt From: " +learntFrom   +  " SegmentValue: " + String.valueOf(as_path_seg.getSegments()));
 
 		}
+		 */
+
 
 		//LOCAL PREF Attribute
 		LOCAL_PREF_Attribute as_local_pref = new LOCAL_PREF_Attribute();
@@ -1797,9 +1829,9 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		localNodeDescriptors.setIGPRouterID(igpRouterIDLNSubTLV);
 		log.info("Local node link descriptior->"+localNodeDescriptors.toString());
 		//Complete Dummy TLVs
-		BGPLSIdentifierNodeDescriptorSubTLV bGPLSIDSubTLV =new BGPLSIdentifierNodeDescriptorSubTLV();
-		bGPLSIDSubTLV.setBGPLS_ID(this.localBGPLSIdentifer);
-		localNodeDescriptors.setBGPLSIDSubTLV(bGPLSIDSubTLV);
+		//BGPLSIdentifierNodeDescriptorSubTLV bGPLSIDSubTLV =new BGPLSIdentifierNodeDescriptorSubTLV();
+		//bGPLSIDSubTLV.setBGPLS_ID(this.localBGPLSIdentifer);
+		//localNodeDescriptors.setBGPLSIDSubTLV(bGPLSIDSubTLV);
 		AreaIDNodeDescriptorSubTLV areaID = new AreaIDNodeDescriptorSubTLV();
 		areaID.setAREA_ID(this.localAreaID);
 		//commented for compliance with ODL
@@ -1826,7 +1858,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 
 		}
 		//Complete Dummy TLVs
-		remoteNodeDescriptors.setBGPLSIDSubTLV(bGPLSIDSubTLV);
+		//remoteNodeDescriptors.setBGPLSIDSubTLV(bGPLSIDSubTLV);
 		//commented for compliance with ODL
 		// remoteNodeDescriptors.setAreaID(areaID);
 
@@ -1851,7 +1883,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			LinkLocalRemoteIdentifiersLinkDescriptorSubTLV linkIdentifiersTLV = new LinkLocalRemoteIdentifiersLinkDescriptorSubTLV();
 			linkIdentifiersTLV.setLinkLocalIdentifier(localRemoteIfList.get(0));
 			linkIdentifiersTLV.setLinkRemoteIdentifier(localRemoteIfList.get(1));
-			linkNLRI.setLinkIdentifiersTLV(linkIdentifiersTLV);
+			//linkNLRI.setLinkIdentifiersTLV(linkIdentifiersTLV);
 		}
 		
 
@@ -1909,6 +1941,11 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		log.debug("The Link NLRI is:"+linkNLRI.toString());
 		BGP_LS_MP_Reach_Attribute ra= new BGP_LS_MP_Reach_Attribute();
 		ra.setLsNLRI(linkNLRI);
+		try {
+			ra.setNextHop(InetAddress.getByName(learntFrom));
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
 
 		pathAttributes.add(ra);
 

@@ -38,7 +38,7 @@
 	<!-- RFC 4271. This 1-octet unsigned integer indicates the protocol version number of the message.  The current BGP version number is 4. -->
 	<version>4</version><!-- Optional Parameter. Default value: 4. -->
 	<!-- RFC 4271.  This 2-octet unsigned integer indicates the Autonomous System number of the sender.-->
-	<myAutonomousSystem>3</myAutonomousSystem>
+	<myAutonomousSystem>65000</myAutonomousSystem>
 	<!-- RFC 4271. This 4-octet unsigned integer indicates the BGP Identifier of the sender.  A given BGP speaker sets the value of its BGP
          Identifier to an IP address that is assigned to that BGP speaker.  The value of the BGP Identifier is determined upon
          startup and is the same for every local interface and BGP peer. --> 
