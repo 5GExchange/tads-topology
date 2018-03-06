@@ -596,14 +596,14 @@ public class SendTopology implements Runnable {
 			pathAttributes.add(or);
 			//AS_PATH
 
-			/*
+
 			if (send4AS == true) {
 				AS4_Path_Attribute as_path = new AS4_Path_Attribute();
 				AS4_Path_Segment as_path_seg = new AS4_Path_Segment();
 				long[] segs = new long[1];
 				segs[0] = ASnumber;
 				as_path_seg.setSegments(segs);
-				as_path.getAsPathSegments().add(as_path_seg);
+				//as_path.getAsPathSegments().add(as_path_seg);
 				pathAttributes.add(as_path);
 			} else {
 				AS_Path_Attribute as_path = new AS_Path_Attribute();
@@ -611,10 +611,10 @@ public class SendTopology implements Runnable {
 				int[] segs = new int[1];
 				segs[0] = ASnumber;
 				as_path_seg.setSegments(segs);
-				as_path.getAsPathSegments().add(as_path_seg);
+				//as_path.getAsPathSegments().add(as_path_seg);
 				pathAttributes.add(as_path);
 			}
-			 */
+
 
 			//LOCAL PREF Attribute
 			LOCAL_PREF_Attribute as_local_pref = new LOCAL_PREF_Attribute();
@@ -706,14 +706,14 @@ public class SendTopology implements Runnable {
 			or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
 			pathAttributes.add(or);
 			//AS_PATH
-			/*
+
 			if (send4AS==true) {
 				AS4_Path_Attribute as_path = new AS4_Path_Attribute();
 				AS4_Path_Segment as_path_seg = new AS4_Path_Segment();
 				long[] segs = new long[1];
 				segs[0] = ASnumber;
 				as_path_seg.setSegments(segs);
-				as_path.getAsPathSegments().add(as_path_seg);
+				//as_path.getAsPathSegments().add(as_path_seg);
 				pathAttributes.add(as_path);
 			}
 			else {
@@ -722,10 +722,10 @@ public class SendTopology implements Runnable {
 				int[] segs = new int[1];
 				segs[0] = ASnumber;
 				as_path_seg.setSegments(segs);
-				as_path.getAsPathSegments().add(as_path_seg);
+				//as_path.getAsPathSegments().add(as_path_seg);
 				pathAttributes.add(as_path);
 			}
-			*/
+
 
 			//LOCAL PREF Attribute
 			LOCAL_PREF_Attribute as_local_pref = new LOCAL_PREF_Attribute();
@@ -826,14 +826,14 @@ public class SendTopology implements Runnable {
 			pathAttributes.add(or);
 
 			//AS_PATH
-			/*
+
 			if (send4AS==true) {
 				AS4_Path_Attribute as_path = new AS4_Path_Attribute();
 				AS4_Path_Segment as_path_seg = new AS4_Path_Segment();
 				long[] segs = new long[1];
 				segs[0] = ASnumber;
 				as_path_seg.setSegments(segs);
-				as_path.getAsPathSegments().add(as_path_seg);
+				//as_path.getAsPathSegments().add(as_path_seg);
 				pathAttributes.add(as_path);
 			}
 			else {
@@ -842,10 +842,10 @@ public class SendTopology implements Runnable {
 				int[] segs = new int[1];
 				segs[0] = ASnumber;
 				as_path_seg.setSegments(segs);
-				as_path.getAsPathSegments().add(as_path_seg);
+				//as_path.getAsPathSegments().add(as_path_seg);
 				pathAttributes.add(as_path);
 			}
-			*/
+
 
 			//LOCAL PREF Attribute
 			LOCAL_PREF_Attribute as_local_pref = new LOCAL_PREF_Attribute();
@@ -902,7 +902,7 @@ public class SendTopology implements Runnable {
 			or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
 			pathAttributes.add(or);
 			//AS_PATH
-			/*
+
 			if (send4AS==true) {
 
 				AS4_Path_Attribute as_path = new AS4_Path_Attribute();
@@ -910,7 +910,7 @@ public class SendTopology implements Runnable {
 				long[] segs = new long[1];
 				segs[0] = ASnumber;
 				as_path_seg.setSegments(segs);
-				as_path.getAsPathSegments().add(as_path_seg);
+				//as_path.getAsPathSegments().add(as_path_seg);
 				pathAttributes.add(as_path);
 			}
 			else {
@@ -919,14 +919,15 @@ public class SendTopology implements Runnable {
 				int[] segs = new int[1];
 				segs[0] = ASnumber;
 				as_path_seg.setSegments(segs);
-				as_path.getAsPathSegments().add(as_path_seg);
+				//as_path.getAsPathSegments().add(as_path_seg);
 				pathAttributes.add(as_path);
 			}
-				//LOCAL PREF Attribute
-				LOCAL_PREF_Attribute as_local_pref = new LOCAL_PREF_Attribute();
-				as_local_pref.setValue(LocalPref);
-				pathAttributes.add(as_local_pref);
-			 */
+
+			//LOCAL PREF Attribute
+			LOCAL_PREF_Attribute as_local_pref = new LOCAL_PREF_Attribute();
+			as_local_pref.setValue(LocalPref);
+			pathAttributes.add(as_local_pref);
+
 
 			//NLRI
 			PCENLRI pceNLRI = new PCENLRI();
@@ -1598,7 +1599,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 }
 */
 
-		/*
+
 		if (send4AS==true) {
 
 
@@ -1607,7 +1608,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			long[] segs = new long[1];
 			segs[0] = ASnumber;
 			as_path_seg.setSegments(segs);
-			as_path.getAsPathSegments().add(as_path_seg);
+			//as_path.getAsPathSegments().add(as_path_seg);
 			pathAttributes.add(as_path);
 			//log.info("Learnt From: " +learntFrom   +  " SegmentValue: " + String.valueOf(as_path_seg.getSegments()));
 		}
@@ -1617,12 +1618,12 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			int[] segs = new int[1];
 			segs[0] = ASnumber;
 			as_path_seg.setSegments(segs);
-			as_path.getAsPathSegments().add(as_path_seg);
+			//as_path.getAsPathSegments().add(as_path_seg);
 			pathAttributes.add(as_path);
 			//log.info("Learnt From: " +learntFrom   +  " SegmentValue: " + String.valueOf(as_path_seg.getSegments()));
 
 		}
-		 */
+
 
 
 		//LOCAL PREF Attribute
