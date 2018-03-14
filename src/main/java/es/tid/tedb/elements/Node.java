@@ -21,6 +21,7 @@ public class Node {
 	/**IOS version*/
 	String rotuerModel;
 	ArrayList<String> unnumberedIntfList=null;
+	long ISIS_ID;
 	
 	public ArrayList<String> getUnnumberedIntfList() {
 		return unnumberedIntfList;
@@ -159,6 +160,12 @@ public class Node {
 	 */
 	public void setParentRouter(String parentRouter) {
 		this.parentRouter = parentRouter;
+	}
+	public long getISIS_ID() {
+		return ISIS_ID;
+	}
+	public void setISIS_ID(long dpid) {
+		this.ISIS_ID = dpid;
 	}
 
 	public String getLayer() {

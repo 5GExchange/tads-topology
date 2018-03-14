@@ -15,7 +15,7 @@ public class NodeinfoUpdateTime {
 
     Inet4Address localDomainID;
     Inet4Address localnodeID;
-    int localISISid=0;
+    long localISISid=0;
     Long NodeupdateTime;
     String LearntFrom=null;
     private Logger log;
@@ -51,7 +51,7 @@ public NodeinfoUpdateTime(Hashtable<NodeinfoUpdateTime, Long> nodeinfoUpdate, In
     }
 }
 
-public NodeinfoUpdateTime(Hashtable<NodeinfoUpdateTime, Long> nodeinfoUpdate, Inet4Address localDomainID, int id, Long NodeupdateTime){
+public NodeinfoUpdateTime(Hashtable<NodeinfoUpdateTime, Long> nodeinfoUpdate, Inet4Address localDomainID, long id, Long NodeupdateTime){
 
         this.localDomainID=localDomainID;
         this.localISISid=id;
@@ -90,7 +90,7 @@ public NodeinfoUpdateTime(Inet4Address localDomainID, Inet4Address localnodeID)
     this.localnodeID=localnodeID;
 }
 
-public NodeinfoUpdateTime(Inet4Address localDomainID, int id) {
+public NodeinfoUpdateTime(Inet4Address localDomainID, long id) {
         this.localDomainID=localDomainID;
         this.localISISid=id;
 }

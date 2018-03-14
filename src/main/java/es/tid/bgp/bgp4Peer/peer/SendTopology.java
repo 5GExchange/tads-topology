@@ -17,6 +17,7 @@ import es.tid.ospf.ospfv2.lsa.tlv.LinkTLV;
 import es.tid.ospf.ospfv2.lsa.tlv.subtlv.*;
 import es.tid.ospf.ospfv2.lsa.tlv.subtlv.complexFields.BitmapLabelSet;
 import es.tid.tedb.*;
+import es.tid.tedb.elements.Node;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,7 +40,7 @@ public class SendTopology implements Runnable {
 	 * 1= optical
 	 * 0= L3
 	 */
-	private int identifier = 1;
+	private int identifier = 0;
 	private static final int IPV4_PART_COUNT = 4;
 	private static final int IPV6_PART_COUNT = 8;
 	private static final Splitter IPV4_SPLITTER = Splitter.on('.').limit(IPV4_PART_COUNT);
@@ -232,13 +233,17 @@ public class SendTopology implements Runnable {
 		Iterator<Object> vertexIt = vertexSet.iterator();
 		//Enviamos primero los nodos. Un Node NLRI por cada nodo.
 		while (vertexIt.hasNext()) {
-			Integer node = 0;
+			long node = 0L;
 			Object v = vertexIt.next();
 			if (v instanceof es.tid.tedb.elements.Node) {
-				node = Integer.valueOf(((es.tid.tedb.elements.Node) v).getAddress().get(0));
-
-			} else {
-				node = (Integer) v;
+				log.info("instance of Node");
+				//node = Integer.valueOf(((es.tid.tedb.elements.Node) v).getAddress().get(0));
+				node=((es.tid.tedb.elements.Node) v).getISIS_ID();
+				log.info("Send NLRI ISIS node id "+ String.valueOf(node));
+			}
+			else {
+				node = (long) v;
+				log.info("Node in control before sending " + String.valueOf( node) );
 			}
 
 
@@ -442,7 +447,7 @@ public class SendTopology implements Runnable {
 		while (edgeIt.hasNext()) {
 
 			IntraDomainEdge edge = edgeIt.next();
-			int source = 0;
+			long source = 0L;
 			/*
 						Object v = vertexIt.next();
 			if( v instanceof es.tid.tedb.elements.Node){
@@ -455,23 +460,27 @@ public class SendTopology implements Runnable {
 			 */
 			if (edge.getSource() instanceof es.tid.tedb.elements.Node) {
 
-				source = Integer.valueOf(((es.tid.tedb.elements.Node) edge.getSource()).getAddress().get(0));
-
-			} else {
-				source = (Integer) edge.getSource();
+				//source = Integer.valueOf(((es.tid.tedb.elements.Node) edge.getSource()).getAddress().get(0));
+				source= ((es.tid.tedb.elements.Node) edge.getSource()).getISIS_ID();
+			}
+			else {
+				source = (long) edge.getSource();
 			}
 
-			int dst = 0;
+			long dst = 0L;
 			if (edge.getTarget() instanceof es.tid.tedb.elements.Node) {
-				dst = Integer.valueOf(((es.tid.tedb.elements.Node) edge.getTarget()).getAddress().get(0));
+				//dst = Integer.valueOf(((es.tid.tedb.elements.Node) edge.getTarget()).getAddress().get(0));
+				dst = ((es.tid.tedb.elements.Node) edge.getTarget()).getISIS_ID();
 
-			} else {
-				dst = (Integer) edge.getTarget();
+
 			}
-			log.debug("Sending: (" + String.valueOf(source) + "," + String.valueOf(dst) + ")");
-			addressList = new ArrayList<Integer>();
-			addressList.add(0, source);
-			addressList.add(1, dst);
+			else {
+				dst = (long) edge.getTarget();
+			}
+
+			//addressList = new ArrayList<long>();
+			//addressList.add(0, source);
+			//addressList.add(1, dst);
 			//Link Local Remote Identifiers
 			ArrayList<Long> localRemoteIfList = null;
 			localRemoteIfList = new ArrayList<Long>();
@@ -492,6 +501,7 @@ public class SendTopology implements Runnable {
 
 
 			TE_Information te_info = ((IntraDomainEdge) edge).getTE_info();
+			log.info("Sending: (" + String.valueOf(source) + "," + String.valueOf(dst) + ") with TE info "+ te_info.toString());
 			Inet4Address local = ((IntraDomainEdge) edge).getLocalInterfaceIPv4();
 			Inet4Address neighbor = ((IntraDomainEdge) edge).getNeighborIPv4();
 			if (local != null && neighbor != null)
@@ -506,7 +516,7 @@ public class SendTopology implements Runnable {
 			domainList.add(domainID);
 			domainList.add(domainID);
 
-			BGP4Update update = createMsgUpdateLinkNLRIISIS(edge, addressList, localRemoteIfList, lanID, domainList, true, te_info, edge.getLearntFrom(), local, neighbor);
+			BGP4Update update = createMsgUpdateLinkNLRIISIS(edge, source, dst, lanID, domainList, true, te_info, edge.getLearntFrom(), local, neighbor);
 			update.setLearntFrom(edge.getLearntFrom());
 			sendMessage(update);
 
@@ -677,10 +687,12 @@ public class SendTopology implements Runnable {
 			nodeNLRI.setLocalNodeDescriptors(localNodeDescriptors);
 			BGP_LS_MP_Reach_Attribute ra = new BGP_LS_MP_Reach_Attribute();
 			ra.setLsNLRI(nodeNLRI);
-			try {
-				ra.setNextHop(InetAddress.getByName(learntFrom));
-			} catch (UnknownHostException e) {
-				e.printStackTrace();
+			if (learntFrom!="local"){
+				try {
+					ra.setNextHop(InetAddress.getByName(learntFrom));
+				} catch (UnknownHostException e) {
+					e.printStackTrace();
+				}//aaaa
 			}
 			pathAttributes.add(ra);
 			update.setLearntFrom(node_info.getLearntFrom());
@@ -795,10 +807,12 @@ public class SendTopology implements Runnable {
 			nodeNLRI.setLocalNodeDescriptors(localNodeDescriptors);
 			BGP_LS_MP_Reach_Attribute ra= new BGP_LS_MP_Reach_Attribute();
 			ra.setLsNLRI(nodeNLRI);
-			try {
-				ra.setNextHop(InetAddress.getByName(learntFrom));
-			} catch (UnknownHostException e) {
-				e.printStackTrace();
+			if (learntFrom!="local"){
+				try {
+					ra.setNextHop(InetAddress.getByName(learntFrom));
+				} catch (UnknownHostException e) {
+					e.printStackTrace();
+				}
 			}pathAttributes.add(ra);
 			update.setLearntFrom(node_info.getLearntFrom());
 			return update;
@@ -874,10 +888,12 @@ public class SendTopology implements Runnable {
 			//itNodeNLRI.setLocalNodeDescriptors(localNodeDescriptors);
 			BGP_LS_MP_Reach_Attribute ra= new BGP_LS_MP_Reach_Attribute();
 			ra.setLsNLRI(itNodeNLRI);
-			try {
-				ra.setNextHop(InetAddress.getByName(learntFrom));
-			} catch (UnknownHostException e) {
-				e.printStackTrace();
+			if (learntFrom!="local"){
+				try {
+					ra.setNextHop(InetAddress.getByName(learntFrom));
+				} catch (UnknownHostException e) {
+					e.printStackTrace();
+				}
 			}
 			pathAttributes.add(ra);
 			return update;
@@ -963,10 +979,12 @@ public class SendTopology implements Runnable {
 								//add NLRI to BGP-LS
 			BGP_LS_MP_Reach_Attribute ra= new BGP_LS_MP_Reach_Attribute();
 			ra.setLsNLRI(pceNLRI);
-			try {
-				ra.setNextHop(InetAddress.getByName(learntFrom));
-			} catch (UnknownHostException e) {
-				e.printStackTrace();
+			if (learntFrom!="local"){
+				try {
+					ra.setNextHop(InetAddress.getByName(learntFrom));
+				} catch (UnknownHostException e) {
+					e.printStackTrace();
+				}
 			}
 			pathAttributes.add(ra);
 			log.info(ra.toString());
@@ -1266,7 +1284,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		AvailableLabels availableLabels = null;
 		MF_OTPAttribTLV mfOTP = null;
 
-		int metric = 0;
+		int defmetric = 0;
 		int te_metric = 0;
 		
 		
@@ -1286,12 +1304,12 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			if (te_info.getAvailableLabels() != null)
 				availableLabels = te_info.getAvailableLabels();
 			if(te_info.getDefaultTEMetric()!=null){
-				metric = (int) te_info.getDefaultTEMetric().getLinkMetric();
-				log.debug("Metric en el metodo sendLinkNLRI es: " + metric);
+				defmetric = (int) te_info.getDefaultTEMetric().getLinkMetric();
+				log.debug("Metric en el metodo sendLinkNLRI es: " + defmetric);
 			}
 			if(te_info.getTrafficEngineeringMetric()!=null){
 				te_metric = (int) te_info.getTrafficEngineeringMetric().getLinkMetric() ;
-				log.debug("Metric en el metodo sendLinkNLRI es: " + metric);
+				log.debug("Metric en el metodo sendLinkNLRI es: " + te_metric);
 			}
 			if(te_info.getMfOTF()!=null){
 				mfOTP =  te_info.getMfOTF();
@@ -1350,19 +1368,21 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		}
 
 		//1.2.5 metric
-//		if (metric != 0){
-//			DefaultTEMetricLinkAttribTLV defaultMetric = new DefaultTEMetricLinkAttribTLV();
-//			defaultMetric.setLinkMetric(metric);
-//			log.info("Metric en el metodo createMsgUpdateLinkNLRI es: " + metric);
-//			linkStateAttribute.setTEMetricTLV(defaultMetric);
-//			linkStateNeeded=true;
-//		}
-		
 		if (te_metric != 0){
+			MetricLinkAttribTLV metricx = new MetricLinkAttribTLV();
+			metricx.setMetric(te_metric);
+			metricx.setMetric_type(1);
+			log.info("Metric en el metodo createMsgUpdateLinkNLRI es: " + te_metric);
+			linkStateAttribute.setMetricTLV(metricx);
+			linkStateNeeded=true;
+		}
+		
+		if (defmetric != 0){
 			DefaultTEMetricLinkAttribTLV defaultMetric = new DefaultTEMetricLinkAttribTLV();
 			//defaultMetric.setLinkMetric(metric);
-			defaultMetric.setLinkMetric(te_metric);
-			log.debug("Metric en el metodo createMsgUpdateLinkNLRI es: " + te_metric);
+			defaultMetric.setLinkMetric(defmetric);
+
+			log.debug("Metric en el metodo createMsgUpdateLinkNLRI es: " + defmetric);
 			linkStateAttribute.setTEMetricTLV(defaultMetric);
 			linkStateNeeded=true;
 		}
@@ -1564,17 +1584,19 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		linkNLRI.setIdentifier(this.identifier);
 		BGP_LS_MP_Reach_Attribute ra= new BGP_LS_MP_Reach_Attribute();
 		ra.setLsNLRI(linkNLRI);
-		try {
-			ra.setNextHop(InetAddress.getByName(learntFrom));
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
+		if (learntFrom!="local"){
+			try {
+				ra.setNextHop(InetAddress.getByName(learntFrom));
+			} catch (UnknownHostException e) {
+				e.printStackTrace();
+			}
 		}
 		pathAttributes.add(ra);
 
 		return update;
 	}
 
-	private BGP4Update createMsgUpdateLinkNLRIISIS(IntraDomainEdge edgex, ArrayList<Integer> addressList, ArrayList<Long> localRemoteIfList, int lanID, ArrayList<String> domainList, boolean intradomain, TE_Information te_info, String learntFrom, Inet4Address local, Inet4Address neighbor){
+	private BGP4Update createMsgUpdateLinkNLRIISIS(IntraDomainEdge edgex, long src, long dst, int lanID, ArrayList<String> domainList, boolean intradomain, TE_Information te_info, String learntFrom, Inet4Address local, Inet4Address neighbor){
 		log.debug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXAndrea Sending link NLRI ISIS ");
 		BGP4Update update= new BGP4Update();
 		//1. Path Attributes
@@ -1640,12 +1662,12 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		AvailableLabels availableLabels = null;
 		MF_OTPAttribTLV mfOTP = null;
 
-		int metric = 0;
+		int defmetric = 0;
 		int te_metric = 0;
 
 
 		if (te_info != null){
-			log.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXAndrea TE info link NLRI ISIS not null");
+			log.info("XXXXXXXXXXXXXXXXXX    Sending TE info link NLRI ISIS not null");
 
 			if (te_info.getLinkLocalRemoteIdentifiers() != null){
 
@@ -1662,12 +1684,12 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			if (te_info.getAvailableLabels() != null)
 				availableLabels = te_info.getAvailableLabels();
 			if(te_info.getDefaultTEMetric()!=null){
-				metric = (int) te_info.getDefaultTEMetric().getLinkMetric();
-				log.debug("Metric en el metodo sendLinkNLRI es: " + metric);
+				defmetric = (int) te_info.getDefaultTEMetric().getLinkMetric();
+				log.debug("Metric en el metodo sendLinkNLRI es: " + defmetric);
 			}
 			if(te_info.getTrafficEngineeringMetric()!=null){
 				te_metric = (int) te_info.getTrafficEngineeringMetric().getLinkMetric() ;
-				log.debug("Metric en el metodo sendLinkNLRI es: " + metric);
+				log.debug("Metric en el metodo sendLinkNLRI es: " + te_metric);
 			}
 			if(te_info.getMfOTF()!=null){
 				mfOTP =  te_info.getMfOTF();
@@ -1728,19 +1750,21 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		}
 
 		//1.2.5 metric
-//		if (metric != 0){
-//			DefaultTEMetricLinkAttribTLV defaultMetric = new DefaultTEMetricLinkAttribTLV();
-//			defaultMetric.setLinkMetric(metric);
-//			log.info("Metric en el metodo createMsgUpdateLinkNLRI es: " + metric);
-//			linkStateAttribute.setTEMetricTLV(defaultMetric);
-//			linkStateNeeded=true;
-//		}
-
 		if (te_metric != 0){
+			MetricLinkAttribTLV metricx = new MetricLinkAttribTLV();
+			metricx.setMetric(te_metric);
+			metricx.setMetric_type(1);
+			log.info("Metric en el metodo createMsgUpdateLinkNLRI es: " + te_metric);
+			linkStateAttribute.setMetricTLV(metricx);
+			linkStateNeeded=true;
+		}
+
+		if (defmetric != 0){
 			DefaultTEMetricLinkAttribTLV defaultMetric = new DefaultTEMetricLinkAttribTLV();
 			//defaultMetric.setLinkMetric(metric);
-			defaultMetric.setLinkMetric(te_metric);
-			log.debug("Metric en el metodo createMsgUpdateLinkNLRI es: " + te_metric);
+			defaultMetric.setLinkMetric(defmetric);
+
+			log.debug("Metric en el metodo createMsgUpdateLinkNLRI es: " + defmetric);
 			linkStateAttribute.setTEMetricTLV(defaultMetric);
 			linkStateNeeded=true;
 		}
@@ -1809,14 +1833,15 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 
 		if (linkStateNeeded){
 			//log.debug("Link state needed");
-			log.debug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX link NLRI ISIS link state needed");
-
+			log.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX link NLRI ISIS link state needed");
+			log.info(linkStateAttribute.toString());
 			pathAttributes.add(linkStateAttribute);
+
 		}
 		//2. NLRI
 		LinkNLRI linkNLRI = new LinkNLRI();
 		linkNLRI.setProtocolID(ProtocolIDCodes.IS_IS_Level2_Protocol_ID);
-		linkNLRI.setIdentifier(layer);
+		linkNLRI.setIdentifier(0);
 
 		//2.1. Local Y Remote Descriptors
 		LocalNodeDescriptorsTLV localNodeDescriptors = new LocalNodeDescriptorsTLV();
@@ -1825,7 +1850,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		//2.1.1. IPv4
 		IGPRouterIDNodeDescriptorSubTLV igpRouterIDLNSubTLV = new IGPRouterIDNodeDescriptorSubTLV();
 		//igpRouterIDLNSubTLV.setIpv4AddressOSPF(addressList.get(0));
-		igpRouterIDLNSubTLV.setISIS_ISO_NODE_ID(addressList.get(0));
+		igpRouterIDLNSubTLV.setISIS_ISO_NODE_ID(src);
 		igpRouterIDLNSubTLV.setIGP_router_id_type(IGPRouterIDNodeDescriptorSubTLV.IGP_ROUTER_ID_TYPE_IS_IS_NON_PSEUDO);
 		localNodeDescriptors.setIGPRouterID(igpRouterIDLNSubTLV);
 		log.info("Local node link descriptior->"+localNodeDescriptors.toString());
@@ -1839,7 +1864,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		// localNodeDescriptors.setAreaID(areaID);
 
 		IGPRouterIDNodeDescriptorSubTLV igpRouterIDDNSubTLV = new IGPRouterIDNodeDescriptorSubTLV();
-		igpRouterIDDNSubTLV.setISIS_ISO_NODE_ID(addressList.get(1));
+		igpRouterIDDNSubTLV.setISIS_ISO_NODE_ID(dst);
 		igpRouterIDDNSubTLV.setIGP_router_id_type(IGPRouterIDNodeDescriptorSubTLV.IGP_ROUTER_ID_TYPE_IS_IS_NON_PSEUDO);
 		remoteNodeDescriptors.setIGPRouterID(igpRouterIDDNSubTLV);
 		log.info("Remote node link descriptior->"+remoteNodeDescriptors.toString());
@@ -1880,13 +1905,16 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			}
 		}
 		//2.2.2. Link Local/Remote identifiers TLV
+		/*
+		TEMP commented form ANdreaaaaaa
 		if (localRemoteIfList !=  null){
 			LinkLocalRemoteIdentifiersLinkDescriptorSubTLV linkIdentifiersTLV = new LinkLocalRemoteIdentifiersLinkDescriptorSubTLV();
-			linkIdentifiersTLV.setLinkLocalIdentifier(localRemoteIfList.get(0));
-			linkIdentifiersTLV.setLinkRemoteIdentifier(localRemoteIfList.get(1));
+			linkIdentifiersTLV.setLinkLocalIdentifier(src);
+			linkIdentifiersTLV.setLinkRemoteIdentifier(dst);
 			//linkNLRI.setLinkIdentifiersTLV(linkIdentifiersTLV);
 		}
-		
+		 */
+
 
 		//2.2.3 LinkDelay
 		/*
@@ -1942,14 +1970,16 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		log.debug("The Link NLRI is:"+linkNLRI.toString());
 		BGP_LS_MP_Reach_Attribute ra= new BGP_LS_MP_Reach_Attribute();
 		ra.setLsNLRI(linkNLRI);
-		try {
-			ra.setNextHop(InetAddress.getByName(learntFrom));
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
+		if (learntFrom!="local"){
+			try {
+				ra.setNextHop(InetAddress.getByName(learntFrom));
+			} catch (UnknownHostException e) {
+				e.printStackTrace();
+			}
 		}
 
 		pathAttributes.add(ra);
-
+		log.info("The final update is :"+ update.toString());
 		return update;
 	}
 

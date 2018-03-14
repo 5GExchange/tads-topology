@@ -16,8 +16,8 @@ public class IntraDomainLinkUpdateTime {
     Inet4Address localDomainID;
     Inet4Address LocalNodeIGPId;
     Inet4Address RemoteNodeIGPId;
-    int localISISid=0;
-    int remoteISISid=0;
+    long localISISid=0L;
+    long remoteISISid=0L;
     Long LocalIdentifier;
     Long RemoteIdentifier;
     Long linkUpdateTime;
@@ -69,7 +69,7 @@ public IntraDomainLinkUpdateTime(Inet4Address localDomainID, Inet4Address LocalN
 
 }
 
-public IntraDomainLinkUpdateTime(Hashtable<IntraDomainLinkUpdateTime, Long> intraDomainLinkUpdate, Inet4Address localDomainID, int LocalNodeIGPId, Long LocalIdentifier, int RemoteNodeIGPId, Long RemoteIdentifier, long linkUpdateTime){
+public IntraDomainLinkUpdateTime(Hashtable<IntraDomainLinkUpdateTime, Long> intraDomainLinkUpdate, Inet4Address localDomainID, long LocalNodeIGPId, Long LocalIdentifier, long RemoteNodeIGPId, Long RemoteIdentifier, long linkUpdateTime){
 
         this.localDomainID=localDomainID;
         this.localISISid=LocalNodeIGPId;
@@ -103,7 +103,7 @@ public IntraDomainLinkUpdateTime(Hashtable<IntraDomainLinkUpdateTime, Long> intr
         }
 }
 
-public IntraDomainLinkUpdateTime(Inet4Address localDomainID, int LocalNodeIGPId, Long LocalIdentifier, int RemoteNodeIGPId, Long RemoteIdentifier)
+public IntraDomainLinkUpdateTime(Inet4Address localDomainID, long LocalNodeIGPId, Long LocalIdentifier, long RemoteNodeIGPId, Long RemoteIdentifier)
 {
         this.localDomainID=localDomainID;
         this.localISISid=LocalNodeIGPId;
@@ -127,7 +127,7 @@ public boolean equals (Object o) {
     return Objects.equals(localDomainID, UpdateTime.localDomainID) && Objects.equals(LocalNodeIGPId, UpdateTime.LocalNodeIGPId) && Objects.equals(LocalIdentifier, UpdateTime.LocalIdentifier) && Objects.equals(RemoteNodeIGPId, UpdateTime.RemoteNodeIGPId) && Objects.equals(RemoteIdentifier, UpdateTime.RemoteIdentifier);
 }
 
-    public String toString()
+public String toString()
     {
         if((this.LocalNodeIGPId.getHostAddress()!=null)&&(this.localDomainID.getHostAddress()!=null)&&(this.RemoteNodeIGPId.getHostAddress()!=null)) {
             String ret = this.localDomainID.getHostAddress() + "<--->" + this.LocalNodeIGPId.getHostAddress() + "<--->" + this.LocalIdentifier + "<--->"

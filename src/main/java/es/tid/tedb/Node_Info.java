@@ -23,7 +23,7 @@ public class Node_Info {
 	private byte[] name;
 	private LinkedList <Inet4Address> ipv4areaIDs = new LinkedList <Inet4Address>();
 	private int sid;
-	private int ISIS_ISO_NODE_ID=0;
+	private long ISIS_ISO_NODE_ID=0L;
 
 
 
@@ -171,11 +171,11 @@ public class Node_Info {
 		return sid;
 	}
 
-	public void setISISid(int id) {
+	public void setISISid(long id) {
 		this.ISIS_ISO_NODE_ID = id;
 	}
 
-	public int getISISid(){
+	public long getISISid(){
 		return this.ISIS_ISO_NODE_ID;
 	}
 
@@ -194,7 +194,7 @@ public class Node_Info {
 			ret = ret +"Local Node IP Address: " + this.getIpv4AddressLocalNode() + "\t";
 		if(sid!=0)
 			ret = ret + "SID:" + this.getSid() +"\t";
-		if(ISIS_ISO_NODE_ID!=0)
+		if(ISIS_ISO_NODE_ID!=0L)
 			ret = ret + "IS-IS id:" + this.getISISid() +"\t";
 
 		return ret;

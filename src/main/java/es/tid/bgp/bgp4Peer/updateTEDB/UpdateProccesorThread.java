@@ -17,6 +17,7 @@ import es.tid.tedb.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.lang.model.element.NestingKind;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -217,8 +218,10 @@ public class UpdateProccesorThread extends Thread {
 								continue;
 
 							case PathAttributesTypeCode.PATH_ATTRIBUTE_TYPECODE_BGP_LS_ATTRIBUTE:
-							processAttributeLinkState((LinkStateAttribute) att);
-							continue;
+								//log.info("CCCCCCCCCCCCCCCCCCCCCCC ");
+								log.info (((LinkStateAttribute) att).toString());
+								processAttributeLinkState((LinkStateAttribute) att);
+								continue;
 
 							case PathAttributesTypeCode.PATH_ATTRIBUTE_TYPECODE_ASPATH:
 								processAttributeAsPath((AS_Path_Attribute) att, learntFrom);
@@ -227,30 +230,37 @@ public class UpdateProccesorThread extends Thread {
 							int afi;
 							afi = ((MP_Reach_Attribute)att).getAddressFamilyIdentifier();
 							if (afi == AFICodes.AFI_BGP_LS){
-								LinkStateNLRI nlri = (LinkStateNLRI) ((BGP_LS_MP_Reach_Attribute)att).getLsNLRI();
-								int nlriType =  nlri.getNLRIType();
-								switch (nlriType){					
-								case NLRITypes.Link_NLRI:
-									log.debug("Link NLRI Learnt From: "+learntFrom +">-----<" +nlri.toString());
-									processLinkNLRI((LinkNLRI)(nlri), learntFrom);
-									continue;
-								case NLRITypes.Node_NLRI:
-									fillNodeInformation((NodeNLRI)(nlri), learntFrom);
-									log.info("Node Information Learnt From: "+learntFrom +">-----<" +nlri.toString());
-									continue;
-								case NLRITypes.Prefix_v4_NLRI://POR HACER...
-									fillPrefixNLRI((PrefixNLRI)nlri, igpFlagBitsTLV, OSPFForwardingAddrTLV, prefixMetricTLV, routeTagTLV);
-									continue;
-								case NLRITypes.IT_Node_NLRI:
-									fillITNodeInformation((ITNodeNLRI)(nlri), learntFrom);
-									//log.debug("IT Node Information Learnt From: "+learntFrom +">-----<" +nlri.toString());
-									continue;
-									case NLRITypes.PCE_NLRI:
-										log.info("........................Received PCE_NLRI........................");
-										fillMDPCEInformation((PCENLRI)(nlri), learntFrom);
-										continue;
-								default:
-									log.debug("Attribute Code Unknown");
+								List<LinkStateNLRI> nlris= (List<LinkStateNLRI>) ((BGP_LS_MP_Reach_Attribute)att).getLsNLRIList();
+								LinkStateNLRI nlri= null;
+								//log.info("Number of NLRI in path attribute "+ String.valueOf(nlris.size()));
+								for (int j=0;j<nlris.size();j++){
+									nlri = nlris.get(j);
+									int nlriType =  nlri.getNLRIType();
+									switch (nlriType){
+										case NLRITypes.Link_NLRI:
+											log.info("Received Link NLRI Learnt From: "+learntFrom +">-----<");
+											log.info (nlri.toString());
+											processLinkNLRI((LinkNLRI)(nlri), learntFrom);
+											continue;
+										case NLRITypes.Node_NLRI:
+											fillNodeInformation((NodeNLRI)(nlri), learntFrom);
+											log.info("Received Node NLRI Learnt From: "+learntFrom +">-----<" +nlri.toString());
+											continue;
+										case NLRITypes.Prefix_v4_NLRI://POR HACER...
+											fillPrefixNLRI((PrefixNLRI)nlri, igpFlagBitsTLV, OSPFForwardingAddrTLV, prefixMetricTLV, routeTagTLV);
+											log.info("Received Prefix NLRI Learnt From: "+learntFrom +">-----<" +nlri.toString());
+											continue;
+										case NLRITypes.IT_Node_NLRI:
+											fillITNodeInformation((ITNodeNLRI)(nlri), learntFrom);
+											log.info("Received IT Node NLRI Learnt From: "+learntFrom +">-----<" +nlri.toString());;
+											continue;
+										case NLRITypes.PCE_NLRI:
+											log.info("Received PCE NLRI Learnt From: "+learntFrom +">-----<" +nlri.toString());
+											fillMDPCEInformation((PCENLRI)(nlri), learntFrom);
+											continue;
+										default:
+											log.debug("Attribute Code Unknown");
+									}
 								}
 							}
 							continue;
@@ -430,8 +440,8 @@ if (AsInfo_DB.containsKey(learntFrom))
 		Inet4Address IPv4InterfaceAddress = null ;
 		Inet4Address IPv4RemoteAddress = null ;
 		int IGP_type;
-		int localISISid=0;
-		int remoteISISid=0;
+		long localISISid=0L;
+		long remoteISISid=0L;
 		Inet4Address areaID= null ;
 		Inet4Address bgplsID = null;
 
@@ -594,7 +604,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 
 			if (learntFrom!=null) {
 				if(intraEdge.getLearntFrom()==null || intraEdge.getLearntFrom().equals(learntFrom)) {
-					log.info("Existing IntraDomain Edge LearntFrom: " + intraEdge.getLearntFrom() + "  New LearntFrom:  " + learntFrom);
+					log.info("IntraDomain Edge LearntFrom:  " + learntFrom);
 					te_info = createTE_Info(simpleTEDBxx);
 					intraEdge.setTE_info(te_info);
 					intraEdge.setLearntFrom(learntFrom);
@@ -628,7 +638,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 						//			}
 
 						if (!(simpleTEDBxx.getNetworkGraph().containsVertex(remoteISISid))) {
-							log.info("ISIS remoet node "+String.valueOf(remoteISISid)+" not present");
+							log.info("ISIS remote node "+String.valueOf(remoteISISid)+" not present");
 
 							//log.info("Not containing dst vertex");
 							simpleTEDBxx.getNetworkGraph().addVertex(remoteISISid);
@@ -852,6 +862,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 		}
 	}
 	private TE_Information createTE_Info(DomainTEDB domainTEDB){
+		log.info("Creating TE info");
 		TE_Information te_info = new TE_Information();
 		if(linkDelay>0){
 			UndirectionalLinkDelayDescriptorSubTLV uSTLV = new UndirectionalLinkDelayDescriptorSubTLV();
@@ -916,6 +927,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 		}
 		if(metricTLV!=null){
 			MetricLinkAttribTLV metric = new MetricLinkAttribTLV();
+			metric.setMetric_type(metricTLV.getMetric_type());
 			metric.setMetric(metricTLV.getMetric());
 			te_info.setMetric(metric);
 		}
@@ -971,6 +983,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 			}
 			te_info.setAvailableLabels(availableLabels.dublicate());
 		}
+		log.info("Created TE info: "+ te_info.toString());
 		return te_info;
 	}
 
@@ -981,6 +994,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 			Thread.currentThread().interrupt();
 		}
 	*/
+        log.info(".........................Fill MDPCE Information.........................");
 		DomainTEDB domainTEDB= null;
 		PCEInfo MDPCE= new PCEInfo();
 		PCEv4ScopeTLV pceScope= new PCEv4ScopeTLV();
@@ -1107,6 +1121,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 			Thread.currentThread().interrupt();
 		}
 	*/
+        log.info(".........................Fill Node IT Information.........................");
 		IT_Resources itResources = null;
 		DomainTEDB domainTEDB= null;
 		domainTEDB=(DomainTEDB)intraTEDBs.get(itNodeNLRI.getNodeId());
@@ -1158,7 +1173,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 		Inet4Address bgplsID = null;
 		int IGP_type = 3;
 		Inet4Address IGPID = null;
-		int IGPIDint=0;
+		long IGPIDint=0L;
 		Node_Info node_info = null;
 		Hashtable<Object, Node_Info> NodeTable;
 
@@ -1439,7 +1454,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 		//log.info("..................Added Intra-Domain Link : " +intraDom_linkUpdate   + "   Time of Update:  " + LinkUpdateTime);
 	}
 
-	public void setIntraDomainEdgeUpdateTime(Inet4Address localDomainID, int LocalNodeIGPId, int RemoteNodeIGPId, long LocalIdentifier, long RemoteIdentifier, long LinkUpdateTime) {
+	public void setIntraDomainEdgeUpdateTime(Inet4Address localDomainID, long LocalNodeIGPId, long RemoteNodeIGPId, long LocalIdentifier, long RemoteIdentifier, long LinkUpdateTime) {
 		DomainUpdateTime domain_update = new DomainUpdateTime(DomainUpdate, localDomainID, LinkUpdateTime);
 		IntraDomainLinkUpdateTime intraDom_linkUpdate= new IntraDomainLinkUpdateTime(intraDomainLinkUpdate, localDomainID, LocalNodeIGPId,LocalIdentifier,RemoteNodeIGPId,RemoteIdentifier, LinkUpdateTime);
 		//log.info("Domain ID : " +String.valueOf(localDomainID)  +"DomainTEDS Size:  " +DomainUpdate.size() + "   Time of Update:  " + LinkUpdateTime);
@@ -1484,7 +1499,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 		//log.info("..................Added Node Info : " +node_updateTime  +"  Learnt From:" +node_updateTime.getlearntfrom() + "   Time of Update:  " + UpdateTime);
 	}
 
-	public void setNodeInfoUpdateTime(Inet4Address DomainID, int localnodeID, String learntFrom, long UpdateTime) throws UnknownHostException {
+	public void setNodeInfoUpdateTime(Inet4Address DomainID, long localnodeID, String learntFrom, long UpdateTime) throws UnknownHostException {
 
 		DomainUpdateTime domain_update = new DomainUpdateTime(DomainUpdate, DomainID, UpdateTime);
 		//log.info("Domain Id : " +String.valueOf(DomainID) +"DomainTEDS Size:  " +DomainUpdate.size()  + "   Time of Update:  " +UpdateTime);
