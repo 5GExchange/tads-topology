@@ -218,12 +218,12 @@ public class SendTopology implements Runnable {
 			}
 			Node_Info node_info = NodeTable.get(node);
 			if (node_info != null) {
-				log.info("Sending node: (" + node + ")");
+				log.debug("Sending node: (" + node + ")");
 				//Mandamos NodeNLRI
 				BGP4Update update = createMsgUpdateNodeNLRI(node_info,  NodeTable.get(node).getLearntFrom());
 				sendMessage(update);
 			} else {
-				log.info("Node " + node + " HAS No Node_info in NodeTable");
+				log.debug("Node " + node + " HAS No Node_info in NodeTable");
 			}
 
 		}
@@ -236,14 +236,13 @@ public class SendTopology implements Runnable {
 			long node = 0L;
 			Object v = vertexIt.next();
 			if (v instanceof es.tid.tedb.elements.Node) {
-				log.info("instance of Node");
+				log.debug("instance of Node");
 				//node = Integer.valueOf(((es.tid.tedb.elements.Node) v).getAddress().get(0));
 				node=((es.tid.tedb.elements.Node) v).getISIS_ID();
-				log.info("Send NLRI ISIS node id "+ String.valueOf(node));
+				log.debug("Send NLRI ISIS node id "+ String.valueOf(node));
 			}
 			else {
 				node = (long) v;
-				log.info("Node in control before sending " + String.valueOf( node) );
 			}
 
 
@@ -256,7 +255,7 @@ public class SendTopology implements Runnable {
 				BGP4Update update = createMsgUpdateNodeNLRIISIS(node_info, NodeTable.get(node).getLearntFrom());
 				sendMessage(update);
 			} else {
-				log.info("Node " + node + " HAS No Node_info in NodeTable");
+				log.debug("Node " + node + " HAS No Node_info in NodeTable");
 			}
 
 		}
@@ -353,11 +352,11 @@ public class SendTopology implements Runnable {
 				domainList.add(((Inet4Address) edge.getDomain_src_router()).getHostAddress().toString());
 				//System.out.println("SRC Domain is "+((Inet4Address)edge.getDomain_src_router()).getHostAddress().toString() );
 				domainList.add(((Inet4Address) edge.getDomain_dst_router()).getHostAddress().toString());
-				log.info("Source Domain is " + (Inet4Address) edge.getDomain_dst_router());
+				log.debug("Source Domain is " + (Inet4Address) edge.getDomain_dst_router());
 				BGP4Update update = createMsgUpdateLinkNLRI(null, addressList, localRemoteIfList, lanID, domainList, false, te_info, edge.getLearntFrom()
 				);
 				update.setLearntFrom(edge.getLearntFrom());
-				log.info("Update message Created for Edge: " + edge.toString());
+				log.debug("Update message Created for Edge: " + edge.toString());
 				sendMessage(update);
 			}
 		}
@@ -501,16 +500,16 @@ public class SendTopology implements Runnable {
 
 
 			TE_Information te_info = ((IntraDomainEdge) edge).getTE_info();
-			log.info("Sending: (" + String.valueOf(source) + "," + String.valueOf(dst) + ") with TE info "+ te_info.toString());
+			log.debug("Sending: (" + String.valueOf(source) + "," + String.valueOf(dst) + ") with TE info "+ te_info.toString());
 			Inet4Address local = ((IntraDomainEdge) edge).getLocalInterfaceIPv4();
 			Inet4Address neighbor = ((IntraDomainEdge) edge).getNeighborIPv4();
 			if (local != null && neighbor != null)
-				log.info("IPv4 addresses: source->" + local.toString() + "///// dest->" + neighbor.toString() + ")");
+				log.debug("IPv4 addresses: source->" + local.toString() + "///// dest->" + neighbor.toString() + ")");
 			else {
 				if (local == null)
-					log.info("local==null");
+					log.debug("local==null");
 				if (neighbor == null)
-					log.info("neighbor==null");
+					log.debug("neighbor==null");
 			}
 			ArrayList<String> domainList = new ArrayList<String>(2);
 			domainList.add(domainID);
@@ -544,7 +543,7 @@ public class SendTopology implements Runnable {
 					String destination = session.getRemotePeerIP().getHostAddress();
 					log.info("BGP4 Update learnt from:" + update.getLearntFrom());
 					if (isTest) {
-						log.info("Sending BGP4 update to:" + destination + " with no check on the ID since it is test");
+						log.debug("Sending BGP4 update to:" + destination + " with no check on the ID since it is test");
 						if (session.getMyAutonomousSystem() != session.getRemoteAutonomousSystem()) {
 							log.debug("size before: " + String.valueOf(update.getPathAttributes().size()));
 							for (PathAttribute attr : update.getPathAttributes()) {
@@ -565,7 +564,7 @@ public class SendTopology implements Runnable {
 									session.sendBGP4Message(update);
 
 								} else
-									log.info("destination " + destination + " and source of information " + update.getLearntFrom().substring(1) + " are equal");
+									log.debug("destination " + destination + " and source of information " + update.getLearntFrom().substring(1) + " are equal");
 
 
 							} else {
@@ -785,7 +784,7 @@ public class SendTopology implements Runnable {
 				linkStateNeeded=true;
 			}
 			if (node_info.getName() != null) {
-				log.info("Sending node name: "+new String (node_info.getName()));
+				log.debug("Sending node name: "+new String (node_info.getName()));
 				NodeNameNodeAttribTLV nna = new NodeNameNodeAttribTLV();
 				nna.setNameb(node_info.getName());
 				linkStateAttribute.setNodeNameTLV(nna);
@@ -805,7 +804,7 @@ public class SendTopology implements Runnable {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					log.info("Sending ISIS Area ID: "+idarea.getHostAddress());
+					log.debug("Sending ISIS Area ID: "+idarea.getHostAddress());
 					IS_IS_AreaIdentifierNodeAttribTLV isisarea = new IS_IS_AreaIdentifierNodeAttribTLV();
 					isisarea.setValid_len(3);
 					isisarea.setIpv4areaIDs(node_info.getIpv4areaIDs());
@@ -819,7 +818,7 @@ public class SendTopology implements Runnable {
 					Inet4Address idarea = null;
 					for (int i=0;i<node_info.getIpv4areaIDs().size();++i) {
 						idarea=node_info.getIpv4areaIDs().get(i);
-						log.info("Sending ISIS Area ID: "+idarea.getHostAddress());
+						log.debug("Sending ISIS Area ID: "+idarea.getHostAddress());
 						IS_IS_AreaIdentifierNodeAttribTLV isisarea = new IS_IS_AreaIdentifierNodeAttribTLV();
 						isisarea.setValid_len(4);
 						isisarea.setIpv4areaIDs(node_info.getIpv4areaIDs());
@@ -834,7 +833,7 @@ public class SendTopology implements Runnable {
 				Inet4Address ip = node_info.getIpv4AddressLocalNode();
                 IPv4RouterIDLocalNodeNodeAttribTLV ipv4Id = new IPv4RouterIDLocalNodeNodeAttribTLV();
 				ipv4Id.setIpv4Address(ip);
-				log.info("Sending ipv4address: "+ip.getHostAddress());
+				log.debug("Sending ipv4address: "+ip.getHostAddress());
 				linkStateAttribute.setIPv4RouterIDLocalNodeNATLV(ipv4Id);
 				linkStateNeeded=true;
 			}
@@ -844,7 +843,7 @@ public class SendTopology implements Runnable {
 			//nna.setName();
 
 			if (linkStateNeeded){
-				log.info("WWWWWWWWWWWWWWWW Node Attribute needed and Added");
+				log.debug("Node Attribute needed and Added");
 				pathAttributes.add(linkStateAttribute);
 			}
 
@@ -856,7 +855,7 @@ public class SendTopology implements Runnable {
 
 			//igp router id
 			if(node_info.getISISid()!=0){
-				log.info("ISIS node id set in TED!!!!   ->   "+String.valueOf(node_info.getISISid()));
+				log.debug("ISIS node id set in TED!!!!   ->   "+String.valueOf(node_info.getISISid()));
 				IGPRouterIDNodeDescriptorSubTLV igpRouterIDLNSubTLV = new IGPRouterIDNodeDescriptorSubTLV();
 				igpRouterIDLNSubTLV.setISIS_ISO_NODE_ID(node_info.getISISid());
 				igpRouterIDLNSubTLV.setIGP_router_id_type(IGPRouterIDNodeDescriptorSubTLV.IGP_ROUTER_ID_TYPE_IS_IS_NON_PSEUDO);
@@ -949,7 +948,7 @@ public class SendTopology implements Runnable {
 			itNodeNLRI.setMem(itResources.getMem());
 			itNodeNLRI.setStorage(itResources.getStorage());
 			update.setLearntFrom(itResources.getLearntFrom());
-			log.info("Creating IT Update Related to Domain "+domainID+" Learnt from "+itResources.getLearntFrom());
+			log.debug("Creating IT Update Related to Domain "+domainID+" Learnt from "+itResources.getLearntFrom());
 			LocalNodeDescriptorsTLV localNodeDescriptors = new LocalNodeDescriptorsTLV();
 			
 			//Complete Dummy TLVs
@@ -1042,7 +1041,7 @@ public class SendTopology implements Runnable {
 			PCEv4DomainTLV domTLV= new PCEv4DomainTLV();
 			AreaIDNodeDescriptorSubTLV domID =new AreaIDNodeDescriptorSubTLV();
 			domainIDx = domainID.replace("/", "");
-			log.info(domainIDx);
+			log.debug(domainIDx);
 			domID.setAREA_ID((Inet4Address) forString(domainIDx));
 			//domTLV.addAreaIDSubTLV(domID);
 
@@ -1062,7 +1061,7 @@ public class SendTopology implements Runnable {
 				}
 			}
 			pathAttributes.add(ra);
-			log.info(ra.toString());
+			log.debug(ra.toString());
 			return update;
 
 		} catch (Exception e) {
@@ -1379,7 +1378,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 				availableLabels = te_info.getAvailableLabels();
 			if(te_info.getDefaultTEMetric()!=null){
 				defmetric = te_info.getDefaultTEMetric().getLinkMetric();
-				log.info("Default Metric Andreaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaset: " + defmetric);
+				log.debug("Default Metric: " + defmetric);
 			}
 			if(te_info.getMetric()!=null){
 				te_metric = te_info.getMetric().getMetric() ;
@@ -1424,7 +1423,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		}
 		//1.2.4. AvailableLabels
 		if (availableLabels != null){
-			log.info("Available labels fields: "+availableLabels.getLabelSet().getNumLabels());
+			log.debug("Available labels fields: "+availableLabels.getLabelSet().getNumLabels());
 			AvailableLabels al = new AvailableLabels();
 
 			BitmapLabelSet bl = new BitmapLabelSet();
@@ -1470,7 +1469,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			//defaultMetric.setLinkMetric(metric);
 			admGroup.setAdministrativeGroup(administrativeGroup);
 
-			log.info("Administrative Group set: " + administrativeGroup);
+			log.debug("Administrative Group set: " + administrativeGroup);
 			linkStateAttribute.setAdministrativeGroupTLV(admGroup);
 			linkStateNeeded=true;
 		}
@@ -1755,7 +1754,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		int administrativeGroup=0;
 		boolean adminGroupPresent= false;
 		if (te_info != null){
-			log.info("XXXXXXXXXXXXXXXXXX    Sending TE info link NLRI ISIS not null");
+			log.debug("Sending TE info link NLRI ISIS not null");
 
 
 			//MPLS
@@ -1771,7 +1770,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 				availableLabels = te_info.getAvailableLabels();
 			if(te_info.getDefaultTEMetric()!=null){
 				defmetric = te_info.getDefaultTEMetric().getLinkMetric();
-				log.info("Default Metric Andreaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaset: " + defmetric);
+				log.debug("Default Metric: " + defmetric);
 			}
 			if(te_info.getMetric()!=null){
 				te_metric = te_info.getMetric().getMetric() ;
@@ -1817,7 +1816,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		}
 		//1.2.4. AvailableLabels
 		if (availableLabels != null){
-			log.info("Available labels fields: "+availableLabels.getLabelSet().getNumLabels());
+			log.debug("Available labels fields: "+availableLabels.getLabelSet().getNumLabels());
 			AvailableLabels al = new AvailableLabels();
 
 			BitmapLabelSet bl = new BitmapLabelSet();
@@ -1844,7 +1843,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			MetricLinkAttribTLV metricx = new MetricLinkAttribTLV();
 			metricx.setMetric(te_metric);
 			metricx.setMetric_type(3);
-			log.info("Metric en el metodo createMsgUpdateLinkNLRI es: " + te_metric);
+			log.debug("Metric en el metodo createMsgUpdateLinkNLRI es: " + te_metric);
 			linkStateAttribute.setMetricTLV(metricx);
 			linkStateNeeded=true;
 		}
@@ -1863,7 +1862,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			//defaultMetric.setLinkMetric(metric);
 			admGroup.setAdministrativeGroup(administrativeGroup);
 
-			log.info("Administrative Group set: " + administrativeGroup);
+			log.debug("Administrative Group set: " + administrativeGroup);
 			linkStateAttribute.setAdministrativeGroupTLV(admGroup);
 			linkStateNeeded=true;
 		}
@@ -1932,8 +1931,8 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 
 		if (linkStateNeeded){
 			//log.debug("Link state needed");
-			log.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX link NLRI ISIS link state needed");
-			log.info(linkStateAttribute.toString());
+			log.debug("Link NLRI ISIS link state needed");
+			log.debug(linkStateAttribute.toString());
 			pathAttributes.add(linkStateAttribute);
 
 		}
@@ -1952,7 +1951,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		igpRouterIDLNSubTLV.setISIS_ISO_NODE_ID(src);
 		igpRouterIDLNSubTLV.setIGP_router_id_type(IGPRouterIDNodeDescriptorSubTLV.IGP_ROUTER_ID_TYPE_IS_IS_NON_PSEUDO);
 		localNodeDescriptors.setIGPRouterID(igpRouterIDLNSubTLV);
-		log.info("Local node link descriptior->"+localNodeDescriptors.toString());
+		log.debug("Local node link descriptior->"+localNodeDescriptors.toString());
 		//Complete Dummy TLVs
 		//BGPLSIdentifierNodeDescriptorSubTLV bGPLSIDSubTLV =new BGPLSIdentifierNodeDescriptorSubTLV();
 		//bGPLSIDSubTLV.setBGPLS_ID(this.localBGPLSIdentifer);
@@ -1966,7 +1965,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		igpRouterIDDNSubTLV.setISIS_ISO_NODE_ID(dst);
 		igpRouterIDDNSubTLV.setIGP_router_id_type(IGPRouterIDNodeDescriptorSubTLV.IGP_ROUTER_ID_TYPE_IS_IS_NON_PSEUDO);
 		remoteNodeDescriptors.setIGPRouterID(igpRouterIDDNSubTLV);
-		log.info("Remote node link descriptior->"+remoteNodeDescriptors.toString());
+		log.debug("Remote node link descriptior->"+remoteNodeDescriptors.toString());
 		//2.1.2. AS
 		if (domainList != null){
 			AutonomousSystemNodeDescriptorSubTLV as_local = new AutonomousSystemNodeDescriptorSubTLV();
@@ -2078,7 +2077,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		}
 
 		pathAttributes.add(ra);
-		log.info("The final update is :"+ update.toString());
+		log.debug("The final update is :"+ update.toString());
 		return update;
 	}
 
