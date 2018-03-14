@@ -72,10 +72,11 @@ public class UpdateProccesorThread extends Thread {
 	UnreservedBandwidthLinkAttribTLV unreservedBandwidthTLV;
 	AdministrativeGroupLinkAttribTLV administrativeGroupTLV;
 	LinkProtectionTypeLinkAttribTLV linkProtectionTLV;
-	MetricLinkAttribTLV metricTLV;
+
 	IPv4RouterIDLocalNodeLinkAttribTLV iPv4RouterIDLocalNodeLATLV;
 	IPv4RouterIDRemoteNodeLinkAttribTLV iPv4RouterIDRemoteNodeLATLV;
-	DefaultTEMetricLinkAttribTLV TEMetricTLV;	
+	MetricLinkAttribTLV metricTLV;
+	DefaultTEMetricLinkAttribTLV dTEMetricTLV;
 	TransceiverClassAndAppAttribTLV transceiverClassAndAppATLV;
 	MF_OTPAttribTLV mF_OTP_ATLV;
 	int linkDelay;
@@ -356,7 +357,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 			metricTLV = lsAtt.getMetricTLV();
 		}
 		if(lsAtt.getTEMetricTLV()!=null){
-			TEMetricTLV = lsAtt.getTEMetricTLV();
+			dTEMetricTLV = lsAtt.getTEMetricTLV();
 		}
 		if(lsAtt.getNodeFlagBitsTLV()!= null){
 			nodeFlagBitsTLV = lsAtt.getNodeFlagBitsTLV();
@@ -931,12 +932,17 @@ if (AsInfo_DB.containsKey(learntFrom))
 			metric.setMetric(metricTLV.getMetric());
 			te_info.setMetric(metric);
 		}
-		if(TEMetricTLV!=null){
-			TrafficEngineeringMetric teMetric = new TrafficEngineeringMetric();
-			teMetric.setLinkMetric((long)TEMetricTLV.getLinkMetric());
-			te_info.setTrafficEngineeringMetric(teMetric);
+		if(dTEMetricTLV!=null){
+			//log.info("Default TE metric not null and equal to: "+dTEMetricTLV.toString());
+			DefaultTEMetricLinkAttribTLV teMetric = new DefaultTEMetricLinkAttribTLV();
+			teMetric.setLinkMetric(dTEMetricTLV.getLinkMetric());
+			te_info.setDefaultTEMetric(teMetric);
+			//DefaultTEMetricLinkAttribTLV teMetric = new DefaultTEMetricLinkAttribTLV();
+			//teMetric.setLinkMetric(dTEMetricTLV.getLinkMetric());
+			//te_info.setDefaultTEMetric(teMetric);
 		}
 		if(administrativeGroupTLV!=null){
+            log.info("Administartive group= "+administrativeGroupTLV.toString());
 			AdministrativeGroup adminGroup = new AdministrativeGroup();
 			adminGroup.setAdministrativeGroup(administrativeGroupTLV.getAdministrativeGroup());
 			te_info.setAdministrativeGroup(adminGroup);
@@ -1221,7 +1227,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 			}
 
 			if(node_info.getLearntFrom()==null || node_info.getLearntFrom().equals(learntFrom)) {
-				log.info("Existing Learnt From: " + node_info.getLearntFrom() + "  New Learnt From: " + learntFrom);
+				log.info("Learnt From: " + learntFrom);
 
 				if (nodeNLRI.getLocalNodeDescriptors().getAreaID() != null) {
 					areaID = nodeNLRI.getLocalNodeDescriptors().getAreaID().getAREA_ID();
@@ -1249,7 +1255,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 				}
 
 				if (iPv4RouterIDLocalNodeLATLV != null) {
-					//log.debug("........Adding IPv4 of Local Node to Table........");
+					log.info("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Adding IPv4 of Local Node to Table........");
 					node_info.setIpv4AddressLocalNode(iPv4RouterIDLocalNodeLATLV.getIpv4Address());
 				}
 				if (nodeFlagBitsTLV != null) {
@@ -1261,13 +1267,14 @@ if (AsInfo_DB.containsKey(learntFrom))
 				}
 
 				if (nodeNameTLV != null) {
-					//log.debug("Adding name of Local Node to Table....");
+					log.info("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Adding name of Local Node to Table.... -> "+ new String (nodeNameTLV.getName()));
 					node_info.setName(nodeNameTLV.getName());
 				}
 
 				if (areaIDTLV != null) {
-					//log.debug("Adding AreaID of Local node to table....");
-					node_info.setIpv4areaIDs(areaIDTLV.getIpv4areaIDs());
+					log.info("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Adding AreaID of Local node to table....with len "+String.valueOf(areaIDTLV.getValid_len()));
+                    node_info.setValid_len(areaIDTLV.getValid_len());
+                    node_info.setIpv4areaIDs(areaIDTLV.getIpv4areaIDs());
 				}
 
 				if (sidTLV != null) {
@@ -1360,7 +1367,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 				}
 
 				if (iPv4RouterIDLocalNodeLATLV != null) {
-					//log.debug("........Adding IPv4 of Local Node to Table........");
+					log.info("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Adding IPv4 of Local Node to Table........");
 					node_info.setIpv4AddressLocalNode(iPv4RouterIDLocalNodeLATLV.getIpv4Address());
 				}
 				if (nodeFlagBitsTLV != null) {
@@ -1372,12 +1379,13 @@ if (AsInfo_DB.containsKey(learntFrom))
 				}
 
 				if (nodeNameTLV != null) {
-					//log.debug("Adding name of Local Node to Table....");
+					log.info("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Adding name of Local Node to Table.... -> "+ new String (nodeNameTLV.getName()));
 					node_info.setName(nodeNameTLV.getName());
 				}
 
 				if (areaIDTLV != null) {
-					//log.debug("Adding AreaID of Local node to table....");
+					log.info("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Adding AreaID of Local node to table....with len "+String.valueOf(areaIDTLV.getValid_len()));
+					node_info.setValid_len(areaIDTLV.getValid_len());
 					node_info.setIpv4areaIDs(areaIDTLV.getIpv4areaIDs());
 				}
 
@@ -1432,7 +1440,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 		metricTLV = null;
 		iPv4RouterIDLocalNodeLATLV = null;
 		iPv4RouterIDRemoteNodeLATLV = null;
-		TEMetricTLV = null;				
+		dTEMetricTLV = null;
 		transceiverClassAndAppATLV = null;
 		mF_OTP_ATLV = null;
 		availableLabels=null;

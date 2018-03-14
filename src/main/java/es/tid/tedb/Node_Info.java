@@ -24,7 +24,7 @@ public class Node_Info {
 	private LinkedList <Inet4Address> ipv4areaIDs = new LinkedList <Inet4Address>();
 	private int sid;
 	private long ISIS_ISO_NODE_ID=0L;
-
+	private int valid_len=0;
 
 
 
@@ -167,10 +167,17 @@ public class Node_Info {
 		this.sid = sid;
 	}
 
+	public int getValid_len(){
+		return valid_len;
+	}
+
+	public void setValid_len(int len) {
+		this.valid_len = len;
+	}
+
 	public int getSid(){
 		return sid;
 	}
-
 	public void setISISid(long id) {
 		this.ISIS_ISO_NODE_ID = id;
 	}
@@ -180,24 +187,30 @@ public class Node_Info {
 	}
 
 	public String toString(){
-		String ret = "";
+		StringBuffer sb=new StringBuffer(10000);;
 
 		if(igp_ident!=null)
-			ret = ret + "IGP-ID:" + this.getIpv4Address() +"\t";
+			sb.append("IGP-ID:" + this.getIpv4Address() +"\t");
 		if(as_number!=null)
-			ret = ret + "as_num:" + this.getAs_number() +"\t";
+			sb.append("as_num:" + this.getAs_number() +"\t");
 		if(bgpls_ident != null)
-			ret = ret + "BGPLS-identifer:" + this.getBgpls_ident() +"\t";
+			sb.append("BGPLS-identifer:" + this.getBgpls_ident() +"\t");
 		if(name != null)
-			ret = ret + "Name :" + this.getName() +"\t";
+			sb.append("Name :" + new String (this.getName()) +"\t");
 		if(ipv4AddressLocalNode!=null)
-			ret = ret +"Local Node IP Address: " + this.getIpv4AddressLocalNode() + "\t";
+			sb.append("Local Node IP Address: " + this.getIpv4AddressLocalNode() + "\t");
+		if(this.getIpv4areaIDs()!=null) {
+			if (this.getIpv4areaIDs().size()>0) {
+				sb.append("ISIS Area ID: " + this.getIpv4areaIDs().get(0).getHostAddress() + "\t");
+				sb.append("ISIS  len: " + String.valueOf(this.valid_len)+ "\t");
+			}
+		}
 		if(sid!=0)
-			ret = ret + "SID:" + this.getSid() +"\t";
+			sb.append("SID:" + this.getSid() +"\t");
 		if(ISIS_ISO_NODE_ID!=0L)
-			ret = ret + "IS-IS id:" + this.getISISid() +"\t";
+			sb.append("IS-IS id:" + this.getISISid() +"\t");
 
-		return ret;
+		return sb.toString();
 
 	}
 

@@ -110,11 +110,16 @@ public class TE_Information {
 		return trafficEngineeringMetric;
 	}
 
-	public void setTrafficEngineeringMetric(
-			TrafficEngineeringMetric trafficEngineeringMetric) {
+	public void setTrafficEngineeringMetric(TrafficEngineeringMetric trafficEngineeringMetric) {
 		this.trafficEngineeringMetric = trafficEngineeringMetric;
 	}
+	public DefaultTEMetricLinkAttribTLV getDefTrafficEngineeringMetric() {
+		return defaultTEMetric;
+	}
 
+	public void setDefTrafficEngineeringMetric(DefaultTEMetricLinkAttribTLV trafficEngineeringMetric) {
+		this.defaultTEMetric = trafficEngineeringMetric;
+	}
 	public MaximumBandwidth getMaximumBandwidth() {
 		return maximumBandwidth;
 	}

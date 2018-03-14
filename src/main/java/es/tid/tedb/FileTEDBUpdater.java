@@ -490,7 +490,7 @@ public class FileTEDBUpdater {
 								else{
 									tE_info = edge.getTE_info();
 								}
-								defaultTeMetric.setLinkMetric((long)metric);
+								defaultTeMetric.setLinkMetric((int)metric);
 								tE_info.setDefaultTEMetric(defaultTeMetric);
 								edge.setTE_info(tE_info);
 							}
@@ -1882,7 +1882,7 @@ public class FileTEDBUpdater {
 			String s_metric_aux = getCharacterDataFromElement(metric_aux);
 			int metric = Integer.parseInt(s_metric_aux);
 			DefaultTEMetricLinkAttribTLV defaultTeMetric= new DefaultTEMetricLinkAttribTLV();
-			defaultTeMetric.setLinkMetric((long)metric);
+			defaultTeMetric.setLinkMetric((int)metric);
 			tE_info.setDefaultTEMetric(defaultTeMetric);
 		}else if(tE_info_common!=null && tE_info_common.getDefaultTEMetric()!=null){
 			DefaultTEMetricLinkAttribTLV defaultTeMetric= new DefaultTEMetricLinkAttribTLV();

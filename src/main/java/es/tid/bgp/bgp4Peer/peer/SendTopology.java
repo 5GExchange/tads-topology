@@ -644,10 +644,38 @@ public class SendTopology implements Runnable {
 				linkStateNeeded = true;
 			}
 
+			if (node_info.getName() != null) {
+				NodeNameNodeAttribTLV nna = new NodeNameNodeAttribTLV();
+				nna.setName(new String(node_info.getName()));
+				linkStateAttribute.setNodeNameTLV(nna);
+				linkStateNeeded=true;
+			}
 
-			//linkStateAttribute.setNodeNameTLV();
-			NodeNameNodeAttribTLV nna = new NodeNameNodeAttribTLV();
-			//nna.setName();
+			
+			if (node_info.getArea_id()!=null){
+				byte[] address = null;
+				address=new byte[4];
+				Inet4Address idarea = null;
+				System.arraycopy(node_info.getArea_id(),0, address, 0, 4);
+				try {
+					idarea= (Inet4Address) Inet4Address.getByAddress(address);
+				} catch (UnknownHostException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				IPv4RouterIDLocalNodeNodeAttribTLV ipv4Id = new IPv4RouterIDLocalNodeNodeAttribTLV();
+				ipv4Id.setIpv4Address(idarea);
+				linkStateAttribute.setIPv4RouterIDLocalNodeNATLV(ipv4Id);
+				linkStateNeeded=true;
+			}
+			if (node_info.getIpv4Address()!=null){
+				Inet4Address ip = node_info.getIpv4Address();
+				IPv4RouterIDLocalNodeNodeAttribTLV ipv4Id = new IPv4RouterIDLocalNodeNodeAttribTLV();
+				ipv4Id.setIpv4Address(ip);
+				linkStateAttribute.setIPv4RouterIDLocalNodeNATLV(ipv4Id);
+				linkStateNeeded=true;
+			}
+
 
 			if (linkStateNeeded) {
 				log.debug("Node Attribute added....");
@@ -756,20 +784,67 @@ public class SendTopology implements Runnable {
 				linkStateAttribute.setSidLabelTLV(sidLabelTLV);
 				linkStateNeeded=true;
 			}
+			if (node_info.getName() != null) {
+				log.info("Sending node name: "+new String (node_info.getName()));
+				NodeNameNodeAttribTLV nna = new NodeNameNodeAttribTLV();
+				nna.setNameb(node_info.getName());
+				linkStateAttribute.setNodeNameTLV(nna);
+				linkStateNeeded=true;
+			}
 			//da sistemare
-			/*if (node_info.getIpv4Address()!=null){
-				Inet4Address ip = node_info.getIpv4Address();
-				IPv4RouterIDLocalNodeNodeAttribTLV ipv4Id = new IPv4RouterIDLocalNodeNodeAttribTLV();
+			if (node_info.getIpv4areaIDs()!=null){
+				int vlen=node_info.getValid_len();
+				if (vlen==3){
+					byte[] address = null;
+					address=new byte[4];
+					Inet4Address idarea = null;
+					System.arraycopy(node_info.getIpv4areaIDs().get(0).getAddress(),1, address, 1, 3);
+					try {
+						idarea= (Inet4Address) Inet4Address.getByAddress(address);
+					} catch (UnknownHostException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					log.info("Sending ISIS Area ID: "+idarea.getHostAddress());
+					IS_IS_AreaIdentifierNodeAttribTLV isisarea = new IS_IS_AreaIdentifierNodeAttribTLV();
+					isisarea.setValid_len(3);
+					isisarea.setIpv4areaIDs(node_info.getIpv4areaIDs());
+					linkStateAttribute.setAreaIDTLV(isisarea);
+
+
+				}
+				else if (vlen==4){
+					byte[] address = null;
+					address=new byte[4];
+					Inet4Address idarea = null;
+					for (int i=0;i<node_info.getIpv4areaIDs().size();++i) {
+						idarea=node_info.getIpv4areaIDs().get(i);
+						log.info("Sending ISIS Area ID: "+idarea.getHostAddress());
+						IS_IS_AreaIdentifierNodeAttribTLV isisarea = new IS_IS_AreaIdentifierNodeAttribTLV();
+						isisarea.setValid_len(4);
+						isisarea.setIpv4areaIDs(node_info.getIpv4areaIDs());
+						linkStateAttribute.setAreaIDTLV(isisarea);
+					}
+				}
+
+				linkStateNeeded=true;
+			}
+			if (node_info.getIpv4AddressLocalNode()!=null){
+
+				Inet4Address ip = node_info.getIpv4AddressLocalNode();
+                IPv4RouterIDLocalNodeNodeAttribTLV ipv4Id = new IPv4RouterIDLocalNodeNodeAttribTLV();
 				ipv4Id.setIpv4Address(ip);
+				log.info("Sending ipv4address: "+ip.getHostAddress());
 				linkStateAttribute.setIPv4RouterIDLocalNodeNATLV(ipv4Id);
 				linkStateNeeded=true;
-			}*/
-			//linkStateAttribute.setNodeNameTLV();
-			NodeNameNodeAttribTLV nna = new NodeNameNodeAttribTLV();
+			}
+
+
+
 			//nna.setName();
 
 			if (linkStateNeeded){
-				log.debug("Node Attribute added....");
+				log.info("WWWWWWWWWWWWWWWW Node Attribute needed and Added");
 				pathAttributes.add(linkStateAttribute);
 			}
 
@@ -1286,12 +1361,11 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 
 		int defmetric = 0;
 		int te_metric = 0;
-		
+		int administrativeGroup=0;
+		boolean adminGrouppresent= false;
 		
 		if (te_info != null){
-			if (te_info.getLinkLocalRemoteIdentifiers() != null){
 
-			}
 			//MPLS
 			if (te_info.getMaximumBandwidth() != null) {
 				maximumBandwidth = te_info.getMaximumBandwidth().getMaximumBandwidth();
@@ -1304,12 +1378,17 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			if (te_info.getAvailableLabels() != null)
 				availableLabels = te_info.getAvailableLabels();
 			if(te_info.getDefaultTEMetric()!=null){
-				defmetric = (int) te_info.getDefaultTEMetric().getLinkMetric();
-				log.debug("Metric en el metodo sendLinkNLRI es: " + defmetric);
+				defmetric = te_info.getDefaultTEMetric().getLinkMetric();
+				log.info("Default Metric Andreaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaset: " + defmetric);
 			}
-			if(te_info.getTrafficEngineeringMetric()!=null){
-				te_metric = (int) te_info.getTrafficEngineeringMetric().getLinkMetric() ;
+			if(te_info.getMetric()!=null){
+				te_metric = te_info.getMetric().getMetric() ;
 				log.debug("Metric en el metodo sendLinkNLRI es: " + te_metric);
+			}
+			if(te_info.getAdministrativeGroup()!=null){
+				adminGrouppresent= true;
+				administrativeGroup = te_info.getAdministrativeGroup().getAdministrativeGroup() ;
+				log.debug("Administrative group : " + administrativeGroup);
 			}
 			if(te_info.getMfOTF()!=null){
 				mfOTP =  te_info.getMfOTF();
@@ -1372,7 +1451,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			MetricLinkAttribTLV metricx = new MetricLinkAttribTLV();
 			metricx.setMetric(te_metric);
 			metricx.setMetric_type(1);
-			log.info("Metric en el metodo createMsgUpdateLinkNLRI es: " + te_metric);
+			log.debug("Metric en el metodo createMsgUpdateLinkNLRI es: " + te_metric);
 			linkStateAttribute.setMetricTLV(metricx);
 			linkStateNeeded=true;
 		}
@@ -1386,7 +1465,16 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			linkStateAttribute.setTEMetricTLV(defaultMetric);
 			linkStateNeeded=true;
 		}
-		
+		if (adminGrouppresent){
+			AdministrativeGroupLinkAttribTLV admGroup = new AdministrativeGroupLinkAttribTLV();
+			//defaultMetric.setLinkMetric(metric);
+			admGroup.setAdministrativeGroup(administrativeGroup);
+
+			log.info("Administrative Group set: " + administrativeGroup);
+			linkStateAttribute.setAdministrativeGroupTLV(admGroup);
+			linkStateNeeded=true;
+		}
+
 		//1.2.6 MF_OPT
 		if (mfOTP != null){
 			MF_OTPAttribTLV mfOTPTLV = mfOTP.duplicate();
@@ -1664,14 +1752,12 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 
 		int defmetric = 0;
 		int te_metric = 0;
-
-
+		int administrativeGroup=0;
+		boolean adminGroupPresent= false;
 		if (te_info != null){
 			log.info("XXXXXXXXXXXXXXXXXX    Sending TE info link NLRI ISIS not null");
 
-			if (te_info.getLinkLocalRemoteIdentifiers() != null){
 
-			}
 			//MPLS
 			if (te_info.getMaximumBandwidth() != null) {
 				maximumBandwidth = te_info.getMaximumBandwidth().getMaximumBandwidth();
@@ -1684,15 +1770,19 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			if (te_info.getAvailableLabels() != null)
 				availableLabels = te_info.getAvailableLabels();
 			if(te_info.getDefaultTEMetric()!=null){
-				defmetric = (int) te_info.getDefaultTEMetric().getLinkMetric();
-				log.debug("Metric en el metodo sendLinkNLRI es: " + defmetric);
+				defmetric = te_info.getDefaultTEMetric().getLinkMetric();
+				log.info("Default Metric Andreaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaset: " + defmetric);
 			}
-			if(te_info.getTrafficEngineeringMetric()!=null){
-				te_metric = (int) te_info.getTrafficEngineeringMetric().getLinkMetric() ;
+			if(te_info.getMetric()!=null){
+				te_metric = te_info.getMetric().getMetric() ;
 				log.debug("Metric en el metodo sendLinkNLRI es: " + te_metric);
 			}
 			if(te_info.getMfOTF()!=null){
 				mfOTP =  te_info.getMfOTF();
+			}
+			if (te_info.getAdministrativeGroup() != null) {
+				adminGroupPresent=true;
+				administrativeGroup = te_info.getAdministrativeGroup().getAdministrativeGroup();
 			}
 
 		}else{
@@ -1753,7 +1843,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		if (te_metric != 0){
 			MetricLinkAttribTLV metricx = new MetricLinkAttribTLV();
 			metricx.setMetric(te_metric);
-			metricx.setMetric_type(1);
+			metricx.setMetric_type(3);
 			log.info("Metric en el metodo createMsgUpdateLinkNLRI es: " + te_metric);
 			linkStateAttribute.setMetricTLV(metricx);
 			linkStateNeeded=true;
@@ -1766,6 +1856,15 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 
 			log.debug("Metric en el metodo createMsgUpdateLinkNLRI es: " + defmetric);
 			linkStateAttribute.setTEMetricTLV(defaultMetric);
+			linkStateNeeded=true;
+		}
+		if (adminGroupPresent){
+			AdministrativeGroupLinkAttribTLV admGroup = new AdministrativeGroupLinkAttribTLV();
+			//defaultMetric.setLinkMetric(metric);
+			admGroup.setAdministrativeGroup(administrativeGroup);
+
+			log.info("Administrative Group set: " + administrativeGroup);
+			linkStateAttribute.setAdministrativeGroupTLV(admGroup);
 			linkStateNeeded=true;
 		}
 
