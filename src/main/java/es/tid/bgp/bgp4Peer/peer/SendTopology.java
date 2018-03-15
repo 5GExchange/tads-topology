@@ -241,6 +241,19 @@ public class SendTopology implements Runnable {
 				node=((es.tid.tedb.elements.Node) v).getISIS_ID();
 				log.debug("Send NLRI ISIS node id "+ String.valueOf(node));
 			}
+			else if (v instanceof Inet4Address){
+				Inet4Address nodex = null;
+				nodex = (Inet4Address) v;
+				Node_Info node_info = NodeTable.get(nodex);
+				if (node_info != null) {
+					log.debug("Sending node: (" + nodex + ")");
+					//Mandamos NodeNLRI
+					BGP4Update update = createMsgUpdateNodeNLRI(node_info,  NodeTable.get(nodex).getLearntFrom());
+					sendMessage(update);
+				} else {
+					log.debug("Node " + nodex + " HAS No Node_info in NodeTable");
+				}
+			}
 			else {
 				node = (long) v;
 			}
@@ -1319,7 +1332,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		log.info("SegmentType: " + As.getType() + "SegmentNumber" + As.getsegmentNumbers() + "SegmentValue " + As.getsegmentValue());
 }
 */
-		/*
+
 		if (send4AS==true) {
 
 			AS4_Path_Attribute as_path = new AS4_Path_Attribute();
@@ -1342,8 +1355,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			//log.info("Learnt From: " +learntFrom   +  " SegmentValue: " + String.valueOf(as_path_seg.getSegments()));
 
 		}
-		 */
-
+		
 		//LOCAL PREF Attribute
 		LOCAL_PREF_Attribute as_local_pref = new LOCAL_PREF_Attribute();
 		as_local_pref.setValue(LocalPref);
