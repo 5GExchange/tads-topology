@@ -812,7 +812,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 					InterDomainEdge interDomainEdge = iterador.next();
 					log.debug("Existing Edge: " + interDomainEdge.toString());
 					if (interDomainEdge.getSrc_router_id().equals(LocalNodeIGPId)) {
-						//log.info("Local Router is the same!!!");
+						//log.info("Local F is the same!!!");
 						if (interDomainEdge.getDst_router_id().equals(RemoteNodeIGPId)) {
 							//log.info("Destination Router is the same!!!");
 							interEdge = interDomainEdge;

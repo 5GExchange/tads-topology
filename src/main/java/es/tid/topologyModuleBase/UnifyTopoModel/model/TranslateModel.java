@@ -3,8 +3,7 @@ package es.tid.topologyModuleBase.UnifyTopoModel.model;
 import es.tid.tedb.*;
 
 import java.net.Inet4Address;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 //import es.tid.tedb.elements.Link;
 
@@ -89,7 +88,7 @@ public class TranslateModel {
 		  return node;
 	  }
 	
-	public static LinksSchema translateInterDomainLinks(String domainID, MultiDomainTEDB ted){
+	public static LinksSchema translateInterDomainLinks(String domainID, MultiDomainTEDB ted, Hashtable<String,TEDB> all){
 			//Translating InterDomain links from TEDB to Unify Model
 			LinksSchema links = new LinksSchema();
 			List<Link> linklist = new ArrayList<Link>();
@@ -102,9 +101,34 @@ public class TranslateModel {
 					String srcUnify = "/nodes/node[id="+srcDomain+"]/ports/port[id="+src+"]";
 					link.setSrc(srcUnify);		
 				}
+				else if (linkTed.getSrc_router_id() instanceof Long){
+					//String src = "/nodes/node[id="+domainID+"]/ports/port[id="+String.valueOf(linkTed.getSource())+"]";
+					String src=null;
+					String srcDomain = ((java.net.Inet4Address) linkTed.getDomain_src_router()).getHostAddress();
+					for(Map.Entry<String, TEDB>entry : all.entrySet() ){
+						if (entry.getValue() instanceof DomainTEDB) {
+							Node_Info node_info=((DomainTEDB) entry.getValue()).getNodeTable().get(linkTed.getSrc_router_id());
+							if (node_info!=null){
+								if (node_info.getIpv4AddressLocalNode()!=null) {
+									//System.out.println(node.toString());
+									src = "/nodes/node[id="+srcDomain+"]/ports/port[id="+node_info.getIpv4AddressLocalNode().getHostAddress()+"]";
+									//port.setId(node.getIpv4AddressLocalNode().getHostAddress());
+								}
+								else {
+									src = "/nodes/node[id="+srcDomain+"]/ports/port[id="+String.valueOf(linkTed.getSource())+"]";
+									//System.out.println("null");
+								}
+								link.setSrc(src);
+
+							}
+						}
+					}
+
+				}
+
 				else{
 
-					System.out.println("Type of InterDomain link not implemented for UnifyModel");
+					System.out.println("SRC Type of InterDomain link not implemented for UnifyModel");
 				}
 				
 				if (linkTed.getDst_router_id() instanceof java.net.Inet4Address){
@@ -113,8 +137,32 @@ public class TranslateModel {
 					String dstUnify = "/nodes/node[id="+dstDomain+"]/ports/port[id="+dst+"]";
 					link.setDst(dstUnify);					
 				}
+				else if (linkTed.getDst_router_id() instanceof Long){
+					//String src = "/nodes/node[id="+domainID+"]/ports/port[id="+String.valueOf(linkTed.getSource())+"]";
+					String dst=null;
+					String dstDomain = ((java.net.Inet4Address) linkTed.getDomain_dst_router()).getHostAddress();
+					for(Map.Entry<String, TEDB>entry : all.entrySet() ){
+						if (entry.getValue() instanceof DomainTEDB) {
+							Node_Info node_info=((DomainTEDB) entry.getValue()).getNodeTable().get(linkTed.getDst_router_id());
+							if (node_info!=null){
+								if (node_info.getIpv4AddressLocalNode()!=null) {
+									//System.out.println(node.toString());
+									dst = "/nodes/node[id="+dstDomain+"]/ports/port[id="+node_info.getIpv4AddressLocalNode().getHostAddress()+"]";
+									//port.setId(node.getIpv4AddressLocalNode().getHostAddress());
+								}
+								else {
+									dst = "/nodes/node[id="+dstDomain+"]/ports/port[id="+String.valueOf(linkTed.getTarget())+"]";
+									//System.out.println("null");
+								}
+								link.setDst(dst);
+
+							}
+						}
+					}
+
+				}
 				else{
-					System.out.println("Type of InterDomain link not implemented for UnifyModel");
+					System.out.println("DST Type of InterDomain link not implemented for UnifyModel"+linkTed.getDst_router_id().toString());
 				}
 				linklist.add(link);
 			}

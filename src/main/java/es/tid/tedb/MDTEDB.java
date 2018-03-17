@@ -65,7 +65,11 @@ public class MDTEDB implements MultiDomainTEDB {
 	public void initializeFromFile(String file, String learntFrom){
 		networkDomainGraph=FileTEDBUpdater.readMDNetwork(file, learntFrom);
 	}
-	
+
+	public void addLinksformFile(String file, String learntFrom){
+		networkDomainGraph=FileTEDBUpdater.readMDNetwork(file, learntFrom);
+	}
+
 	public void initializeFromFileInterDomainLinks(String file){
 	}
 	

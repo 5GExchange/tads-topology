@@ -3,13 +3,16 @@ package es.tid.tedb;
 
 import org.jgrapht.graph.DefaultWeightedEdge;
 
+import java.net.Inet4Address;
+
 public class InterDomainEdge extends DefaultWeightedEdge {
 	
 	/**
 	 * Interface ID of the outgoing interface from the source
 	 */
 	public long src_if_id;
-	
+
+
 	/**
 	 * Interface ID of the incoming interface from the destination
 	 */
@@ -19,7 +22,11 @@ public class InterDomainEdge extends DefaultWeightedEdge {
 	public Object src_router_id;
 	
 	public Object dst_router_id;
-	
+
+
+	public Inet4Address localInterfaceIP;
+
+	public Inet4Address neighborIP;
 
 	/**
 	 * Source route domain
@@ -33,6 +40,7 @@ public class InterDomainEdge extends DefaultWeightedEdge {
 	
 	
 	public TE_Information TE_info;
+
 	public InterDomainEdge(){
 		TE_info=new TE_Information();
 		
@@ -71,6 +79,23 @@ public class InterDomainEdge extends DefaultWeightedEdge {
 
 	public void setSrc_if_id(long src_if_id) {
 		this.src_if_id = src_if_id;
+	}
+
+	public Inet4Address getLocalInterfaceIPv4() {
+		return localInterfaceIP;
+	}
+
+	public void setLocalInterfaceIPv4 (Inet4Address ip) {
+		this.localInterfaceIP = ip;
+	}
+
+
+	public Inet4Address getNeighborIPv4() {
+		return neighborIP;
+	}
+
+	public void setNeighborIPv4 (Inet4Address ip) {
+		this.neighborIP = ip;
 	}
 
 	public long getDst_if_id() {
@@ -168,10 +193,11 @@ public class InterDomainEdge extends DefaultWeightedEdge {
 	}
 	@Override
 	public String toString(){
-		String ideString;
+		String ideString="";
 		//TODO: he cambiado esta linea,...porq no me funcionaba super.getSource...Hayq ue mirarlo!!
 		//ideString=src_router_id.toString()+":"+src_if_id+" ("+((Object)super.getSource()).toString()+")  --> "+dst_router_id.toString()+":"+dst_if_id+" ("+((Object)super.getTarget()).toString()+")";
-		ideString=src_router_id.toString()+": "+src_if_id+" --> "+dst_router_id.toString()+": "+dst_if_id;
+		if ((src_router_id!=null)&&(dst_router_id!=null))
+			ideString=src_router_id.toString()+": "+src_if_id+" --> "+dst_router_id.toString()+": "+dst_if_id;
 		/*if (TE_info==null){
 			return ideString;
 		}

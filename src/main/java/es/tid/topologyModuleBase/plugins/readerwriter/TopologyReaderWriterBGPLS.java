@@ -41,7 +41,7 @@ public class TopologyReaderWriterBGPLS extends TopologyReaderWriter{
         bgpPeer.setIntraTEDBs(ted.getTeds());
         bgpPeer.setMultiDomainTEDB(ted.getMdTed());
         bgpPeer.createUpdateDispatcher();
-        log.info("Testing change");
+        log.fine("Testing change");
         bgpPeer.startClient();
         bgpPeer.startServer();
         bgpPeer.startManagementServer();

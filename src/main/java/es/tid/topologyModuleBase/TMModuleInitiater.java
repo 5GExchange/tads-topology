@@ -35,29 +35,28 @@ public class TMModuleInitiater {
 		this.lock = lock;
 		this.pluginsList=pluginsList;
 	}
-	public void intiate()
-	{
+	public void intiate() {
 		executor = new ScheduledThreadPoolExecutor(20);
 		ArrayList<TopologyModuleParams> paramList = params.getParamList();
 		for (int i = 0; i < paramList.size(); i++)
 		{
 			TopologyModuleParams actualLittleParams = paramList.get(i);
+			// IMPORTER/EXPORTER
+			if (actualLittleParams.isBGPLSReadingWriting())
+			{
+				TMPlugin p = new TopologyReaderWriterBGPLS(ted, actualLittleParams,lock);
+				executor.execute(p);
+				pluginsList.add(p);
+			}
+
 			//IMPORTERS
-			
 			if (actualLittleParams.isCOPReading())
 			{
 				TMPlugin p = new TopologyReaderCOP(ted, actualLittleParams,lock);
 				executor.scheduleWithFixedDelay(p, 0,20, TimeUnit.SECONDS);
 				pluginsList.add(p);
 			}
-			if (actualLittleParams.isXML())
-			{
-				TMPlugin p = new TopologyReaderXML(ted, actualLittleParams,lock);
-				System.out.println("Andrea............................................Topology Reader");
-				executor.execute(p);
-				pluginsList.add(p);
-				//log.info("Topology Read from file. State:\n"+ted.printTopology());
-			}
+
 			
 			
 			if (actualLittleParams.isOSPF())
@@ -143,15 +142,16 @@ public class TMModuleInitiater {
                         }
                         
                         
-			// IMPORTER/EXPORTER
-			if (actualLittleParams.isBGPLSReadingWriting())
+			if (actualLittleParams.isXML())
 			{
-				TMPlugin p = new TopologyReaderWriterBGPLS(ted, actualLittleParams,lock);
-				executor.execute(p);
+				//Thread.sleep(8000);
+				TMPlugin p = new TopologyReaderXML(ted, actualLittleParams,lock);
+				System.out.println("Andrea............................................Topology Reader");
+				//executor.execute(p);
+				executor.schedule (p, 20, TimeUnit.SECONDS);
 				pluginsList.add(p);
+				//log.info("Topology Read from file. State:\n"+ted.printTopology());
 			}
-
-
 			//BOTH
 			/*NO WS
 			 if (actualLittleParams.isWSOld()){

@@ -1,6 +1,7 @@
 package es.tid.topologyModuleBase;
 
 import es.tid.topologyModuleBase.util.UtilsFunctions;
+
 import org.w3c.dom.CharacterData;
 import org.w3c.dom.*;
 
@@ -9,7 +10,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.logging.Logger;
-
 /**
  * 
  * @author La humiltat
@@ -31,6 +31,7 @@ public class TopologyModuleParamsArray
 	/**
 	 * Logger
 	 */
+
 	private static Logger log=Logger.getLogger("TMController");
 	
 	/**
@@ -131,11 +132,16 @@ public class TopologyModuleParamsArray
 				littleParams.setModexml(getCharacterDataFromElement(((Element) nodes_xml.getElementsByTagName("mode").item(0))));
 				littleParams.setNetworkDescriptionFile(getCharacterDataFromElement(((Element) nodes_xml.getElementsByTagName("XMLFileTopology").item(0))));
 				littleParams.setXML(true);
-				if (littleParams.getModexml()=="TM")
+				if (littleParams.getModexml().equals("TM")){
+					log.info("..................................................XML mode: "+littleParams.getModexml()+".");
 					littleParams.setIdentifier(getCharacterDataFromElement(((Element) nodes_xml.getElementsByTagName("Identifier").item(0))));
+					log.info("..................................................XML mode: "+littleParams.getIdentifier());
 
-				log.info("..................................................XML configured with file: "+littleParams.getNetworkDescriptionFile());
+				}
+				log.info("..................................................XML configured with file: "+littleParams.getNetworkDescriptionFile()+" with identifier "+
+						littleParams.getIdentifier());
 				paramList.add(littleParams);
+
 			}
 			
 			NodeList list_nodes_COP = doc.getElementsByTagName("COP");

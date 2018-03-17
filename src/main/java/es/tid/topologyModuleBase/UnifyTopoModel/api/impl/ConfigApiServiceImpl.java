@@ -619,8 +619,9 @@ public class ConfigApiServiceImpl extends ConfigApiService {
     			
     		}else if(entry.getValue() instanceof MultiDomainTEDB){
     			//Interdomain links
-    			tSchema.setLinks(TranslateModel.translateInterDomainLinks(entry.getKey(),(MultiDomainTEDB)entry.getValue()));
-    			
+    			//tSchema.setLinks(TranslateModel.translateInterDomainLinks(entry.getKey(),(MultiDomainTEDB)entry.getValue()));
+                tSchema.setLinks(TranslateModel.translateInterDomainLinks(entry.getKey(),(MultiDomainTEDB)entry.getValue(), ted.getTeds()));
+
     		}else{// unrecognized TED
     			System.out.println("Type of TED not implemented");
     			
