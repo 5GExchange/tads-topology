@@ -454,17 +454,21 @@ public class TopologiesDataBase implements TopologyTEDB
 	{
 		//ted.initializeFromFile(file);
 		//System.out.println("It works!!!!");
-		if (teds.size()==0)
-			teds.putAll(FileTEDBUpdater.readMultipleDomainSimpleNetworks(file, null, false,0,Integer.MAX_VALUE, false, ID));
-
-		else
-			FileTEDBUpdater.readAllDomain(file, null, false,0,Integer.MAX_VALUE, false, ID, teds);
-
+		if (teds.size()==0) {
+			teds.putAll(FileTEDBUpdater.readMultipleDomainSimpleNetworks(file, null, false, 0, Integer.MAX_VALUE, false, ID));
+			System.out.println("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr No teds, initialized from file");
+		}
+		else {
+			if(teds!=null){
+				FileTEDBUpdater.readAllDomain(file, null, false, 0, Integer.MAX_VALUE, false, ID, teds);
+				System.out.println("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr Teds present, started from previous, Tteds size is="+teds.size());
+			}
+		}
 		if (mdTed==null)
 			mdTed.initializeFromFile(file, ID);
 		else
 			FileTEDBUpdater.addLinksformFile(mdTed, teds, file, ID);
-		System.out.println("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"+mdTed.toString());
+
 	}
 
 

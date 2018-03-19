@@ -148,7 +148,8 @@ public class TMModuleInitiater {
 				TMPlugin p = new TopologyReaderXML(ted, actualLittleParams,lock);
 				System.out.println("Andrea............................................Topology Reader");
 				//executor.execute(p);
-				executor.schedule (p, 20, TimeUnit.SECONDS);
+				//executor.schedule (p, 20, TimeUnit.SECONDS);
+				executor.schedule (p, 5, TimeUnit.SECONDS);
 				pluginsList.add(p);
 				//log.info("Topology Read from file. State:\n"+ted.printTopology());
 			}
