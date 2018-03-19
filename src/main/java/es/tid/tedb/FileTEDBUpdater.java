@@ -1303,6 +1303,7 @@ public class FileTEDBUpdater {
 				boolean readNetwork=false;
 				Element element1 = (Element) nodes_domains.item(j);
 				SimpleTEDB tedb = new SimpleTEDB();
+				tedb.setIGPType(3);
 				SimpleDirectedWeightedGraph<Object, IntraDomainEdge> graph = new SimpleDirectedWeightedGraph<Object, IntraDomainEdge>(IntraDomainEdge.class);
 
 				if (layer!=null){
@@ -1970,10 +1971,12 @@ public class FileTEDBUpdater {
 				if (domainTEDB instanceof SimpleTEDB){
 					tedb = (SimpleTEDB) domainTEDB;
 					graph = ((SimpleTEDB) domainTEDB).getNetworkGraph();
+
 					log.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXdomain " + domain_id+" exists!!");
 				}else if (domainTEDB==null){
 					tedb = new SimpleTEDB();
 					graph = new SimpleDirectedWeightedGraph<Object, IntraDomainEdge>(IntraDomainEdge.class);
+					tedb.setIGPType(3);
 					log.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXdomain " + domain_id+" initialized!!");
 				}else {
 					log.debug("PROBLEM: TEDB not Compatible");
