@@ -1425,6 +1425,7 @@ public class FileTEDBUpdater {
 						nodeI.setName(name.getBytes());
 						nodeI.setIpv4Address((Inet4Address)router_id_addr);
 						nodeI.setIpv4AddressLocalNode((Inet4Address)router_id_addr);
+						nodeI.setLearntFrom(learntFrom);
 						log.info ("created from file this node info"+nodeI.toString());
 						Hashtable<Object, Node_Info> NodeTable;
 						NodeTable =tedb.getNodeTable();
@@ -2082,6 +2083,7 @@ public class FileTEDBUpdater {
 					nodeI.setName(name.getBytes());
 					nodeI.setIpv4Address((Inet4Address)router_id_addr);
 					nodeI.setIpv4AddressLocalNode((Inet4Address)router_id_addr);
+					nodeI.setLearntFrom(learntFrom);
 					log.info ("created from file this node info"+nodeI.toString());
 					Hashtable<Object, Node_Info> NodeTable;
 					NodeTable =tedb.getNodeTable();
