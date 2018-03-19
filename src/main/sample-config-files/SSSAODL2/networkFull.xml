@@ -29,7 +29,6 @@
 	
 		<edgeCommon>
 			<maximum_bandwidth>1000</maximum_bandwidth>
-			<maximum_bandwidth>12500</maximum_bandwidth>
 			<unreserved_bandwidth priority="7">12500</unreserved_bandwidth>
 			<unreserved_bandwidth priority="6">12500</unreserved_bandwidth>
 			<unreserved_bandwidth priority="5">12500</unreserved_bandwidth>

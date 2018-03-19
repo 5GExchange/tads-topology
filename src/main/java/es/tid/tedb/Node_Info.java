@@ -193,6 +193,8 @@ public class Node_Info {
 			sb.append("IGP-ID:" + this.getIpv4Address() +"\t");
 		if(as_number!=null)
 			sb.append("as_num:" + this.getAs_number() +"\t");
+		if(learntFrom!=null)
+			sb.append("learnFrom:" + this.getLearntFrom() +"\t");
 		if(bgpls_ident != null)
 			sb.append("BGPLS-identifer:" + this.getBgpls_ident() +"\t");
 		if(name != null)

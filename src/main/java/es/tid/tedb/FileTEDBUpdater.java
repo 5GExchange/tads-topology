@@ -1420,8 +1420,8 @@ public class FileTEDBUpdater {
 								.getElementsByTagName("name");
 						Element name_e = (Element) name_node.item(0);
 						String name = getCharacterDataFromElement(name_e);
-						log.info("Node name: " + name);
 						Node_Info nodeI= null;
+						log.info("Node name: " + name);
 						Hashtable<Object, Node_Info> NodeTable;
 						NodeTable =tedb.getNodeTable();
 						if(tedb.getNodeTable().containsKey((Inet4Address)router_id_addr))
@@ -1433,22 +1433,23 @@ public class FileTEDBUpdater {
 
 							nodeI = new Node_Info();
 						}
+						if (name!=null)
+							nodeI.setName(name.getBytes());
 						Inet4Address ip = null;
 						try{ // router_id_addr type: Inet4Address
 								ip = (Inet4Address) Inet4Address.getByName(domain_id);
 							} catch (Exception e) { // router_id_addr type: DataPathID
 
 							}
+						nodeI.setIpv4Address((Inet4Address)router_id_addr);
+						nodeI.setIpv4AddressLocalNode((Inet4Address)router_id_addr);
+						nodeI.setLearntFrom(learntFrom);
 
 						if (ip!=null) {
-							if (name!=null)
-								nodeI.setName(name.getBytes());
 							nodeI.setAs_number(ip);
-							nodeI.setIpv4Address((Inet4Address)router_id_addr);
-							nodeI.setIpv4AddressLocalNode((Inet4Address)router_id_addr);
-							nodeI.setLearntFrom(learntFrom);
-							log.info ("created from file this node info"+nodeI.toString());
 						}
+						log.info ("created from file this node info       Andrea "+nodeI.toString());
+
 						if (NodeTable != null) {
 							if (!NodeTable.containsKey((Inet4Address)router_id_addr)) {
 								NodeTable.remove((Inet4Address)router_id_addr);
@@ -2096,17 +2097,17 @@ public class FileTEDBUpdater {
 
 						}
 
+					if (name!=null)
+						nodeI.setName(name.getBytes());
 
+					nodeI.setIpv4Address((Inet4Address)router_id_addr);
+					nodeI.setIpv4AddressLocalNode((Inet4Address)router_id_addr);
+					nodeI.setLearntFrom(learntFrom);
 
 					if (ip!=null) {
-						if (name!=null)
-							nodeI.setName(name.getBytes());
 						nodeI.setAs_number(ip);
-						nodeI.setIpv4Address((Inet4Address)router_id_addr);
-						nodeI.setIpv4AddressLocalNode((Inet4Address)router_id_addr);
-						nodeI.setLearntFrom(learntFrom);
-						log.info ("created from file this node info"+nodeI.toString());
 					}
+					log.info ("created from file this node info  "+nodeI.toString());
 					if (NodeTable != null) {
 						if (!NodeTable.containsKey((Inet4Address)router_id_addr)) {
 							NodeTable.remove((Inet4Address)router_id_addr);
