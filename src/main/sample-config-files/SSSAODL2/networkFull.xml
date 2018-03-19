@@ -72,6 +72,14 @@
    			<undir_residual_bandwidth>802</undir_residual_bandwidth>
    			<undir_available_bandwidth>500</undir_available_bandwidth>
    			<undir_utilized_bandwidth>436</undir_utilized_bandwidth>
+			<unreserved_bandwidth priority="7">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="6">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="5">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="4">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="3">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="2">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="1">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="0">12500</unreserved_bandwidth>
 		</edge>
 		<edge>
 			<source>
@@ -96,6 +104,14 @@
    			<undir_residual_bandwidth>802</undir_residual_bandwidth>
    			<undir_available_bandwidth>500</undir_available_bandwidth>
    			<undir_utilized_bandwidth>436</undir_utilized_bandwidth>
+			<unreserved_bandwidth priority="7">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="6">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="5">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="4">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="3">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="2">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="1">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="0">12500</unreserved_bandwidth>
 		</edge>
 		<edge>
 			<source>
@@ -120,6 +136,14 @@
    			<undir_residual_bandwidth>802</undir_residual_bandwidth>
    			<undir_available_bandwidth>500</undir_available_bandwidth>
    			<undir_utilized_bandwidth>436</undir_utilized_bandwidth>
+			<unreserved_bandwidth priority="7">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="6">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="5">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="4">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="3">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="2">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="1">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="0">12500</unreserved_bandwidth>
 		</edge>
 		<edge>
 			<source>
@@ -144,6 +168,14 @@
    			<undir_residual_bandwidth>802</undir_residual_bandwidth>
    			<undir_available_bandwidth>500</undir_available_bandwidth>
    			<undir_utilized_bandwidth>436</undir_utilized_bandwidth>
+			<unreserved_bandwidth priority="7">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="6">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="5">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="4">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="3">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="2">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="1">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="0">12500</unreserved_bandwidth>
 		</edge>
 		<edge>
 			<source>
@@ -168,6 +200,14 @@
    			<undir_residual_bandwidth>802</undir_residual_bandwidth>
    			<undir_available_bandwidth>500</undir_available_bandwidth>
    			<undir_utilized_bandwidth>436</undir_utilized_bandwidth>
+			<unreserved_bandwidth priority="7">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="6">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="5">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="4">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="3">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="2">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="1">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="0">12500</unreserved_bandwidth>
 		</edge>
 		<edge>
 			<source>
@@ -192,6 +232,14 @@
    			<undir_residual_bandwidth>802</undir_residual_bandwidth>
    			<undir_available_bandwidth>500</undir_available_bandwidth>
    			<undir_utilized_bandwidth>436</undir_utilized_bandwidth>
+			<unreserved_bandwidth priority="7">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="6">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="5">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="4">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="3">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="2">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="1">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="0">12500</unreserved_bandwidth>
 		</edge>
 		<edge>
 			<source>
@@ -216,6 +264,14 @@
    			<undir_residual_bandwidth>802</undir_residual_bandwidth>
    			<undir_available_bandwidth>500</undir_available_bandwidth>
    			<undir_utilized_bandwidth>436</undir_utilized_bandwidth>
+			<unreserved_bandwidth priority="7">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="6">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="5">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="4">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="3">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="2">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="1">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="0">12500</unreserved_bandwidth>
 		</edge>
 		<edge>
 			<source>
@@ -240,6 +296,14 @@
    			<undir_residual_bandwidth>802</undir_residual_bandwidth>
    			<undir_available_bandwidth>500</undir_available_bandwidth>
    			<undir_utilized_bandwidth>436</undir_utilized_bandwidth>
+			<unreserved_bandwidth priority="7">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="6">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="5">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="4">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="3">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="2">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="1">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="0">12500</unreserved_bandwidth>
 		</edge>
 		<edge>
 			<source>
@@ -264,6 +328,14 @@
    			<undir_residual_bandwidth>802</undir_residual_bandwidth>
    			<undir_available_bandwidth>500</undir_available_bandwidth>
    			<undir_utilized_bandwidth>436</undir_utilized_bandwidth>
+			<unreserved_bandwidth priority="7">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="6">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="5">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="4">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="3">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="2">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="1">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="0">12500</unreserved_bandwidth>
 		</edge>
 		<edge>
 			<source>
@@ -288,6 +360,14 @@
    			<undir_residual_bandwidth>802</undir_residual_bandwidth>
    			<undir_available_bandwidth>500</undir_available_bandwidth>
    			<undir_utilized_bandwidth>436</undir_utilized_bandwidth>
+			<unreserved_bandwidth priority="7">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="6">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="5">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="4">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="3">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="2">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="1">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="0">12500</unreserved_bandwidth>
 		</edge>
 
 	</domain>
