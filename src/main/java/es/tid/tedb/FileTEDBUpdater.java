@@ -1441,7 +1441,8 @@ public class FileTEDBUpdater {
 							}
 
 						if (ip!=null) {
-							nodeI.setName(name.getBytes());
+							if (name!=null)
+								nodeI.setName(name.getBytes());
 							nodeI.setAs_number(ip);
 							nodeI.setIpv4Address((Inet4Address)router_id_addr);
 							nodeI.setIpv4AddressLocalNode((Inet4Address)router_id_addr);
@@ -2098,7 +2099,8 @@ public class FileTEDBUpdater {
 
 
 					if (ip!=null) {
-						nodeI.setName(name.getBytes());
+						if (name!=null)
+							nodeI.setName(name.getBytes());
 						nodeI.setAs_number(ip);
 						nodeI.setIpv4Address((Inet4Address)router_id_addr);
 						nodeI.setIpv4AddressLocalNode((Inet4Address)router_id_addr);
