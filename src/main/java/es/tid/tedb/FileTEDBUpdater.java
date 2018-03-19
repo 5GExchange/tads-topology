@@ -3281,6 +3281,7 @@ public class FileTEDBUpdater {
 
 				log.info("Adding Domain: " + domain_id);
 				graph.addVertex(domain_id);
+
 				NodeList nodes = element_domain.getElementsByTagName("node");
 
 				for (int i = 0; i < nodes.getLength(); i++) {
@@ -3289,7 +3290,7 @@ public class FileTEDBUpdater {
 							.getElementsByTagName("router_id");
 					Element router_id_e = (Element) router_id_node.item(0);
 					String router_id = getCharacterDataFromElement(router_id_e);
-					log.info("Router_id: " + router_id);
+					//log.info("Router_id: " + router_id);
 					try { // router_id_addr type: Inet4Address
 						router_id_addr = (Inet4Address) Inet4Address.getByName(router_id);
 					} catch (Exception e) { // router_id_addr type: DataPathID
@@ -3313,13 +3314,13 @@ public class FileTEDBUpdater {
 					Node_Info nodeI = new Node_Info();
 					if (name_e!=null) {
 						String name = getCharacterDataFromElement(name_e);
-						log.info("Node name: " + name);
+						//log.info("Node name: " + name);
 
 						nodeI.setName(name.getBytes());
 					}
 					nodeI.setIpv4Address((Inet4Address)router_id_addr);
 					nodeI.setIpv4AddressLocalNode((Inet4Address)router_id_addr);
-					log.info ("created from file this node info"+nodeI.toString());
+					//log.info ("created from file this node info"+nodeI.toString());
 
 				}
 
