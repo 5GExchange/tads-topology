@@ -1160,7 +1160,8 @@ public class FileTEDBUpdater {
 									log.debug("s_router_id_addr: "+s_router_id_addr.toString()+"; d_router_id_addr: "+d_router_id_addr.toString()+"; edge: "+edge);
 									log.info("New intradomain link: "+s_router_id_addr.toString()+" --> "+d_router_id_addr.toString());//+" \n "+edge);
 
-								}else{
+								}
+								/*else{
 									log.debug("s_router_id_addr: "+s_router_id_addr.toString()+"; d_router_id_addr: "+d_router_id_addr.toString()+"; edge: "+edge);
 									if(graph.containsVertex(d_router_id_addr)==false){
 										//interDomain edge
@@ -1174,14 +1175,14 @@ public class FileTEDBUpdater {
 										log.info("New intradomain link: "+s_router_id_addr.toString()+" --> "+d_router_id_addr.toString());//+" \n "+edge);
 
 									}
-								}
+								}*/
 							}catch(Exception e){
 								log.error("Problem with source "+s_router_id_addr+" destination "+d_router_id_addr);
 								e.printStackTrace();
 								System.exit(-1);
 							}
 						}
-						if(type.equals("interdomain")){
+						/*if(type.equals("interdomain")){
 							log.debug("New Interdomain Edge");
 							InterDomainEdge edge = new InterDomainEdge();
 							TE_Information tE_info=readTE_INFOfromXml(tE_info_common,element, false,numLabels, grid,  cs, n, 0, Integer.MAX_VALUE);
@@ -1253,7 +1254,7 @@ public class FileTEDBUpdater {
 
 							}
 							
-						}
+						}*/
 					}
 					
 				}
@@ -1324,13 +1325,13 @@ public class FileTEDBUpdater {
 				}else {
 					readNetwork=true;
 				}
+				readNetwork=true;
 				if (readNetwork){
 					Element element_domain = (Element) nodes_domains.item(j);
 					NodeList nodes_domain_id = element_domain.getElementsByTagName("domain_id");
 					for (int k = 0; k < nodes_domain_id.getLength(); k++) {
 						Element domain_id_e = (Element) nodes_domain_id.item(0);
 						domain_id = getCharacterDataFromElement(domain_id_e);
-						log.debug("Looking for nodes in domain: " + domain_id);
 						log.info("Loading topology from domain " + domain_id);
 					}
 
@@ -1453,7 +1454,7 @@ public class FileTEDBUpdater {
 
 						if (NodeTable != null) {
 							if (!NodeTable.containsKey((Inet4Address)router_id_addr)) {
-								NodeTable.remove((Inet4Address)router_id_addr);
+								//NodeTable.remove((Inet4Address)router_id_addr);
 								NodeTable.put((Inet4Address)router_id_addr, nodeI);
 							}
 						}
@@ -2077,8 +2078,11 @@ public class FileTEDBUpdater {
 					NodeList name_node = element
 							.getElementsByTagName("name");
 					Element name_e = (Element) name_node.item(0);
-					String name = getCharacterDataFromElement(name_e);
-					log.info("Node name: " + name);
+					String name=null;
+					if(name_e!=null) {
+						name = getCharacterDataFromElement(name_e);
+						log.info("Node name: " + name);
+					}
 					Node_Info nodeI= null;
 					Hashtable<Object, Node_Info> NodeTable;
 					NodeTable =tedb.getNodeTable();
@@ -2111,7 +2115,7 @@ public class FileTEDBUpdater {
 					log.info ("created from file this node info  "+nodeI.toString());
 					if (NodeTable != null) {
 						if (!NodeTable.containsKey((Inet4Address)router_id_addr)) {
-							NodeTable.remove((Inet4Address)router_id_addr);
+							//NodeTable.remove((Inet4Address)router_id_addr);
 							NodeTable.put((Inet4Address)router_id_addr, nodeI);
 						}
 					}
@@ -2428,6 +2432,10 @@ public class FileTEDBUpdater {
 									graph.getEdge(s_router_id_addr, d_router_id_addr).setNumberFibers(graph.getEdge(s_router_id_addr, d_router_id_addr).getNumberFibers()+1);
 									log.debug("s_router_id_addr: "+s_router_id_addr.toString()+"; d_router_id_addr: "+d_router_id_addr.toString()+"; edge: "+edge);
 									log.info("New intradomain link: "+s_router_id_addr.toString()+" --> "+d_router_id_addr.toString());//+" \n "+edge);
+									graph.addEdge(s_router_id_addr, d_router_id_addr, edge);
+									graph.getEdge(s_router_id_addr, d_router_id_addr).setNumberFibers(1);
+									log.debug("New Intradomain Edge");
+									log.info("New intradomain link: "+s_router_id_addr.toString()+" --> "+d_router_id_addr.toString()+" learnt "+edge.getLearntFrom());//+" \n "+edge);
 
 								}else{
 									log.debug("s_router_id_addr: "+s_router_id_addr.toString()+"; d_router_id_addr: "+d_router_id_addr.toString()+"; edge: "+edge);
@@ -2438,12 +2446,6 @@ public class FileTEDBUpdater {
 										//interdomain links will be loaded separately
 										// type="interdomain";
 										type="different";
-
-									}else{
-										graph.addEdge(s_router_id_addr, d_router_id_addr, edge);
-										graph.getEdge(s_router_id_addr, d_router_id_addr).setNumberFibers(1);
-										log.debug("New Intradomain Edge");
-										log.info("New intradomain link: "+s_router_id_addr.toString()+" --> "+d_router_id_addr.toString()+" learnt "+edge.getLearntFrom());//+" \n "+edge);
 
 									}
 								}
@@ -3270,7 +3272,7 @@ public class FileTEDBUpdater {
 
 			NodeList nodes_domains = doc.getElementsByTagName("domain");
 			// First pass to read all the nodes and domains
-			log.info("Multidomain Graph add links");
+			log.info("Bla bla bla bla bla bla Multidomain Graph add links");
 			for (int j = 0; j < nodes_domains.getLength(); j++) {
 				Element element_domain = (Element) nodes_domains.item(j);
 				NodeList nodes_domain_id = element_domain
@@ -3473,6 +3475,11 @@ public class FileTEDBUpdater {
 				edge.setDomain_dst_router(dest_domain_id);
 				//edge.setDst_router_id(d_router_id_addr);
 				//edge.setSrc_router_id(s_router_id_addr);
+
+				//Cialone
+				//TE Link information
+				//edge.setTE_info(readTE_INFOfromXml(tE_info_common, element, commonBitmapLabelSet,numLabels, grid,  cs, n,lambdaIni,lambdaEnd));
+
 
 				Enumeration<String> iter = teds.keys();
 
@@ -4537,12 +4544,16 @@ public class FileTEDBUpdater {
 						connection.setDst_router_id(d_router_id_addr);
 						connection.setDomain_src_router(s_router_domain);
 						connection.setDomain_dst_router(d_router_domain);
+						TE_Information teinfo=null;
 						if(connection.getTE_info()==null){
-							TE_Information tE_info= new TE_Information();							
-							if (commonBitmapLabelSet){	
-								tE_info.createBitmapLabelSet(numLabels, grid,  cs, n);
+							teinfo= new TE_Information();
+							if (commonBitmapLabelSet){
+								teinfo.createBitmapLabelSet(numLabels, grid,  cs, n);
 							}
-							connection.setTE_info(tE_info);
+							connection.setTE_info(teinfo);
+						}
+						else{
+							teinfo=connection.getTE_info();
 						}
 						//add the connection to the LinkedList.
 						interDomainLinks.add(connection);

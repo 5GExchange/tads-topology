@@ -464,10 +464,14 @@ public class TopologiesDataBase implements TopologyTEDB
 				System.out.println("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr Teds present, started from previous, Tteds size is="+teds.size());
 			}
 		}
-		if (mdTed==null)
+		if (mdTed==null) {
+			System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh Mdted initialized from scratch");
 			mdTed.initializeFromFile(file, ID);
-		else
+		}
+		else{
 			FileTEDBUpdater.addLinksformFile(mdTed, teds, file, ID);
+			System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh Mdted alredy present");
+		}
 
 	}
 

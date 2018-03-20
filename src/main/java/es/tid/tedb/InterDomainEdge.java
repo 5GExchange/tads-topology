@@ -17,7 +17,8 @@ public class InterDomainEdge extends DefaultWeightedEdge {
 	 * Interface ID of the incoming interface from the destination
 	 */
 	public long dst_if_id;
-	
+
+	public boolean complete=false;
 	
 	public Object src_router_id;
 	
@@ -43,11 +44,12 @@ public class InterDomainEdge extends DefaultWeightedEdge {
 
 	public InterDomainEdge(){
 		TE_info=new TE_Information();
-		
+		complete=false;
 	}
 	public InterDomainEdge(Object src, Object dst){
 		src_router_id= src;
 		dst_router_id=dst;
+		complete=true;
 	}
 	public Object getDomain_dst_router() {
 		return domain_dst_router;
@@ -72,6 +74,15 @@ public class InterDomainEdge extends DefaultWeightedEdge {
 		Object destination= (Object)super.getTarget();
 		return destination;
 	}
+
+	public boolean getComplete() {
+		return complete;
+	}
+
+	public void setComplete(boolean compl) {
+		this.complete = compl;
+	}
+
 
 	public long getSrc_if_id() {
 		return src_if_id;

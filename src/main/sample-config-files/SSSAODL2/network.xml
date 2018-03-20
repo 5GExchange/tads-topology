@@ -18,6 +18,7 @@
 				<if_id>2</if_id>
 				<ip>192.168.200.2</ip>
 			</destination>
+			<type>interdomain</type>
 			<maximum_bandwidth>12500</maximum_bandwidth>
 			<unreserved_bandwidth priority="7">12500</unreserved_bandwidth>
 			<unreserved_bandwidth priority="6">12500</unreserved_bandwidth>

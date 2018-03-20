@@ -143,6 +143,7 @@ public class SendTopology implements Runnable {
 						log.debug("Sending from TEDB");
 						Enumeration<TEDB> iter = intraTEDBs.elements();
 						while (iter.hasMoreElements()) {
+
 							sendLinkNLRI(iter.nextElement().getInterDomainLinks());
 						}
 					}
@@ -346,43 +347,45 @@ public class SendTopology implements Runnable {
 			while (edgeIt.hasNext()) {
 
 				InterDomainEdge edge = edgeIt.next();
-				Object source = null;
-				Object dst = null;
-				if (edge.getSrc_router_id() instanceof Inet4Address)
-					source = (Inet4Address) edge.getSrc_router_id();
-				if (edge.getSrc_router_id() instanceof Long)
-					source = (long) edge.getSrc_router_id();
-				if (edge.getDst_router_id() instanceof Inet4Address)
-					dst = (Inet4Address) edge.getDst_router_id();
-				if (edge.getDst_router_id() instanceof Long)
-					dst = (Inet4Address) edge.getDst_router_id();
-				if ((source!=null) && (dst!=null))
-					log.debug("Sending ID Edge: (" + source.toString() + ":" + ((InterDomainEdge) edge).getSrc_if_id() + "," + dst.toString() + ")");
-				addressList = new ArrayList<Object>();
-				addressList.add(0, source);
-				addressList.add(1, dst);
-				//Link Local Remote Identifiers
-				ArrayList<Long> localRemoteIfList = null;
-				localRemoteIfList = new ArrayList<Long>();
-				localRemoteIfList.add(0, ((InterDomainEdge) edge).getSrc_if_id());//te_info.getLinkLocalRemoteIdentifiers().getLinkLocalIdentifier());
-				localRemoteIfList.add(1, ((InterDomainEdge) edge).getDst_if_id());//te_info.getLinkLocalRemoteIdentifiers().getLinkRemoteIdentifier());
-				interfacesList.add(0,((InterDomainEdge) edge).getLocalInterfaceIPv4() );
-				interfacesList.add(1,((InterDomainEdge) edge).getNeighborIPv4());
+				if(edge.getComplete()) {
+					Object source = null;
+					Object dst = null;
+					if (edge.getSrc_router_id() instanceof Inet4Address)
+						source = (Inet4Address) edge.getSrc_router_id();
+					if (edge.getSrc_router_id() instanceof Long)
+						source = (long) edge.getSrc_router_id();
+					if (edge.getDst_router_id() instanceof Inet4Address)
+						dst = (Inet4Address) edge.getDst_router_id();
+					if (edge.getDst_router_id() instanceof Long)
+						dst = (Inet4Address) edge.getDst_router_id();
+					if ((source != null) && (dst != null))
+						log.debug("Sending ID Edge: (" + source.toString() + ":" + ((InterDomainEdge) edge).getSrc_if_id() + "," + dst.toString() + ")");
+					addressList = new ArrayList<Object>();
+					addressList.add(0, source);
+					addressList.add(1, dst);
+					//Link Local Remote Identifiers
+					ArrayList<Long> localRemoteIfList = null;
+					localRemoteIfList = new ArrayList<Long>();
+					localRemoteIfList.add(0, ((InterDomainEdge) edge).getSrc_if_id());//te_info.getLinkLocalRemoteIdentifiers().getLinkLocalIdentifier());
+					localRemoteIfList.add(1, ((InterDomainEdge) edge).getDst_if_id());//te_info.getLinkLocalRemoteIdentifiers().getLinkRemoteIdentifier());
+					interfacesList.add(0, ((InterDomainEdge) edge).getLocalInterfaceIPv4());
+					interfacesList.add(1, ((InterDomainEdge) edge).getNeighborIPv4());
 
 
-				ArrayList<String> domainList = new ArrayList<String>(2);
-				//FIXME: chequear
-				TE_Information te_info = ((InterDomainEdge) edge).getTE_info();
+					ArrayList<String> domainList = new ArrayList<String>(2);
+					//FIXME: chequear
+					TE_Information te_info = ((InterDomainEdge) edge).getTE_info();
 
-				domainList.add(((Inet4Address) edge.getDomain_src_router()).getHostAddress().toString());
-				//System.out.println("SRC Domain is "+((Inet4Address)edge.getDomain_src_router()).getHostAddress().toString() );
-				domainList.add(((Inet4Address) edge.getDomain_dst_router()).getHostAddress().toString());
-				log.debug("Source Domain is " + (Inet4Address) edge.getDomain_dst_router());
-				BGP4Update update = createMsgUpdateLinkNLRI2(null, addressList, localRemoteIfList, lanID, domainList, false, te_info, edge.getLearntFrom(),
-						interfacesList);
-				update.setLearntFrom(edge.getLearntFrom());
-				log.debug("Update message Created for Edge: " + edge.toString());
-				sendMessage(update);
+					domainList.add(((Inet4Address) edge.getDomain_src_router()).getHostAddress().toString());
+					//System.out.println("SRC Domain is "+((Inet4Address)edge.getDomain_src_router()).getHostAddress().toString() );
+					domainList.add(((Inet4Address) edge.getDomain_dst_router()).getHostAddress().toString());
+					log.debug("Source Domain is " + (Inet4Address) edge.getDomain_dst_router());
+					BGP4Update update = createMsgUpdateLinkNLRI2(null, addressList, localRemoteIfList, lanID, domainList, false, te_info, edge.getLearntFrom(),
+							interfacesList);
+					update.setLearntFrom(edge.getLearntFrom());
+					log.debug("Update message Created for Edge: " + edge.toString());
+					sendMessage(update);
+				}
 			}
 		}
 
