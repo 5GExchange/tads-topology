@@ -3507,36 +3507,42 @@ public class FileTEDBUpdater {
 									node= (long) v;
 									node_info= ((DomainTEDB) ted).getNodeTable().get(node);
 								}
-								if (node_info!=null){
-									log.info("bbbbbbbbbbbbbbbbbbbb src router ID="+((Inet4Address) s_router_id_addr).getCanonicalHostName());
-									log.info("bbbbbbbbbbbbbbbbbbbb dst router ID="+((Inet4Address) d_router_id_addr).getCanonicalHostName());
-									if(node_info.getIpv4AddressLocalNode()!=null){
-										log.info("bbbbbbbbbbbbbbbbbbbb node_info ID="+(node_info.getIpv4AddressLocalNode().getCanonicalHostName()));
-										if ((node_info.getIpv4AddressLocalNode().getCanonicalHostName()).equals(((Inet4Address) s_router_id_addr).getCanonicalHostName())){
-											if(s_router_id_addr!=null) {
-												log.info("ttttttttttttttttttttttttttttttttttttttttttttttFound node match for read src router ID=" + ((Inet4Address) s_router_id_addr).getCanonicalHostName());
-												edge.setLocal_Node_Info(srcNode);
-											}
-											if (v instanceof Long)
-												edge.setSrc_router_id(node);
-											if (v instanceof Inet4Address)
-												edge.setSrc_router_id(nodex);
-											}
-										else if ((node_info.getIpv4AddressLocalNode().getCanonicalHostName()).equals(((Inet4Address) d_router_id_addr).getCanonicalHostName())){
-											if(d_router_id_addr!=null) {
-												log.info("ttttttttttttttttttttttttttttttttttttttttttttttFound node match for read dst router ID=" + ((Inet4Address) d_router_id_addr).getCanonicalHostName());
-												edge.setRemote_Node_Info(dstNode);
-											}//edge.setDst_router_id(d_router_id_addr);
-											if (v instanceof Long)
-												edge.setDst_router_id(node);
-											if (v instanceof Inet4Address)
-												edge.setDst_router_id(nodex);
+								if (!source_domain_id.equals(dest_domain_id)) {
 
+									if (node_info!=null){
+										log.info("bbbbbbbbbbbbbbbbbbbb src router ID="+((Inet4Address) s_router_id_addr).getCanonicalHostName());
+										log.info("bbbbbbbbbbbbbbbbbbbb dst router ID="+((Inet4Address) d_router_id_addr).getCanonicalHostName());
+										if(node_info.getIpv4AddressLocalNode()!=null){
+											log.info("bbbbbbbbbbbbbbbbbbbb node_info ID="+(node_info.getIpv4AddressLocalNode().getCanonicalHostName()));
+											if ((node_info.getIpv4AddressLocalNode().getCanonicalHostName()).equals(((Inet4Address) s_router_id_addr).getCanonicalHostName())){
+												if(s_router_id_addr!=null) {
+													log.info("ttttttttttttttttttttttttttttttttttttttttttttttFound node match for read src router ID=" + ((Inet4Address) s_router_id_addr).getCanonicalHostName());
+													edge.setLocal_Node_Info(srcNode);
+												}
+												if (v instanceof Long)
+													edge.setSrc_router_id(node);
+												if (v instanceof Inet4Address)
+													edge.setSrc_router_id(nodex);
+												}
+											else if ((node_info.getIpv4AddressLocalNode().getCanonicalHostName()).equals(((Inet4Address) d_router_id_addr).getCanonicalHostName())){
+												if(d_router_id_addr!=null) {
+													log.info("ttttttttttttttttttttttttttttttttttttttttttttttFound node match for read dst router ID=" + ((Inet4Address) d_router_id_addr).getCanonicalHostName());
+													edge.setRemote_Node_Info(dstNode);
+												}//edge.setDst_router_id(d_router_id_addr);
+												if (v instanceof Long)
+													edge.setDst_router_id(node);
+												if (v instanceof Inet4Address)
+													edge.setDst_router_id(nodex);
+													log.info("Adding interdomain link "+source_domain_id.toString()+"-->"+dest_domain_id.toString()+" learnt "+edge.getLearntFrom());//edge.toString());
+													//Only add if the source and destination domains are different
+													graph.addEdge(source_domain_id, dest_domain_id, edge);
+
+											}
 										}
+
+
+
 									}
-
-
-
 								}
 							}
 						}
@@ -3547,11 +3553,6 @@ public class FileTEDBUpdater {
 
 
 
-				if (!source_domain_id.equals(dest_domain_id)) {
-					log.info("Adding interdomain link "+source_domain_id.toString()+"-->"+dest_domain_id.toString()+" learnt "+edge.getLearntFrom());//edge.toString());
-					//Only add if the source and destination domains are different
-					graph.addEdge(source_domain_id, dest_domain_id, edge);
-				}
 
 				
 			}
