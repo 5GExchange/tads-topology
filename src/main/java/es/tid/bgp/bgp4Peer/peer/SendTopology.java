@@ -402,127 +402,129 @@ public class SendTopology implements Runnable {
 
 		boolean sfound = false;
 		boolean dfound = false;
-		if (md.getTemps().size()>0){
-			while (iter.hasMoreElements()) {
-			String domainID = iter.nextElement();
-			//Andrea
-			if (domainID != null) {
-				log.info("temp procedure checking domain_id: " + domainID);
-				TEDB ted = teds.get(domainID);
-				if (ted instanceof DomainTEDB) {
-					Iterator<Object> vertexIt = ((DomainTEDB) ted).getIntraDomainLinksvertexSet().iterator();
-					while (vertexIt.hasNext()) {
-						Inet4Address nodex = null;
-						long node = 0L;
-						Object v = vertexIt.next();
-									/*if (v instanceof es.tid.tedb.elements.Node) {
-										log.debug("instance of Node");
-										//node = Integer.valueOf(((es.tid.tedb.elements.Node) v).getAddress().get(0));
-										node=((es.tid.tedb.elements.Node) v).getISIS_ID();
-										log.debug("Send NLRI ISIS node id "+ String.valueOf(node));
-									}*/
+		if (md!=null){
+			if (md.getTemps().size()>0){
+				while (iter.hasMoreElements()) {
+					String domainID = iter.nextElement();
+					//Andrea
+					if (domainID != null) {
+						log.info("temp procedure checking domain_id: " + domainID);
+						TEDB ted = teds.get(domainID);
+						if (ted instanceof DomainTEDB) {
+							Iterator<Object> vertexIt = ((DomainTEDB) ted).getIntraDomainLinksvertexSet().iterator();
+							while (vertexIt.hasNext()) {
+								Inet4Address nodex = null;
+								long node = 0L;
+								Object v = vertexIt.next();
+											/*if (v instanceof es.tid.tedb.elements.Node) {
+												log.debug("instance of Node");
+												//node = Integer.valueOf(((es.tid.tedb.elements.Node) v).getAddress().get(0));
+												node=((es.tid.tedb.elements.Node) v).getISIS_ID();
+												log.debug("Send NLRI ISIS node id "+ String.valueOf(node));
+											}*/
 
-						Node_Info node_info = null;
-						if (v instanceof Inet4Address) {
-							nodex = (Inet4Address) v;
-							node_info = ((DomainTEDB) ted).getNodeTable().get(nodex);
-						} else if (v instanceof Long) {
-							node = (long) v;
-							node_info = ((DomainTEDB) ted).getNodeTable().get(node);
-						}
-						//if (!source_domain_id.equals(dest_domain_id)) {
+								Node_Info node_info = null;
+								if (v instanceof Inet4Address) {
+									nodex = (Inet4Address) v;
+									node_info = ((DomainTEDB) ted).getNodeTable().get(nodex);
+								} else if (v instanceof Long) {
+									node = (long) v;
+									node_info = ((DomainTEDB) ted).getNodeTable().get(node);
+								}
+								//if (!source_domain_id.equals(dest_domain_id)) {
 
-						if (node_info != null) {
-							if (node_info.getIpv4AddressLocalNode() != null) {
-								String nodeip = node_info.getIpv4AddressLocalNode().getCanonicalHostName();
-								log.info("bbbbbbbbbbbbbbbbbbbb node_info ID=" + nodeip);
-								if (md.getTemps() != null) {
-									Enumeration keys = md.getTemps().keys();
-									String key;
-									while (keys.hasMoreElements()) {
-										key = (String) keys.nextElement();
-										InterDomainEdge edge = md.getTemps().get(key);
-										//source check
-										if (edge.getSrc_router_id() != null) {
-											String source = null;
-											if (edge.getSrc_router_id() instanceof Long) {
-												if (edge.getLocal_Node_Info() != null) {
-													if (edge.getLocal_Node_Info().getIpv4Address() != null) {
-														source = edge.getLocal_Node_Info().getIpv4Address().getCanonicalHostName();
+								if (node_info != null) {
+									if (node_info.getIpv4AddressLocalNode() != null) {
+										String nodeip = node_info.getIpv4AddressLocalNode().getCanonicalHostName();
+										log.info("bbbbbbbbbbbbbbbbbbbb node_info ID=" + nodeip);
+										if (md.getTemps() != null) {
+											Enumeration keys = md.getTemps().keys();
+											String key;
+											while (keys.hasMoreElements()) {
+												key = (String) keys.nextElement();
+												InterDomainEdge edge = md.getTemps().get(key);
+												//source check
+												if (edge.getSrc_router_id() != null) {
+													String source = null;
+													if (edge.getSrc_router_id() instanceof Long) {
+														if (edge.getLocal_Node_Info() != null) {
+															if (edge.getLocal_Node_Info().getIpv4Address() != null) {
+																source = edge.getLocal_Node_Info().getIpv4Address().getCanonicalHostName();
+																log.info("bbbbbbbbbbbbbbbbbbbb src router ID=" + source);
+															}
+														}
+													}
+													if (edge.getSrc_router_id() instanceof Inet4Address) {
+														source = ((Inet4Address) edge.getSrc_router_id()).getHostAddress();
 														log.info("bbbbbbbbbbbbbbbbbbbb src router ID=" + source);
 													}
+													if (edge.getLocal_Node_Info() == null) {
+														log.info("Trying to configure the the src node");
+														if (node_info.getIpv4AddressLocalNode() != null) {
+															log.info("bbbbbbbbbbbbbbbbbbbb node_info ID=" + (node_info.getIpv4AddressLocalNode().getCanonicalHostName()));
+															if ((node_info.getIpv4AddressLocalNode().getCanonicalHostName()).equals(source)) {
+																sfound = true;
+																log.info("ttttttttttttttttttttttttttttttttttttttttttttttFound node match for read src router ID=" + source);
+																edge.setLocal_Node_Info(node_info);
+															}
+															if (v instanceof Long)
+																edge.setSrc_router_id(node);
+															if (v instanceof Inet4Address)
+																edge.setSrc_router_id(nodex);
+														}
+													} else
+														log.info("Src info already present=");
+													sfound = true;
 												}
-											}
-											if (edge.getSrc_router_id() instanceof Inet4Address) {
-												source = ((Inet4Address) edge.getSrc_router_id()).getHostAddress();
-												log.info("bbbbbbbbbbbbbbbbbbbb src router ID=" + source);
-											}
-											if (edge.getLocal_Node_Info() == null) {
-												log.info("Trying to configure the the src node");
-												if (node_info.getIpv4AddressLocalNode() != null) {
-													log.info("bbbbbbbbbbbbbbbbbbbb node_info ID=" + (node_info.getIpv4AddressLocalNode().getCanonicalHostName()));
-													if ((node_info.getIpv4AddressLocalNode().getCanonicalHostName()).equals(source)) {
-														sfound = true;
-														log.info("ttttttttttttttttttttttttttttttttttttttttttttttFound node match for read src router ID=" + source);
-														edge.setLocal_Node_Info(node_info);
+												//destination check
+												if (edge.getDst_router_id() != null) {
+													String destin = null;
+													if (edge.getDst_router_id() instanceof Long) {
+														destin = "127.0.0.1";
+														log.info("Strange case src router ID=" + destin);
 													}
-													if (v instanceof Long)
-														edge.setSrc_router_id(node);
-													if (v instanceof Inet4Address)
-														edge.setSrc_router_id(nodex);
-												}
-											} else
-												log.info("Src info already present=");
-											sfound = true;
-										}
-										//destination check
-										if (edge.getDst_router_id() != null) {
-											String destin = null;
-											if (edge.getDst_router_id() instanceof Long) {
-												destin = "127.0.0.1";
-												log.info("Strange case src router ID=" + destin);
-											}
-											if (edge.getDst_router_id() instanceof Inet4Address) {
-												destin = ((Inet4Address) edge.getSrc_router_id()).getHostAddress();
-												log.info("bbbbbbbbbbbbbbbbbbbb src router ID=" + destin);
-											}
-											if (edge.getRemote_Node_Info() == null) {
-												log.info("Trying to configure the the dst node");
-												if (node_info.getIpv4AddressLocalNode() != null) {
-													if ((node_info.getIpv4AddressLocalNode().getCanonicalHostName()).equals(destin)) {
-														dfound = true;
-														log.info("ttttttttttttttttttttttttttttttttttttttttttttttFound node match for read dst router ID=" + destin);
-														edge.setRemote_Node_Info(node_info);
-														md.getNetworkDomainGraph().addVertex(domainID);
+													if (edge.getDst_router_id() instanceof Inet4Address) {
+														destin = ((Inet4Address) edge.getSrc_router_id()).getHostAddress();
+														log.info("bbbbbbbbbbbbbbbbbbbb src router ID=" + destin);
 													}
-													if (v instanceof Long)
-														edge.setDst_router_id(node);
-													if (v instanceof Inet4Address)
-														edge.setDst_router_id(nodex);
+													if (edge.getRemote_Node_Info() == null) {
+														log.info("Trying to configure the the dst node");
+														if (node_info.getIpv4AddressLocalNode() != null) {
+															if ((node_info.getIpv4AddressLocalNode().getCanonicalHostName()).equals(destin)) {
+																dfound = true;
+																log.info("ttttttttttttttttttttttttttttttttttttttttttttttFound node match for read dst router ID=" + destin);
+																edge.setRemote_Node_Info(node_info);
+																md.getNetworkDomainGraph().addVertex(domainID);
+															}
+															if (v instanceof Long)
+																edge.setDst_router_id(node);
+															if (v instanceof Inet4Address)
+																edge.setDst_router_id(nodex);
+														}
+													} else
+														log.info("Dst info already present=");
 												}
-											} else
-												log.info("Dst info already present=");
-										}
-										if (sfound && dfound) {
-											edge.setDomain_dst_router(domainID);
-											log.info("Adding interdomain link " + edge.getDomain_src_router() + "-->" + domainID);
-											//Only add if the source and destination domains are different
-											md.getNetworkDomainGraph().addEdge(edge.getDomain_src_router(), domainID, edge);
-											md.getTemps().remove(key);
+												if (sfound && dfound) {
+													edge.setDomain_dst_router(domainID);
+													log.info("Adding interdomain link " + edge.getDomain_src_router() + "-->" + domainID);
+													//Only add if the source and destination domains are different
+													md.getNetworkDomainGraph().addEdge(edge.getDomain_src_router(), domainID, edge);
+													md.getTemps().remove(key);
+												}
+
+											}
 										}
 
 									}
+
+
 								}
-
+								//}
 							}
-
-
 						}
-						//}
+
 					}
 				}
-
-			}
 			}
 		}
 		//aggiungi gran cialo il link ai temp links
