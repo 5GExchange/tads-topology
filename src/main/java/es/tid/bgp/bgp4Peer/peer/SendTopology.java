@@ -138,7 +138,7 @@ public class SendTopology implements Runnable {
 				if (!(bgp4SessionsInformation.getSessionList().isEmpty())) {
 					if (multiDomainTEDB != null) {
 						log.debug("Sending Multi-Domain TEDB");
-						sendLinkNLRI(multiDomainTEDB.getInterDomainLinks());
+						sendLinkNLRI(multiDomainTEDB, intraTEDBs);
 					} else {
 						log.debug("Sending from TEDB");
 						Enumeration<TEDB> iter = intraTEDBs.elements();
@@ -339,6 +339,8 @@ public class SendTopology implements Runnable {
 	 * @param interdomainLinks
 	 */
 	private void sendLinkNLRI(LinkedList<InterDomainEdge> interdomainLinks) {
+
+
 		if (true) {
 			int lanID = 1; ///INVENTADOO
 			ArrayList<Object> addressList = new ArrayList<>();
@@ -390,6 +392,179 @@ public class SendTopology implements Runnable {
 		}
 
 	}
+
+	//used function that checks if there is some uncomplete intedomain links and then sends updates
+	private void sendLinkNLRI(MultiDomainTEDB md, Hashtable<String, TEDB> teds) {
+
+		LinkedList<InterDomainEdge> interdomainLinks= md.getInterDomainLinks();
+
+		Enumeration<String> iter = teds.keys();
+
+		boolean sfound=false;
+		boolean dfound=false;
+		while (iter.hasMoreElements()) {
+			String domainID = iter.nextElement();
+			//Andrea
+			if (domainID != null) {
+				log.info("temp procedure checking domain_id: " + domainID);
+				TEDB ted = teds.get(domainID);
+				if (ted instanceof DomainTEDB) {
+					Iterator<Object> vertexIt = ((DomainTEDB) ted).getIntraDomainLinksvertexSet().iterator();
+					while (vertexIt.hasNext()) {
+						Inet4Address nodex = null;
+						long node = 0L;
+						Object v = vertexIt.next();
+								/*if (v instanceof es.tid.tedb.elements.Node) {
+									log.debug("instance of Node");
+									//node = Integer.valueOf(((es.tid.tedb.elements.Node) v).getAddress().get(0));
+									node=((es.tid.tedb.elements.Node) v).getISIS_ID();
+									log.debug("Send NLRI ISIS node id "+ String.valueOf(node));
+								}*/
+
+						Node_Info node_info = null;
+						if (v instanceof Inet4Address) {
+							nodex = (Inet4Address) v;
+							node_info = ((DomainTEDB) ted).getNodeTable().get(nodex);
+						} else if (v instanceof Long) {
+							node = (long) v;
+							node_info = ((DomainTEDB) ted).getNodeTable().get(node);
+						}
+						//if (!source_domain_id.equals(dest_domain_id)) {
+
+						if (node_info != null) {
+							if (node_info.getIpv4AddressLocalNode() != null) {
+								String nodeip=node_info.getIpv4AddressLocalNode().getCanonicalHostName();
+								log.info("bbbbbbbbbbbbbbbbbbbb node_info ID=" + nodeip);
+								Enumeration keys=md.getTemps().keys();
+								String key;
+								while(keys.hasMoreElements()){
+									key=(String) keys.nextElement();
+									InterDomainEdge edge=md.getTemps().get(key);
+									//source check
+									if (edge.getSrc_router_id()!=null) {
+										String source = ((Inet4Address) edge.getSrc_router_id()).getHostAddress();
+										log.info("bbbbbbbbbbbbbbbbbbbb src router ID=" + source);
+										if(edge.getLocal_Node_Info()==null) {
+											log.info("Trying to configure the the src node");
+											if (node_info.getIpv4AddressLocalNode() != null) {
+												log.info("bbbbbbbbbbbbbbbbbbbb node_info ID=" + (node_info.getIpv4AddressLocalNode().getCanonicalHostName()));
+												if ((node_info.getIpv4AddressLocalNode().getCanonicalHostName()).equals(source)) {
+													sfound = true;
+													log.info("ttttttttttttttttttttttttttttttttttttttttttttttFound node match for read src router ID=" + source);
+													edge.setLocal_Node_Info(node_info);
+												}
+												if (v instanceof Long)
+													edge.setSrc_router_id(node);
+												if (v instanceof Inet4Address)
+													edge.setSrc_router_id(nodex);
+											}
+										}
+										else
+											log.info("Src info already present=");
+										sfound=true;
+									}
+									//destination check
+									if (edge.getDst_router_id()!=null) {
+										String destin = ((Inet4Address) edge.getSrc_router_id()).getHostAddress();
+										log.info("bbbbbbbbbbbbbbbbbbbb dst router ID=" +destin);
+										if(edge.getRemote_Node_Info()==null) {
+											log.info("Trying to configure the the dst node");
+											if (node_info.getIpv4AddressLocalNode() != null) {
+												if ((node_info.getIpv4AddressLocalNode().getCanonicalHostName()).equals(destin)) {
+													dfound = true;
+													log.info("ttttttttttttttttttttttttttttttttttttttttttttttFound node match for read dst router ID=" + destin);
+													edge.setRemote_Node_Info(node_info);
+													md.getNetworkDomainGraph().addVertex(domainID);
+												}
+												if (v instanceof Long)
+													edge.setDst_router_id(node);
+												if (v instanceof Inet4Address)
+													edge.setDst_router_id(nodex);
+											}
+										}
+										else
+											log.info("Dst info already present=");
+									}
+									if (sfound&&dfound){
+										edge.setDomain_dst_router(domainID);
+										log.info("Adding interdomain link " + edge.getDomain_src_router() + "-->" + domainID);
+										//Only add if the source and destination domains are different
+										md.getNetworkDomainGraph().addEdge(edge.getDomain_src_router(), domainID, edge);
+										md.getTemps().remove(key);
+									}
+
+								}
+
+
+							}
+
+
+						}
+							//}
+					}
+				}
+
+			}
+		}
+
+		//aggiungi gran cialo il link ai temp links
+
+
+
+
+
+		if (true) {
+			int lanID = 1; ///INVENTADOO
+			ArrayList<Object> addressList = new ArrayList<>();
+			ArrayList<Inet4Address> interfacesList = new ArrayList<Inet4Address>();
+			Iterator<InterDomainEdge> edgeIt = interdomainLinks.iterator();
+			while (edgeIt.hasNext()) {
+
+				InterDomainEdge edge = edgeIt.next();
+				if(edge.getComplete()) {
+					Object source = null;
+					Object dst = null;
+					if (edge.getSrc_router_id() instanceof Inet4Address)
+						source = (Inet4Address) edge.getSrc_router_id();
+					if (edge.getSrc_router_id() instanceof Long)
+						source = (long) edge.getSrc_router_id();
+					if (edge.getDst_router_id() instanceof Inet4Address)
+						dst = (Inet4Address) edge.getDst_router_id();
+					if (edge.getDst_router_id() instanceof Long)
+						dst = (Inet4Address) edge.getDst_router_id();
+					if ((source != null) && (dst != null))
+						log.debug("Sending ID Edge: (" + source.toString() + ":" + ((InterDomainEdge) edge).getSrc_if_id() + "," + dst.toString() + ")");
+					addressList = new ArrayList<Object>();
+					addressList.add(0, source);
+					addressList.add(1, dst);
+					//Link Local Remote Identifiers
+					ArrayList<Long> localRemoteIfList = null;
+					localRemoteIfList = new ArrayList<Long>();
+					localRemoteIfList.add(0, ((InterDomainEdge) edge).getSrc_if_id());//te_info.getLinkLocalRemoteIdentifiers().getLinkLocalIdentifier());
+					localRemoteIfList.add(1, ((InterDomainEdge) edge).getDst_if_id());//te_info.getLinkLocalRemoteIdentifiers().getLinkRemoteIdentifier());
+					interfacesList.add(0, ((InterDomainEdge) edge).getLocalInterfaceIPv4());
+					interfacesList.add(1, ((InterDomainEdge) edge).getNeighborIPv4());
+
+
+					ArrayList<String> domainList = new ArrayList<String>(2);
+					//FIXME: chequear
+					TE_Information te_info = ((InterDomainEdge) edge).getTE_info();
+
+					domainList.add(((Inet4Address) edge.getDomain_src_router()).getHostAddress().toString());
+					//System.out.println("SRC Domain is "+((Inet4Address)edge.getDomain_src_router()).getHostAddress().toString() );
+					domainList.add(((Inet4Address) edge.getDomain_dst_router()).getHostAddress().toString());
+					log.debug("Source Domain is " + (Inet4Address) edge.getDomain_dst_router());
+					BGP4Update update = createMsgUpdateLinkNLRI2(null, addressList, localRemoteIfList, lanID, domainList, false, te_info, edge.getLearntFrom(),
+							interfacesList);
+					update.setLearntFrom(edge.getLearntFrom());
+					log.debug("Update message Created for Edge: " + edge.toString());
+					sendMessage(update);
+				}
+			}
+		}
+
+	}
+
 
 	/**
 	 * This function sends a BGP4 update message (encoded in a LinkNLRI) for each link in the set
