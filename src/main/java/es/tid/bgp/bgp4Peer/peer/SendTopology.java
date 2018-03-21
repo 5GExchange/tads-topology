@@ -443,8 +443,16 @@ public class SendTopology implements Runnable {
 										InterDomainEdge edge = md.getTemps().get(key);
 										//source check
 										if (edge.getSrc_router_id() != null) {
-											String source = ((Inet4Address) edge.getSrc_router_id()).getHostAddress();
-											log.info("bbbbbbbbbbbbbbbbbbbb src router ID=" + source);
+											String source = null;
+											if (edge.getSrc_router_id() instanceof Long) {
+												source =edge.getLocal_Node_Info().getIpv4Address().getCanonicalHostName();
+												log.info("bbbbbbbbbbbbbbbbbbbb src router ID=" + source);
+
+											}
+											if (edge.getSrc_router_id() instanceof Inet4Address){
+												source = ((Inet4Address) edge.getSrc_router_id()).getHostAddress();
+												log.info("bbbbbbbbbbbbbbbbbbbb src router ID=" + source);
+											}
 											if (edge.getLocal_Node_Info() == null) {
 												log.info("Trying to configure the the src node");
 												if (node_info.getIpv4AddressLocalNode() != null) {
