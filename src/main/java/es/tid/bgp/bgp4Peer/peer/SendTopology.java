@@ -529,8 +529,17 @@ public class SendTopology implements Runnable {
 		}
 		//aggiungi gran cialo il link ai temp links
 
-		if (md!=null)
-			log.info(md.toString());
+		if (md!=null){
+			if (md.getNetworkDomainGraph()!=null){
+				log.info("Number of nodes: "+ String.valueOf(md.getNetworkDomainGraph().vertexSet().size()));
+				log.info("Number of links: "+ String.valueOf(md.getNetworkDomainGraph().edgeSet().size()));
+			}
+			else
+				log.info("getNetworkDomainGraph is null");
+		}
+		else {
+			log.info("md is null");
+		}
 
 
 
