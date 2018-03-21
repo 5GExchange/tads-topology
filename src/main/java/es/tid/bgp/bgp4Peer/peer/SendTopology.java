@@ -433,68 +433,67 @@ public class SendTopology implements Runnable {
 
 						if (node_info != null) {
 							if (node_info.getIpv4AddressLocalNode() != null) {
-								String nodeip=node_info.getIpv4AddressLocalNode().getCanonicalHostName();
+								String nodeip = node_info.getIpv4AddressLocalNode().getCanonicalHostName();
 								log.info("bbbbbbbbbbbbbbbbbbbb node_info ID=" + nodeip);
-								Enumeration keys=md.getTemps().keys();
-								String key;
-								while(keys.hasMoreElements()){
-									key=(String) keys.nextElement();
-									InterDomainEdge edge=md.getTemps().get(key);
-									//source check
-									if (edge.getSrc_router_id()!=null) {
-										String source = ((Inet4Address) edge.getSrc_router_id()).getHostAddress();
-										log.info("bbbbbbbbbbbbbbbbbbbb src router ID=" + source);
-										if(edge.getLocal_Node_Info()==null) {
-											log.info("Trying to configure the the src node");
-											if (node_info.getIpv4AddressLocalNode() != null) {
-												log.info("bbbbbbbbbbbbbbbbbbbb node_info ID=" + (node_info.getIpv4AddressLocalNode().getCanonicalHostName()));
-												if ((node_info.getIpv4AddressLocalNode().getCanonicalHostName()).equals(source)) {
-													sfound = true;
-													log.info("ttttttttttttttttttttttttttttttttttttttttttttttFound node match for read src router ID=" + source);
-													edge.setLocal_Node_Info(node_info);
+								if (md.getTemps()!=null){
+									Enumeration keys = md.getTemps().keys();
+									String key;
+									while (keys.hasMoreElements()) {
+										key = (String) keys.nextElement();
+										InterDomainEdge edge = md.getTemps().get(key);
+										//source check
+										if (edge.getSrc_router_id() != null) {
+											String source = ((Inet4Address) edge.getSrc_router_id()).getHostAddress();
+											log.info("bbbbbbbbbbbbbbbbbbbb src router ID=" + source);
+											if (edge.getLocal_Node_Info() == null) {
+												log.info("Trying to configure the the src node");
+												if (node_info.getIpv4AddressLocalNode() != null) {
+													log.info("bbbbbbbbbbbbbbbbbbbb node_info ID=" + (node_info.getIpv4AddressLocalNode().getCanonicalHostName()));
+													if ((node_info.getIpv4AddressLocalNode().getCanonicalHostName()).equals(source)) {
+														sfound = true;
+														log.info("ttttttttttttttttttttttttttttttttttttttttttttttFound node match for read src router ID=" + source);
+														edge.setLocal_Node_Info(node_info);
+													}
+													if (v instanceof Long)
+														edge.setSrc_router_id(node);
+													if (v instanceof Inet4Address)
+														edge.setSrc_router_id(nodex);
 												}
-												if (v instanceof Long)
-													edge.setSrc_router_id(node);
-												if (v instanceof Inet4Address)
-													edge.setSrc_router_id(nodex);
-											}
+											} else
+												log.info("Src info already present=");
+											sfound = true;
 										}
-										else
-											log.info("Src info already present=");
-										sfound=true;
-									}
-									//destination check
-									if (edge.getDst_router_id()!=null) {
-										String destin = ((Inet4Address) edge.getSrc_router_id()).getHostAddress();
-										log.info("bbbbbbbbbbbbbbbbbbbb dst router ID=" +destin);
-										if(edge.getRemote_Node_Info()==null) {
-											log.info("Trying to configure the the dst node");
-											if (node_info.getIpv4AddressLocalNode() != null) {
-												if ((node_info.getIpv4AddressLocalNode().getCanonicalHostName()).equals(destin)) {
-													dfound = true;
-													log.info("ttttttttttttttttttttttttttttttttttttttttttttttFound node match for read dst router ID=" + destin);
-													edge.setRemote_Node_Info(node_info);
-													md.getNetworkDomainGraph().addVertex(domainID);
+										//destination check
+										if (edge.getDst_router_id() != null) {
+											String destin = ((Inet4Address) edge.getSrc_router_id()).getHostAddress();
+											log.info("bbbbbbbbbbbbbbbbbbbb dst router ID=" + destin);
+											if (edge.getRemote_Node_Info() == null) {
+												log.info("Trying to configure the the dst node");
+												if (node_info.getIpv4AddressLocalNode() != null) {
+													if ((node_info.getIpv4AddressLocalNode().getCanonicalHostName()).equals(destin)) {
+														dfound = true;
+														log.info("ttttttttttttttttttttttttttttttttttttttttttttttFound node match for read dst router ID=" + destin);
+														edge.setRemote_Node_Info(node_info);
+														md.getNetworkDomainGraph().addVertex(domainID);
+													}
+													if (v instanceof Long)
+														edge.setDst_router_id(node);
+													if (v instanceof Inet4Address)
+														edge.setDst_router_id(nodex);
 												}
-												if (v instanceof Long)
-													edge.setDst_router_id(node);
-												if (v instanceof Inet4Address)
-													edge.setDst_router_id(nodex);
-											}
+											} else
+												log.info("Dst info already present=");
 										}
-										else
-											log.info("Dst info already present=");
-									}
-									if (sfound&&dfound){
-										edge.setDomain_dst_router(domainID);
-										log.info("Adding interdomain link " + edge.getDomain_src_router() + "-->" + domainID);
-										//Only add if the source and destination domains are different
-										md.getNetworkDomainGraph().addEdge(edge.getDomain_src_router(), domainID, edge);
-										md.getTemps().remove(key);
-									}
+										if (sfound && dfound) {
+											edge.setDomain_dst_router(domainID);
+											log.info("Adding interdomain link " + edge.getDomain_src_router() + "-->" + domainID);
+											//Only add if the source and destination domains are different
+											md.getNetworkDomainGraph().addEdge(edge.getDomain_src_router(), domainID, edge);
+											md.getTemps().remove(key);
+										}
 
+									}
 								}
-
 
 							}
 

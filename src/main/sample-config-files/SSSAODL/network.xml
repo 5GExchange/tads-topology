@@ -15,26 +15,35 @@
 			<destination>
 				<router_id>3.3.3.3</router_id>
 				<if_id>2</if_id>
-			</destination>		
-			<maximum_bandwidth>1000</maximum_bandwidth>
+			</destination>
+			<type>interdomain</type>
+			<maximum_bandwidth>12500</maximum_bandwidth>
+			<unreserved_bandwidth priority="7">125</unreserved_bandwidth>
+			<unreserved_bandwidth priority="6">125</unreserved_bandwidth>
+			<unreserved_bandwidth priority="5">125</unreserved_bandwidth>
+			<unreserved_bandwidth priority="4">125</unreserved_bandwidth>
+			<unreserved_bandwidth priority="3">125</unreserved_bandwidth>
+			<unreserved_bandwidth priority="2">125</unreserved_bandwidth>
+			<unreserved_bandwidth priority="1">125</unreserved_bandwidth>
+			<unreserved_bandwidth priority="0">125</unreserved_bandwidth>
 			<default_te_metric>10</default_te_metric>
-   			<undir_delay_link>99</undir_delay_link>
- 			<undir_min_max_delay>
-			    <min>23</min>
-    			    <max>43</max>
-   			</undir_min_max_delay> 
-   			<undir_delay_variation>1</undir_delay_variation>
-   			<undir_link_loss>102</undir_link_loss>
-   			<undir_residual_bandwidth>802</undir_residual_bandwidth>
-   			<undir_available_bandwidth>500</undir_available_bandwidth>
-   			<undir_utilized_bandwidth>436</undir_utilized_bandwidth>
+			<undir_delay_link>99</undir_delay_link>
+			<undir_min_max_delay>
+				<min>23</min>
+				<max>43</max>
+			</undir_min_max_delay>
+			<undir_delay_variation>1</undir_delay_variation>
+			<undir_link_loss>102</undir_link_loss>
+			<undir_residual_bandwidth>802</undir_residual_bandwidth>
+			<undir_available_bandwidth>500</undir_available_bandwidth>
+			<undir_utilized_bandwidth>436</undir_utilized_bandwidth>
 		</edge>
 	</domain>
-	<domain>
+	<!--domain>
 		<domain_id>0.0.253.233</domain_id>
 
 		<node>
 			<router_id>3.3.3.3</router_id>
 		</node>
-	</domain>
+	</domain-->
 </network>
