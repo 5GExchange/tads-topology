@@ -402,7 +402,7 @@ public class SendTopology implements Runnable {
 
 		boolean sfound = false;
 		boolean dfound = false;
-		if (md!=null){
+		if ((md!=null)&&(md.getTemps()!=null)){
 			if (md.getTemps().size()>0){
 				while (iter.hasMoreElements()) {
 					String domainID = iter.nextElement();
