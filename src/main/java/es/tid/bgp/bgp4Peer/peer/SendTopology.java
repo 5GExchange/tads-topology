@@ -2742,7 +2742,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		ra.setLsNLRI(linkNLRI);
 		if (learntFrom!="local"){
 			try {
-				ra.setNextHop(InetAddress.getByName(learntFrom.replaceAll("7","")));
+				ra.setNextHop(InetAddress.getByName(learntFrom.replaceAll("/","")));
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
 			}
