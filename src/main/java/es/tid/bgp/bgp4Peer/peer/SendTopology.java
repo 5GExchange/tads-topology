@@ -1105,7 +1105,7 @@ public class SendTopology implements Runnable {
 			ra.setLsNLRI(nodeNLRI);
 			if (learntFrom!="local"){
 				try {
-					ra.setNextHop(InetAddress.getByName(learntFrom));
+					ra.setNextHop(InetAddress.getByName(learntFrom.replaceAll("/","")));
 				} catch (UnknownHostException e) {
 					e.printStackTrace();
 				}
@@ -2742,7 +2742,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		ra.setLsNLRI(linkNLRI);
 		if (learntFrom!="local"){
 			try {
-				ra.setNextHop(InetAddress.getByName(learntFrom));
+				ra.setNextHop(InetAddress.getByName(learntFrom.replaceAll("7","")));
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
 			}
