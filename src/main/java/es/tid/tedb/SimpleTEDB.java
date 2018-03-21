@@ -684,6 +684,14 @@ public class SimpleTEDB implements DomainTEDB{
 		// TODO Auto-generated method stub
 	}
 
+
+
+	@Override
+	public Hashtable<String, InterDomainEdge> getTemps(){return null;};
+
+	@Override
+	public void setTemps(Hashtable<String, InterDomainEdge> val){};
+
 	public void setWSONinfo(WSONInformation wSONinfo) {
 		WSONinfo = wSONinfo;
 	}

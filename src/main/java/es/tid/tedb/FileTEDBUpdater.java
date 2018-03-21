@@ -2527,20 +2527,20 @@ public class FileTEDBUpdater {
 			tE_info.setDefaultTEMetric(defaultTeMetric);
 		}
 
+		UnreservedBandwidth unreservedBandwidth=null;
+
 		NodeList unreserved_bandwidth_nl = element.getElementsByTagName("unreserved_bandwidth");
 		if (unreserved_bandwidth_nl!=null){
 			int num_u_b=unreserved_bandwidth_nl.getLength();
-			UnreservedBandwidth unreservedBandwidth;
 			if (num_u_b>0){
 				unreservedBandwidth =new UnreservedBandwidth();
-				tE_info.setUnreservedBandwidth(unreservedBandwidth);
 				for(int k=0;k<num_u_b;++k){
 					Element unreserved_bandwidth_el = (Element) unreserved_bandwidth_nl.item(k);
 					String s_unreserved_bandwidth = getCharacterDataFromElement(unreserved_bandwidth_el);
 
 					String s_priority=unreserved_bandwidth_el.getAttributeNode("priority").getValue();
 					Integer priority = Integer.valueOf(s_priority);
-					float unreserved_bandwidth=Float.parseFloat(s_unreserved_bandwidth);	
+					float unreserved_bandwidth=Float.parseFloat(s_unreserved_bandwidth);
 
 					(unreservedBandwidth.getUnreservedBandwidth())[priority]=unreserved_bandwidth;
 				}
@@ -2549,6 +2549,10 @@ public class FileTEDBUpdater {
 
 		}
 
+
+		if (unreservedBandwidth!=null) {
+			tE_info.setUnreservedBandwidth(unreservedBandwidth);
+		}
 		NodeList maximum_wlans_nl = element.getElementsByTagName("number_wlans");
 		if (maximum_wlans_nl!=null){
 			if (maximum_wlans_nl.getLength()>0){
@@ -3455,8 +3459,22 @@ public class FileTEDBUpdater {
 						}
 					}
 				}
-                if (sfound&&!dfound)
-                    log.info("d not found");
+                if (sfound&&!dfound) {
+					log.info("d not found");
+					if (mdTed.getTemps()!=null) {
+						if (d_router_id_addr != null) {
+							mdTed.getTemps().put(((Inet4Address) d_router_id_addr).getCanonicalHostName(), edge);
+							log.info("Link edge added to temp list" + edge.toString());
+						}
+					}
+					else{
+						Hashtable<String, InterDomainEdge> tt =new Hashtable<String, InterDomainEdge>();
+						tt.put(((Inet4Address) d_router_id_addr).getCanonicalHostName(), edge);
+						mdTed.setTemps(tt);
+						log.info("temps initialaized and link edge added to temp list" + edge.toString());
+					}
+
+				}
                     //aggiungi gran cialo il link ai temp links
 				//getIpv4AddressLocalNode()
 

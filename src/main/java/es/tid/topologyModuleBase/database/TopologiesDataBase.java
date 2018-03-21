@@ -16,7 +16,11 @@ public class TopologiesDataBase implements TopologyTEDB
 	 * Used when there are several teds
 	 */
 	Hashtable<String, TEDB> teds = null;
-	
+
+
+	//destination node as key interdomain as value
+
+
 	/**
 	 * Used when there is only one ted
 	 * Users do not have to introduce an identifier if there is only TEDB

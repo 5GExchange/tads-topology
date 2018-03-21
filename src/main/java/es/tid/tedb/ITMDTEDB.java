@@ -271,5 +271,10 @@ public class ITMDTEDB implements MultiDomainTEDB {
 		return null;
 	}
 
+	@Override
+	public Hashtable<String, InterDomainEdge> getTemps(){return null;};
+
+	@Override
+	public void setTemps(Hashtable<String, InterDomainEdge> val){};
 
 }

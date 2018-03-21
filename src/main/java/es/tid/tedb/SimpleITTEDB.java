@@ -139,6 +139,11 @@ public class SimpleITTEDB implements DomainTEDB{
 		return interDomainLinks;
 	}
 
+	@Override
+	public Hashtable<String, InterDomainEdge> getTemps(){return null;};
+
+	@Override
+	public void setTemps(Hashtable<String, InterDomainEdge> val){};
 
 
 	public void setInterDomainLinks(LinkedList<InterDomainEdge> interDomainLinks) {

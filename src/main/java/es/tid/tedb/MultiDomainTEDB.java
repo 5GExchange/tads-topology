@@ -3,7 +3,6 @@ package es.tid.tedb;
 import org.jgrapht.graph.DirectedWeightedMultigraph;
 
 import java.net.Inet4Address;
-import java.util.ArrayList;
 import java.util.Hashtable;
 
 
@@ -14,4 +13,12 @@ public interface MultiDomainTEDB extends TEDB {
 
 
 	DirectedWeightedMultigraph<Object, InterDomainEdge> getNetworkDomainGraph();
+
+	Hashtable<String, InterDomainEdge> temps = null;
+
+	public Hashtable<String, InterDomainEdge> getTemps();
+
+	public void setTemps(Hashtable<String, InterDomainEdge> val);
+
+
 }

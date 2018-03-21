@@ -91,6 +91,13 @@ public interface DomainTEDB extends TEDB {
 	public void setIGPType(Integer type);
 	public Integer getIGPType();
 
+	Hashtable<String, InterDomainEdge> temps = null;
+
+	public Hashtable<String, InterDomainEdge> getTemps();
+
+	public void setTemps(Hashtable<String, InterDomainEdge> val);
+
+
 }
 
 

@@ -20,14 +20,23 @@ public class MDTEDB implements MultiDomainTEDB {
 	public SimpleDirectedWeightedGraph<Object,IntraDomainEdge> networkGraph;
 
 
+	Hashtable<String, InterDomainEdge> temps = null;
 
-	
+	public Hashtable<String, InterDomainEdge> getTemps() {
+		return temps;
+	}
+	public void setTemps(Hashtable<String, InterDomainEdge> val) {
+		this.temps = val;
+	}
+
+
 	//private LinkedList<InterDomainEdge> interDomainLinks;  
 		
 	public SimpleTEDB simple_ted;
 	
 	private Logger log;
-	
+
+
 	private boolean addBidirectional;
 	
 	/**
@@ -48,6 +57,7 @@ public class MDTEDB implements MultiDomainTEDB {
 		DirectedWeightedMultigraph<Object,InterDomainEdge> graphCopy= (DirectedWeightedMultigraph<Object, InterDomainEdge>) networkDomainGraph.clone();
 		return graphCopy;
 	}
+
 	
 	public DirectedWeightedMultigraph<Object, InterDomainEdge> getNetworkDomainGraph() {
 		return networkDomainGraph;
@@ -83,6 +93,7 @@ public class MDTEDB implements MultiDomainTEDB {
 	public void setGraphId(long graphId) {
 		this.graphId = graphId;
 	}
+
 
 
 	public SimpleDirectedWeightedGraph<Object, IntraDomainEdge> getDuplicatedNetworkGraph() {

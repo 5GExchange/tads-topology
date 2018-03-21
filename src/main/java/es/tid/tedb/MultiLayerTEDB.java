@@ -41,7 +41,13 @@ public class MultiLayerTEDB implements DomainTEDB {
 	private WSONInformation WSONinfo=null;
 	
 	private Lock TEDBlock;
-	
+
+	@Override
+	public Hashtable<String, InterDomainEdge> getTemps(){return null;};
+
+	@Override
+	public void setTemps(Hashtable<String, InterDomainEdge> val){};
+
 
 	/**
 	 * List of interdomain Links

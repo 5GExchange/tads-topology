@@ -516,14 +516,14 @@ public class TE_Information {
 //		}
 
 		if (maximumBandwidth!=null){
-			ret=ret+maximumBandwidth.toStringShort()+"\t";
+			ret=ret+maximumBandwidth.toString()+"\t";
 		}
 		if (maximumReservableBandwidth!=null){
 			ret=ret+maximumReservableBandwidth.toString()+"\t";
 		}
 		
 		if (unreservedBandwidth!=null){
-			ret=ret+unreservedBandwidth.toStringShort()+"\t";
+			ret=ret+unreservedBandwidth.toString()+"\t";
 		}
 		
 		if (administrativeGroup!=null){
