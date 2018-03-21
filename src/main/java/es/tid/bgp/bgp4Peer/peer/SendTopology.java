@@ -396,13 +396,14 @@ public class SendTopology implements Runnable {
 	//used function that checks if there is some uncomplete intedomain links and then sends updates
 	private void sendLinkNLRI(MultiDomainTEDB md, Hashtable<String, TEDB> teds) {
 
-		LinkedList<InterDomainEdge> interdomainLinks= md.getInterDomainLinks();
+		LinkedList<InterDomainEdge> interdomainLinks = md.getInterDomainLinks();
 
 		Enumeration<String> iter = teds.keys();
 
-		boolean sfound=false;
-		boolean dfound=false;
-		while (iter.hasMoreElements()) {
+		boolean sfound = false;
+		boolean dfound = false;
+		if (md.getTemps().size()>0){
+			while (iter.hasMoreElements()) {
 			String domainID = iter.nextElement();
 			//Andrea
 			if (domainID != null) {
@@ -414,12 +415,12 @@ public class SendTopology implements Runnable {
 						Inet4Address nodex = null;
 						long node = 0L;
 						Object v = vertexIt.next();
-								/*if (v instanceof es.tid.tedb.elements.Node) {
-									log.debug("instance of Node");
-									//node = Integer.valueOf(((es.tid.tedb.elements.Node) v).getAddress().get(0));
-									node=((es.tid.tedb.elements.Node) v).getISIS_ID();
-									log.debug("Send NLRI ISIS node id "+ String.valueOf(node));
-								}*/
+									/*if (v instanceof es.tid.tedb.elements.Node) {
+										log.debug("instance of Node");
+										//node = Integer.valueOf(((es.tid.tedb.elements.Node) v).getAddress().get(0));
+										node=((es.tid.tedb.elements.Node) v).getISIS_ID();
+										log.debug("Send NLRI ISIS node id "+ String.valueOf(node));
+									}*/
 
 						Node_Info node_info = null;
 						if (v instanceof Inet4Address) {
@@ -435,7 +436,7 @@ public class SendTopology implements Runnable {
 							if (node_info.getIpv4AddressLocalNode() != null) {
 								String nodeip = node_info.getIpv4AddressLocalNode().getCanonicalHostName();
 								log.info("bbbbbbbbbbbbbbbbbbbb node_info ID=" + nodeip);
-								if (md.getTemps()!=null){
+								if (md.getTemps() != null) {
 									Enumeration keys = md.getTemps().keys();
 									String key;
 									while (keys.hasMoreElements()) {
@@ -445,14 +446,14 @@ public class SendTopology implements Runnable {
 										if (edge.getSrc_router_id() != null) {
 											String source = null;
 											if (edge.getSrc_router_id() instanceof Long) {
-												if (edge.getLocal_Node_Info()!=null){
-													if (edge.getLocal_Node_Info().getIpv4Address()!=null) {
+												if (edge.getLocal_Node_Info() != null) {
+													if (edge.getLocal_Node_Info().getIpv4Address() != null) {
 														source = edge.getLocal_Node_Info().getIpv4Address().getCanonicalHostName();
 														log.info("bbbbbbbbbbbbbbbbbbbb src router ID=" + source);
 													}
 												}
 											}
-											if (edge.getSrc_router_id() instanceof Inet4Address){
+											if (edge.getSrc_router_id() instanceof Inet4Address) {
 												source = ((Inet4Address) edge.getSrc_router_id()).getHostAddress();
 												log.info("bbbbbbbbbbbbbbbbbbbb src router ID=" + source);
 											}
@@ -478,10 +479,10 @@ public class SendTopology implements Runnable {
 										if (edge.getDst_router_id() != null) {
 											String destin = null;
 											if (edge.getDst_router_id() instanceof Long) {
-												destin="127.0.0.1";
+												destin = "127.0.0.1";
 												log.info("Strange case src router ID=" + destin);
 											}
-											if (edge.getDst_router_id() instanceof Inet4Address){
+											if (edge.getDst_router_id() instanceof Inet4Address) {
 												destin = ((Inet4Address) edge.getSrc_router_id()).getHostAddress();
 												log.info("bbbbbbbbbbbbbbbbbbbb src router ID=" + destin);
 											}
@@ -517,16 +518,16 @@ public class SendTopology implements Runnable {
 
 
 						}
-							//}
+						//}
 					}
 				}
 
 			}
+			}
 		}
-
 		//aggiungi gran cialo il link ai temp links
 
-
+		log.info(md.toString());
 
 
 
@@ -2728,8 +2729,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 				linkNLRI.setUndirectionalAvailableBwTLV(uSTLV);
 			}
 			if(te_info.getUndirUtilizedBw() != null){
-				int utilizedBw = te_info.getUndirUtilizedBw().getUtilizedBw();
-				UndirectionalUtilizedBandwidthDescriptorSubTLV uSTLV =new UndirectionalUtilizedBandwidthDescriptorSubTLV();
+				int utilizedBw = te_info.getUndirUtilizedBw().getUtilrectionalUtilizedBandwidthDescriptorSubTLV uSTLV =new UndirectionalUtilizedBandwidthDescriptorSubTLV();
 				uSTLV.setUtilizedBw(utilizedBw);
 				linkNLRI.setUndirectionalUtilizedBwTLV(uSTLV);
 			}
