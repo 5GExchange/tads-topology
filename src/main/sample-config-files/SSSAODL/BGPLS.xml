@@ -17,7 +17,13 @@
                 <export>false</export>
                 <import>true</import>
                 <peerPort>179</peerPort>
-        </configPeer>
+	</configPeer>
+	<configPeer>
+		<peer>10.30.2.207</peer>
+		<export>true</export>
+		<import>true</import>
+		<peerPort>179</peerPort>
+	</configPeer>
 	<!-- Ficheros log (servidor, protocolo PCEP y OSPF). Campos opcionales-->
 	<BGP4LogFile>BGP4Parser-BGPLS2.log</BGP4LogFile><!-- Default value: BGP4Parser.log -->
 	<BGP4LogFileClient>BGP4Client-BGPLS2.log</BGP4LogFileClient><!-- Default value: BGP4Client.log-->
