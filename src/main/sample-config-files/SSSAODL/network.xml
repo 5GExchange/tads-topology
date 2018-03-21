@@ -11,10 +11,12 @@
 			<source>
 				<router_id>2.2.2.2</router_id>
 				<if_id>1</if_id>
+				<ip>192.168.200.2</ip>
 			</source>			
 			<destination>
 				<router_id>3.3.3.3</router_id>
 				<if_id>2</if_id>
+				<ip>192.168.200.1</ip>
 			</destination>
 			<type>interdomain</type>
 			<maximum_bandwidth>12500</maximum_bandwidth>
