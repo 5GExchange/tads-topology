@@ -445,9 +445,10 @@ public class SendTopology implements Runnable {
 										if (edge.getSrc_router_id() != null) {
 											String source = null;
 											if (edge.getSrc_router_id() instanceof Long) {
-												source =edge.getLocal_Node_Info().getIpv4Address().getCanonicalHostName();
-												log.info("bbbbbbbbbbbbbbbbbbbb src router ID=" + source);
-
+												if (edge.getLocal_Node_Info().getIpv4Address()!=null) {
+													source = edge.getLocal_Node_Info().getIpv4Address().getCanonicalHostName();
+													log.info("bbbbbbbbbbbbbbbbbbbb src router ID=" + source);
+												}
 											}
 											if (edge.getSrc_router_id() instanceof Inet4Address){
 												source = ((Inet4Address) edge.getSrc_router_id()).getHostAddress();
@@ -473,8 +474,15 @@ public class SendTopology implements Runnable {
 										}
 										//destination check
 										if (edge.getDst_router_id() != null) {
-											String destin = ((Inet4Address) edge.getSrc_router_id()).getHostAddress();
-											log.info("bbbbbbbbbbbbbbbbbbbb dst router ID=" + destin);
+											String destin = null;
+											if (edge.getDst_router_id() instanceof Long) {
+												destin="127.0.0.1";
+												log.info("Strange case src router ID=" + destin);
+											}
+											if (edge.getDst_router_id() instanceof Inet4Address){
+												destin = ((Inet4Address) edge.getSrc_router_id()).getHostAddress();
+												log.info("bbbbbbbbbbbbbbbbbbbb src router ID=" + destin);
+											}
 											if (edge.getRemote_Node_Info() == null) {
 												log.info("Trying to configure the the dst node");
 												if (node_info.getIpv4AddressLocalNode() != null) {
