@@ -762,6 +762,8 @@ public class SendTopology implements Runnable {
 				if (session.getSendTo()) {
 					String destination = session.getRemotePeerIP().getHostAddress();
 					log.info("BGP4 Update learnt from:" + update.getLearntFrom());
+					if (update.getLearntFrom().contains("/"))
+						log.info("BGP4 Update learnt from new:" + update.getLearntFrom().replaceAll("/",""));
 					if (isTest) {
 						log.debug("Sending BGP4 update to:" + destination + " with no check on the ID since it is test");
 						if (session.getMyAutonomousSystem() != session.getRemoteAutonomousSystem()) {
