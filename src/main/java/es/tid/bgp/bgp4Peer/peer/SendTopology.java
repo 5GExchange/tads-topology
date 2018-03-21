@@ -416,12 +416,6 @@ public class SendTopology implements Runnable {
 								Inet4Address nodex = null;
 								long node = 0L;
 								Object v = vertexIt.next();
-											/*if (v instanceof es.tid.tedb.elements.Node) {
-												log.debug("instance of Node");
-												//node = Integer.valueOf(((es.tid.tedb.elements.Node) v).getAddress().get(0));
-												node=((es.tid.tedb.elements.Node) v).getISIS_ID();
-												log.debug("Send NLRI ISIS node id "+ String.valueOf(node));
-											}*/
 
 								Node_Info node_info = null;
 								if (v instanceof Inet4Address) {
@@ -436,13 +430,14 @@ public class SendTopology implements Runnable {
 								if (node_info != null) {
 									if (node_info.getIpv4AddressLocalNode() != null) {
 										String nodeip = node_info.getIpv4AddressLocalNode().getCanonicalHostName();
-										log.info("bbbbbbbbbbbbbbbbbbbb node_info ID=" + nodeip);
+										log.info("llllllllllllllllllllllllllllllllll node_info ID=" + nodeip);
 										if (md.getTemps() != null) {
 											Enumeration keys = md.getTemps().keys();
 											String key;
 											while (keys.hasMoreElements()) {
 												key = (String) keys.nextElement();
 												InterDomainEdge edge = md.getTemps().get(key);
+												log.info(edge.toString());
 												//source check
 												if (edge.getSrc_router_id() != null) {
 													String source = null;
@@ -450,21 +445,21 @@ public class SendTopology implements Runnable {
 														if (edge.getLocal_Node_Info() != null) {
 															if (edge.getLocal_Node_Info().getIpv4Address() != null) {
 																source = edge.getLocal_Node_Info().getIpv4Address().getCanonicalHostName();
-																log.info("bbbbbbbbbbbbbbbbbbbb src router ID=" + source);
+																log.info("kkkkkkkkkkkkkkkkkkkkkkk src router ID=" + source);
 															}
 														}
 													}
 													if (edge.getSrc_router_id() instanceof Inet4Address) {
 														source = ((Inet4Address) edge.getSrc_router_id()).getHostAddress();
-														log.info("bbbbbbbbbbbbbbbbbbbb src router ID=" + source);
+														log.info("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk src router ID=" + source);
 													}
 													if (edge.getLocal_Node_Info() == null) {
 														log.info("Trying to configure the the src node");
 														if (node_info.getIpv4AddressLocalNode() != null) {
-															log.info("bbbbbbbbbbbbbbbbbbbb node_info ID=" + (node_info.getIpv4AddressLocalNode().getCanonicalHostName()));
+															log.info("pppppppppppppppppppppppppp node_info ID=" + (node_info.getIpv4AddressLocalNode().getCanonicalHostName()));
 															if ((node_info.getIpv4AddressLocalNode().getCanonicalHostName()).equals(source)) {
 																sfound = true;
-																log.info("ttttttttttttttttttttttttttttttttttttttttttttttFound node match for read src router ID=" + source);
+																log.info("ggggggggggggggggggggggggggggggggggg Found node match for read src router ID=" + source);
 																edge.setLocal_Node_Info(node_info);
 															}
 															if (v instanceof Long)
@@ -472,9 +467,10 @@ public class SendTopology implements Runnable {
 															if (v instanceof Inet4Address)
 																edge.setSrc_router_id(nodex);
 														}
-													} else
+													} else {
 														log.info("Src info already present=");
-													sfound = true;
+														sfound = true;
+													}
 												}
 												//destination check
 												if (edge.getDst_router_id() != null) {
@@ -485,14 +481,14 @@ public class SendTopology implements Runnable {
 													}
 													if (edge.getDst_router_id() instanceof Inet4Address) {
 														destin = ((Inet4Address) edge.getSrc_router_id()).getHostAddress();
-														log.info("bbbbbbbbbbbbbbbbbbbb src router ID=" + destin);
+														log.info("pppppppppppppppppppppppppppppppppppppppppp src router ID=" + destin);
 													}
 													if (edge.getRemote_Node_Info() == null) {
 														log.info("Trying to configure the the dst node");
 														if (node_info.getIpv4AddressLocalNode() != null) {
 															if ((node_info.getIpv4AddressLocalNode().getCanonicalHostName()).equals(destin)) {
 																dfound = true;
-																log.info("ttttttttttttttttttttttttttttttttttttttttttttttFound node match for read dst router ID=" + destin);
+																log.info("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj Found node match for read dst router ID=" + destin);
 																edge.setRemote_Node_Info(node_info);
 																md.getNetworkDomainGraph().addVertex(domainID);
 															}
@@ -514,12 +510,18 @@ public class SendTopology implements Runnable {
 
 											}
 										}
+										else{
+											log.info("getTemps is null");
+										}
 
 									}
-
-
+									else{
+										log.info("get ipv4 address null");
+									}
 								}
-								//}
+								else{
+									log.info("node_info is null");
+								}
 							}
 						}
 
