@@ -3444,10 +3444,11 @@ public class FileTEDBUpdater {
 												if (v instanceof Inet4Address)
 													edge.setDst_router_id(nodex);
                                                     edge.setDomain_dst_router(domainID);
-													log.info("Adding interdomain link "+source_domain_id.toString()+"-->"+dest_domain_id.toString()+" learnt "+edge.getLearntFrom());//edge.toString());
-													//Only add if the source and destination domains are different
-													graph.addEdge(source_domain_id, dest_domain_id, edge);
-
+													if ((source_domain_id!=null)&&(dest_domain_id!=null)){
+														log.info("Adding interdomain link "+source_domain_id.toString()+"-->"+dest_domain_id.toString()+" learnt "+edge.getLearntFrom());//edge.toString());
+														//Only add if the source and destination domains are different
+														graph.addEdge(source_domain_id, dest_domain_id, edge);
+													}
 											}
 										}
 
