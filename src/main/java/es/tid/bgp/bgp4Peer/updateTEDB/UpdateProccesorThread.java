@@ -17,7 +17,6 @@ import es.tid.tedb.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.lang.model.element.NestingKind;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -1172,6 +1171,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 			SetnodeITinfoUpdate(simpleTEDB.getDomainID(), itNodeNLRI.getNodeId(), learntFrom, System.currentTimeMillis());
 			}
 	}
+
 	private void fillNodeInformation(NodeNLRI nodeNLRI, String learntFrom) throws UnknownHostException {
 
 		Inet4Address as_number = null;

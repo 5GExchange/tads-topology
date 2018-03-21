@@ -407,7 +407,7 @@ public class SendTopology implements Runnable {
 				while (iter.hasMoreElements()) {
 					String domainID = iter.nextElement();
 					//Andrea
-					if (domainID != null) {
+					if ((domainID != null)&&(!domainID.equals("multidomain"))) {
 						log.info("temp procedure checking domain_id: " + domainID);
 						TEDB ted = teds.get(domainID);
 						if (ted instanceof DomainTEDB) {
@@ -472,16 +472,19 @@ public class SendTopology implements Runnable {
 														sfound = true;
 													}
 												}
+												else{
+													log.info("getSrc_router_id is null");
+												}
 												//destination check
 												if (edge.getDst_router_id() != null) {
 													String destin = null;
 													if (edge.getDst_router_id() instanceof Long) {
 														destin = "127.0.0.1";
-														log.info("Strange case src router ID=" + destin);
+														log.info("Strange case dst router ID=" + destin);
 													}
 													if (edge.getDst_router_id() instanceof Inet4Address) {
 														destin = ((Inet4Address) edge.getSrc_router_id()).getHostAddress();
-														log.info("pppppppppppppppppppppppppppppppppppppppppp src router ID=" + destin);
+														log.info("pppppppppppppppppppppppppppppppppppppppppp dst router ID=" + destin);
 													}
 													if (edge.getRemote_Node_Info() == null) {
 														log.info("Trying to configure the the dst node");
@@ -499,6 +502,9 @@ public class SendTopology implements Runnable {
 														}
 													} else
 														log.info("Dst info already present=");
+												}
+												else{
+													log.info("getDst_router_id is null");
 												}
 												if (sfound && dfound) {
 													edge.setDomain_dst_router(domainID);
