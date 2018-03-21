@@ -527,7 +527,8 @@ public class SendTopology implements Runnable {
 		}
 		//aggiungi gran cialo il link ai temp links
 
-		log.info(md.toString());
+		if (md!=null)
+			log.info(md.toString());
 
 
 
