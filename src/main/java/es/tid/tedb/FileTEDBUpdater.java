@@ -3450,6 +3450,7 @@ public class FileTEDBUpdater {
 													dfound = true;
 													log.info("ttttttttttttttttttttttttttttttttttttttttttttttFound node match for read dst router ID=" + ((Inet4Address) d_router_id_addr).getCanonicalHostName());
 													edge.setRemote_Node_Info(node_info);
+													graph.addVertex(domainID);
 
 													if (v instanceof Long){
 														edge.setDst_router_id(node);
