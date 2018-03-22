@@ -362,8 +362,8 @@ public class SendTopology implements Runnable {
 						dst = (Inet4Address) edge.getDst_router_id();
 					if (edge.getDst_router_id() instanceof Long)
 						dst = (Inet4Address) edge.getDst_router_id();
-					if ((source != null) && (dst != null))
-						log.debug("Sending ID Edge: (" + source.toString() + ":" + ((InterDomainEdge) edge).getSrc_if_id() + "," + dst.toString() + ")");
+					if ((source != null) && (dst != null)&&()&&())
+						log.debug("Sending ID Edge: (" + source.toString() + "in domain " + ((InterDomainEdge) edge).getDomain_src_router().ge + "," + dst.toString() + ")");
 					addressList = new ArrayList<Object>();
 					addressList.add(0, source);
 					addressList.add(1, dst);
@@ -1989,6 +1989,8 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		return update;
 	}
 
+
+	//ANDREAINTERDOMAIN
 	private BGP4Update createMsgUpdateLinkNLRI2(IntraDomainEdge edgex, ArrayList<Object> addressList, ArrayList<Long> localRemoteIfList, int lanID, ArrayList<String> domainList, boolean intradomain, TE_Information te_info, String learntFrom, ArrayList<Inet4Address> interfacesList){
 		BGP4Update update= new BGP4Update();
 		//1. Path Attributes
