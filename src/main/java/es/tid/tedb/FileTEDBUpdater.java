@@ -3450,28 +3450,35 @@ public class FileTEDBUpdater {
 													dfound = true;
 													log.info("ttttttttttttttttttttttttttttttttttttttttttttttFound node match for read dst router ID=" + ((Inet4Address) d_router_id_addr).getCanonicalHostName());
 													edge.setRemote_Node_Info(node_info);
-													graph.addVertex(domainID);
-
-													if (v instanceof Long){
-														edge.setDst_router_id(node);
-														log.info("ISIS");
-														edge.setDomain_dst_router(domainID);
-														if ((source_domain_id!=null)&&(domainID!=null)){
-															log.info("Adding interdomain link " + edge.getDomain_src_router() + "-->" + domainID);
-															//Only add if the source and destination domains are different
-															graph.addEdge((Inet4Address)edge.getDomain_src_router(), domainID, edge);
-															graph.addEdge(source_domain_id, dest_domain_id, edge);
-														}
+													Inet4Address dom=null;
+													try { // d_router_id_addr type: Inet4Address
+														dom = (Inet4Address) Inet4Address.getByName(domainID);
+													} catch (Exception e) { // d_router_id_addr type: DataPathID
+														log.info(e.toString());
 													}
-													if (v instanceof Inet4Address){
-														log.info("ipv4");
-														edge.setDst_router_id(nodex);
-														edge.setDomain_dst_router(domainID);
-														if ((source_domain_id!=null)&&(domainID!=null)){
-															log.info("Adding interdomain link " + edge.getDomain_src_router() + "-->" + domainID);
-															//Only add if the source and destination domains are different
-															graph.addEdge((Inet4Address)edge.getDomain_src_router(), domainID, edge);
-															graph.addEdge(source_domain_id, dest_domain_id, edge);
+													if (dom!=null){
+														graph.addVertex(dom);
+														if (v instanceof Long){
+															edge.setDst_router_id(node);
+															log.info("ISIS");
+															edge.setDomain_dst_router(domainID);
+															if ((source_domain_id!=null)&&(domainID!=null)){
+																log.info("Adding interdomain link " + edge.getDomain_src_router() + "-->" + domainID);
+																//Only add if the source and destination domains are different
+																graph.addEdge((Inet4Address)edge.getDomain_src_router(), dom, edge);
+																graph.addEdge(source_domain_id, dest_domain_id, edge);
+															}
+														}
+														if (v instanceof Inet4Address){
+															log.info("ipv4");
+															edge.setDst_router_id(nodex);
+															edge.setDomain_dst_router(domainID);
+															if ((source_domain_id!=null)&&(domainID!=null)){
+																log.info("Adding interdomain link " + edge.getDomain_src_router() + "-->" + domainID);
+																//Only add if the source and destination domains are different
+																graph.addEdge((Inet4Address)edge.getDomain_src_router(), dom, edge);
+																graph.addEdge(source_domain_id, dest_domain_id, edge);
+															}
 														}
 													}
 
