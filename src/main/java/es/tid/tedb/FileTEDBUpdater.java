@@ -3302,7 +3302,6 @@ public class FileTEDBUpdater {
 				InterDomainEdge edge = new InterDomainEdge();
 				TE_Information tE_info=readTE_INFOfromXml(null, element, false,numLabels, grid,  cs, n, 0, Integer.MAX_VALUE);
 				edge.setTE_info(tE_info);
-				edge.setLearntFrom(LearntFrom);
 				NodeList source = element.getElementsByTagName("source");
 				Element source_router_el = (Element) source.item(0);
 				NodeList source_router_id = source_router_el
@@ -3450,6 +3449,7 @@ public class FileTEDBUpdater {
 													dfound = true;
 													log.info("ttttttttttttttttttttttttttttttttttttttttttttttFound node match for read dst router ID=" + ((Inet4Address) d_router_id_addr).getCanonicalHostName());
 													edge.setRemote_Node_Info(node_info);
+													edge.setLearntFrom(LearntFrom);
 													Inet4Address dom=null;
 													try { // d_router_id_addr type: Inet4Address
 														dom = (Inet4Address) Inet4Address.getByName(domainID);
