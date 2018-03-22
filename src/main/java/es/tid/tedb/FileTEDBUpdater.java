@@ -3454,14 +3454,22 @@ public class FileTEDBUpdater {
 													if (v instanceof Long){
 														edge.setDst_router_id(node);
 														log.info("ISIS");
+														edge.setDomain_dst_router(domainID);
+														if ((source_domain_id!=null)&&(domainID!=null)){
+															log.info("Adding interdomain link " + edge.getDomain_src_router() + "-->" + domainID);
+															//Only add if the source and destination domains are different
+															graph.addEdge((Inet4Address)edge.getDomain_src_router(), domainID, edge);
+															graph.addEdge(source_domain_id, dest_domain_id, edge);
+														}
 													}
 													if (v instanceof Inet4Address){
 														log.info("ipv4");
 														edge.setDst_router_id(nodex);
 														edge.setDomain_dst_router(domainID);
-														if ((source_domain_id!=null)&&(dest_domain_id!=null)){
-															log.info("Adding interdomain link "+source_domain_id.toString()+"-->"+dest_domain_id.toString()+" learnt "+edge.getLearntFrom());//edge.toString());
+														if ((source_domain_id!=null)&&(domainID!=null)){
+															log.info("Adding interdomain link " + edge.getDomain_src_router() + "-->" + domainID);
 															//Only add if the source and destination domains are different
+															graph.addEdge((Inet4Address)edge.getDomain_src_router(), domainID, edge);
 															graph.addEdge(source_domain_id, dest_domain_id, edge);
 														}
 													}
@@ -3469,7 +3477,7 @@ public class FileTEDBUpdater {
 												}
 												else
 													log.info("node_info and dst different");
-												if (sfound && dfound) {
+												/*if (sfound && dfound) {
 													Inet4Address dom=null;
 													try { // d_router_id_addr type: Inet4Address
 														dom = (Inet4Address) Inet4Address.getByName(domainID);
@@ -3483,7 +3491,7 @@ public class FileTEDBUpdater {
 													//Only add if the source and destination domains are different
 													mdTed.getNetworkDomainGraph().addEdge((Inet4Address)edge.getDomain_src_router(), dom, edge);
 													//mdTed.getTemps().remove(key);
-												}
+												}*/
 											}
 											else
 												log.info("d_router_id_addr null");
