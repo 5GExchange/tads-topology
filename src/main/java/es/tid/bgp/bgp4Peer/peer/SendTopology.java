@@ -9,6 +9,7 @@ import es.tid.bgp.bgp4.update.tlv.linkstate_attribute_tlvs.*;
 import es.tid.bgp.bgp4.update.tlv.node_link_prefix_descriptor_subTLVs.*;
 import es.tid.bgp.bgp4Peer.bgp4session.BGP4SessionsInformation;
 import es.tid.bgp.bgp4Peer.bgp4session.GenericBGP4Session;
+import es.tid.of.DataPathID;
 import es.tid.ospf.ospfv2.OSPFv2LinkStateUpdatePacket;
 import es.tid.ospf.ospfv2.lsa.LSA;
 import es.tid.ospf.ospfv2.lsa.LSATypes;
@@ -521,11 +522,18 @@ public class SendTopology implements Runnable {
 													log.info("getDst_router_id is null");
 												}
 												if (sfound && dfound) {
-													edge.setDomain_dst_router(domainID);
-													log.info("Adding interdomain link " + edge.getDomain_src_router() + "-->" + domainID);
-													//Only add if the source and destination domains are different
-													md.getNetworkDomainGraph().addEdge(edge.getDomain_src_router(), domainID, edge);
-													md.getTemps().remove(key);
+													Inet4Address dom=null;
+													try { // d_router_id_addr type: Inet4Address
+														dom = (Inet4Address) Inet4Address.getByName(domainID);
+													} catch (Exception e) { // d_router_id_addr type: DataPathID
+														log.info(e.toString());
+													}
+													if (dom!=null)
+														edge.setDomain_dst_router(domainID);
+														log.info("Adding interdomain link " + edge.getDomain_src_router() + "-->" + domainID);
+														//Only add if the source and destination domains are different
+														md.getNetworkDomainGraph().addEdge(edge.getDomain_src_router(), domainID, edge);
+														md.getTemps().remove(key);
 												}
 
 											}
