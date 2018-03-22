@@ -140,7 +140,9 @@ public class TranslateModel {
 				else if (linkTed.getDst_router_id() instanceof Long){
 					//String src = "/nodes/node[id="+domainID+"]/ports/port[id="+String.valueOf(linkTed.getSource())+"]";
 					String dst=null;
-					String dstDomain = ((java.net.Inet4Address) linkTed.getDomain_dst_router()).getHostAddress();
+					//String dstDomain = ((java.net.Inet4Address) linkTed.getDomain_dst_router()).getHostAddress();
+					//Cialissimo
+					String dstDomain =((Inet4Address) linkTed.getDomain_dst_router()).getHostAddress();
 					for(Map.Entry<String, TEDB>entry : all.entrySet() ){
 						if (entry.getValue() instanceof DomainTEDB) {
 							Node_Info node_info=((DomainTEDB) entry.getValue()).getNodeTable().get(linkTed.getDst_router_id());
