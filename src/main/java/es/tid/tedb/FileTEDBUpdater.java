@@ -3459,10 +3459,11 @@ public class FileTEDBUpdater {
 													if (dom!=null){
 														graph.addVertex(dom);
 														if (v instanceof Long){
-															edge.setDst_router_id(node);
-															log.info("ISIS");
-															edge.setDomain_dst_router(dom);
 															if ((source_domain_id!=null)&&(domainID!=null)){
+																edge.setDst_router_id(node);
+																log.info("ISIS");
+																edge.setDomain_dst_router(dom);
+																edge.setComplete(true);
 																log.info("Adding interdomain link " + edge.getDomain_src_router() + "-->" + domainID);
 																//Only add if the source and destination domains are different
 																graph.addEdge((Inet4Address)edge.getDomain_src_router(), dom, edge);
@@ -3470,10 +3471,11 @@ public class FileTEDBUpdater {
 															}
 														}
 														if (v instanceof Inet4Address){
-															log.info("ipv4");
-															edge.setDst_router_id(nodex);
-															edge.setDomain_dst_router(dom);
 															if ((source_domain_id!=null)&&(dom!=null)){
+																log.info("ipv4");
+																edge.setDst_router_id(nodex);
+																edge.setDomain_dst_router(dom);
+																edge.setComplete(true);
 																log.info("Adding interdomain link " + edge.getDomain_src_router() + "-->" + domainID);
 																//Only add if the source and destination domains are different
 																//graph.addEdge((Inet4Address)edge.getDomain_src_router(), dom, edge);

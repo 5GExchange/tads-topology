@@ -9,6 +9,7 @@ import es.tid.bgp.bgp4.update.tlv.linkstate_attribute_tlvs.*;
 import es.tid.bgp.bgp4.update.tlv.node_link_prefix_descriptor_subTLVs.*;
 import es.tid.bgp.bgp4Peer.bgp4session.BGP4SessionsInformation;
 import es.tid.bgp.bgp4Peer.bgp4session.GenericBGP4Session;
+import es.tid.bgp.bgp4Peer.updateTEDB.InterDomainLinkUpdateTime;
 import es.tid.of.DataPathID;
 import es.tid.ospf.ospfv2.OSPFv2LinkStateUpdatePacket;
 import es.tid.ospf.ospfv2.lsa.LSA;
@@ -528,13 +529,17 @@ public class SendTopology implements Runnable {
 													} catch (Exception e) { // d_router_id_addr type: DataPathID
 														log.info(e.toString());
 													}
-													if (dom!=null)
+													if (dom!=null) {
 														md.getNetworkDomainGraph().addVertex(dom);
 														edge.setDomain_dst_router(dom);
 														log.info("Adding interdomain link " + edge.getDomain_src_router() + "-->" + domainID);
 														//Only add if the source and destination domains are different
-														md.getNetworkDomainGraph().addEdge((Inet4Address)edge.getDomain_src_router(), dom, edge);
+
+														//setInterDomainEdgeUpdateTime(localDomainID, LocalNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(), remoteDomainID, RemoteNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(), System.currentTimeMillis());
+														edge.setComplete(true);
+														md.getNetworkDomainGraph().addEdge((Inet4Address) edge.getDomain_src_router(), dom, edge);
 														md.getTemps().remove(key);
+													}
 												}
 
 											}
@@ -594,7 +599,7 @@ public class SendTopology implements Runnable {
 					if (edge.getDst_router_id() instanceof Long)
 						dst = (Inet4Address) edge.getDst_router_id();
 					if ((source != null) && (dst != null))
-						log.debug("Sending ID Edge: (" + source.toString() + ":" + ((InterDomainEdge) edge).getSrc_if_id() + "," + dst.toString() + ")");
+						log.info("Sending ID Edge: (" + source.toString() + ":" + ((InterDomainEdge) edge).getSrc_if_id() + "," + dst.toString() + ")");
 					addressList = new ArrayList<Object>();
 					addressList.add(0, source);
 					addressList.add(1, dst);
@@ -618,7 +623,7 @@ public class SendTopology implements Runnable {
 					BGP4Update update = createMsgUpdateLinkNLRI2(null, addressList, localRemoteIfList, lanID, domainList, false, te_info, edge.getLearntFrom(),
 							interfacesList);
 					update.setLearntFrom(edge.getLearntFrom());
-					log.debug("Update message Created for Edge: " + edge.toString());
+					log.info("Update message Created for Edge: " + edge.toString());
 					sendMessage(update);
 				}
 			}
@@ -626,6 +631,16 @@ public class SendTopology implements Runnable {
 
 	}
 
+	/*
+	public void setInterDomainEdgeUpdateTime(Inet4Address localDomainID,Inet4Address LocalNodeIGPId, Long LinkLocalIdentifier, Inet4Address remoteDomainID, Inet4Address RemoteNodeIGPId, Long LinkRemoteIdentifier, long LinkUpdateTime) {
+
+		DomainUpdateTime domain_update = new DomainUpdateTime(DomainUpdate, localDomainID, LinkUpdateTime);
+		//log.info("Domain Id : " +String.valueOf(localDomainID) +"DomainTEDS Size:  " +DomainUpdate.size()  + "   Time of Update:  " + LinkUpdateTime);
+		InterDomainLinkUpdateTime interDom_linkUpdate= new InterDomainLinkUpdateTime(interDomainLinkUpdate, localDomainID, LocalNodeIGPId,LinkLocalIdentifier,remoteDomainID,RemoteNodeIGPId,LinkRemoteIdentifier, LinkUpdateTime);
+		//log.info("..................Added InterDomain Link : " +interDom_linkUpdate.toString()   + "   Time of Update:  " + LinkUpdateTime);
+
+	}
+	 */
 
 	/**
 	 * This function sends a BGP4 update message (encoded in a LinkNLRI) for each link in the set
@@ -1962,6 +1977,8 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 				e.printStackTrace();
 			}
 		}
+		else
+			log.info("local");
 		pathAttributes.add(ra);
 
 		return update;
@@ -2400,7 +2417,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 
 
 	private BGP4Update createMsgUpdateLinkNLRIISIS(IntraDomainEdge edgex, long src, long dst, int lanID, ArrayList<String> domainList, boolean intradomain, TE_Information te_info, String learntFrom, Inet4Address local, Inet4Address neighbor){
-		log.debug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXAndrea Sending link NLRI ISIS ");
+		log.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXAndrea Sending link NLRI ISIS ");
 		BGP4Update update= new BGP4Update();
 		//1. Path Attributes
 		ArrayList<PathAttribute> pathAttributes = update.getPathAttributes();
@@ -2718,69 +2735,8 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 				log.debug("Added remote ip link descriptior->"+ipv4NeighborAddressTLV.toString());
 			}
 		}
-		//2.2.2. Link Local/Remote identifiers TLV
-		/*
-		TEMP commented form ANdreaaaaaa
-		if (localRemoteIfList !=  null){
-			LinkLocalRemoteIdentifiersLinkDescriptorSubTLV linkIdentifiersTLV = new LinkLocalRemoteIdentifiersLinkDescriptorSubTLV();
-			linkIdentifiersTLV.setLinkLocalIdentifier(src);
-			linkIdentifiersTLV.setLinkRemoteIdentifier(dst);
-			//linkNLRI.setLinkIdentifiersTLV(linkIdentifiersTLV);
-		}
-		 */
-
-
-		//2.2.3 LinkDelay
-		/*
-		if (te_info != null){
-			if(te_info.getUndirLinkDelay() != null){
-				int undirLinkDelay = te_info.getUndirLinkDelay().getDelay();
-				UndirectionalLinkDelayDescriptorSubTLV uSTLV =new UndirectionalLinkDelayDescriptorSubTLV();
-				uSTLV.setDelay(undirLinkDelay);
-				linkNLRI.setUndirectionalLinkDelayTLV(uSTLV);
-			}
-			if(te_info.getUndirDelayVar() != null){
-				int undirDelayVar = te_info.getUndirDelayVar().getDelayVar();
-				UndirectionalDelayVariationDescriptorSubTLV uSTLV =new UndirectionalDelayVariationDescriptorSubTLV();
-				uSTLV.setDelayVar(undirDelayVar);
-				linkNLRI.setUndirectionalDelayVariationTLV(uSTLV);
-			}
-			if(te_info.getMinMaxUndirLinkDelay() != null){
-				int minDelay = te_info.getMinMaxUndirLinkDelay().getLowDelay();
-				int maxDelay = te_info.getMinMaxUndirLinkDelay().getHighDelay();
-				MinMaxUndirectionalLinkDelayDescriptorSubTLV uSTLV =new MinMaxUndirectionalLinkDelayDescriptorSubTLV();
-				uSTLV.setHighDelay(maxDelay);
-				uSTLV.setLowDelay(minDelay);
-				linkNLRI.setMinMaxUndirectionalLinkDelayTLV(uSTLV);
-			}
-			if(te_info.getUndirLinkLoss() != null){
-				int linkLoss = te_info.getUndirLinkLoss().getLinkLoss();
-				UndirectionalLinkLossDescriptorSubTLV uSTLV =new UndirectionalLinkLossDescriptorSubTLV();
-				uSTLV.setLinkLoss(linkLoss);
-				linkNLRI.setUndirectionalLinkLossTLV(uSTLV);
-			}
-			if(te_info.getUndirResidualBw() != null){
-				int resBw = te_info.getUndirResidualBw().getResidualBw();
-				UndirectionalResidualBandwidthDescriptorSubTLV uSTLV =new UndirectionalResidualBandwidthDescriptorSubTLV();
-				uSTLV.setResidualBw(resBw);
-				linkNLRI.setUndirectionalResidualBwTLV(uSTLV);
-			}
-			if(te_info.getUndirAvailableBw() != null){
-				int availableBw = te_info.getUndirAvailableBw().getAvailableBw();
-				UndirectionalAvailableBandwidthDescriptorSubTLV uSTLV =new UndirectionalAvailableBandwidthDescriptorSubTLV();
-				uSTLV.setAvailableBw(availableBw);
-				linkNLRI.setUndirectionalAvailableBwTLV(uSTLV);
-			}
-			if(te_info.getUndirUtilizedBw() != null){
-				int utilizedBw = te_info.getUndirUtilizedBw().getUtilrectionalUtilizedBandwidthDescriptorSubTLV uSTLV =new UndirectionalUtilizedBandwidthDescriptorSubTLV();
-				uSTLV.setUtilizedBw(utilizedBw);
-				linkNLRI.setUndirectionalUtilizedBwTLV(uSTLV);
-			}
-
-		}
-		 */
 		linkNLRI.setIdentifier(this.identifier);
-		log.debug("The Link NLRI is:"+linkNLRI.toString());
+		log.info("The Link NLRI is:"+linkNLRI.toString());
 		BGP_LS_MP_Reach_Attribute ra= new BGP_LS_MP_Reach_Attribute();
 		ra.setLsNLRI(linkNLRI);
 		if (learntFrom!="local"){
@@ -2790,7 +2746,8 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 				e.printStackTrace();
 			}
 		}
-
+		else
+			log.info("local");
 		pathAttributes.add(ra);
 		log.debug("The final update is :"+ update.toString());
 		return update;

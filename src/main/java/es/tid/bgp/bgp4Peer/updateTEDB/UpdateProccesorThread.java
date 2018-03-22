@@ -48,11 +48,10 @@ public class UpdateProccesorThread extends Thread {
 
 	private Hashtable<String, ArrayList<AsInfo>> AsInfo_DB= new Hashtable<String, ArrayList<AsInfo>>();
 
-	private Hashtable<DomainUpdateTime, Long> DomainUpdate;
 
 	private Hashtable<IntraDomainLinkUpdateTime, Long> intraDomainLinkUpdate;
 
-
+	private Hashtable<DomainUpdateTime, Long> DomainUpdate;
 	private Hashtable<InterDomainLinkUpdateTime, Long> interDomainLinkUpdate;
 	private Hashtable<NodeITinfoUpdateTime, Long> nodeITinfoUpdate;
 	private Hashtable<NodeinfoUpdateTime, Long> nodeinfoUpdate;
