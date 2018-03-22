@@ -444,13 +444,13 @@ public class SendTopology implements Runnable {
 													if (edge.getSrc_router_id() instanceof Long) {
 														if (edge.getLocal_Node_Info() != null) {
 															log.info("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"+edge.getLocal_Node_Info().toString());
-															if (edge.getLocal_Node_Info().getIpv4AddressLocalNode() != null) {
+															if (edge.getLocal_Node_Info().getIpv4Address() != null) {
 																if(edge.getLocal_Node_Info().getIpv4Address()!=null){
 																	source = edge.getLocal_Node_Info().getIpv4Address().getHostAddress();
 																	log.info("kkkkkkkkkkkkkkkkkkkkkkk src router ID=" + source);
 																}
 																else
-																	log.info("edge.getLocal_Node_Info().getIpv4AddressLocalNode() null");
+																	log.info("edge.getLocal_Node_Info().getIpv4Address() null");
 															}
 															else{
 																log.info("edge.getLocal_Node_Info().getIpv4AddressLocalNode() null");
