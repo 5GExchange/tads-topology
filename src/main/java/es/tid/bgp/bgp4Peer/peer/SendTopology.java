@@ -483,7 +483,7 @@ public class SendTopology implements Runnable {
 														log.info("Strange case dst router ID=" + destin);
 													}
 													if (edge.getDst_router_id() instanceof Inet4Address) {
-														destin = ((Inet4Address) edge.getSrc_router_id()).getHostAddress();
+														destin = ((Inet4Address) edge.getDst_router_id()).getHostAddress();
 														log.info("pppppppppppppppppppppppppppppppppppppppppp dst router ID=" + destin);
 													}
 													if (edge.getRemote_Node_Info() == null) {
@@ -494,11 +494,17 @@ public class SendTopology implements Runnable {
 																log.info("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj Found node match for read dst router ID=" + destin);
 																edge.setRemote_Node_Info(node_info);
 																md.getNetworkDomainGraph().addVertex(domainID);
+
+																if (node_info.getISISid()!=0) {
+																	log.info("ISIS");
+																	edge.setDst_router_id(node_info.getISISid());
+																}
+																if (node_info.getIpv4Address()!=null) {
+																	log.info("ipv4");
+																	edge.setDst_router_id(node_info.getIpv4Address());
+																}
 															}
-															if (v instanceof Long)
-																edge.setDst_router_id(node);
-															if (v instanceof Inet4Address)
-																edge.setDst_router_id(nodex);
+															
 														}
 													} else
 														log.info("Dst info already present=");
