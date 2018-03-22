@@ -502,7 +502,7 @@ public class SendTopology implements Runnable {
 																dfound = true;
 																log.info("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj Found node match for read dst router ID=" + destin);
 																edge.setRemote_Node_Info(node_info);
-																md.getNetworkDomainGraph().addVertex(domainID);
+																//md.getNetworkDomainGraph().addVertex(domainID);
 
 																if (node_info.getISISid()!=0) {
 																	log.info("ISIS");
@@ -529,10 +529,11 @@ public class SendTopology implements Runnable {
 														log.info(e.toString());
 													}
 													if (dom!=null)
+														md.getNetworkDomainGraph().addVertex(dom);
 														edge.setDomain_dst_router(dom);
 														log.info("Adding interdomain link " + edge.getDomain_src_router() + "-->" + domainID);
 														//Only add if the source and destination domains are different
-														md.getNetworkDomainGraph().addEdge(edge.getDomain_src_router(), dom, edge);
+														md.getNetworkDomainGraph().addEdge((Inet4Address)edge.getDomain_src_router(), dom, edge);
 														md.getTemps().remove(key);
 												}
 
