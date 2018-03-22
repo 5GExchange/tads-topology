@@ -3469,6 +3469,21 @@ public class FileTEDBUpdater {
 												}
 												else
 													log.info("node_info and dst different");
+												if (sfound && dfound) {
+													Inet4Address dom=null;
+													try { // d_router_id_addr type: Inet4Address
+														dom = (Inet4Address) Inet4Address.getByName(domainID);
+													} catch (Exception e) { // d_router_id_addr type: DataPathID
+														log.info(e.toString());
+													}
+													if (dom!=null)
+														mdTed.getNetworkDomainGraph().addVertex(dom);
+													edge.setDomain_dst_router(dom);
+													log.info("Adding interdomain link " + edge.getDomain_src_router() + "-->" + domainID);
+													//Only add if the source and destination domains are different
+													mdTed.getNetworkDomainGraph().addEdge((Inet4Address)edge.getDomain_src_router(), dom, edge);
+													//mdTed.getTemps().remove(key);
+												}
 											}
 											else
 												log.info("d_router_id_addr null");
@@ -3497,6 +3512,7 @@ public class FileTEDBUpdater {
 					}
 
 				}
+
                     //aggiungi gran cialo il link ai temp links
 				//getIpv4AddressLocalNode()
 
