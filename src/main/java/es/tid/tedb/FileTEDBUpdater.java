@@ -3350,9 +3350,12 @@ public class FileTEDBUpdater {
 				log.info("Edge Destination router_id: " + d_r_id);
 				try { // d_router_id_addr type: Inet4Address
 					d_router_id_addr = (Inet4Address) Inet4Address.getByName(d_r_id);
+					log.info("destination ip address: "+((Inet4Address) d_router_id_addr).getHostAddress());
+					edge.setDomain_dst_router((Inet4Address) d_router_id_addr);
 				} catch (Exception e) { // d_router_id_addr type: DataPathID
 					d_router_id_addr =  DataPathID.getByName(d_r_id);
 				}
+
 				Inet4Address dest_domain_id = router_id_domain_ed.get(d_router_id_addr);
 				if (dest_domain_id!=null){
                     log.info("Destination domain_id: " + dest_domain_id);
