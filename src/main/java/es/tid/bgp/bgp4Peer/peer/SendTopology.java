@@ -2401,7 +2401,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			}
 		}
 		else
-			log.info("local")
+			log.info("local");
 		pathAttributes.add(ra);
 
 		return update;
