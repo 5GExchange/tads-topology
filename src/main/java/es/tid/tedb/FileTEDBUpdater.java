@@ -3460,7 +3460,7 @@ public class FileTEDBUpdater {
 														graph.addVertex(dom);
 														if (v instanceof Long){
 															if ((source_domain_id!=null)&&(domainID!=null)){
-																edge.setDst_router_id(node);
+																edge.setDst_router_id((long)node);
 																log.info("ISIS");
 																edge.setDomain_dst_router(dom);
 																edge.setComplete(true);
