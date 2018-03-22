@@ -443,9 +443,12 @@ public class SendTopology implements Runnable {
 													String source = null;
 													if (edge.getSrc_router_id() instanceof Long) {
 														if (edge.getLocal_Node_Info() != null) {
-															if (edge.getLocal_Node_Info().getIpv4Address() != null) {
-																source = edge.getLocal_Node_Info().getIpv4Address().getCanonicalHostName();
+															if (edge.getLocal_Node_Info().getIpv4AddressLocalNode() != null) {
+																source = edge.getLocal_Node_Info().getIpv4Address().getHostAddress();
 																log.info("kkkkkkkkkkkkkkkkkkkkkkk src router ID=" + source);
+															}
+															else{
+																log.info("edge.getLocal_Node_Info().getIpv4AddressLocalNode() null");
 															}
 														}
 													}
@@ -504,7 +507,7 @@ public class SendTopology implements Runnable {
 																	edge.setDst_router_id(node_info.getIpv4Address());
 																}
 															}
-															
+
 														}
 													} else
 														log.info("Dst info already present=");
