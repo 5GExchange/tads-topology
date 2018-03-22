@@ -623,7 +623,12 @@ public class SendTopology implements Runnable {
 					BGP4Update update = createMsgUpdateLinkNLRI2(null, addressList, localRemoteIfList, lanID, domainList, false, te_info, edge.getLearntFrom(),
 							interfacesList);
 					update.setLearntFrom(edge.getLearntFrom());
-					log.info("Update message Created for Edge: " + edge.toString());
+					log.info("Inter                  ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp      " +
+							"" +
+							"" +
+							"" +
+							"" +
+							"Update message Created for Edge: " + edge.toString());
 					sendMessage(update);
 				}
 			}
@@ -2318,11 +2323,11 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			IPv4InterfaceAddressLinkDescriptorsSubTLV ipv4InterfaceAddressTLV = new IPv4InterfaceAddressLinkDescriptorsSubTLV();
 			ipv4InterfaceAddressTLV.setIpv4Address(interfacesList.get(0));
 			linkNLRI.setIpv4InterfaceAddressTLV(ipv4InterfaceAddressTLV);
-			log.info("Added interface ip link descriptior->"+ipv4InterfaceAddressTLV.toString());
+			log.info("222Added interface ip link descriptior->"+ipv4InterfaceAddressTLV.toString());
 			IPv4NeighborAddressLinkDescriptorSubTLV ipv4NeighborAddressTLV = new IPv4NeighborAddressLinkDescriptorSubTLV();
 			ipv4NeighborAddressTLV.setIpv4Address(interfacesList.get(1));
 			linkNLRI.setIpv4NeighborAddressTLV(ipv4NeighborAddressTLV);
-			log.info("Added remote ip link descriptior->"+ipv4NeighborAddressTLV.toString());
+			log.info("22222Added remote ip link descriptior->"+ipv4NeighborAddressTLV.toString());
 		}
 		//2.2.2. Link Local/Remote identifiers TLV
 		/*
@@ -2395,6 +2400,8 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 				e.printStackTrace();
 			}
 		}
+		else
+			log.info("local")
 		pathAttributes.add(ra);
 
 		return update;
