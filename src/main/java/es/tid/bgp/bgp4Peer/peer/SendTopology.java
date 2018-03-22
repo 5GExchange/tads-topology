@@ -529,10 +529,10 @@ public class SendTopology implements Runnable {
 														log.info(e.toString());
 													}
 													if (dom!=null)
-														edge.setDomain_dst_router(domainID);
+														edge.setDomain_dst_router(dom);
 														log.info("Adding interdomain link " + edge.getDomain_src_router() + "-->" + domainID);
 														//Only add if the source and destination domains are different
-														md.getNetworkDomainGraph().addEdge(edge.getDomain_src_router(), domainID, edge);
+														md.getNetworkDomainGraph().addEdge(edge.getDomain_src_router(), dom, edge);
 														md.getTemps().remove(key);
 												}
 
