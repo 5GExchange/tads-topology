@@ -3428,12 +3428,19 @@ public class FileTEDBUpdater {
 														sfound=true;
 														log.info("ttttttttttttttttttttttttttttttttttttttttttttttFound node match for read src router ID=" + ((Inet4Address) s_router_id_addr).getCanonicalHostName());
 														edge.setLocal_Node_Info(srcNode);
-													if (v instanceof Long)
+													if (v instanceof Long){
 														edge.setSrc_router_id(node);
-													if (v instanceof Inet4Address)
+														log.info("ISIS");
+													}
+													if (v instanceof Inet4Address){
 														edge.setSrc_router_id(nodex);
+														log.info("ipv4");}
 												}
+												else
+													log.info("s_router_id_addr different");
 											}
+											else
+												log.info("node_info and src different");
 											if(d_router_id_addr!=null) {
 												if ((node_info.getIpv4AddressLocalNode().getCanonicalHostName()).equals(((Inet4Address) d_router_id_addr).getCanonicalHostName())){
 													log.info("Node info id = to dst");
@@ -3454,8 +3461,14 @@ public class FileTEDBUpdater {
 													}
 
 												}
+												else
+													log.info("node_info and dst different");
 											}
+											else
+												log.info("d_router_id_addr null");
 										}
+										else
+											log.info("node.info.getIpv4AddressLocalNode null");
 									}
 								//}
 							}
