@@ -500,6 +500,8 @@ public class SendTopology implements Runnable {
 															md.getTemps().remove(key);
 															md.getTemps().put(key,edge);
 														}
+														else
+															log.info("getIpv4AddressLocalNode is null");
 													} else {
 														log.info("Src info already present=");
 														sfound = true;
