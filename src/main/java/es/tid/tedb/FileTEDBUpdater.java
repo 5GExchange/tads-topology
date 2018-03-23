@@ -3514,8 +3514,8 @@ public class FileTEDBUpdater {
 						}
 					}
 				}
-                if (sfound&&!dfound) {
-					log.info("d not found");
+                if (!sfound&&!dfound) {
+					log.info("s or d not found");
 					if (mdTed.getTemps()!=null) {
 						if (d_router_id_addr != null) {
 							mdTed.getTemps().put(((Inet4Address) d_router_id_addr).getCanonicalHostName(), edge);
