@@ -477,7 +477,7 @@ public class SendTopology implements Runnable {
 															}
 															else if(edge.getSrc_router_id() instanceof Long){
 																//if ( ((Inet4Address)edge.getLocal_Node_Info().getIpv4Address()).getHostAddress().equals(node_info.getIpv4Address().getHostAddress())){
-																if (edge.getSrc_router_id()==node_info.getISISid() ){
+																if ((long)edge.getSrc_router_id()==node_info.getISISid() ){
 																	log.info("Node info id = to src");
 																	sfound=true;
 																	edge.setLocal_Node_Info(node_info);
