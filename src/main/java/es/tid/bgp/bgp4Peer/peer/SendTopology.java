@@ -439,7 +439,7 @@ public class SendTopology implements Runnable {
 											while (keys.hasMoreElements()) {
 												key = (String) keys.nextElement();
 												InterDomainEdge edge = md.getTemps().get(key);
-												log.info(edge.toString());
+												log.debug(edge.toString());
 												//source check
 												if (edge.getSrc_router_id() != null) {
 													String source = null;
@@ -516,8 +516,10 @@ public class SendTopology implements Runnable {
 															}
 
 														}
-													} else
+													} else {
 														log.info("Dst info already present=");
+														dfound=true;
+													}
 												}
 												else{
 													log.info("getDst_router_id is null");

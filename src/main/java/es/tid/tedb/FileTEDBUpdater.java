@@ -3319,6 +3319,7 @@ public class FileTEDBUpdater {
 				Inet4Address source_domain_id = router_id_domain_ed.get(s_router_id_addr);
 				log.info("Edge Source domain_id: " + source_domain_id);
                 edge.setDomain_src_router(source_domain_id);
+				edge.setSrc_router_id((Inet4Address) s_router_id_addr);
 
 				NodeList source_if_id_nl = source_router_el
 						.getElementsByTagName("if_id");
