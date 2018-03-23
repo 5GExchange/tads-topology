@@ -363,7 +363,7 @@ public class SendTopology implements Runnable {
 					if (edge.getDst_router_id() instanceof Long)
 						dst = (Inet4Address) edge.getDst_router_id();
 					if ((source != null) && (dst != null)&&()&&())
-						log.debug("Sending ID Edge: (" + source.toString() + "in domain " + ((InterDomainEdge) edge).getDomain_src_router().ge + "," + dst.toString() + ")");
+						log.debug("Sending ID Edge: (" + source.toString() + "in domain " + ((Inet4Address)((InterDomainEdge) edge).getDomain_src_router()).getCanonicalHostName() + "," + dst.toString() + ")");
 					addressList = new ArrayList<Object>();
 					addressList.add(0, source);
 					addressList.add(1, dst);
@@ -380,9 +380,9 @@ public class SendTopology implements Runnable {
 					//FIXME: chequear
 					TE_Information te_info = ((InterDomainEdge) edge).getTE_info();
 
-					domainList.add(((Inet4Address) edge.getDomain_src_router()).getHostAddress().toString());
+					domainList.add(((Inet4Address) edge.getDomain_src_router()).getHostAddress());
 					//System.out.println("SRC Domain is "+((Inet4Address)edge.getDomain_src_router()).getHostAddress().toString() );
-					domainList.add(((Inet4Address) edge.getDomain_dst_router()).getHostAddress().toString());
+					domainList.add(((Inet4Address) edge.getDomain_dst_router()).getHostAddress());
 					log.debug("Source Domain is " + (Inet4Address) edge.getDomain_dst_router());
 					BGP4Update update = createMsgUpdateLinkNLRI2(null, addressList, localRemoteIfList, lanID, domainList, false, te_info, edge.getLearntFrom(),
 							interfacesList);
@@ -599,7 +599,7 @@ public class SendTopology implements Runnable {
 					if (edge.getDst_router_id() instanceof Long)
 						dst = (long) edge.getDst_router_id();
 					if ((source != null) && (dst != null))
-						log.info("Sending ID Edge: (" + source.toString() + ":" + ((InterDomainEdge) edge).getSrc_if_id() + "," + dst.toString() + ")");
+						log.info("Sending interdomain  Edge: (" + source.toString() +" " + dst.toString() + ")");
 					addressList = new ArrayList<Object>();
 					addressList.add(0, source);
 					addressList.add(1, dst);
@@ -619,16 +619,12 @@ public class SendTopology implements Runnable {
 					domainList.add(((Inet4Address) edge.getDomain_src_router()).getHostAddress().toString());
 					//System.out.println("SRC Domain is "+((Inet4Address)edge.getDomain_src_router()).getHostAddress().toString() );
 					domainList.add(((Inet4Address) edge.getDomain_dst_router()).getHostAddress().toString());
-					log.debug("Source Domain is " + (Inet4Address) edge.getDomain_dst_router());
+					log.info("Source Domain is " + ((Inet4Address) edge.getDomain_src_router()).getHostAddress());
+					log.info("Dst Domain is " + ((Inet4Address) edge.getDomain_dst_router()).getHostAddress());
 					BGP4Update update = createMsgUpdateLinkNLRI2(null, addressList, localRemoteIfList, lanID, domainList, false, te_info, edge.getLearntFrom(),
 							interfacesList);
 					update.setLearntFrom(edge.getLearntFrom());
-					log.info("Inter                  ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp      " +
-							"" +
-							"" +
-							"" +
-							"" +
-							"Update message Created for Edge: " + edge.toString());
+					log.info("Update message created for interdomain link "+update.toString());
 					sendMessage(update);
 				}
 			}
