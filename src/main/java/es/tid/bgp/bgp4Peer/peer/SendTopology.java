@@ -625,6 +625,7 @@ public class SendTopology implements Runnable {
 							interfacesList);
 					update.setLearntFrom(edge.getLearntFrom());
 					log.info("Update message created for interdomain link "+update.toString());
+					log.info("learnt from "+ edge.getLearntFrom());
 					sendMessage(update);
 				}
 			}
@@ -2422,7 +2423,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 
 
 	private BGP4Update createMsgUpdateLinkNLRIISIS(IntraDomainEdge edgex, long src, long dst, int lanID, ArrayList<String> domainList, boolean intradomain, TE_Information te_info, String learntFrom, Inet4Address local, Inet4Address neighbor){
-		log.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXAndrea Sending link NLRI ISIS ");
+		log.debug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXAndrea Sending link NLRI ISIS ");
 		BGP4Update update= new BGP4Update();
 		//1. Path Attributes
 		ArrayList<PathAttribute> pathAttributes = update.getPathAttributes();
@@ -2741,7 +2742,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			}
 		}
 		linkNLRI.setIdentifier(this.identifier);
-		log.info("The Link NLRI is:"+linkNLRI.toString());
+		log.debug("The Link NLRI is:"+linkNLRI.toString());
 		BGP_LS_MP_Reach_Attribute ra= new BGP_LS_MP_Reach_Attribute();
 		ra.setLsNLRI(linkNLRI);
 		if (learntFrom!="local"){
