@@ -488,6 +488,7 @@ public class SendTopology implements Runnable {
 														log.info("Trying to configure the the src node");
 														if (node_info.getIpv4AddressLocalNode() != null) {
 															log.info("pppppppppppppppppppppppppp node_info ID=" + (node_info.getIpv4AddressLocalNode().getCanonicalHostName()));
+															log.info("pppppppppppppppppppppppppp source ID=" + source);
 															if ((node_info.getIpv4AddressLocalNode().getCanonicalHostName()).equals(source)) {
 																sfound = true;
 																log.info("ggggggggggggggggggggggggggggggggggg Found node match for read src router ID=" + source);
