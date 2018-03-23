@@ -362,7 +362,7 @@ public class SendTopology implements Runnable {
 						dst = (Inet4Address) edge.getDst_router_id();
 					if (edge.getDst_router_id() instanceof Long)
 						dst = (Inet4Address) edge.getDst_router_id();
-					if ((source != null) && (dst != null)&&()&&())
+					if ((source != null) && (dst != null))
 						log.debug("Sending ID Edge: (" + source.toString() + "in domain " + ((Inet4Address)((InterDomainEdge) edge).getDomain_src_router()).getCanonicalHostName() + "," + dst.toString() + ")");
 					addressList = new ArrayList<Object>();
 					addressList.add(0, source);
