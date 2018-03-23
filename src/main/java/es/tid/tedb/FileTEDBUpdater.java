@@ -3437,7 +3437,8 @@ public class FileTEDBUpdater {
 													}
 													if (v instanceof Inet4Address){
 														edge.setSrc_router_id(nodex);
-														log.info("ipv4");}
+														log.info("ipv4");
+													}
 												}
 												else
 													log.info("s_router_id_addr different");

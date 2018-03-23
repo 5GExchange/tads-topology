@@ -454,8 +454,29 @@ public class SendTopology implements Runnable {
 																log.info("edge.getLocal_Node_Info().getIpv4AddressLocalNode() null");
 															}
 														}
-														else
+														else{
 															log.info("edge.getLocal_Node_Info()  is null");
+															if(edge.getSrc_router_id() instanceof Inet4Address){
+																if ( ((Inet4Address)edge.getSrc_router_id()).getHostAddress().equals(node_info.getIpv4Address().getHostAddress())){
+																	log.info("Node info id = to src");
+																	sfound=true;
+																	edge.setLocal_Node_Info(node_info);
+																	if (v instanceof Long){
+																		edge.setSrc_router_id(node);
+																		log.info("ISIS");
+																	}
+																	if (v instanceof Inet4Address){
+																		edge.setSrc_router_id(nodex);
+																		log.info("ipv4");
+																	}
+																}
+																else
+																	log.info("differentzzzzzzzzzzzzzzzzzzzzzzzzz");
+
+															}
+															else
+																log.info("edge.getSrc_router_id() not null");
+														}
 													}
 													else if (edge.getSrc_router_id() instanceof Inet4Address) {
 														source = ((Inet4Address) edge.getSrc_router_id()).getHostAddress();
@@ -476,6 +497,8 @@ public class SendTopology implements Runnable {
 																edge.setSrc_router_id(node);
 															if (v instanceof Inet4Address)
 																edge.setSrc_router_id(nodex);
+															md.getTemps().remove(key);
+															md.getTemps().put(key,edge);
 														}
 													} else {
 														log.info("Src info already present=");
