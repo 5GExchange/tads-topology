@@ -45,7 +45,8 @@ public class TMModuleInitiater {
 			if (actualLittleParams.isBGPLSReadingWriting())
 			{
 				TMPlugin p = new TopologyReaderWriterBGPLS(ted, actualLittleParams,lock);
-				executor.execute(p);
+				//executor.execute(p);
+				executor.schedule (p, 10, TimeUnit.SECONDS);
 				pluginsList.add(p);
 			}
 
@@ -147,9 +148,9 @@ public class TMModuleInitiater {
 				//Thread.sleep(8000);
 				TMPlugin p = new TopologyReaderXML(ted, actualLittleParams,lock);
 				System.out.println("Andrea............................................Topology Reader");
-				//executor.execute(p);
+				executor.execute(p);
 				//executor.schedule (p, 20, TimeUnit.SECONDS);
-				executor.schedule (p, 5, TimeUnit.SECONDS);
+				//executor.schedule (p, 5, TimeUnit.SECONDS);
 				pluginsList.add(p);
 				//log.info("Topology Read from file. State:\n"+ted.printTopology());
 			}
