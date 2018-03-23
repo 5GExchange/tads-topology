@@ -441,8 +441,9 @@ public class SendTopology implements Runnable {
 												InterDomainEdge edge = md.getTemps().get(key);
 												log.debug(edge.toString());
 												//source check
+												String source = null;
 												if (edge.getSrc_router_id() != null) {
-													String source = null;
+
 													if (edge.getSrc_router_id() instanceof Long) {
 														if (edge.getLocal_Node_Info() != null) {
 															log.info("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"+edge.getLocal_Node_Info().toString());
