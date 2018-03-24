@@ -847,7 +847,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 
 			if (interEdge == null) {
 				interEdge = new InterDomainEdge();
-				log.debug("New Inter-Domain Edge");
+				log.info("New Inter-Domain Edge");
 				if (linkNLRI.getLinkIdentifiersTLV() != null) {
 					interEdge.setSrc_if_id(linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier());
 					interEdge.setDst_if_id(linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier());
@@ -864,6 +864,17 @@ if (AsInfo_DB.containsKey(learntFrom))
 					if (remoteISISid!=0)
 						interEdge.setDst_router_id(remoteISISid);
 				}
+				if (linkNLRI.getIpv4InterfaceAddressTLV()!=null) {
+					interEdge.setLocalInterfaceIPv4(linkNLRI.getIpv4InterfaceAddressTLV().getIpv4Address());
+					log.debug("Ipv4 of local interface" + linkNLRI.getIpv4InterfaceAddressTLV().getIpv4Address().getHostAddress());
+				}
+				else
+					log.debug("Ipv4 of local interface null");
+				if (linkNLRI.getIpv4NeighborAddressTLV()!=null){
+					interEdge.setNeighborIPv4(linkNLRI.getIpv4NeighborAddressTLV().getIpv4Address());
+					log.debug("Ipv4 of neighbor interface"+linkNLRI.getIpv4NeighborAddressTLV().getIpv4Address().getHostAddress());
+				}
+
 				interEdge.setDomain_dst_router(remoteDomainID);
 				interEdge.setDomain_src_router(localDomainID);
 				//log.info("Src if id: " + interEdge.getSrc_if_id() + "  Dst if id:  " + interEdge.getDst_if_id());
@@ -884,8 +895,17 @@ if (AsInfo_DB.containsKey(learntFrom))
 				}
 				else{
 					if ((localISISid!=0)&&(remoteISISid!=0)) {
-						setInterDomainEdgeUpdateTime(localDomainID, localISISid, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(), remoteDomainID, remoteISISid, linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(), System.currentTimeMillis());
-						multiTedb.addInterdomainLink(localDomainID, localISISid, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(), remoteDomainID, remoteISISid, linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(), te_info);//log.info("Checking new LearntFrom: " + interEdge.getLearntFrom());
+						if(linkNLRI.getLinkIdentifiersTLV()!=null){
+							setInterDomainEdgeUpdateTime(localDomainID, localISISid, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(), remoteDomainID, remoteISISid, linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(), System.currentTimeMillis());
+							multiTedb.addInterdomainLink(localDomainID, localISISid, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(), remoteDomainID, remoteISISid, linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(), te_info);//log.info("Checking new LearntFrom: " + interEdge.getLearntFrom());
+						}
+						else{
+							if ((linkNLRI.getIpv4InterfaceAddressTLV()!=null)&&(linkNLRI.getIpv4NeighborAddressTLV()!=null)){
+								setInterDomainEdgeUpdateTime(localDomainID, localISISid, linkNLRI.getIpv4InterfaceAddressTLV().getIpv4Address(), remoteDomainID, remoteISISid, linkNLRI.getIpv4NeighborAddressTLV().getIpv4Address(), System.currentTimeMillis());
+								multiTedb.addInterdomainLink(localDomainID, localISISid, linkNLRI.getIpv4InterfaceAddressTLV().getIpv4Address(), remoteDomainID, remoteISISid, linkNLRI.getIpv4NeighborAddressTLV().getIpv4Address(), te_info);//log.info("Checking new LearntFrom: " + interEdge.getLearntFrom());
+
+							}
+						}
 					}
 
 				}
@@ -1527,6 +1547,16 @@ if (AsInfo_DB.containsKey(learntFrom))
 		//log.info("..................Added InterDomain Link : " +interDom_linkUpdate.toString()   + "   Time of Update:  " + LinkUpdateTime);
 
 	}
+	public void setInterDomainEdgeUpdateTime(Inet4Address localDomainID,long LocalNodeIGPId, Inet4Address LinkLocalIdentifier, Inet4Address remoteDomainID, long RemoteNodeIGPId, Inet4Address LinkRemoteIdentifier, long LinkUpdateTime) {
+
+		DomainUpdateTime domain_update = new DomainUpdateTime(DomainUpdate, localDomainID, LinkUpdateTime);
+		//log.info("Domain Id : " +String.valueOf(localDomainID) +"DomainTEDS Size:  " +DomainUpdate.size()  + "   Time of Update:  " + LinkUpdateTime);
+		InterDomainLinkUpdateTime interDom_linkUpdate= new InterDomainLinkUpdateTime(interDomainLinkUpdate, localDomainID, LocalNodeIGPId,LinkLocalIdentifier,remoteDomainID,RemoteNodeIGPId,LinkRemoteIdentifier, LinkUpdateTime);
+		//log.info("..................Added InterDomain Link : " +interDom_linkUpdate.toString()   + "   Time of Update:  " + LinkUpdateTime);
+
+	}
+
+
 	private void SetnodeITinfoUpdate(Inet4Address DomainID, String nodeId, String learntFrom, long UpdateTime) {
 
 		DomainUpdateTime domain_update = new DomainUpdateTime(DomainUpdate, DomainID, UpdateTime);

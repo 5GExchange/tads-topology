@@ -20,7 +20,7 @@ import java.util.*;
  * @author Alejandro Tovar
  *
  */
-public class ITMDTEDB implements MultiDomainTEDB {
+public abstract class ITMDTEDB implements MultiDomainTEDB {
 
 	private long graphId;
 	private DirectedWeightedMultigraph<Object,InterDomainEdge> networkDomainGraph;
