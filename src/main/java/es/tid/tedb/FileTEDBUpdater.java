@@ -3376,14 +3376,25 @@ public class FileTEDBUpdater {
 						.item(0);
 				if (dest_ipel!=null)
 					d_ip = getCharacterDataFromElement(dest_ipel);
-					log.info("Edge Dest interface: " + d_ip);
+					log.info("Edge Dest inLinterface: " + d_ip);
 					d_addr = (Inet4Address) InetAddress.getByName(d_ip);
                     edge.setNeighborIPv4(d_addr);
 
+				if (mdTed.getTemps()!=null) {
+					if (d_router_id_addr != null) {
+						mdTed.getTemps().put(((Inet4Address) d_router_id_addr).getCanonicalHostName(), edge);
+						log.info("Link edge added to temp list" + edge.toString());
+					}
+				}
+				else{
+					Hashtable<String, InterDomainEdge> tt =new Hashtable<String, InterDomainEdge>();
+					tt.put(((Inet4Address) d_router_id_addr).getCanonicalHostName(), edge);
+					mdTed.setTemps(tt);
+					log.info("temps initialaized and link edge added to temp list" + edge.toString());
+				}
 
-				//Cialone
 
-
+				/*
 				Enumeration<String> iter = teds.keys();
 
 				Node_Info srcNode = null;
@@ -3402,12 +3413,6 @@ public class FileTEDBUpdater {
 								Inet4Address nodex = null;
 								long node = 0L;
 								Object v = vertexIt.next();
-								/*if (v instanceof es.tid.tedb.elements.Node) {
-									log.debug("instance of Node");
-									//node = Integer.valueOf(((es.tid.tedb.elements.Node) v).getAddress().get(0));
-									node=((es.tid.tedb.elements.Node) v).getISIS_ID();
-									log.debug("Send NLRI ISIS node id "+ String.valueOf(node));
-								}*/
 
 								Node_Info node_info=null;
 								if (v instanceof Inet4Address){
@@ -3489,21 +3494,7 @@ public class FileTEDBUpdater {
 												}
 												else
 													log.info("node_info and dst different");
-												/*if (sfound && dfound) {
-													Inet4Address dom=null;
-													try { // d_router_id_addr type: Inet4Address
-														dom = (Inet4Address) Inet4Address.getByName(domainID);
-													} catch (Exception e) { // d_router_id_addr type: DataPathID
-														log.info(e.toString());
-													}
-													if (dom!=null)
-														mdTed.getNetworkDomainGraph().addVertex(dom);
-													edge.setDomain_dst_router(dom);
-													log.info("Adding interdomain link " + edge.getDomain_src_router() + "-->" + domainID);
-													//Only add if the source and destination domains are different
-													mdTed.getNetworkDomainGraph().addEdge((Inet4Address)edge.getDomain_src_router(), dom, edge);
-													//mdTed.getTemps().remove(key);
-												}*/
+
 											}
 											else
 												log.info("d_router_id_addr null");
@@ -3539,9 +3530,7 @@ public class FileTEDBUpdater {
 
 				}
 
-                    //aggiungi gran cialo il link ai temp links
-				//getIpv4AddressLocalNode()
-
+                */
 
 
 

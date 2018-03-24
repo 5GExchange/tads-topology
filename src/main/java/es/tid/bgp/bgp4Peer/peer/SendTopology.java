@@ -394,10 +394,152 @@ public class SendTopology implements Runnable {
 		}
 
 	}
-
+	//Corrente....
 	//used function that checks if there is some uncomplete intedomain links and then sends updates
 	private void sendLinkNLRI(MultiDomainTEDB md, Hashtable<String, TEDB> teds) {
 
+		LinkedList<InterDomainEdge> interdomainLinks = md.getInterDomainLinks();
+
+
+		Enumeration keys = md.getTemps().keys();
+		String key;
+		boolean sfound = false;
+		boolean dfound = false;
+
+		if ((md!=null)&&(md.getTemps()!=null)){
+			if (md.getTemps().size()>0){
+				while (keys.hasMoreElements()) {
+					key = (String) keys.nextElement();
+					InterDomainEdge edge = md.getTemps().get(key);
+					Enumeration<String> iter = teds.keys();
+					while (iter.hasMoreElements()) {
+						String domainID = iter.nextElement();
+						if ((domainID != null)&&(!domainID.equals("multidomain"))) {
+							log.info("temp procedure checking domain_id: " + domainID);
+							TEDB ted = teds.get(domainID);
+							if (ted instanceof DomainTEDB) {
+								Iterator<Object> vertexIt = ((DomainTEDB) ted).getIntraDomainLinksvertexSet().iterator();
+								while (vertexIt.hasNext()) {
+									Inet4Address nodex = null;
+									long node = 0L;
+									Object v = vertexIt.next();
+									Node_Info node_info = null;
+									if (v instanceof Inet4Address) {
+										nodex = (Inet4Address) v;
+										node_info = ((DomainTEDB) ted).getNodeTable().get(nodex);
+									} else if (v instanceof Long) {
+										node = (long) v;
+										node_info = ((DomainTEDB) ted).getNodeTable().get(node);
+									}
+									if (node_info != null) {
+
+										String nodeip = node_info.getIpv4AddressLocalNode().getCanonicalHostName();
+										log.info("Current node ID=" + nodeip);
+										//src node
+										if (edge.getLocal_Node_Info()==null){
+											if(edge.getSrc_router_id() instanceof Inet4Address) {
+												if (((Inet4Address) edge.getSrc_router_id()).getHostAddress().equals(nodeip)) {
+													log.info("Node info id = to src");
+													sfound = true;
+													edge.setLocal_Node_Info(node_info);
+													if (v instanceof Long) {
+														edge.setSrc_router_id(node);
+														log.info("ISIS");
+													}
+													else
+														log.info("ipv4");
+
+												}
+												else
+													log.info("edge src and node ip are different");
+											}
+											else
+												log.info("not ipv4");
+										}
+										else{
+											log.info("Src info already present");
+											sfound=true;
+										}
+
+										//dest node
+										if (edge.getRemote_Node_Info()==null){
+											if(edge.getDst_router_id() instanceof Inet4Address) {
+												if (((Inet4Address) edge.getDst_router_id()).getHostAddress().equals(nodeip)) {
+													log.info("Node info id = to dst");
+													dfound = true;
+													edge.setRemote_Node_Info(node_info);
+													if (v instanceof Long) {
+														edge.setDst_router_id(node);
+														log.info("ISIS");
+													} else
+														log.info("ipv4");
+													Inet4Address dom = null;
+													try { // d_router_id_addr type: Inet4Address
+														dom = (Inet4Address) Inet4Address.getByName(domainID);
+													} catch (Exception e) { // d_router_id_addr type: DataPathID
+														log.info(e.toString());
+													}
+													if (dom != null) {
+														md.getNetworkDomainGraph().addVertex(dom);
+														edge.setDomain_dst_router(dom);
+													} else
+														log.info("dom is null");
+												}
+												else
+													log.info("edge dst and node ip are different");
+											}
+											else
+												log.info("not ipv4");
+										}
+										else{
+											log.info("dst info already present");
+											dfound=true;
+										}
+
+
+									}
+									else
+										log.info("node info null");
+								}
+							}
+							else
+								log.info("not a domainTEDB instance");
+
+						}
+						else
+							log.info("domain null or multidomani");
+
+					}
+					if(sfound&&dfound){
+							log.info("Adding interdomain link to md ted");
+							//Only add if the source and destination domains are different
+
+							//setInterDomainEdgeUpdateTime(localDomainID, LocalNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(), remoteDomainID, RemoteNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(), System.currentTimeMillis());
+							edge.setComplete(true);
+							md.getNetworkDomainGraph().addEdge((Inet4Address) edge.getDomain_src_router(), edge.getDomain_dst_router(), edge);
+							md.getTemps().remove(key);
+					}else{
+						log.info("link still not complete");
+						if (dfound) log.info("dst found");
+						else log.info("dst not found");
+						if (sfound) log.info("src found");
+						else log.info("src not found");
+					}
+
+
+				}
+			}//xx
+			else
+				log.info("md temps size 0");
+
+		}//xx
+		else
+		log.info("md null or md.temp null");
+
+
+
+
+		/*
 		LinkedList<InterDomainEdge> interdomainLinks = md.getInterDomainLinks();
 
 		Enumeration<String> iter = teds.keys();
@@ -622,8 +764,19 @@ public class SendTopology implements Runnable {
 		else {
 			log.info("md is null");
 		}
+		*/
 
-
+		if (md!=null){
+			if (md.getNetworkDomainGraph()!=null){
+				log.info("Number of nodes: "+ String.valueOf(md.getNetworkDomainGraph().vertexSet().size()));
+				log.info("Number of links: "+ String.valueOf(md.getNetworkDomainGraph().edgeSet().size()));
+			}
+			else
+				log.info("getNetworkDomainGraph is null");
+		}
+		else {
+			log.info("md is null");
+		}
 
 		if (true) {
 			int lanID = 1; ///INVENTADOO
