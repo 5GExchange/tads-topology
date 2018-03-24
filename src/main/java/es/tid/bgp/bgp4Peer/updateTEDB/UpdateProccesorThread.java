@@ -877,6 +877,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 
 				interEdge.setDomain_dst_router(remoteDomainID);
 				interEdge.setDomain_src_router(localDomainID);
+				interEdge.setComplete(true);
 				//log.info("Src if id: " + interEdge.getSrc_if_id() + "  Dst if id:  " + interEdge.getDst_if_id());
 				//log.info("Src Router id: " + interEdge.getSrc_router_id() + "  Dst Router id:  " + interEdge.getDst_router_id());
 				//log.info("Domain Src Router: " + interEdge.getDomain_src_router() + "  Domain Dst Router:  " + interEdge.getDomain_dst_router());
