@@ -3380,6 +3380,8 @@ public class FileTEDBUpdater {
 					d_addr = (Inet4Address) InetAddress.getByName(d_ip);
                     edge.setNeighborIPv4(d_addr);
 
+				edge.setLearntFrom(LearntFrom);
+
 				if (mdTed.getTemps()!=null) {
 					if (d_router_id_addr != null) {
 						mdTed.getTemps().put(((Inet4Address) d_router_id_addr).getCanonicalHostName(), edge);
