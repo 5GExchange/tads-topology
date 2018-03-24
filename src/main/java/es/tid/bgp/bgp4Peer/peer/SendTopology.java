@@ -2599,15 +2599,18 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		linkNLRI.setIdentifier(this.identifier);
 		BGP_LS_MP_Reach_Attribute ra= new BGP_LS_MP_Reach_Attribute();
 		ra.setLsNLRI(linkNLRI);
-		if (learntFrom!="local"){
+		if ((learntFrom!="local")&&(learntFrom!=null)){
 			try {
-				ra.setNextHop(InetAddress.getByName(learntFrom.replaceAll("/","")));
+				if (learntFrom.contains("/"))
+					ra.setNextHop(InetAddress.getByName(learntFrom.replaceAll("/","")));
+				else
+					ra.setNextHop(InetAddress.getByName(learntFrom));
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
 			}
 		}
 		else
-			log.info("local");
+			log.info("local or null");
 		pathAttributes.add(ra);
 
 		return update;
