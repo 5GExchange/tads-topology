@@ -831,6 +831,7 @@ public class SendTopology implements Runnable {
 					log.info("learnt from "+ edge.getLearntFrom());
 					sendMessage(update);
 				}
+				else log.info ("Edge not complete/n"+edge.toString());
 			}
 		}
 
