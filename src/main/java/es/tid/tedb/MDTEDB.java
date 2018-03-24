@@ -143,6 +143,7 @@ public class MDTEDB implements MultiDomainTEDB {
 			newInterDomainEdge.setDst_if_id(remoteRouterASBRIf);
 			newInterDomainEdge.setDomain_dst_router(remoteDomainID);
 			newInterDomainEdge.setDomain_src_router(localDomainID);
+			newInterDomainEdge.setComplete(true);
 			if (te_info != null)
 				newInterDomainEdge.setTE_info(te_info);
 			networkDomainGraph.addEdge(localDomainID, remoteDomainID, newInterDomainEdge);
@@ -204,6 +205,7 @@ public class MDTEDB implements MultiDomainTEDB {
 			newInterDomainEdge.setNeighborIPv4(remoteIf);
 			newInterDomainEdge.setDomain_dst_router(remoteDomainID);
 			newInterDomainEdge.setDomain_src_router(localDomainID);
+			newInterDomainEdge.setComplete(true);
 			if (te_info != null)
 				newInterDomainEdge.setTE_info(te_info);
 			networkDomainGraph.addEdge(localDomainID, remoteDomainID, newInterDomainEdge);

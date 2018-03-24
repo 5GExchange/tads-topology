@@ -890,7 +890,6 @@ if (AsInfo_DB.containsKey(learntFrom))
 				te_info = createTE_Info(simpleTEDB);
 				interEdge.setTE_info(te_info);
 				interEdge.setLearntFrom(learntFrom);
-				interEdge.setComplete(true);
 				if ((LocalNodeIGPId!=null)&&(RemoteNodeIGPId!=null)) {
 					setInterDomainEdgeUpdateTime(localDomainID, LocalNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(), remoteDomainID, RemoteNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(), System.currentTimeMillis());
 					multiTedb.addInterdomainLink(localDomainID, LocalNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(), remoteDomainID, RemoteNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(), te_info);//log.info("Checking new LearntFrom: " + interEdge.getLearntFrom());
