@@ -2601,7 +2601,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		ra.setLsNLRI(linkNLRI);
 		if (learntFrom!="local"){
 			try {
-				ra.setNextHop(InetAddress.getByName(learntFrom));
+				ra.setNextHop(InetAddress.getByName(learntFrom.replaceAll("/","")));
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
 			}
