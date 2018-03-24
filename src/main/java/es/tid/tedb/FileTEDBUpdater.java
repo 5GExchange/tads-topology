@@ -3392,7 +3392,7 @@ public class FileTEDBUpdater {
 					Hashtable<String, InterDomainEdge> tt =new Hashtable<String, InterDomainEdge>();
 					tt.put(((Inet4Address) d_router_id_addr).getCanonicalHostName(), edge);
 					mdTed.setTemps(tt);
-					log.info("temps initialaized and link edge added to temp list" + edge.toString());
+					log.info("temps initialaized and link edge added to temp list");
 				}
 
 

@@ -387,7 +387,7 @@ public class SendTopology implements Runnable {
 					BGP4Update update = createMsgUpdateLinkNLRI2(null, addressList, localRemoteIfList, lanID, domainList, false, te_info, edge.getLearntFrom(),
 							interfacesList);
 					update.setLearntFrom(edge.getLearntFrom());
-					log.debug("Update message Created for Edge: " + edge.toString());
+					log.debug("Update message Created for  interdomain edge");
 					sendMessage(update);
 				}
 			}
@@ -518,6 +518,7 @@ public class SendTopology implements Runnable {
 							edge.setComplete(true);
 							md.getNetworkDomainGraph().addEdge((Inet4Address) edge.getDomain_src_router(), edge.getDomain_dst_router(), edge);
 							md.getTemps().remove(key);
+							log.info(edge.toString());
 					}else{
 						log.info("link still not complete");
 						if (dfound) log.info("dst found");
@@ -823,7 +824,7 @@ public class SendTopology implements Runnable {
 					BGP4Update update = createMsgUpdateLinkNLRI2(null, addressList, localRemoteIfList, lanID, domainList, false, te_info, edge.getLearntFrom(),
 							interfacesList);
 					update.setLearntFrom(edge.getLearntFrom());
-					log.info("Update message created for interdomain link "+update.toString());
+					log.info("Update message created for interdomain link");
 					log.info("learnt from "+ edge.getLearntFrom());
 					sendMessage(update);
 				}
