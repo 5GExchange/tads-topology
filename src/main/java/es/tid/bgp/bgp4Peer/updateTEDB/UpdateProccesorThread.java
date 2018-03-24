@@ -470,7 +470,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 		if ((IGP_type == 1)||(IGP_type == 2)) {
 			if (linkNLRI.getLocalNodeDescriptors().getIGPRouterID() != null) {
 				localISISid = linkNLRI.getLocalNodeDescriptors().getIGPRouterID().getISIS_ISO_NODE_ID();
-				log.debug("Local ISIS id is "+ String.valueOf(localISISid));
+				log.info("Local ISIS id is "+ String.valueOf(localISISid));
 			}
 		}
 		if (linkNLRI.getRemoteNodeDescriptorsTLV().getAutonomousSystemSubTLV() != null) {
@@ -490,7 +490,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 		if ((IGP_type == 1)||(IGP_type == 2)) {
 			if (linkNLRI.getRemoteNodeDescriptorsTLV().getIGPRouterID() != null) {
 				remoteISISid = linkNLRI.getRemoteNodeDescriptorsTLV().getIGPRouterID().getISIS_ISO_NODE_ID();
-				log.debug("Remote ISIS id is "+ String.valueOf(remoteISISid));
+				log.info("Remote ISIS id is "+ String.valueOf(remoteISISid));
 			}
 		}
 		if (linkNLRI.getUndirectionalLinkDelayTLV() != null) {
@@ -518,12 +518,12 @@ if (AsInfo_DB.containsKey(learntFrom))
 
 		if (linkNLRI.getIpv4InterfaceAddressTLV()!=null){
 			IPv4InterfaceAddress=linkNLRI.getIpv4InterfaceAddressTLV().getIpv4Address();
-			log.debug("Ipv4 Interface Address:  " + IPv4InterfaceAddress.getHostAddress());
+			log.info("Ipv4 Interface Address:  " + IPv4InterfaceAddress.getHostAddress());
 		}
 
 		if (linkNLRI.getIpv4NeighborAddressTLV()!=null){
 			IPv4RemoteAddress=linkNLRI.getIpv4NeighborAddressTLV().getIpv4Address();
-			log.debug("Ipv4 Remote Address:  " + IPv4RemoteAddress.getHostAddress());
+			log.info("Ipv4 Remote Address:  " + IPv4RemoteAddress.getHostAddress());
 		}
 
 		if (linkNLRI.getIpv4InterfaceAddressTLV() != null) {
@@ -608,13 +608,13 @@ if (AsInfo_DB.containsKey(learntFrom))
 					intraEdge.setTE_info(te_info);
 					intraEdge.setLearntFrom(learntFrom);
 					if ((IGP_type == 1)||(IGP_type == 2)) {
-						log.debug("ISIS");
+						log.info("ISIS");
 						if ((localDomainID!=null)&& (localISISid!=0)&&(remoteISISid!=0)&&(linkNLRI.getLinkIdentifiersTLV()!=null))
 							setIntraDomainEdgeUpdateTime (localDomainID, localISISid,remoteISISid, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(),linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(),System.currentTimeMillis());
 					}
 					//if (IGP_type == 3) {
 					else{
-						log.debug("OSPF");
+						log.info("OSPF");
 						if ((localDomainID!=null)&& (LocalNodeIGPId!=null)&&(RemoteNodeIGPId!=null)&&(linkNLRI.getLinkIdentifiersTLV()!=null))
 							setIntraDomainEdgeUpdateTime (localDomainID, LocalNodeIGPId,RemoteNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(),linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(),System.currentTimeMillis());
 					}
@@ -760,8 +760,12 @@ if (AsInfo_DB.containsKey(learntFrom))
 		}
 
 		else {
-			log.debug(".........InterDomain Link..........");
-			log.debug("Source: " + LocalNodeIGPId + "  Destination:  " + RemoteNodeIGPId);
+			log.info(".........received new interDomain Link..........");
+			if ((LocalNodeIGPId!=null)&&(RemoteNodeIGPId!=null))
+				log.info("Source: " + LocalNodeIGPId + "  Destination:  " + RemoteNodeIGPId);
+			if ((localISISid!=0)&&(remoteISISid!=0))
+				log.info("Source: " + localISISid + "  Destination:  " + remoteISISid);
+
 			InterDomainEdge interEdge = null;
 
 			//check Source Domain
@@ -809,16 +813,34 @@ if (AsInfo_DB.containsKey(learntFrom))
 				while (iterador.hasNext()) {
 					InterDomainEdge interDomainEdge = iterador.next();
 					log.debug("Existing Edge: " + interDomainEdge.toString());
-					if (interDomainEdge.getSrc_router_id().equals(LocalNodeIGPId)) {
-						//log.info("Local F is the same!!!");
-						if (interDomainEdge.getDst_router_id().equals(RemoteNodeIGPId)) {
-							//log.info("Destination Router is the same!!!");
-							interEdge = interDomainEdge;
+					if (LocalNodeIGPId!=null){
+						if (interDomainEdge.getSrc_router_id().equals(LocalNodeIGPId)) {
+							//log.info("Local F is the same!!!");
+							if (interDomainEdge.getDst_router_id().equals(RemoteNodeIGPId)) {
+								//log.info("Destination Router is the same!!!");
+								interEdge = interDomainEdge;
+							} else {
+								log.debug("Destination Router is Different!!!");
+							}
 						} else {
-							log.debug("Destination Router is Different!!!");
+							log.debug("Local router is Different!!!");
 						}
-					} else {
-						log.debug("Local router is Different!!!");
+					}
+					else{
+						if(localISISid!=0){
+							if (interDomainEdge.getSrc_router_id()==localISISid) {
+								//log.info("Local F is the same!!!");
+								if (interDomainEdge.getDst_router_id()==remoteISISid) {
+									//log.info("Destination Router is the same!!!");
+									interEdge = interDomainEdge;
+								} else {
+									log.debug("Destination Router is Different!!!");
+								}
+							} else {
+								log.debug("Local router is Different!!!");
+							}
+
+						}
 					}
 				}
 			}
@@ -830,8 +852,18 @@ if (AsInfo_DB.containsKey(learntFrom))
 					interEdge.setSrc_if_id(linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier());
 					interEdge.setDst_if_id(linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier());
 				}
-				interEdge.setSrc_router_id(LocalNodeIGPId);
-				interEdge.setDst_router_id(RemoteNodeIGPId);
+				if(LocalNodeIGPId!=null)
+					interEdge.setSrc_router_id(LocalNodeIGPId);
+				else{
+					if (localISISid!=0)
+						interEdge.setSrc_router_id(localISISid);
+				}
+				if(RemoteNodeIGPId!=null)
+					interEdge.setDst_router_id(RemoteNodeIGPId);
+				else{
+					if (remoteISISid!=0)
+						interEdge.setDst_router_id(remoteISISid);
+				}
 				interEdge.setDomain_dst_router(remoteDomainID);
 				interEdge.setDomain_src_router(localDomainID);
 				//log.info("Src if id: " + interEdge.getSrc_if_id() + "  Dst if id:  " + interEdge.getDst_if_id());
@@ -846,8 +878,17 @@ if (AsInfo_DB.containsKey(learntFrom))
 				te_info = createTE_Info(simpleTEDB);
 				interEdge.setTE_info(te_info);
 				interEdge.setLearntFrom(learntFrom);
-				setInterDomainEdgeUpdateTime (localDomainID,LocalNodeIGPId,linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(), remoteDomainID, RemoteNodeIGPId,linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(),System.currentTimeMillis());
-				//log.info("Checking new LearntFrom: " + interEdge.getLearntFrom());
+				if ((LocalNodeIGPId!=null)&&(RemoteNodeIGPId!=null)) {
+					setInterDomainEdgeUpdateTime(localDomainID, LocalNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(), remoteDomainID, RemoteNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(), System.currentTimeMillis());
+					multiTedb.addInterdomainLink(localDomainID, LocalNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(), remoteDomainID, RemoteNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(), te_info);//log.info("Checking new LearntFrom: " + interEdge.getLearntFrom());
+				}
+				else{
+					if ((localISISid!=0)&&(remoteISISid!=0)) {
+						setInterDomainEdgeUpdateTime(localDomainID, localISISid, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(), remoteDomainID, remoteISISid, linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(), System.currentTimeMillis());
+						multiTedb.addInterdomainLink(localDomainID, localISISid, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(), remoteDomainID, remoteISISid, linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(), te_info);//log.info("Checking new LearntFrom: " + interEdge.getLearntFrom());
+					}
+
+				}
 				//FIXME: ADD I-D links to the Simple TEDBs
 				/**
 				 if(simpleTEDB.getInterdomainLink(LocalNodeIGPId, RemoteNodeIGPId) == null){
@@ -856,7 +897,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 				 ((BitmapLabelSet)edge.getTE_info().getAvailableLabels().getLabelSet()).initializeReservation(((BitmapLabelSet)interEdge.getTE_info().getAvailableLabels().getLabelSet()).getBytesBitMap());
 				 }
 				 */
-				multiTedb.addInterdomainLink(localDomainID, LocalNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(), remoteDomainID, RemoteNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(), te_info);
+
 			}
 		}
 	}
@@ -1478,7 +1519,7 @@ if (AsInfo_DB.containsKey(learntFrom))
 		//log.info("..................Added InterDomain Link : " +interDom_linkUpdate.toString()   + "   Time of Update:  " + LinkUpdateTime);
 		
 	}
-	public void setInterDomainEdgeUpdateTime(Inet4Address localDomainID,int LocalNodeIGPId, Long LinkLocalIdentifier, Inet4Address remoteDomainID, int RemoteNodeIGPId, Long LinkRemoteIdentifier, long LinkUpdateTime) {
+	public void setInterDomainEdgeUpdateTime(Inet4Address localDomainID,long LocalNodeIGPId, Long LinkLocalIdentifier, Inet4Address remoteDomainID, long RemoteNodeIGPId, Long LinkRemoteIdentifier, long LinkUpdateTime) {
 
 		DomainUpdateTime domain_update = new DomainUpdateTime(DomainUpdate, localDomainID, LinkUpdateTime);
 		//log.info("Domain Id : " +String.valueOf(localDomainID) +"DomainTEDS Size:  " +DomainUpdate.size()  + "   Time of Update:  " + LinkUpdateTime);

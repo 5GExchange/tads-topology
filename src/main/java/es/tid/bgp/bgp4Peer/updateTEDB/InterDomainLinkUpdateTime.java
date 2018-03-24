@@ -17,8 +17,8 @@ public class InterDomainLinkUpdateTime {
     Inet4Address remoteDomainID;
     Inet4Address LocalNodeIGPId;
     Inet4Address RemoteNodeIGPId;
-    int localISISid=0;
-    int remoteISISid=0;
+    long localISISid=0;
+    long remoteISISid=0;
     Long LocalIdentifier;
     Long RemoteIdentifier;
     Long LinkUpdateTime;
@@ -59,7 +59,7 @@ public InterDomainLinkUpdateTime(Hashtable<InterDomainLinkUpdateTime, Long> inte
         }
 }
 
-public InterDomainLinkUpdateTime(Hashtable<InterDomainLinkUpdateTime, Long> interDomainLinkUpdate, Inet4Address localDomainID, int LocalNodeIGPId, Long LocalIdentifier, Inet4Address remoteDomainID, int RemoteNodeIGPId, Long RemoteIdentifier, Long LinkUpdateTime){
+public InterDomainLinkUpdateTime(Hashtable<InterDomainLinkUpdateTime, Long> interDomainLinkUpdate, Inet4Address localDomainID, long LocalNodeIGPId, Long LocalIdentifier, Inet4Address remoteDomainID, long RemoteNodeIGPId, Long RemoteIdentifier, Long LinkUpdateTime){
 
         this.localDomainID=localDomainID;
         this.remoteDomainID=remoteDomainID;
@@ -103,7 +103,7 @@ public InterDomainLinkUpdateTime(Inet4Address localDomainID, Inet4Address LocalN
     this.RemoteIdentifier=RemoteIdentifier;
 }
 
-public InterDomainLinkUpdateTime(Inet4Address localDomainID, int LocalNodeIGPId, Long LocalIdentifier, Inet4Address remoteDomainID, int RemoteNodeIGPId, Long RemoteIdentifier)
+public InterDomainLinkUpdateTime(Inet4Address localDomainID, long LocalNodeIGPId, Long LocalIdentifier, Inet4Address remoteDomainID, long RemoteNodeIGPId, Long RemoteIdentifier)
     {
         this.localDomainID=localDomainID;
         this.remoteDomainID=remoteDomainID;
