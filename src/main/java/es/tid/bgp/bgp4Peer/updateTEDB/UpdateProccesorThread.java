@@ -828,9 +828,9 @@ if (AsInfo_DB.containsKey(learntFrom))
 					}
 					else{
 						if(localISISid!=0){
-							if (interDomainEdge.getSrc_router_id()==localISISid) {
+							if ((long)interDomainEdge.getSrc_router_id()==localISISid) {
 								//log.info("Local F is the same!!!");
-								if (interDomainEdge.getDst_router_id()==remoteISISid) {
+								if ((long)interDomainEdge.getDst_router_id()==remoteISISid) {
 									//log.info("Destination Router is the same!!!");
 									interEdge = interDomainEdge;
 								} else {
