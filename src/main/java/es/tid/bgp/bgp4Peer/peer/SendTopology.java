@@ -400,6 +400,7 @@ public class SendTopology implements Runnable {
 
 		LinkedList<InterDomainEdge> interdomainLinks = md.getInterDomainLinks();
 
+		log.info(interdomainLinks.size()+ "  in interdomainLinks graph");
 
 		Enumeration keys = md.getTemps().keys();
 		String key;
@@ -790,6 +791,8 @@ public class SendTopology implements Runnable {
 				if(edge.getComplete()) {
 					Object source = null;
 					Object dst = null;
+					log.info("edge before sending it");
+					log.info(edge.toString());
 					if (edge.getSrc_router_id() instanceof Inet4Address)
 						source = (Inet4Address) edge.getSrc_router_id();
 					if (edge.getSrc_router_id() instanceof Long)
