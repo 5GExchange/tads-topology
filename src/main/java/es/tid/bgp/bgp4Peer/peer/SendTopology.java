@@ -2196,7 +2196,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		if (intradomain)
 			or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
 		else
-			or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_EGP);
+			or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
 		pathAttributes.add(or);
 		///Andrea
 		//update.setLearntFrom("192.168.0.1");
@@ -2437,7 +2437,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		}
 		else{
 			//linkNLRI.setProtocolID(ProtocolIDCodes.OSPF_Protocol_ID);
-			linkNLRI.setProtocolID(ProtocolIDCodes.Direct_Protocol_ID);
+			linkNLRI.setProtocolID(ProtocolIDCodes.IS_IS_Level2_Protocol_ID);
 		}
 
 		linkNLRI.setIdentifier(layer);
