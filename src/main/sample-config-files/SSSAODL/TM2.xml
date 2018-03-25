@@ -5,7 +5,7 @@
 
     <XML_Plugin>
         <mode>TM</mode>
-    	<XMLFileTopology>target/SSSAODL2/networkFull.xml</XMLFileTopology>
+    	<XMLFileTopology>target/SSSAODL/networkFull.xml</XMLFileTopology>
         <Identifier>10.10.10.37</Identifier>
         <intra>true</intra>
     </XML_Plugin>
@@ -22,7 +22,7 @@
     <BGPLS>
         <Reader>True</Reader>
         <Writer>True</Writer>
-        <BGPLSconfigFile>target/SSSAODL2/BGPLS.xml</BGPLSconfigFile>
+        <BGPLSconfigFile>target/SSSAODL/BGPLS.xml</BGPLSconfigFile>
     </BGPLS>
    
 </config>

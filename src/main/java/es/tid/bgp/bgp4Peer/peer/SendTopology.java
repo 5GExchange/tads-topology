@@ -1209,9 +1209,9 @@ public class SendTopology implements Runnable {
 			nodeNLRI.setLocalNodeDescriptors(localNodeDescriptors);
 			BGP_LS_MP_Reach_Attribute ra = new BGP_LS_MP_Reach_Attribute();
 			ra.setLsNLRI(nodeNLRI);
-			if (learntFrom!="local"){
+			if ((learntFrom!="local")&&(learntFrom!=null)){
 				try {
-					ra.setNextHop(InetAddress.getByName(learntFrom));
+					ra.setNextHop(InetAddress.getByName(learntFrom.replaceAll("7","")));
 				} catch (UnknownHostException e) {
 					e.printStackTrace();
 				}//aaaa
@@ -2186,9 +2186,9 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		linkNLRI.setIdentifier(this.identifier);
 		BGP_LS_MP_Reach_Attribute ra= new BGP_LS_MP_Reach_Attribute();
 		ra.setLsNLRI(linkNLRI);
-		if (learntFrom!="local"){
+		if ((learntFrom!="local")&&(learntFrom!=null)){
 			try {
-				ra.setNextHop(InetAddress.getByName(learntFrom));
+				ra.setNextHop(InetAddress.getByName(learntFrom.replaceAll("/","")));
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
 			}
