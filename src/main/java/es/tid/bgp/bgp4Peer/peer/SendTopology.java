@@ -1211,7 +1211,7 @@ public class SendTopology implements Runnable {
 			ra.setLsNLRI(nodeNLRI);
 			if ((learntFrom!="local")&&(learntFrom!=null)){
 				try {
-					ra.setNextHop(InetAddress.getByName(learntFrom.replaceAll("7","")));
+					ra.setNextHop(InetAddress.getByName(learntFrom.replaceAll("/","")));
 				} catch (UnknownHostException e) {
 					e.printStackTrace();
 				}//aaaa
