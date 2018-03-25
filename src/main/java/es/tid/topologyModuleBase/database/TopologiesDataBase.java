@@ -454,29 +454,31 @@ public class TopologiesDataBase implements TopologyTEDB
 	}
 
 	@Override
-	public void initializeFromFile(String file, String ID, Boolean test)
+	public void initializeFromFile(String file, String ID, Boolean intra)
 	{
-		//ted.initializeFromFile(file);
-		//System.out.println("It works!!!!");
-		/*if (teds.size()==0) {
-			teds.putAll(FileTEDBUpdater.readMultipleDomainSimpleNetworks(file, null, false, 0, Integer.MAX_VALUE, false, ID));
-			System.out.println("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr No teds, initialized from file");
-		}
-		else {
-			if(teds!=null){
-				FileTEDBUpdater.readAllDomain(file, null, false, 0, Integer.MAX_VALUE, false, ID, teds);
-				System.out.println("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr Teds present, started from previous, Tteds size is="+teds.size());
+
+		if (!intra) {
+			System.out.println("Reading only interdomain links");
+			if (mdTed == null) {
+				System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh Mdted initialized from scratch");
+				mdTed.initializeFromFile(file, ID);
+			} else {
+				FileTEDBUpdater.addLinksformFile(mdTed, teds, file, ID, intra);
+				System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh Mdted alredy present");
 			}
-		}*/
-		if (mdTed==null) {
-			System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh Mdted initialized from scratch");
-			mdTed.initializeFromFile(file, ID);
 		}
 		else{
-			FileTEDBUpdater.addLinksformFile(mdTed, teds, file, ID);
-			System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh Mdted alredy present");
+			System.out.println(".............................................Reading interdomain links and intradomain topology from file");
+			teds.putAll(FileTEDBUpdater.readMultipleDomainSimpleNetworks(file, null, false, 0, Integer.MAX_VALUE, false, ID));
+			FileTEDBUpdater.addLinksformFile(mdTed, teds, file, ID, intra);
+			if (mdTed == null) {
+				System.out.println("wwwwwwwwwwwwwwwwwwwwwwwwwwwww Mdted initialized from scratch");
+				mdTed.initializeFromFile(file, ID);
+			} else {
+				FileTEDBUpdater.addLinksformFile(mdTed, teds, file, ID, intra);
+				System.out.println("wjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj Mdted alredy present");
+			}
 		}
-
 	}
 
 

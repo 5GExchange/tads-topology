@@ -278,7 +278,9 @@ public class UpdateProccesorThread extends Thread {
 	}
 
 
-	private void fillPrefixNLRI(PrefixNLRI nlri, IGPFlagBitsPrefixAttribTLV igpFlagBitsTLV, OSPFForwardingAddressPrefixAttribTLV oSPFForwardingAddrTLV, PrefixMetricPrefixAttribTLV prefixMetricTLV, RouteTagPrefixAttribTLV routeTagTLV) {// TODO Auto-generated method stub
+	private void fillPrefixNLRI(PrefixNLRI nlri, IGPFlagBitsPrefixAttribTLV igpFlagBitsTLV, OSPFForwardingAddressPrefixAttribTLV oSPFForwardingAddrTLV, PrefixMetricPrefixAttribTLV prefixMetricTLV, RouteTagPrefixAttribTLV routeTagTLV) {
+
+		// TODO Auto-generated method stub
 	}
 
 	/**
@@ -304,23 +306,23 @@ public class UpdateProccesorThread extends Thread {
 		//Enumeration domains = AsInfo_DB.keys();
 
 
-if (AsInfo_DB.containsKey(learntFrom))
-	AsInfo_DB.remove(learntFrom); // Remove previously Stored AS Path Information for this Domain
-		for(int i = 0; i < asPathAtt.getAsPathSegments().size();  i++)
-		asPathSegments.add(asPathAtt.getAsPathSegments().get(i));
+		if (AsInfo_DB.containsKey(learntFrom))
+			AsInfo_DB.remove(learntFrom); // Remove previously Stored AS Path Information for this Domain
+				for(int i = 0; i < asPathAtt.getAsPathSegments().size();  i++)
+				asPathSegments.add(asPathAtt.getAsPathSegments().get(i));
 
-		for(int i = 0; i < asPathSegments.size(); i++)
-		{
-			type= asPathSegments.get(i).getType(); //T---Ordered or Unordered
-			numberOfSegments=asPathSegments.get(i).getNumberOfSegments(); //L--- Number of AS segments
-			int[] temp_segments = new int [numberOfSegments];
-			temp_segments= asPathSegments.get(i).getSegments(); //V---- Value of the Segment
-			asInfo.add(new AsInfo(asPathSegments.get(i),type, numberOfSegments,temp_segments, learntFrom));
+				for(int i = 0; i < asPathSegments.size(); i++)
+				{
+					type= asPathSegments.get(i).getType(); //T---Ordered or Unordered
+					numberOfSegments=asPathSegments.get(i).getNumberOfSegments(); //L--- Number of AS segments
+					int[] temp_segments = new int [numberOfSegments];
+					temp_segments= asPathSegments.get(i).getSegments(); //V---- Value of the Segment
+					asInfo.add(new AsInfo(asPathSegments.get(i),type, numberOfSegments,temp_segments, learntFrom));
 
-			//log.info("Learnt From: " +learntFrom   + "SegmentType:  " + asPathSegments.get(i).getType() + " SegmentNumber: " + asPathSegments.get(i).getNumberOfSegments() + " SegmentValue: " + asPathSegments.get(i).get4Segments());
-		}
-		AsInfo_DB.put(learntFrom,asInfo);
-		//this.multiTedb.setASInfo_DB(AsInfo_DB);
+					//log.info("Learnt From: " +learntFrom   + "SegmentType:  " + asPathSegments.get(i).getType() + " SegmentNumber: " + asPathSegments.get(i).getNumberOfSegments() + " SegmentValue: " + asPathSegments.get(i).get4Segments());
+				}
+				AsInfo_DB.put(learntFrom,asInfo);
+				//this.multiTedb.setASInfo_DB(AsInfo_DB);
 
 
 							//-------------------Not completed Yet--------------------//

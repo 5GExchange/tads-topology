@@ -39,7 +39,7 @@ public class TopologyReaderXML extends TopologyReader
 	{
 		lock.lock();
 		isRunning=true;
-		log.info("Colled the XML reader");
+		log.info("Called the XML reader");
 		//Initialize Traffic Engineering Database
 		if (params.getModexml()!=null){
 			if (params.getModexml().equals("IP")){
@@ -47,7 +47,7 @@ public class TopologyReaderXML extends TopologyReader
 			}
 			else if(params.getModexml().equals("TM")){
 				log.info("Andrea.........................................Inside TM ");
-				ted.initializeFromFile(params.getNetworkDescriptionFile(), params.getIdentifier(), true);
+				ted.initializeFromFile(params.getNetworkDescriptionFile(), params.getIdentifier(), params.getLoadIntraTopology());
 			}
 			else log.warning("Unknown Mode");
 		}

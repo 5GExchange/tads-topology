@@ -18,16 +18,7 @@
 			<router_id>172.16.102.102</router_id>
 			<name>router2</name>
 		</node>
-		<node>
-			<router_id>172.16.102.103</router_id>
-			<name>router3</name>
-		</node>
-		<node>
-			<router_id>172.16.102.104</router_id>
-			<name>router4</name>
-		</node>
-	
-		<edgeCommon>
+		<!--edgeCommon>
 			<maximum_bandwidth>1000</maximum_bandwidth>
 			<unreserved_bandwidth priority="7">12500</unreserved_bandwidth>
 			<unreserved_bandwidth priority="6">12500</unreserved_bandwidth>
@@ -42,13 +33,13 @@
  			<undir_min_max_delay>
 			    <min>23</min>
     			    <max>43</max>
-   			</undir_min_max_delay> 
+   			</undir_min_max_delay>
    			<undir_delay_variation>1</undir_delay_variation>
    			<undir_link_loss>102</undir_link_loss>
    			<undir_residual_bandwidth>802</undir_residual_bandwidth>
    			<undir_available_bandwidth>500</undir_available_bandwidth>
    			<undir_utilized_bandwidth>436</undir_utilized_bandwidth>
-		</edgeCommon>
+		</edgeCommon-->
 		<edge>
 			<source>
 				<router_id>172.16.102.101</router_id>
@@ -56,7 +47,7 @@
 				<ip>192.168.200.1</ip>
 			</source>			
 			<destination>
-				<router_id>172.16.102.104</router_id>
+				<router_id>172.16.102.102</router_id>
 				<if_id>1</if_id>
 				<ip>192.168.200.2</ip>
 			</destination>	
@@ -83,7 +74,7 @@
 		</edge>
 		<edge>
 			<source>
-				<router_id>172.16.102.104</router_id>
+				<router_id>172.16.102.102</router_id>
 				<if_id>1</if_id>
 				<ip>192.168.200.2</ip>
 			</source>			
@@ -113,7 +104,7 @@
 			<unreserved_bandwidth priority="1">12500</unreserved_bandwidth>
 			<unreserved_bandwidth priority="0">12500</unreserved_bandwidth>
 		</edge>
-		<edge>
+		<!--edge>
 			<source>
 				<router_id>172.16.102.101</router_id>
 				<if_id>2</if_id>
@@ -336,15 +327,15 @@
 			<unreserved_bandwidth priority="2">12500</unreserved_bandwidth>
 			<unreserved_bandwidth priority="1">12500</unreserved_bandwidth>
 			<unreserved_bandwidth priority="0">12500</unreserved_bandwidth>
-		</edge>
+		</edge-->
 		<edge>
 			<source>
-				<router_id>172.16.102.104</router_id>
+				<router_id>172.16.102.102</router_id>
 				<if_id>3</if_id>
 				<ip>192.168.207.2</ip>
 			</source>
 			<destination>
-				<router_id>172.16.102.102</router_id>
+				<router_id>172.16.103.101</router_id>
 				<if_id>3</if_id>
 				<ip>192.168.207.1</ip>
 			</destination>

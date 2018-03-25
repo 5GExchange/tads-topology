@@ -51,7 +51,7 @@ public class TopologyModuleParams
 	private int lambdaEnd=Integer.MAX_VALUE;
 	
 	private String layer=null;
-	
+
 	private boolean isWSOld=false;
 	private String ipWSOld=null;
 	private int portWSOld;
@@ -151,6 +151,8 @@ public class TopologyModuleParams
 	 * Name of the reachability file
 	 */
 
+
+	private boolean loadIntraTopology=false;
 
 	private String Identifier="";
 
@@ -714,8 +716,21 @@ public class TopologyModuleParams
 	{
 		this.isRestInfinera = isRestInfinera;
 	}
+
+	public void setLoadIntraTopology(boolean read)
+	{
+		this.loadIntraTopology = read;
+	}
+	/**
+	 * @return the cOPPort
+	 */
+	public boolean getLoadIntraTopology() {
+		return loadIntraTopology;
+	}
+
+
 	public boolean isCOPWriting() {
-		
+
 		return this.isCOPwritting;
 	}
 	public void setCOPWriting(boolean isCOPwritting)

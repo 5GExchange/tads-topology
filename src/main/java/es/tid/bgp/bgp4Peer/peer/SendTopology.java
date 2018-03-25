@@ -402,116 +402,120 @@ public class SendTopology implements Runnable {
 
 		log.info(interdomainLinks.size()+ "  in interdomainLinks graph");
 
-		Enumeration keys = md.getTemps().keys();
+		Enumeration keys = null;
+		if((md!=null)&&(md.getTemps()!=null)){
+			keys=md.getTemps().keys();
+		}
 		String key;
 		boolean sfound = false;
 		boolean dfound = false;
 
 		if ((md!=null)&&(md.getTemps()!=null)){
 			if (md.getTemps().size()>0){
-				while (keys.hasMoreElements()) {
-					key = (String) keys.nextElement();
-					InterDomainEdge edge = md.getTemps().get(key);
-					Enumeration<String> iter = teds.keys();
-					while (iter.hasMoreElements()) {
-						String domainID = iter.nextElement();
-						if ((domainID != null)&&(!domainID.equals("multidomain"))) {
-							log.info("temp procedure checking domain_id: " + domainID);
-							TEDB ted = teds.get(domainID);
-							if (ted instanceof DomainTEDB) {
-								Iterator<Object> vertexIt = ((DomainTEDB) ted).getIntraDomainLinksvertexSet().iterator();
-								while (vertexIt.hasNext()) {
-									Inet4Address nodex = null;
-									long node = 0L;
-									Object v = vertexIt.next();
-									Node_Info node_info = null;
-									if (v instanceof Inet4Address) {
-										nodex = (Inet4Address) v;
-										node_info = ((DomainTEDB) ted).getNodeTable().get(nodex);
-									} else if (v instanceof Long) {
-										node = (long) v;
-										node_info = ((DomainTEDB) ted).getNodeTable().get(node);
-									}
-									if (node_info != null) {
+				if(keys !=null){
+					while (keys.hasMoreElements()) {
+						key = (String) keys.nextElement();
+						InterDomainEdge edge = md.getTemps().get(key);
+						Enumeration<String> iter = teds.keys();
+						while (iter.hasMoreElements()) {
+							String domainID = iter.nextElement();
+							if ((domainID != null)&&(!domainID.equals("multidomain"))) {
+								log.info("temp procedure checking domain_id: " + domainID);
+								TEDB ted = teds.get(domainID);
+								if (ted instanceof DomainTEDB) {
+									Iterator<Object> vertexIt = ((DomainTEDB) ted).getIntraDomainLinksvertexSet().iterator();
+									while (vertexIt.hasNext()) {
+										Inet4Address nodex = null;
+										long node = 0L;
+										Object v = vertexIt.next();
+										Node_Info node_info = null;
+										if (v instanceof Inet4Address) {
+											nodex = (Inet4Address) v;
+											node_info = ((DomainTEDB) ted).getNodeTable().get(nodex);
+										} else if (v instanceof Long) {
+											node = (long) v;
+											node_info = ((DomainTEDB) ted).getNodeTable().get(node);
+										}
+										if (node_info != null) {
 
-										String nodeip = node_info.getIpv4AddressLocalNode().getCanonicalHostName();
-										log.info("Current node ID=" + nodeip);
-										//src node
-										if (edge.getLocal_Node_Info()==null){
-											if(edge.getSrc_router_id() instanceof Inet4Address) {
-												if (((Inet4Address) edge.getSrc_router_id()).getHostAddress().equals(nodeip)) {
-													log.info("Node info id = to src");
-													sfound = true;
-													edge.setLocal_Node_Info(node_info);
-													if (v instanceof Long) {
-														edge.setSrc_router_id(node);
-														log.info("ISIS");
+											String nodeip = node_info.getIpv4AddressLocalNode().getCanonicalHostName();
+											log.info("Current node ID=" + nodeip);
+											//src node
+											if (edge.getLocal_Node_Info()==null){
+												if(edge.getSrc_router_id() instanceof Inet4Address) {
+													if (((Inet4Address) edge.getSrc_router_id()).getHostAddress().equals(nodeip)) {
+														log.info("Node info id = to src");
+														sfound = true;
+														edge.setLocal_Node_Info(node_info);
+														if (v instanceof Long) {
+															edge.setSrc_router_id(node);
+															log.info("ISIS");
+														}
+														else
+															log.info("ipv4");
+
 													}
 													else
-														log.info("ipv4");
-
+														log.info("edge src and node ip are different");
 												}
 												else
-													log.info("edge src and node ip are different");
+													log.info("not ipv4");
 											}
-											else
-												log.info("not ipv4");
-										}
-										else{
-											log.info("Src info already present");
-											sfound=true;
-										}
+											else{
+												log.info("Src info already present");
+												sfound=true;
+											}
 
-										//dest node
-										if (edge.getRemote_Node_Info()==null){
-											if(edge.getDst_router_id() instanceof Inet4Address) {
-												if (((Inet4Address) edge.getDst_router_id()).getHostAddress().equals(nodeip)) {
-													log.info("Node info id = to dst");
-													dfound = true;
-													edge.setRemote_Node_Info(node_info);
-													if (v instanceof Long) {
-														edge.setDst_router_id(node);
-														log.info("ISIS");
-													} else
-														log.info("ipv4");
-													Inet4Address dom = null;
-													try { // d_router_id_addr type: Inet4Address
-														dom = (Inet4Address) Inet4Address.getByName(domainID);
-													} catch (Exception e) { // d_router_id_addr type: DataPathID
-														log.info(e.toString());
+											//dest node
+											if (edge.getRemote_Node_Info()==null){
+												if(edge.getDst_router_id() instanceof Inet4Address) {
+													if (((Inet4Address) edge.getDst_router_id()).getHostAddress().equals(nodeip)) {
+														log.info("Node info id = to dst");
+														dfound = true;
+														edge.setRemote_Node_Info(node_info);
+														if (v instanceof Long) {
+															edge.setDst_router_id(node);
+															log.info("ISIS");
+														} else
+															log.info("ipv4");
+														Inet4Address dom = null;
+														try { // d_router_id_addr type: Inet4Address
+															dom = (Inet4Address) Inet4Address.getByName(domainID);
+														} catch (Exception e) { // d_router_id_addr type: DataPathID
+															log.info(e.toString());
+														}
+														if (dom != null) {
+															md.getNetworkDomainGraph().addVertex(dom);
+															edge.setDomain_dst_router(dom);
+														} else
+															log.info("dom is null");
 													}
-													if (dom != null) {
-														md.getNetworkDomainGraph().addVertex(dom);
-														edge.setDomain_dst_router(dom);
-													} else
-														log.info("dom is null");
+													else
+														log.info("edge dst and node ip are different");
 												}
 												else
-													log.info("edge dst and node ip are different");
+													log.info("not ipv4");
 											}
-											else
-												log.info("not ipv4");
-										}
-										else{
-											log.info("dst info already present");
-											dfound=true;
-										}
+											else{
+												log.info("dst info already present");
+												dfound=true;
+											}
 
 
+										}
+										else
+											log.info("node info null");
 									}
-									else
-										log.info("node info null");
 								}
+								else
+									log.info("not a domainTEDB instance");
+
 							}
 							else
-								log.info("not a domainTEDB instance");
+								log.info("domain null or multidomani");
 
 						}
-						else
-							log.info("domain null or multidomani");
-
-					}
-					if(sfound&&dfound){
+						if(sfound&&dfound){
 							log.info("Adding interdomain link to md ted");
 							//Only add if the source and destination domains are different
 
@@ -520,15 +524,16 @@ public class SendTopology implements Runnable {
 							md.getNetworkDomainGraph().addEdge((Inet4Address) edge.getDomain_src_router(), edge.getDomain_dst_router(), edge);
 							md.getTemps().remove(key);
 							log.info(edge.toString());
-					}else{
-						log.info("link still not complete");
-						if (dfound) log.info("dst found");
-						else log.info("dst not found");
-						if (sfound) log.info("src found");
-						else log.info("src not found");
+						}else{
+							log.info("link still not complete");
+							if (dfound) log.info("dst found");
+							else log.info("dst not found");
+							if (sfound) log.info("src found");
+							else log.info("src not found");
+						}
+
+
 					}
-
-
 				}
 			}//xx
 			else
@@ -1173,7 +1178,7 @@ public class SendTopology implements Runnable {
 
 			//NLRI
 			NodeNLRI nodeNLRI = new NodeNLRI();
-			nodeNLRI.setProtocolID(ProtocolIDCodes.Static_Protocol_ID);
+			nodeNLRI.setProtocolID(ProtocolIDCodes.OSPF_Protocol_ID);
 			nodeNLRI.setRoutingUniverseIdentifier(identifier);
 			LocalNodeDescriptorsTLV localNodeDescriptors = new LocalNodeDescriptorsTLV();
 
@@ -2031,13 +2036,15 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		}
 		//2. NLRI
 		LinkNLRI linkNLRI = new LinkNLRI();
+		linkNLRI.setProtocolID(ProtocolIDCodes.OSPF_Protocol_ID);
+		/*
 		if (intradomain){
 			linkNLRI.setProtocolID(ProtocolIDCodes.OSPF_Protocol_ID);
 		}
 		else{
 			//linkNLRI.setProtocolID(ProtocolIDCodes.OSPF_Protocol_ID);
 			linkNLRI.setProtocolID(ProtocolIDCodes.Direct_Protocol_ID);
-		}
+		}*/
 
 		linkNLRI.setIdentifier(layer);
 		//2.1. Local Y Remote Descriptors
@@ -2195,8 +2202,8 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 
 
 	//ANDREAINTERDOMAIN
-	private BGP4Update createMsgUpdateLinkNLRI2(IntraDomainEdge edgex, ArrayList<Object> addressList, ArrayList<Long> localRemoteIfList, int lanID, ArrayList<String> domainList, boolean intradomain, TE_Information te_info, String learntFrom, ArrayList<Inet4Address> interfacesList){
-		BGP4Update update= new BGP4Update();
+	private BGP4Update createMsgUpdateLinkNLRI2(IntraDomainEdge edgex, ArrayList<Object> addressList, ArrayList<Long> localRemoteIfList, int lanID, ArrayList<String> domainList, boolean intradomain, TE_Information te_info, String learntFrom, ArrayList<Inet4Address> interfacesList) {
+		BGP4Update update = new BGP4Update();
 		//1. Path Attributes
 		ArrayList<PathAttribute> pathAttributes = update.getPathAttributes();
 		//1.1. Origin
@@ -2219,7 +2226,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 }
 */
 
-		if (send4AS==true) {
+		if (send4AS == true) {
 
 			AS4_Path_Attribute as_path = new AS4_Path_Attribute();
 			AS4_Path_Segment as_path_seg = new AS4_Path_Segment();
@@ -2229,8 +2236,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			as_path.getAsPathSegments().add(as_path_seg);
 			pathAttributes.add(as_path);
 			//log.info("Learnt From: " +learntFrom   +  " SegmentValue: " + String.valueOf(as_path_seg.getSegments()));
-		}
-		else {
+		} else {
 			AS_Path_Attribute as_path = new AS_Path_Attribute();
 			AS_Path_Segment as_path_seg = new AS_Path_Segment();
 			int[] segs = new int[1];
@@ -2258,10 +2264,10 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 
 		int defmetric = 0;
 		int te_metric = 0;
-		int administrativeGroup=0;
-		boolean adminGrouppresent= false;
+		int administrativeGroup = 0;
+		boolean adminGrouppresent = false;
 
-		if (te_info != null){
+		if (te_info != null) {
 
 			//MPLS
 			if (te_info.getMaximumBandwidth() != null) {
@@ -2274,157 +2280,157 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			//GMPLS
 			if (te_info.getAvailableLabels() != null)
 				availableLabels = te_info.getAvailableLabels();
-			if(te_info.getDefaultTEMetric()!=null){
+			if (te_info.getDefaultTEMetric() != null) {
 				defmetric = te_info.getDefaultTEMetric().getLinkMetric();
 				log.debug("Default Metric: " + defmetric);
 			}
-			if(te_info.getMetric()!=null){
-				te_metric = te_info.getMetric().getMetric() ;
+			if (te_info.getMetric() != null) {
+				te_metric = te_info.getMetric().getMetric();
 				log.debug("Metric en el metodo sendLinkNLRI es: " + te_metric);
 			}
-			if(te_info.getAdministrativeGroup()!=null){
-				adminGrouppresent= true;
-				administrativeGroup = te_info.getAdministrativeGroup().getAdministrativeGroup() ;
+			if (te_info.getAdministrativeGroup() != null) {
+				adminGrouppresent = true;
+				administrativeGroup = te_info.getAdministrativeGroup().getAdministrativeGroup();
 				log.debug("Administrative group : " + administrativeGroup);
 			}
-			if(te_info.getMfOTF()!=null){
-				mfOTP =  te_info.getMfOTF();
+			if (te_info.getMfOTF() != null) {
+				mfOTP = te_info.getMfOTF();
 			}
 
-		}else{
+		} else {
 			log.info("TE_Info is Null");
 		}
 
 
 		boolean linkStateNeeded = false;
-		LinkStateAttribute  linkStateAttribute = new LinkStateAttribute();
+		LinkStateAttribute linkStateAttribute = new LinkStateAttribute();
 		//1.2.1. MaxReservableBandwidth
-		if (maximumReservableBandwidth != 0){
+		if (maximumReservableBandwidth != 0) {
 			MaxReservableBandwidthLinkAttribTLV maxReservableBandwidthTLV = new MaxReservableBandwidthLinkAttribTLV();
 			maxReservableBandwidthTLV.setMaximumReservableBandwidth(maximumReservableBandwidth);
 			linkStateAttribute.setMaxReservableBandwidthTLV(maxReservableBandwidthTLV);
-			linkStateNeeded=true;
+			linkStateNeeded = true;
 		}
 		//1.2.2. maxBandwidth
-		if (maximumBandwidth != 0){
+		if (maximumBandwidth != 0) {
 			MaximumLinkBandwidthLinkAttribTLV maximumLinkBandwidthTLV = new MaximumLinkBandwidthLinkAttribTLV();
 			maximumLinkBandwidthTLV.setMaximumBandwidth(maximumBandwidth);
 			linkStateAttribute.setMaximumLinkBandwidthTLV(maximumLinkBandwidthTLV);
-			linkStateNeeded=true;
+			linkStateNeeded = true;
 		}
 		//1.2.3. unreservedBandwidth
-		if (unreservedBandwidth != null){
+		if (unreservedBandwidth != null) {
 			UnreservedBandwidthLinkAttribTLV unreservedBandwidthTLV = new UnreservedBandwidthLinkAttribTLV();
 			unreservedBandwidthTLV.setUnreservedBandwidth(unreservedBandwidth);
 			linkStateAttribute.setUnreservedBandwidthTLV(unreservedBandwidthTLV);
-			linkStateNeeded=true;
+			linkStateNeeded = true;
 		}
 		//1.2.4. AvailableLabels
-		if (availableLabels != null){
-			log.debug("Available labels fields: "+availableLabels.getLabelSet().getNumLabels());
+		if (availableLabels != null) {
+			log.debug("Available labels fields: " + availableLabels.getLabelSet().getNumLabels());
 			AvailableLabels al = new AvailableLabels();
 
 			BitmapLabelSet bl = new BitmapLabelSet();
-			bl.setBytesBitmap(((BitmapLabelSet)availableLabels.getLabelSet()).getBytesBitMap());
+			bl.setBytesBitmap(((BitmapLabelSet) availableLabels.getLabelSet()).getBytesBitMap());
 			bl.setNumLabels(availableLabels.getLabelSet().getNumLabels());
-			bl.setDwdmWavelengthLabel(((BitmapLabelSet)availableLabels.getLabelSet()).getDwdmWavelengthLabel());
+			bl.setDwdmWavelengthLabel(((BitmapLabelSet) availableLabels.getLabelSet()).getDwdmWavelengthLabel());
 
-			bl.setBytesBitmapReserved(((BitmapLabelSet)availableLabels.getLabelSet()).getBytesBitmapReserved());
+			bl.setBytesBitmapReserved(((BitmapLabelSet) availableLabels.getLabelSet()).getBytesBitmapReserved());
 
 			al.setLabelSet(bl);
 
-			log.debug("Campo BytesBitmap: "+Integer.toHexString(((int)bl.getBytesBitMap()[0])&0xFF));
-			log.debug("Campo DwdmWavelengthLabel: "+bl.getDwdmWavelengthLabel());
-			if (bl.getBytesBitmapReserved()!=null){
-				log.debug("Campo BytesBitmapReserved: "+bl.getBytesBitmapReserved()[0]);
+			log.debug("Campo BytesBitmap: " + Integer.toHexString(((int) bl.getBytesBitMap()[0]) & 0xFF));
+			log.debug("Campo DwdmWavelengthLabel: " + bl.getDwdmWavelengthLabel());
+			if (bl.getBytesBitmapReserved() != null) {
+				log.debug("Campo BytesBitmapReserved: " + bl.getBytesBitmapReserved()[0]);
 			}
 			linkStateAttribute.setAvailableLabels(al);
 
-			linkStateNeeded=true;
+			linkStateNeeded = true;
 		}
 
 		//1.2.5 metric
-		if (te_metric != 0){
+		if (te_metric != 0) {
 			MetricLinkAttribTLV metricx = new MetricLinkAttribTLV();
 			metricx.setMetric(te_metric);
 			metricx.setMetric_type(1);
 			log.debug("Metric en el metodo createMsgUpdateLinkNLRI es: " + te_metric);
 			linkStateAttribute.setMetricTLV(metricx);
-			linkStateNeeded=true;
+			linkStateNeeded = true;
 		}
 
-		if (defmetric != 0){
+		if (defmetric != 0) {
 			DefaultTEMetricLinkAttribTLV defaultMetric = new DefaultTEMetricLinkAttribTLV();
 			//defaultMetric.setLinkMetric(metric);
 			defaultMetric.setLinkMetric(defmetric);
 
 			log.debug("Metric en el metodo createMsgUpdateLinkNLRI es: " + defmetric);
 			linkStateAttribute.setTEMetricTLV(defaultMetric);
-			linkStateNeeded=true;
+			linkStateNeeded = true;
 		}
-		if (adminGrouppresent){
+		if (adminGrouppresent) {
 			AdministrativeGroupLinkAttribTLV admGroup = new AdministrativeGroupLinkAttribTLV();
 			//defaultMetric.setLinkMetric(metric);
 			admGroup.setAdministrativeGroup(administrativeGroup);
 
 			log.debug("Administrative Group set: " + administrativeGroup);
 			linkStateAttribute.setAdministrativeGroupTLV(admGroup);
-			linkStateNeeded=true;
+			linkStateNeeded = true;
 		}
 
 		//1.2.6 MF_OPT
-		if (mfOTP != null){
+		if (mfOTP != null) {
 			MF_OTPAttribTLV mfOTPTLV = mfOTP.duplicate();
 			log.debug("SENDING MFOTP OSCAR");
 			linkStateAttribute.setMF_OTPAttribTLV(mfOTPTLV);
-			linkStateNeeded=true;
+			linkStateNeeded = true;
 		}
 
 
 		//new TE metrics
 		//2.2.3 LinkDelay
-		if (te_info != null){
-			if(te_info.getUndirLinkDelay() != null){
+		if (te_info != null) {
+			if (te_info.getUndirLinkDelay() != null) {
 				int undirLinkDelay = te_info.getUndirLinkDelay().getDelay();
-				UndirectionalLinkDelayDescriptorSubTLV uSTLV =new UndirectionalLinkDelayDescriptorSubTLV();
+				UndirectionalLinkDelayDescriptorSubTLV uSTLV = new UndirectionalLinkDelayDescriptorSubTLV();
 				uSTLV.setDelay(undirLinkDelay);
 				linkStateAttribute.setUndirectionalLinkDelayTLV(uSTLV);
 			}
-			if(te_info.getUndirDelayVar() != null){
+			if (te_info.getUndirDelayVar() != null) {
 				int undirDelayVar = te_info.getUndirDelayVar().getDelayVar();
-				UndirectionalDelayVariationDescriptorSubTLV uSTLV =new UndirectionalDelayVariationDescriptorSubTLV();
+				UndirectionalDelayVariationDescriptorSubTLV uSTLV = new UndirectionalDelayVariationDescriptorSubTLV();
 				uSTLV.setDelayVar(undirDelayVar);
 				linkStateAttribute.setUndirectionalDelayVariationTLV(uSTLV);
 			}
-			if(te_info.getMinMaxUndirLinkDelay() != null){
+			if (te_info.getMinMaxUndirLinkDelay() != null) {
 				int minDelay = te_info.getMinMaxUndirLinkDelay().getLowDelay();
 				int maxDelay = te_info.getMinMaxUndirLinkDelay().getHighDelay();
-				MinMaxUndirectionalLinkDelayDescriptorSubTLV uSTLV =new MinMaxUndirectionalLinkDelayDescriptorSubTLV();
+				MinMaxUndirectionalLinkDelayDescriptorSubTLV uSTLV = new MinMaxUndirectionalLinkDelayDescriptorSubTLV();
 				uSTLV.setHighDelay(maxDelay);
 				uSTLV.setLowDelay(minDelay);
 				linkStateAttribute.setMinMaxUndirectionalLinkDelayTLV(uSTLV);
 			}
-			if(te_info.getUndirLinkLoss() != null){
+			if (te_info.getUndirLinkLoss() != null) {
 				int linkLoss = te_info.getUndirLinkLoss().getLinkLoss();
-				UndirectionalLinkLossDescriptorSubTLV uSTLV =new UndirectionalLinkLossDescriptorSubTLV();
+				UndirectionalLinkLossDescriptorSubTLV uSTLV = new UndirectionalLinkLossDescriptorSubTLV();
 				uSTLV.setLinkLoss(linkLoss);
 				linkStateAttribute.setUndirectionalLinkLossTLV(uSTLV);
 			}
-			if(te_info.getUndirResidualBw() != null){
+			if (te_info.getUndirResidualBw() != null) {
 				float resBw = te_info.getUndirResidualBw().getResidualBw();
-				UndirectionalResidualBandwidthDescriptorSubTLV uSTLV =new UndirectionalResidualBandwidthDescriptorSubTLV();
+				UndirectionalResidualBandwidthDescriptorSubTLV uSTLV = new UndirectionalResidualBandwidthDescriptorSubTLV();
 				uSTLV.setResidualBw(resBw);
 				linkStateAttribute.setUndirectionalResidualBwTLV(uSTLV);
 			}
-			if(te_info.getUndirAvailableBw() != null){
+			if (te_info.getUndirAvailableBw() != null) {
 				float availableBw = te_info.getUndirAvailableBw().getAvailableBw();
-				UndirectionalAvailableBandwidthDescriptorSubTLV uSTLV =new UndirectionalAvailableBandwidthDescriptorSubTLV();
+				UndirectionalAvailableBandwidthDescriptorSubTLV uSTLV = new UndirectionalAvailableBandwidthDescriptorSubTLV();
 				uSTLV.setAvailableBw(availableBw);
 				linkStateAttribute.setUndirectionalAvailableBwTLV(uSTLV);
 			}
-			if(te_info.getUndirUtilizedBw() != null){
+			if (te_info.getUndirUtilizedBw() != null) {
 				float utilizedBw = te_info.getUndirUtilizedBw().getUtilizedBw();
-				UndirectionalUtilizedBandwidthDescriptorSubTLV uSTLV =new UndirectionalUtilizedBandwidthDescriptorSubTLV();
+				UndirectionalUtilizedBandwidthDescriptorSubTLV uSTLV = new UndirectionalUtilizedBandwidthDescriptorSubTLV();
 				uSTLV.setUtilizedBw(utilizedBw);
 				linkStateAttribute.setUndirectionalUtilizedBwTLV(uSTLV);
 			}
@@ -2432,22 +2438,20 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		}
 
 
-
-
-		if (linkStateNeeded){
+		if (linkStateNeeded) {
 			//log.debug("Link state needed");
 			pathAttributes.add(linkStateAttribute);
 		}
 		//2. NLRI
 		LinkNLRI linkNLRI = new LinkNLRI();
-		if (intradomain){
+		/*
+		if (intradomain) {
 			linkNLRI.setProtocolID(ProtocolIDCodes.OSPF_Protocol_ID);
-		}
-		else{
+		} else {
 			//linkNLRI.setProtocolID(ProtocolIDCodes.OSPF_Protocol_ID);
 			linkNLRI.setProtocolID(ProtocolIDCodes.IS_IS_Level2_Protocol_ID);
 		}
-
+		*/
 		linkNLRI.setIdentifier(layer);
 		//2.1. Local Y Remote Descriptors
 		LocalNodeDescriptorsTLV localNodeDescriptors = new LocalNodeDescriptorsTLV();
@@ -2455,15 +2459,18 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 
 		//2.1.1. IPv4
 		IGPRouterIDNodeDescriptorSubTLV igpRouterIDLNSubTLV = new IGPRouterIDNodeDescriptorSubTLV();
-		if (addressList.get(0) instanceof Inet4Address)
+		if (addressList.get(0) instanceof Inet4Address){
 			igpRouterIDLNSubTLV.setIpv4AddressOSPF((Inet4Address) addressList.get(0));
 			igpRouterIDLNSubTLV.setIGP_router_id_type(IGPRouterIDNodeDescriptorSubTLV.IGP_ROUTER_ID_TYPE_OSPF_NON_PSEUDO);
 			localNodeDescriptors.setIGPRouterID(igpRouterIDLNSubTLV);
-		if (addressList.get(0) instanceof Long)
+			linkNLRI.setProtocolID(ProtocolIDCodes.OSPF_Protocol_ID);
+		}
+		if (addressList.get(0) instanceof Long) {
 			igpRouterIDLNSubTLV.setISIS_ISO_NODE_ID((long) addressList.get(0));
 			igpRouterIDLNSubTLV.setIGP_router_id_type(IGPRouterIDNodeDescriptorSubTLV.IGP_ROUTER_ID_TYPE_IS_IS_NON_PSEUDO);
 			localNodeDescriptors.setIGPRouterID(igpRouterIDLNSubTLV);
-
+			linkNLRI.setProtocolID(ProtocolIDCodes.IS_IS_Level2_Protocol_ID);
+		}
 		//Complete Dummy TLVs
 		//BGPLSIdentifierNodeDescriptorSubTLV bGPLSIDSubTLV =new BGPLSIdentifierNodeDescriptorSubTLV();
 		//bGPLSIDSubTLV.setBGPLS_ID(this.localBGPLSIdentifer);
