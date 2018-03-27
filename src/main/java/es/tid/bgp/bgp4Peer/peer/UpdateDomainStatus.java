@@ -59,16 +59,16 @@ public class UpdateDomainStatus implements Runnable {
 
                          //--------------Checking the Update time for IntraDomain Links-------------/
         
-        log.info("------------- Inside UpdateDomainStatus");
+        log.debug("------------- Inside UpdateDomainStatus");
         if(intraDomainLinkUpdate.size()!=0)
         {
-            log.info("------------- Stored IntraDomain Link Size: " +intraDomainLinkUpdate.size());
+            log.debug("------------- Stored IntraDomain Link Size: " +intraDomainLinkUpdate.size());
             Enumeration IntraLinkID = intraDomainLinkUpdate.keys();
             while(IntraLinkID.hasMoreElements())
             {
                 IntraDomainLinkUpdateTime str= (IntraDomainLinkUpdateTime) IntraLinkID.nextElement();
 
-                log.info("-------------IntraDomain Link: " +str.toString());
+                log.debug("-------------IntraDomain Link: " +str.toString());
                 Long timeToCheck = intraDomainLinkUpdate.get(str) + param.getDelay();
 
                 try {
@@ -87,7 +87,7 @@ public class UpdateDomainStatus implements Runnable {
                             SimpleTEDB simpleTEDBxx=null;
                             simpleTEDBxx = (SimpleTEDB) domainTEDB;
                             if(simpleTEDBxx.getNetworkGraph().containsEdge(str.getLocalNodeIGPId(), str.getRemoteNodeIGPId())) {
-                                log.info("Contain IntraDomain Edge from: " + str.getLocalNodeIGPId() + "<------> to:" + str.getRemoteNodeIGPId());
+                                log.debug("Contain IntraDomain Edge from: " + str.getLocalNodeIGPId() + "<------> to:" + str.getRemoteNodeIGPId());
                                 simpleTEDBxx.getNetworkGraph().removeEdge(str.getLocalNodeIGPId(), str.getRemoteNodeIGPId());
                                 intraDomainLinkUpdate.remove(str);
                             }
