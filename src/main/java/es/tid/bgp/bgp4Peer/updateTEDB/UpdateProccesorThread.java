@@ -887,7 +887,7 @@ public class UpdateProccesorThread extends Thread {
 
 
 			if (interEdge.getLearntFrom() == null || interEdge.getLearntFrom().equals(learntFrom)) {
-				log.debug("Existing InterDomain Edge LearntFrom: " + interEdge.getLearntFrom() + "  New LearntFrom:  " + learntFrom);
+				log.info("Valid or new InterDomain Edge LearntFrom: " + interEdge.getLearntFrom() + "  New LearntFrom:  " + learntFrom);
 				DomainTEDB simpleTEDB = new SimpleTEDB();
 				te_info = createTE_Info(simpleTEDB);
 				interEdge.setTE_info(te_info);
