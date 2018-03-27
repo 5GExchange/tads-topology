@@ -1425,9 +1425,12 @@ public class FileTEDBUpdater {
 						NodeList name_node = element
 								.getElementsByTagName("name");
 						Element name_e = (Element) name_node.item(0);
-						String name = getCharacterDataFromElement(name_e);
+						String name =null;
+						if (name_e!=null)
+							 name=getCharacterDataFromElement(name_e);
 						Node_Info nodeI= null;
-						log.info("Node name: " + name);
+						if(name!=null)
+							log.info("Node name: " + name);
 						Hashtable<Object, Node_Info> NodeTable;
 						NodeTable =tedb.getNodeTable();
 						if(tedb.getNodeTable().containsKey(router_id_addr)){
