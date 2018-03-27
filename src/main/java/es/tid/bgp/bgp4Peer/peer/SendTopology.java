@@ -221,7 +221,7 @@ public class SendTopology implements Runnable {
 			}
 			Node_Info node_info = NodeTable.get(node);
 			if (node_info != null) {
-				log.info("Sending node: (" + node + ") with node_info "+ NodeTable.get(node).toString());
+				log.info("Sending node: (" + node + ")");//with node_info "+ NodeTable.get(node).toString());
 				//Mandamos NodeNLRI
 				BGP4Update update = createMsgUpdateNodeNLRI(node_info,  NodeTable.get(node).getLearntFrom());
 				sendMessage(update);
@@ -400,7 +400,7 @@ public class SendTopology implements Runnable {
 
 		LinkedList<InterDomainEdge> interdomainLinks = md.getInterDomainLinks();
 
-		log.info(interdomainLinks.size()+ "  in interdomainLinks graph");
+		log.debug(interdomainLinks.size()+ "  in interdomainLinks graph");
 
 		Enumeration keys = null;
 		if((md!=null)&&(md.getTemps()!=null)){
@@ -420,7 +420,7 @@ public class SendTopology implements Runnable {
 						while (iter.hasMoreElements()) {
 							String domainID = iter.nextElement();
 							if ((domainID != null)&&(!domainID.equals("multidomain"))) {
-								log.info("temp procedure checking domain_id: " + domainID);
+								log.debug("temp procedure checking domain_id: " + domainID);
 								TEDB ted = teds.get(domainID);
 								if (ted instanceof DomainTEDB) {
 									Iterator<Object> vertexIt = ((DomainTEDB) ted).getIntraDomainLinksvertexSet().iterator();
@@ -439,30 +439,30 @@ public class SendTopology implements Runnable {
 										if (node_info != null) {
 
 											String nodeip = node_info.getIpv4AddressLocalNode().getCanonicalHostName();
-											log.info("Current node ID=" + nodeip);
+											log.debug("Current node ID=" + nodeip);
 											//src node
 											if (edge.getLocal_Node_Info()==null){
 												if(edge.getSrc_router_id() instanceof Inet4Address) {
 													if (((Inet4Address) edge.getSrc_router_id()).getHostAddress().equals(nodeip)) {
-														log.info("Node info id = to src");
+														log.debug("Node info id = to src");
 														sfound = true;
 														edge.setLocal_Node_Info(node_info);
 														if (v instanceof Long) {
 															edge.setSrc_router_id(node);
-															log.info("ISIS");
+															log.debug("ISIS");
 														}
 														else
-															log.info("ipv4");
+															log.debug("ipv4");
 
 													}
 													else
-														log.info("edge src and node ip are different");
+														log.debug("edge src and node ip are different");
 												}
 												else
-													log.info("not ipv4");
+													log.debug("not ipv4");
 											}
 											else{
-												log.info("Src info already present");
+												log.debug("Src info already present");
 												sfound=true;
 											}
 
@@ -470,52 +470,52 @@ public class SendTopology implements Runnable {
 											if (edge.getRemote_Node_Info()==null){
 												if(edge.getDst_router_id() instanceof Inet4Address) {
 													if (((Inet4Address) edge.getDst_router_id()).getHostAddress().equals(nodeip)) {
-														log.info("Node info id = to dst");
+														log.debug("Node info id = to dst");
 														dfound = true;
 														edge.setRemote_Node_Info(node_info);
 														if (v instanceof Long) {
 															edge.setDst_router_id(node);
-															log.info("ISIS");
+															log.debug("ISIS");
 														} else
-															log.info("ipv4");
+															log.debug("ipv4");
 														Inet4Address dom = null;
 														try { // d_router_id_addr type: Inet4Address
 															dom = (Inet4Address) Inet4Address.getByName(domainID);
 														} catch (Exception e) { // d_router_id_addr type: DataPathID
-															log.info(e.toString());
+															log.debug(e.toString());
 														}
 														if (dom != null) {
 															md.getNetworkDomainGraph().addVertex(dom);
 															edge.setDomain_dst_router(dom);
 														} else
-															log.info("dom is null");
+															log.debug("dom is null");
 													}
 													else{
-														log.info("edge dst and node ip are different");
-														log.info(((Inet4Address) edge.getDst_router_id()).getHostAddress());
-														log.info(nodeip);
+														log.debug("edge dst and node ip are different");
+														log.debug(((Inet4Address) edge.getDst_router_id()).getHostAddress());
+														log.debug(nodeip);
 													}
 												}
 												else
-													log.info("not ipv4");
+													log.debug("not ipv4");
 											}
 											else{
-												log.info("dst info already present");
+												log.debug("dst info already present");
 												dfound=true;
 											}
 
 
 										}
 										else
-											log.info("node info null");
+											log.debug("node info null");
 									}
 								}
 								else
-									log.info("not a domainTEDB instance");
+									log.debug("not a domainTEDB instance");
 
 							}
 							else
-								log.info("domain null or multidomani");
+								log.debug("domain null or multidomani");
 
 						}
 						if(sfound&&dfound){
@@ -526,9 +526,9 @@ public class SendTopology implements Runnable {
 							edge.setComplete(true);
 							md.getNetworkDomainGraph().addEdge((Inet4Address) edge.getDomain_src_router(), edge.getDomain_dst_router(), edge);
 							md.getTemps().remove(key);
-							log.info(edge.toString());
+							log.debug(edge.toString());
 						}else{
-							log.info("link still not complete");
+							log.info("This link is still not complete");
 							if (dfound) log.info("dst found");
 							else log.info("dst not found");
 							if (sfound) log.info("src found");
@@ -540,228 +540,14 @@ public class SendTopology implements Runnable {
 				}
 			}//xx
 			else
-				log.info("md temps size 0");
+				log.debug("md temps size 0");
 
 		}//xx
 		else
-		log.info("md null or md.temp null");
+		log.debug("md null or md.temp null");
 
 
 
-
-		/*
-		LinkedList<InterDomainEdge> interdomainLinks = md.getInterDomainLinks();
-
-		Enumeration<String> iter = teds.keys();
-
-		boolean sfound = false;
-		boolean dfound = false;
-		if ((md!=null)&&(md.getTemps()!=null)){
-			if (md.getTemps().size()>0){
-				while (iter.hasMoreElements()) {
-					String domainID = iter.nextElement();
-					//Andrea
-					if ((domainID != null)&&(!domainID.equals("multidomain"))) {
-						log.info("temp procedure checking domain_id: " + domainID);
-						TEDB ted = teds.get(domainID);
-						if (ted instanceof DomainTEDB) {
-							Iterator<Object> vertexIt = ((DomainTEDB) ted).getIntraDomainLinksvertexSet().iterator();
-							while (vertexIt.hasNext()) {
-								Inet4Address nodex = null;
-								long node = 0L;
-								Object v = vertexIt.next();
-
-								Node_Info node_info = null;
-								if (v instanceof Inet4Address) {
-									nodex = (Inet4Address) v;
-									node_info = ((DomainTEDB) ted).getNodeTable().get(nodex);
-								} else if (v instanceof Long) {
-									node = (long) v;
-									node_info = ((DomainTEDB) ted).getNodeTable().get(node);
-								}
-								//if (!source_domain_id.equals(dest_domain_id)) {
-
-								if (node_info != null) {
-									if (node_info.getIpv4AddressLocalNode() != null) {
-										String nodeip = node_info.getIpv4AddressLocalNode().getCanonicalHostName();
-										log.info("llllllllllllllllllllllllllllllllll node_info ID=" + nodeip);
-										if (md.getTemps() != null) {
-											Enumeration keys = md.getTemps().keys();
-											String key;
-											while (keys.hasMoreElements()) {
-												key = (String) keys.nextElement();
-												InterDomainEdge edge = md.getTemps().get(key);
-												log.debug(edge.toString());
-												//source check
-												String source = null;
-												if (edge.getSrc_router_id() != null) {
-
-													if (edge.getSrc_router_id() instanceof Long) {
-														if (edge.getLocal_Node_Info() != null) {
-															log.info("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"+edge.getLocal_Node_Info().toString());
-															if (edge.getLocal_Node_Info().getIpv4AddressLocalNode() != null) {
-																source = edge.getLocal_Node_Info().getIpv4AddressLocalNode().getHostAddress();
-																log.info("kkkkkkkkkkkkkkkkkkkkkkk src router ID=" + source);
-															}
-															else{
-																log.info("edge.getLocal_Node_Info().getIpv4AddressLocalNode() null");
-															}
-														}
-														else{
-															log.info("edge.getLocal_Node_Info()  is null");
-															if(edge.getSrc_router_id() instanceof Inet4Address){
-																if ( ((Inet4Address)edge.getSrc_router_id()).getHostAddress().equals(node_info.getIpv4Address().getHostAddress())){
-																	log.info("Node info id = to src");
-																	sfound=true;
-																	edge.setLocal_Node_Info(node_info);
-																	if (v instanceof Long){
-																		edge.setSrc_router_id(node);
-																		log.info("ISIS");
-																	}
-																	if (v instanceof Inet4Address){
-																		edge.setSrc_router_id(nodex);
-																		log.info("ipv4");
-																	}
-																}
-																else
-																	log.info("differentzzzzzzzzzzzzzzzzzzzzzzzzz");
-
-															}
-															else if(edge.getSrc_router_id() instanceof Long){
-																//if ( ((Inet4Address)edge.getLocal_Node_Info().getIpv4Address()).getHostAddress().equals(node_info.getIpv4Address().getHostAddress())){
-																if ((long)edge.getSrc_router_id()==node_info.getISISid() ){
-																	log.info("Node info id = to src");
-																	sfound=true;
-																	edge.setLocal_Node_Info(node_info);
-																	if (v instanceof Long){
-																		edge.setSrc_router_id(node);
-																		log.info("ISIS");
-																	}
-																	if (v instanceof Inet4Address){
-																		edge.setSrc_router_id(nodex);
-																		log.info("ipv4");
-																	}
-																}
-
-															}
-															else
-																log.info("stange type");
-														}
-													}
-													else if (edge.getSrc_router_id() instanceof Inet4Address) {
-														source = ((Inet4Address) edge.getSrc_router_id()).getHostAddress();
-														log.info("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk src router ID=" + source);
-													}
-													else
-														log.info("Strange case");
-													if (edge.getLocal_Node_Info() == null) {
-														log.info("Trying to configure the the src node");
-														if (node_info.getIpv4AddressLocalNode() != null) {
-															log.info("pppppppppppppppppppppppppp node_info ID=" + (node_info.getIpv4AddressLocalNode().getCanonicalHostName()));
-															log.info("pppppppppppppppppppppppppp source ID=" + source);
-															if ((node_info.getIpv4AddressLocalNode().getCanonicalHostName()).equals(source)) {
-																sfound = true;
-																log.info("ggggggggggggggggggggggggggggggggggg Found node match for read src router ID=" + source);
-																edge.setLocal_Node_Info(node_info);
-															}
-															if (v instanceof Long)
-																edge.setSrc_router_id(node);
-															if (v instanceof Inet4Address)
-																edge.setSrc_router_id(nodex);
-															md.getTemps().remove(key);
-															md.getTemps().put(key,edge);
-														}
-														else
-															log.info("getIpv4AddressLocalNode is null");
-													} else {
-														log.info("Src info already present=");
-														sfound = true;
-													}
-												}
-												else{
-													log.info("getSrc_router_id is null");
-												}
-												//destination check
-												if (edge.getDst_router_id() != null) {
-													String destin = null;
-													if (edge.getDst_router_id() instanceof Long) {
-														destin = "127.0.0.1";
-														log.info("Strange case dst router ID=" + destin);
-													}
-													if (edge.getDst_router_id() instanceof Inet4Address) {
-														destin = ((Inet4Address) edge.getDst_router_id()).getHostAddress();
-														log.info("pppppppppppppppppppppppppppppppppppppppppp dst router ID=" + destin);
-													}
-													if (edge.getRemote_Node_Info() == null) {
-														log.info("Trying to configure the the dst node");
-														if (node_info.getIpv4AddressLocalNode() != null) {
-															if ((node_info.getIpv4AddressLocalNode().getCanonicalHostName()).equals(destin)) {
-																dfound = true;
-																log.info("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj Found node match for read dst router ID=" + destin);
-																edge.setRemote_Node_Info(node_info);
-																//md.getNetworkDomainGraph().addVertex(domainID);
-
-																if (node_info.getISISid()!=0) {
-																	log.info("ISIS");
-																	edge.setDst_router_id(node_info.getISISid());
-																}
-																if (node_info.getIpv4Address()!=null) {
-																	log.info("ipv4");
-																	edge.setDst_router_id(node_info.getIpv4Address());
-																}
-															}
-
-														}
-													} else {
-														log.info("Dst info already present=");
-														dfound=true;
-													}
-												}
-												else{
-													log.info("getDst_router_id is null");
-												}
-												if (sfound && dfound) {
-													Inet4Address dom=null;
-													try { // d_router_id_addr type: Inet4Address
-														dom = (Inet4Address) Inet4Address.getByName(domainID);
-													} catch (Exception e) { // d_router_id_addr type: DataPathID
-														log.info(e.toString());
-													}
-													if (dom!=null) {
-														md.getNetworkDomainGraph().addVertex(dom);
-														edge.setDomain_dst_router(dom);
-														log.info("Adding interdomain link " + edge.getDomain_src_router() + "-->" + domainID);
-														//Only add if the source and destination domains are different
-
-														//setInterDomainEdgeUpdateTime(localDomainID, LocalNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(), remoteDomainID, RemoteNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(), System.currentTimeMillis());
-														edge.setComplete(true);
-														md.getNetworkDomainGraph().addEdge((Inet4Address) edge.getDomain_src_router(), dom, edge);
-														md.getTemps().remove(key);
-													}
-												}
-
-											}
-										}
-										else{
-											log.info("getTemps is null");
-										}
-
-									}
-									else{
-										log.info("get ipv4 address null");
-									}
-								}
-								else{
-									log.info("node_info is null");
-								}
-							}
-						}
-
-					}
-				}
-			}
-		}
-		//aggiungi gran cialo il link ai temp links
 
 		if (md!=null){
 			if (md.getNetworkDomainGraph()!=null){
@@ -769,23 +555,10 @@ public class SendTopology implements Runnable {
 				log.info("Number of links: "+ String.valueOf(md.getNetworkDomainGraph().edgeSet().size()));
 			}
 			else
-				log.info("getNetworkDomainGraph is null");
+				log.debug("getNetworkDomainGraph is null");
 		}
 		else {
-			log.info("md is null");
-		}
-		*/
-
-		if (md!=null){
-			if (md.getNetworkDomainGraph()!=null){
-				log.info("Number of nodes: "+ String.valueOf(md.getNetworkDomainGraph().vertexSet().size()));
-				log.info("Number of links: "+ String.valueOf(md.getNetworkDomainGraph().edgeSet().size()));
-			}
-			else
-				log.info("getNetworkDomainGraph is null");
-		}
-		else {
-			log.info("md is null");
+			log.debug("md is null");
 		}
 
 		if (true) {
@@ -799,8 +572,8 @@ public class SendTopology implements Runnable {
 				if(edge.getComplete()) {
 					Object source = null;
 					Object dst = null;
-					log.info("edge before sending it");
-					log.info(edge.toString());
+					log.debug("edge before sending it");
+					log.debug(edge.toString());
 					if (edge.getSrc_router_id() instanceof Inet4Address)
 						source = (Inet4Address) edge.getSrc_router_id();
 					if (edge.getSrc_router_id() instanceof Long)
@@ -831,13 +604,13 @@ public class SendTopology implements Runnable {
 					domainList.add(((Inet4Address) edge.getDomain_src_router()).getHostAddress().toString());
 					//System.out.println("SRC Domain is "+((Inet4Address)edge.getDomain_src_router()).getHostAddress().toString() );
 					domainList.add(((Inet4Address) edge.getDomain_dst_router()).getHostAddress().toString());
-					log.info("Source Domain is " + ((Inet4Address) edge.getDomain_src_router()).getHostAddress());
-					log.info("Dst Domain is " + ((Inet4Address) edge.getDomain_dst_router()).getHostAddress());
+					log.debug("Source Domain is " + ((Inet4Address) edge.getDomain_src_router()).getHostAddress());
+					log.debug("Dst Domain is " + ((Inet4Address) edge.getDomain_dst_router()).getHostAddress());
 					BGP4Update update = createMsgUpdateLinkNLRI2(null, addressList, localRemoteIfList, lanID, domainList, false, te_info, edge.getLearntFrom(),
 							interfacesList);
 					update.setLearntFrom(edge.getLearntFrom());
-					log.info("Update message created for interdomain link");
-					log.info("learnt from "+ edge.getLearntFrom());
+					log.debug("Update message created for interdomain link");
+					log.debug("learnt from "+ edge.getLearntFrom());
 					sendMessage(update);
 				}
 				else log.info ("Edge not complete/n"+edge.toString());
@@ -846,16 +619,6 @@ public class SendTopology implements Runnable {
 
 	}
 
-	/*
-	public void setInterDomainEdgeUpdateTime(Inet4Address localDomainID,Inet4Address LocalNodeIGPId, Long LinkLocalIdentifier, Inet4Address remoteDomainID, Inet4Address RemoteNodeIGPId, Long LinkRemoteIdentifier, long LinkUpdateTime) {
-
-		DomainUpdateTime domain_update = new DomainUpdateTime(DomainUpdate, localDomainID, LinkUpdateTime);
-		//log.info("Domain Id : " +String.valueOf(localDomainID) +"DomainTEDS Size:  " +DomainUpdate.size()  + "   Time of Update:  " + LinkUpdateTime);
-		InterDomainLinkUpdateTime interDom_linkUpdate= new InterDomainLinkUpdateTime(interDomainLinkUpdate, localDomainID, LocalNodeIGPId,LinkLocalIdentifier,remoteDomainID,RemoteNodeIGPId,LinkRemoteIdentifier, LinkUpdateTime);
-		//log.info("..................Added InterDomain Link : " +interDom_linkUpdate.toString()   + "   Time of Update:  " + LinkUpdateTime);
-
-	}
-	 */
 
 	/**
 	 * This function sends a BGP4 update message (encoded in a LinkNLRI) for each link in the set
@@ -1039,7 +802,7 @@ public class SendTopology implements Runnable {
 					if (update.getLearntFrom() != null) {
 
 						if (update.getLearntFrom().contains("/"))
-							log.info("BGP4 Update learnt from new:" + update.getLearntFrom().replaceAll("/", ""));
+							log.debug("BGP4 Update learnt from new:" + update.getLearntFrom().replaceAll("/", ""));
 						if (isTest) {
 							log.debug("Sending BGP4 update to:" + destination + " with no check on the ID since it is test");
 							if (session.getMyAutonomousSystem() != session.getRemoteAutonomousSystem()) {
@@ -1078,7 +841,7 @@ public class SendTopology implements Runnable {
 						}
 					}
 					else
-						log.info("pdate.getLearntFrom() = null");
+						log.debug("update.getLearntFrom() = null");
 				}
 			}
 
@@ -1144,12 +907,11 @@ public class SendTopology implements Runnable {
 
 
 			if (node_info.getName() != null) {
-				log.info("Sending node name: "+new String (node_info.getName()));
+				log.debug("Sending node name: "+new String (node_info.getName()));
 				NodeNameNodeAttribTLV nna = new NodeNameNodeAttribTLV();
 				nna.setNameb(node_info.getName());
 				linkStateAttribute.setNodeNameTLV(nna);
 				linkStateNeeded=true;
-				log.info("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww "+linkStateAttribute.getNodeNameTLV().toString());
 			}
 
 			/*if (node_info.getName() != null) {
@@ -1180,15 +942,14 @@ public class SendTopology implements Runnable {
 				linkStateNeeded=true;
 			}
 			else
-				log.info("area is null");
+				log.debug("area is null");
 			if (node_info.getIpv4Address()!=null){
 				Inet4Address ip = node_info.getIpv4Address();
 				IPv4RouterIDLocalNodeNodeAttribTLV ipv4Id = new IPv4RouterIDLocalNodeNodeAttribTLV();
 				ipv4Id.setIpv4Address(ip);
-				log.info("adding router id");
+				log.debug("adding router id");
 				linkStateAttribute.setIPv4RouterIDLocalNodeNATLV(ipv4Id);
 				linkStateNeeded=true;
-				log.info("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww "+linkStateAttribute.toString());
 			}
 
 
@@ -1239,7 +1000,7 @@ public class SendTopology implements Runnable {
 			}
 			pathAttributes.add(ra);
 			update.setLearntFrom(node_info.getLearntFrom());
-			log.info("Node update: "+update.toString());
+			log.debug("Node update: "+update.toString());
 			return update;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -2126,23 +1887,23 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			IPv4InterfaceAddressLinkDescriptorsSubTLV ipv4InterfaceAddressTLV = new IPv4InterfaceAddressLinkDescriptorsSubTLV();
 			ipv4InterfaceAddressTLV.setIpv4Address(edgex.getLocalInterfaceIPv4());
 			linkNLRI.setIpv4InterfaceAddressTLV(ipv4InterfaceAddressTLV);
-			log.info("Added interface ip link descriptior->"+ipv4InterfaceAddressTLV.toString());
+			log.debug("Added interface ip link descriptior->"+ipv4InterfaceAddressTLV.toString());
 			if ((edgex!=null)&&(edgex.getNeighborIPv4()!=null)) {
 				IPv4NeighborAddressLinkDescriptorSubTLV ipv4NeighborAddressTLV = new IPv4NeighborAddressLinkDescriptorSubTLV();
 				ipv4NeighborAddressTLV.setIpv4Address(edgex.getNeighborIPv4());
 				linkNLRI.setIpv4NeighborAddressTLV(ipv4NeighborAddressTLV);
-				log.info("Added remote ip link descriptior->"+ipv4NeighborAddressTLV.toString());
+				log.debug("Added remote ip link descriptior->"+ipv4NeighborAddressTLV.toString());
 			}
 		}
 		if (interfacesList!=null) {
 			IPv4InterfaceAddressLinkDescriptorsSubTLV ipv4InterfaceAddressTLV = new IPv4InterfaceAddressLinkDescriptorsSubTLV();
 			ipv4InterfaceAddressTLV.setIpv4Address(interfacesList.get(0));
 			linkNLRI.setIpv4InterfaceAddressTLV(ipv4InterfaceAddressTLV);
-			log.info("Added interface ip link descriptior->"+ipv4InterfaceAddressTLV.toString());
+			log.debug("Added interface ip link descriptior->"+ipv4InterfaceAddressTLV.toString());
 			IPv4NeighborAddressLinkDescriptorSubTLV ipv4NeighborAddressTLV = new IPv4NeighborAddressLinkDescriptorSubTLV();
 			ipv4NeighborAddressTLV.setIpv4Address(interfacesList.get(1));
 			linkNLRI.setIpv4NeighborAddressTLV(ipv4NeighborAddressTLV);
-			log.info("Added remote ip link descriptior->"+ipv4NeighborAddressTLV.toString());
+			log.debug("Added remote ip link descriptior->"+ipv4NeighborAddressTLV.toString());
 		}
 		//2.2.2. Link Local/Remote identifiers TLV
 		/*
@@ -2216,7 +1977,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			}
 		}
 		else
-			log.info("local");
+			log.info("local or null");
 		pathAttributes.add(ra);
 
 		return update;
@@ -2486,14 +2247,14 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			igpRouterIDLNSubTLV.setIpv4AddressOSPF((Inet4Address) addressList.get(0));
 			localNodeDescriptors.setIGPRouterID(igpRouterIDLNSubTLV);
 			linkNLRI.setProtocolID(ProtocolIDCodes.OSPF_Protocol_ID);
-			log.info("src node is ipv4-> protocol set to OSPF: "+((Inet4Address) addressList.get(0)).getHostAddress());
+			log.debug("src node is ipv4-> protocol set to OSPF: "+((Inet4Address) addressList.get(0)).getHostAddress());
 		}
 		if (addressList.get(0) instanceof Long) {
 			igpRouterIDLNSubTLV.setISIS_ISO_NODE_ID((long) addressList.get(0));
 			igpRouterIDLNSubTLV.setIGP_router_id_type(IGPRouterIDNodeDescriptorSubTLV.IGP_ROUTER_ID_TYPE_IS_IS_NON_PSEUDO);
 			localNodeDescriptors.setIGPRouterID(igpRouterIDLNSubTLV);
 			linkNLRI.setProtocolID(ProtocolIDCodes.IS_IS_Level2_Protocol_ID);
-			log.info("src node is long-> protocol set to ISIS");
+			log.debug("src node is long-> protocol set to ISIS");
 		}
 		//Complete Dummy TLVs
 		//BGPLSIdentifierNodeDescriptorSubTLV bGPLSIDSubTLV =new BGPLSIdentifierNodeDescriptorSubTLV();
@@ -2509,13 +2270,13 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			igpRouterIDDNSubTLV.setIpv4AddressOSPF((Inet4Address) addressList.get(1));
 			igpRouterIDDNSubTLV.setIGP_router_id_type(IGPRouterIDNodeDescriptorSubTLV.IGP_ROUTER_ID_TYPE_OSPF_NON_PSEUDO);
 			remoteNodeDescriptors.setIGPRouterID(igpRouterIDDNSubTLV);
-			log.info("dst node is ipv4-> protocol set to OSPF: "+((Inet4Address) addressList.get(1)).getHostAddress());
+			log.debug("dst node is ipv4-> protocol set to OSPF: "+((Inet4Address) addressList.get(1)).getHostAddress());
 		}
 		if (addressList.get(1) instanceof Long) {
 			igpRouterIDDNSubTLV.setISIS_ISO_NODE_ID((long) addressList.get(1));
 			igpRouterIDDNSubTLV.setIGP_router_id_type(IGPRouterIDNodeDescriptorSubTLV.IGP_ROUTER_ID_TYPE_IS_IS_NON_PSEUDO);
 			remoteNodeDescriptors.setIGPRouterID(igpRouterIDDNSubTLV);
-			log.info("dst node is long-> protocol set to ISIS");
+			log.debug("dst node is long-> protocol set to ISIS");
 		}//2.1.2. AS
 		if (domainList != null){
 			AutonomousSystemNodeDescriptorSubTLV as_local = new AutonomousSystemNodeDescriptorSubTLV();
@@ -2551,12 +2312,12 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			IPv4InterfaceAddressLinkDescriptorsSubTLV ipv4InterfaceAddressTLV = new IPv4InterfaceAddressLinkDescriptorsSubTLV();
 			ipv4InterfaceAddressTLV.setIpv4Address(edgex.getLocalInterfaceIPv4());
 			linkNLRI.setIpv4InterfaceAddressTLV(ipv4InterfaceAddressTLV);
-			log.info("Added interface ip link descriptior->"+ipv4InterfaceAddressTLV.toString());
+			log.debug("Added interface ip link descriptior->"+ipv4InterfaceAddressTLV.toString());
 			if ((edgex!=null)&&(edgex.getNeighborIPv4()!=null)) {
 				IPv4NeighborAddressLinkDescriptorSubTLV ipv4NeighborAddressTLV = new IPv4NeighborAddressLinkDescriptorSubTLV();
 				ipv4NeighborAddressTLV.setIpv4Address(edgex.getNeighborIPv4());
 				linkNLRI.setIpv4NeighborAddressTLV(ipv4NeighborAddressTLV);
-				log.info("Added remote ip link descriptior->"+ipv4NeighborAddressTLV.toString());
+				log.debug("Added remote ip link descriptior->"+ipv4NeighborAddressTLV.toString());
 			}
 		}
 		if (interfacesList!=null) {
@@ -2565,11 +2326,11 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			linkNLRI.setIpv4InterfaceAddressTLV(ipv4InterfaceAddressTLV);
 			if (linkNLRI.getLocalNodeDescriptors()!=null)
 				linkNLRI.getLocalNodeDescriptors().getIGPRouterID().setIpv4Address_ospf_dr_address(interfacesList.get(0));
-			log.info("222Added interface ip link descriptior->"+ipv4InterfaceAddressTLV.toString());
+			log.debug("222Added interface ip link descriptior->"+ipv4InterfaceAddressTLV.toString());
 			IPv4NeighborAddressLinkDescriptorSubTLV ipv4NeighborAddressTLV = new IPv4NeighborAddressLinkDescriptorSubTLV();
 			ipv4NeighborAddressTLV.setIpv4Address(interfacesList.get(1));
 			linkNLRI.setIpv4NeighborAddressTLV(ipv4NeighborAddressTLV);
-			log.info("22222Added remote ip link descriptior->"+ipv4NeighborAddressTLV.toString());
+			log.debug("22222Added remote ip link descriptior->"+ipv4NeighborAddressTLV.toString());
 			if (linkNLRI.getRemoteNodeDescriptorsTLV()!=null)
 				linkNLRI.getRemoteNodeDescriptorsTLV().getIGPRouterID().setIpv4Address_ospf_dr_address(interfacesList.get(1));
 
