@@ -2410,9 +2410,9 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			}
 		}
 		else
-			log.info("local or null");
+			log.info("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwlocal or null");
 		pathAttributes.add(ra);
-		log.info(update.toString());
+		log.debug(update.toString());
 		return update;
 	}
 

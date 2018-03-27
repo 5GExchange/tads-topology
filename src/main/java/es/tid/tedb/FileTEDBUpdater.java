@@ -1286,7 +1286,7 @@ public class FileTEDBUpdater {
 
 		//First, create the graph
 
-		log.debug("1. SimpleDirectedWeightedGraph");
+		log.info("Loading intra domain topologies");
 
 		File file = new File(fileName);
 		try {
@@ -1430,7 +1430,7 @@ public class FileTEDBUpdater {
 							 name=getCharacterDataFromElement(name_e);
 						Node_Info nodeI= null;
 						if(name!=null)
-							log.info("Node name: " + name);
+							log.debug("Node name: " + name);
 						Hashtable<Object, Node_Info> NodeTable;
 						NodeTable =tedb.getNodeTable();
 						if(tedb.getNodeTable().containsKey(router_id_addr)){
@@ -1457,7 +1457,7 @@ public class FileTEDBUpdater {
 						if (ip!=null) {
 							nodeI.setAs_number(ip);
 						}
-						log.info ("created from file this node info Andrea "+nodeI.toString());
+						log.debug ("created from file this node info "+nodeI.toString());
 
 						if (NodeTable != null) {
 							if (!NodeTable.containsKey((Inet4Address)router_id_addr)) {
@@ -1465,7 +1465,7 @@ public class FileTEDBUpdater {
 								NodeTable.put((Inet4Address)router_id_addr, nodeI);
 							}
 							else{
-								log.info("node already present");
+								log.debug("node already present");
 								NodeTable.remove((Inet4Address)router_id_addr);
 								NodeTable.put((Inet4Address)router_id_addr, nodeI);
 							}
@@ -1635,7 +1635,7 @@ public class FileTEDBUpdater {
 									.item(0);
 							String s_ip = getCharacterDataFromElement(source_ipel);
 							Inet4Address s_addr = (Inet4Address) InetAddress.getByName(s_ip);
-							log.info("Edge Source interface: " + s_ip);
+							log.debug("Edge Source interface: " + s_ip);
 
 							NodeList source_Numif_id_nl = source_router_el.getElementsByTagName("NumIf_id");
 							Element source_Numif_id_el = (Element) source_Numif_id_nl.item(0);
@@ -1695,7 +1695,7 @@ public class FileTEDBUpdater {
 							Element dest_ipel = (Element) dest_ip
 									.item(0);
 							String d_ip = getCharacterDataFromElement(dest_ipel);
-							log.info("Edge Dest interface: " + d_ip);
+							log.debug("Edge Dest interface: " + d_ip);
 							Inet4Address d_addr = (Inet4Address) InetAddress.getByName(d_ip);
 
 							NodeList dest_Numif_id_nl = dest_el.getElementsByTagName("NumIf_id");
@@ -1766,7 +1766,6 @@ public class FileTEDBUpdater {
 										Element bitmap_e = (Element) bitmap_node.item(0);
 										if (bitmap_e!=null){
 											String bitmap_string=getCharacterDataFromElement(bitmap_e);
-											System.out.println("Bitmap read: "+bitmap_string);
 											for (int p =0; p<bitmap_string.length(); p++)
 												result= (int) (result+Math.pow(2, bitmap_string.length()-p-1)*(bitmap_string.charAt(p)-48));
 											bitmap[0]=(byte) result;
@@ -1807,7 +1806,7 @@ public class FileTEDBUpdater {
 								log.debug("NODES IN GRAPH:: "+graph.vertexSet());
 							try{
 								if((graph!=null)&&(graph.containsEdge(s_router_id_addr, d_router_id_addr))){
-									log.debug("New Intradomain Edge");
+									log.info("New Intradomain Edge");
 									graph.getEdge(s_router_id_addr, d_router_id_addr).setNumberFibers(graph.getEdge(s_router_id_addr, d_router_id_addr).getNumberFibers()+1);
 									log.debug("s_router_id_addr: "+s_router_id_addr.toString()+"; d_router_id_addr: "+d_router_id_addr.toString()+"; edge: "+edge);
 									log.info("New intradomain link: "+s_router_id_addr.toString()+" --> "+d_router_id_addr.toString());//+" \n "+edge);
@@ -1821,13 +1820,12 @@ public class FileTEDBUpdater {
 										//interdomain links will be loaded separately
 										// type="interdomain";
 										type="different";
-										log.info("interdomain ssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
 
 									}else{
 										graph.addEdge(s_router_id_addr, d_router_id_addr, edge);
 										graph.getEdge(s_router_id_addr, d_router_id_addr).setNumberFibers(1);
 										log.debug("New Intradomain Edge");
-										log.info("New intradomain link: "+s_router_id_addr.toString()+" --> "+d_router_id_addr.toString()+" learnt "+edge.getLearntFrom());//+" \n "+edge);
+										log.debug("New intradomain link: "+s_router_id_addr.toString()+" --> "+d_router_id_addr.toString()+" learnt "+edge.getLearntFrom());//+" \n "+edge);
 
 									}
 								}
@@ -1934,7 +1932,7 @@ public class FileTEDBUpdater {
 								s_router_id_addr =  DataPathID.getByName(s_r_id);
 							}
 							Inet4Address source_domain_id = (Inet4Address) Inet4Address.getByName(domain_id);
-							log.info("Read edge Source domain_id: " + source_domain_id);
+							log.debug("Read edge Source domain_id: " + source_domain_id);
 
 							NodeList source_if_id_nl = source_router_el
 									.getElementsByTagName("if_id");
@@ -1950,7 +1948,7 @@ public class FileTEDBUpdater {
 							if (source_ipel!=null)
 								s_ip=getCharacterDataFromElement(source_ipel);
 							s_addr = (Inet4Address) InetAddress.getByName(s_ip);
-							log.info("Edge Source interface: " + s_ip);
+							log.debug("Edge Source interface: " + s_ip);
 							edge.setLocalInterfaceIPv4(s_addr);
 
 
@@ -1984,7 +1982,7 @@ public class FileTEDBUpdater {
 							Element dest_ipel = (Element) dest_ip.item(0);
 							if (dest_ipel!=null)
 								d_ip = getCharacterDataFromElement(dest_ipel);
-							log.info("Edge Dest inLinterface: " + d_ip);
+							log.debug("Edge Dest inLinterface: " + d_ip);
 							d_addr = (Inet4Address) InetAddress.getByName(d_ip);
 							edge.setNeighborIPv4(d_addr);
 
@@ -3405,7 +3403,7 @@ public class FileTEDBUpdater {
 
 			NodeList nodes_domains = doc.getElementsByTagName("domain");
 			// First pass to read all the nodes and domains
-			log.info("Bla bla bla bla bla bla Multidomain Graph add links");
+			log.debug("Multidomain Graph add links");
 			for (int j = 0; j < nodes_domains.getLength(); j++) {
 				Element element_domain = (Element) nodes_domains.item(j);
 				NodeList nodes_domain_id = element_domain
@@ -3415,7 +3413,7 @@ public class FileTEDBUpdater {
 				Inet4Address domain_id = (Inet4Address) Inet4Address
 						.getByName(domain_id_str);
 
-				log.info("Adding Domain: " + domain_id);
+				log.debug("Adding Domain: " + domain_id);
 				graph.addVertex(domain_id);
 
 				NodeList nodes = element_domain.getElementsByTagName("node");
@@ -3535,7 +3533,7 @@ public class FileTEDBUpdater {
 				Element source_router_id_el = (Element) source_router_id
 						.item(0);
 				String s_r_id = getCharacterDataFromElement(source_router_id_el);
-				log.info("Edge Source router_id: " + s_r_id);
+				log.debug("Edge Source router_id: " + s_r_id);
 
 				try { // s_router_id_addr type: Inet4Address
 					s_router_id_addr = (Inet4Address) Inet4Address.getByName(s_r_id);
@@ -3543,7 +3541,7 @@ public class FileTEDBUpdater {
 					s_router_id_addr =  DataPathID.getByName(s_r_id);
 				}
 				Inet4Address source_domain_id = router_id_domain_ed.get(s_router_id_addr);
-				log.info("Edge Source domain_id: " + source_domain_id);
+				log.debug("Edge Source domain_id: " + source_domain_id);
                 edge.setDomain_src_router(source_domain_id);
 				edge.setSrc_router_id((Inet4Address) s_router_id_addr);
 
@@ -3563,7 +3561,7 @@ public class FileTEDBUpdater {
 				if (source_ipel!=null)
 					s_ip=getCharacterDataFromElement(source_ipel);
 					s_addr = (Inet4Address) InetAddress.getByName(s_ip);
-					log.info("Edge Source interface: " + s_ip);
+					log.debug("Edge Source interface: " + s_ip);
                     edge.setLocalInterfaceIPv4(s_addr);
 
 
@@ -3573,10 +3571,10 @@ public class FileTEDBUpdater {
 						.getElementsByTagName("router_id");
 				Element dest_router_id_el = (Element) dest_router_id_nl.item(0);
 				String d_r_id = getCharacterDataFromElement(dest_router_id_el);
-				log.info("Edge Destination router_id: " + d_r_id);
+				log.debug("Edge Destination router_id: " + d_r_id);
 				try { // d_router_id_addr type: Inet4Address
 					d_router_id_addr = (Inet4Address) Inet4Address.getByName(d_r_id);
-					log.info("destination ip address: "+((Inet4Address) d_router_id_addr).getHostAddress());
+					log.debug("destination ip address: "+((Inet4Address) d_router_id_addr).getHostAddress());
 					edge.setDst_router_id((Inet4Address) d_router_id_addr);
 				} catch (Exception e) { // d_router_id_addr type: DataPathID
 					d_router_id_addr =  DataPathID.getByName(d_r_id);
@@ -3584,7 +3582,7 @@ public class FileTEDBUpdater {
 
 				Inet4Address dest_domain_id = router_id_domain_ed.get(d_router_id_addr);
 				if (dest_domain_id!=null){
-                    log.info("Destination domain_id: " + dest_domain_id);
+                    log.debug("Destination domain_id: " + dest_domain_id);
                     edge.setDomain_dst_router(dest_domain_id);
                 }
 
@@ -3602,7 +3600,7 @@ public class FileTEDBUpdater {
 						.item(0);
 				if (dest_ipel!=null)
 					d_ip = getCharacterDataFromElement(dest_ipel);
-					log.info("Edge Dest inLinterface: " + d_ip);
+					log.debug("Edge Dest interface: " + d_ip);
 					d_addr = (Inet4Address) InetAddress.getByName(d_ip);
                     edge.setNeighborIPv4(d_addr);
 
@@ -3647,13 +3645,13 @@ public class FileTEDBUpdater {
 								}
 								if (node_info!=null) {
 									if (node_info.getIpv4AddressLocalNode() != null) {
-										log.info("attaching node_info ID=" + (node_info.getIpv4AddressLocalNode().getCanonicalHostName()));
+										log.debug("attaching node_info ID=" + (node_info.getIpv4AddressLocalNode().getCanonicalHostName()));
 										if (s_router_id_addr != null) {
 											if ((node_info.getIpv4AddressLocalNode().getCanonicalHostName()).equals(((Inet4Address) s_router_id_addr).getCanonicalHostName())) {
 												edge.setLocal_Node_Info(node_info);
 												if (v instanceof Long){
 													edge.setSrc_router_id(node);
-													log.info("ISIS");
+													log.debug("ISIS");
 												}
 											}
 										}
@@ -3682,147 +3680,6 @@ public class FileTEDBUpdater {
 						}
 					}
 				}
-
-				/*
-				Enumeration<String> iter = teds.keys();
-
-				Node_Info srcNode = null;
-				Node_Info dstNode = null;
-                boolean sfound=false;
-                boolean dfound=false;
-				while (iter.hasMoreElements()) {
-					String domainID = iter.nextElement();
-					//Andrea
-					if (domainID != null) {
-						TEDB ted = teds.get(domainID);
-						if (ted instanceof DomainTEDB) {
-							Iterator<Object> vertexIt = ((DomainTEDB) ted).getIntraDomainLinksvertexSet().iterator();
-							while (vertexIt.hasNext()) {
-								Inet4Address nodex = null;
-								long node = 0L;
-								Object v = vertexIt.next();
-
-								Node_Info node_info=null;
-								if (v instanceof Inet4Address){
-									nodex = (Inet4Address) v;
-									node_info= ((DomainTEDB) ted).getNodeTable().get(nodex);
-								}
-								else if (v instanceof Long){
-									node= (long) v;
-									node_info= ((DomainTEDB) ted).getNodeTable().get(node);
-								}
-								//if (!source_domain_id.equals(dest_domain_id)) {
-
-									if (node_info!=null){
-										log.info("bbbbbbbbbbbbbbbbbbbb src router ID="+((Inet4Address) s_router_id_addr).getCanonicalHostName());
-										log.info("bbbbbbbbbbbbbbbbbbbb dst router ID="+((Inet4Address) d_router_id_addr).getCanonicalHostName());
-										if(node_info.getIpv4AddressLocalNode()!=null){
-											log.info("bbbbbbbbbbbbbbbbbbbb node_info ID="+(node_info.getIpv4AddressLocalNode().getCanonicalHostName()));
-											if(s_router_id_addr!=null) {
-												if ((node_info.getIpv4AddressLocalNode().getCanonicalHostName()).equals(((Inet4Address) s_router_id_addr).getCanonicalHostName())){
-													log.info("Node info id = to src");
-													sfound=true;
-													log.info("ttttttttttttttttttttttttttttttttttttttttttttttFound node match for read src router ID=" + ((Inet4Address) s_router_id_addr).getCanonicalHostName());
-													edge.setLocal_Node_Info(node_info);
-													if (v instanceof Long){
-														edge.setSrc_router_id(node);
-														log.info("ISIS");
-													}
-													if (v instanceof Inet4Address){
-														edge.setSrc_router_id(nodex);
-														log.info("ipv4");
-													}
-												}
-												else
-													log.info("s_router_id_addr different");
-											}
-											else
-												log.info("node_info and src different");
-											if(d_router_id_addr!=null) {
-												if ((node_info.getIpv4AddressLocalNode().getCanonicalHostName()).equals(((Inet4Address) d_router_id_addr).getCanonicalHostName())) {
-													log.info("Node info id = to dst");
-													dfound = true;
-													log.info("ttttttttttttttttttttttttttttttttttttttttttttttFound node match for read dst router ID=" + ((Inet4Address) d_router_id_addr).getCanonicalHostName());
-													edge.setRemote_Node_Info(node_info);
-													edge.setLearntFrom(LearntFrom);
-													Inet4Address dom=null;
-													try { // d_router_id_addr type: Inet4Address
-														dom = (Inet4Address) Inet4Address.getByName(domainID);
-													} catch (Exception e) { // d_router_id_addr type: DataPathID
-														log.info(e.toString());
-													}
-													if (dom!=null){
-														graph.addVertex(dom);
-														if (v instanceof Long){
-															if ((source_domain_id!=null)&&(domainID!=null)){
-																edge.setDst_router_id((long)node);
-																log.info("ISIS");
-																edge.setDomain_dst_router(dom);
-																edge.setComplete(true);
-																log.info("Adding interdomain link " + edge.getDomain_src_router() + "-->" + domainID);
-																//Only add if the source and destination domains are different
-																graph.addEdge((Inet4Address)edge.getDomain_src_router(), dom, edge);
-																//graph.addEdge(source_domain_id, dom, edge);
-															}
-														}
-														if (v instanceof Inet4Address){
-															if ((source_domain_id!=null)&&(dom!=null)){
-																log.info("ipv4");
-																edge.setDst_router_id(nodex);
-																edge.setDomain_dst_router(dom);
-																edge.setComplete(true);
-																log.info("Adding interdomain link " + edge.getDomain_src_router() + "-->" + domainID);
-																//Only add if the source and destination domains are different
-																//graph.addEdge((Inet4Address)edge.getDomain_src_router(), dom, edge);
-																graph.addEdge((Inet4Address)source_domain_id, dom, edge);
-															}
-														}
-													}
-
-												}
-												else
-													log.info("node_info and dst different");
-
-											}
-											else
-												log.info("d_router_id_addr null");
-										}
-										else
-											log.info("node.info.getIpv4AddressLocalNode null");
-									}
-									else{
-										log.info("no nofde info");
-										log.info("bbbbbbbbbbbbbbbbbbbb src router ID="+((Inet4Address) s_router_id_addr).getCanonicalHostName());
-										log.info("bbbbbbbbbbbbbbbbbbbb dst router ID="+((Inet4Address) d_router_id_addr).getCanonicalHostName());
-									}
-
-								//}
-							}
-						}
-					}
-				}
-                if (!sfound||!dfound) {
-					log.info("s or d not found");
-					if (mdTed.getTemps()!=null) {
-						if (d_router_id_addr != null) {
-							mdTed.getTemps().put(((Inet4Address) d_router_id_addr).getCanonicalHostName(), edge);
-							log.info("Link edge added to temp list" + edge.toString());
-						}
-					}
-					else{
-						Hashtable<String, InterDomainEdge> tt =new Hashtable<String, InterDomainEdge>();
-						tt.put(((Inet4Address) d_router_id_addr).getCanonicalHostName(), edge);
-						mdTed.setTemps(tt);
-						log.info("temps initialaized and link edge added to temp list" + edge.toString());
-					}
-
-				}
-
-                */
-
-
-
-
 				
 			}
 
