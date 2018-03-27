@@ -2,11 +2,12 @@ package es.tid.bgp.bgp4Peer.peer;
 
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.net.Inet4Address;
 import java.util.Enumeration;
 import java.util.Hashtable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 /**
  * Created by Ajmal on 2017-08-10.
  */
@@ -38,7 +39,7 @@ public class DomainUpdateTime {
               {
                   DomainUpdate.remove(key);
                   DomainUpdate.put(new DomainUpdateTime(localDomainID),DomainUpdatetime);
-                  log.info("Match for Domain Found " +key.toString() +"   with: " +(new DomainUpdateTime(localDomainID).toString()));
+                  log.debug("Match for Domain Found " +key.toString() +"   with: " +(new DomainUpdateTime(localDomainID).toString()));
                   indicator++;
                   break;
               }
