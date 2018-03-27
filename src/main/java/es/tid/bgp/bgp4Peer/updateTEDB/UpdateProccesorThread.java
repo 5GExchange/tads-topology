@@ -887,7 +887,7 @@ public class UpdateProccesorThread extends Thread {
 
 
 			if (interEdge.getLearntFrom() == null || interEdge.getLearntFrom().equals(learntFrom)) {
-				log.info("Valid or new InterDomain Edge LearntFrom: " + interEdge.getLearntFrom() + "  New LearntFrom:  " + learntFrom);
+				log.debug("Valid or new InterDomain Edge LearntFrom: " + interEdge.getLearntFrom() + "  New LearntFrom:  " + learntFrom);
 				DomainTEDB simpleTEDB = new SimpleTEDB();
 				te_info = createTE_Info(simpleTEDB);
 				interEdge.setTE_info(te_info);
@@ -896,13 +896,13 @@ public class UpdateProccesorThread extends Thread {
 					if(linkNLRI.getLinkIdentifiersTLV()!=null) {
 						setInterDomainEdgeUpdateTime(localDomainID, LocalNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(), remoteDomainID, RemoteNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(), System.currentTimeMillis());
 						multiTedb.addInterdomainLink(localDomainID, LocalNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(), remoteDomainID, RemoteNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(), te_info, learntFrom);//log.info("Checking new LearntFrom: " + interEdge.getLearntFrom());
-						log.info("interface ids are not null");
+						log.debug("interface ids are not null");
 					}
 					else{
 						if ((linkNLRI.getIpv4InterfaceAddressTLV()!=null)&&(linkNLRI.getIpv4NeighborAddressTLV()!=null)){
 							setInterDomainEdgeUpdateTime(localDomainID, LocalNodeIGPId, linkNLRI.getIpv4InterfaceAddressTLV().getIpv4Address(), remoteDomainID, RemoteNodeIGPId, linkNLRI.getIpv4NeighborAddressTLV().getIpv4Address(), System.currentTimeMillis());
 							multiTedb.addInterdomainLink(localDomainID, LocalNodeIGPId, linkNLRI.getIpv4InterfaceAddressTLV().getIpv4Address(), remoteDomainID, RemoteNodeIGPId, linkNLRI.getIpv4NeighborAddressTLV().getIpv4Address(), te_info, learntFrom);//log.info("Checking new LearntFrom: " + interEdge.getLearntFrom());
-							log.info(interEdge.toString()+ " learnt from "+ interEdge.getLearntFrom());
+							log.debug(interEdge.toString()+ " learnt from "+ interEdge.getLearntFrom());
 						}
 					}
 				}
