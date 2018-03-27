@@ -1508,8 +1508,10 @@ public class FileTEDBUpdater {
 						log.debug("Looking for links in domain: " + domain_id);
 					}
 					//System.out.println("VVV debug domain id:"+domain_id);
-					SimpleTEDB domainTEDB = (SimpleTEDB)TEDBs.get( domain_id);
-					graph = domainTEDB.getNetworkGraph();
+					SimpleTEDB domainTEDB =null;
+					if (domain_id!=null)
+						domainTEDB =(SimpleTEDB)TEDBs.get( domain_id);
+						graph = domainTEDB.getNetworkGraph();
 
 					int numLabels=0;
 					TE_Information tE_info_common=null;
@@ -1793,15 +1795,16 @@ public class FileTEDBUpdater {
 
 							}
 							log.debug("Preparing to add edge");
-							log.debug("NODES IN GRAPH:: "+graph.vertexSet());
+							if (graph!=null)
+								log.debug("NODES IN GRAPH:: "+graph.vertexSet());
 							try{
-								if(graph.containsEdge(s_router_id_addr, d_router_id_addr)){
+								if((graph!=null)&&(graph.containsEdge(s_router_id_addr, d_router_id_addr))){
 									log.debug("New Intradomain Edge");
 									graph.getEdge(s_router_id_addr, d_router_id_addr).setNumberFibers(graph.getEdge(s_router_id_addr, d_router_id_addr).getNumberFibers()+1);
 									log.debug("s_router_id_addr: "+s_router_id_addr.toString()+"; d_router_id_addr: "+d_router_id_addr.toString()+"; edge: "+edge);
 									log.info("New intradomain link: "+s_router_id_addr.toString()+" --> "+d_router_id_addr.toString());//+" \n "+edge);
 
-								}else{
+								}else if((graph!=null)&&(!graph.containsEdge(s_router_id_addr, d_router_id_addr))){
 									log.debug("s_router_id_addr: "+s_router_id_addr.toString()+"; d_router_id_addr: "+d_router_id_addr.toString()+"; edge: "+edge);
 									if(graph.containsVertex(d_router_id_addr)==false){
 										//interDomain edge
@@ -2107,7 +2110,8 @@ public class FileTEDBUpdater {
 					}
 
 				}
-				log.debug("Info graph edge :: "+graph.edgeSet());
+				if(graph!= null)
+					log.debug("Info graph edge :: "+graph.edgeSet());
 
 			}
 		} catch (Exception e) {
