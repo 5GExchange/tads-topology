@@ -1396,7 +1396,8 @@ public class FileTEDBUpdater {
 						NodeList router_id_node = element.getElementsByTagName("router_id");
 						Element router_id_e = (Element) router_id_node.item(0);
 						String router_id = getCharacterDataFromElement(router_id_e);
-
+						if (router_id.contains("7"))
+							router_id=router_id.replaceAll("/","");
 						log.info("Adding node " + router_id);
 						router_id_addr = EdgeUtils.getEdge(router_id);
 
@@ -1604,6 +1605,8 @@ public class FileTEDBUpdater {
 							NodeList source_router_id = source_router_el.getElementsByTagName("router_id");
 							Element source_router_id_el = (Element) source_router_id.item(0);
 							String s_r_id = getCharacterDataFromElement(source_router_id_el);
+							if (s_r_id.contains("7"))
+								s_r_id=s_r_id.replaceAll("/","");
 							s_router_id_addr= EdgeUtils.getEdge(s_r_id);
 
 							NodeList source_if_id_nl = source_router_el.getElementsByTagName("if_id");
@@ -1643,6 +1646,8 @@ public class FileTEDBUpdater {
 							NodeList dest_router_id_nl = dest_el.getElementsByTagName("router_id");
 							Element dest_router_id_el = (Element) dest_router_id_nl.item(0);
 							String d_r_id = getCharacterDataFromElement(dest_router_id_el);
+							if (d_r_id.contains("7"))
+								d_r_id=d_r_id.replaceAll("/","");
 							d_router_id_addr= EdgeUtils.getEdge(d_r_id);
 
 							//Anyadimos los SID

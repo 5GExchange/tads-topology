@@ -490,8 +490,11 @@ public class SendTopology implements Runnable {
 														} else
 															log.info("dom is null");
 													}
-													else
+													else{
 														log.info("edge dst and node ip are different");
+														log.info(((Inet4Address) edge.getDst_router_id()).getHostAddress());
+														log.info(nodeip);
+													}
 												}
 												else
 													log.info("not ipv4");

@@ -471,13 +471,13 @@ public class TopologiesDataBase implements TopologyTEDB
 			System.out.println(".............................................Reading interdomain links and intradomain topology from file");
 			teds.putAll(FileTEDBUpdater.readMultipleDomainSimpleNetworks(file, null, false, 0, Integer.MAX_VALUE, false, ID));
 			FileTEDBUpdater.addLinksformFile(mdTed, teds, file, ID, intra);
-			if (mdTed == null) {
+			/*if (mdTed == null) {
 				System.out.println("wwwwwwwwwwwwwwwwwwwwwwwwwwwww Mdted initialized from scratch");
 				mdTed.initializeFromFile(file, ID);
 			} else {
 				FileTEDBUpdater.addLinksformFile(mdTed, teds, file, ID, intra);
 				System.out.println("wjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj Mdted alredy present");
-			}
+			}*/
 		}
 	}
 
