@@ -49,7 +49,7 @@ public IntraDomainLinkUpdateTime(Hashtable<IntraDomainLinkUpdateTime, Long> intr
             {
                 intraDomainLinkUpdate.remove(key);
                 intraDomainLinkUpdate.put(new IntraDomainLinkUpdateTime(localDomainID,LocalNodeIGPId,LocalIdentifier,RemoteNodeIGPId,RemoteIdentifier), linkUpdateTime);
-                log.info("Intra-Domain Link Match Found " +key.toString() +"   with: " +(new IntraDomainLinkUpdateTime(localDomainID,LocalNodeIGPId,LocalIdentifier,RemoteNodeIGPId ,RemoteIdentifier).toString()));
+                log.debug("Intra-Domain Link Match Found " +key.toString() +"   with: " +(new IntraDomainLinkUpdateTime(localDomainID,LocalNodeIGPId,LocalIdentifier,RemoteNodeIGPId ,RemoteIdentifier).toString()));
                 indicator++;
                 break;
             }

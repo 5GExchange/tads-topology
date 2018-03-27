@@ -1,11 +1,12 @@
 package es.tid.bgp.bgp4Peer.updateTEDB;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.net.Inet4Address;
 import java.util.Enumeration;
 import java.util.Hashtable;
-import org.apache.commons.lang3.builder.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Created by Ajmal on 2017-08-08.
@@ -43,7 +44,7 @@ public NodeITinfoUpdateTime(Hashtable<NodeITinfoUpdateTime, Long> nodeITinfoUpda
            {
                nodeITinfoUpdate.remove(key);
                nodeITinfoUpdate.put(new NodeITinfoUpdateTime(localDomainID, nodeId), UpdateTime);
-               log.info("Node IT Info update Match Found " +key.toString() +"   with: " +(new NodeITinfoUpdateTime(localDomainID, nodeId).toString()));
+               log.debug("Node IT Info update Match Found " +key.toString() +"   with: " +(new NodeITinfoUpdateTime(localDomainID, nodeId).toString()));
                indicator++;
                break;
            }

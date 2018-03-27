@@ -156,7 +156,7 @@ public InterDomainLinkUpdateTime(Hashtable<InterDomainLinkUpdateTime, Long> inte
                 {
                     interDomainLinkUpdate.remove(key);
                     interDomainLinkUpdate.put(new InterDomainLinkUpdateTime(localDomainID, LocalNodeIGPId, LocalIdentifier, remoteDomainID, RemoteNodeIGPId, RemoteIdentifier), LinkUpdateTime);
-                    log.info("Inter-Domain Link Match Found " +key.toString() +"   with: " +(new InterDomainLinkUpdateTime(localDomainID, LocalNodeIGPId, LocalIdentifier, remoteDomainID, RemoteNodeIGPId, RemoteIdentifier).toString()));
+                    log.debug("Inter-Domain Link Match Found " +key.toString() +"   with: " +(new InterDomainLinkUpdateTime(localDomainID, LocalNodeIGPId, LocalIdentifier, remoteDomainID, RemoteNodeIGPId, RemoteIdentifier).toString()));
                     indicator++;
                     break;
                 }

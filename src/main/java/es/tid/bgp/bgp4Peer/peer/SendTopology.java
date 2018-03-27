@@ -2335,67 +2335,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 				linkNLRI.getRemoteNodeDescriptorsTLV().getIGPRouterID().setIpv4Address_ospf_dr_address(interfacesList.get(1));
 
 		}
-		//2.2.2. Link Local/Remote identifiers TLV
-		/*
-		Commented Andrea aftre adding the interface ip address
-		if (localRemoteIfList !=  null){
-			LinkLocalRemoteIdentifiersLinkDescriptorSubTLV linkIdentifiersTLV = new LinkLocalRemoteIdentifiersLinkDescriptorSubTLV();
-			linkIdentifiersTLV.setLinkLocalIdentifier(localRemoteIfList.get(0));
-			linkIdentifiersTLV.setLinkRemoteIdentifier(localRemoteIfList.get(1));
-			linkNLRI.setLinkIdentifiersTLV(linkIdentifiersTLV);
-		}
-		 */
 
-		//2.2.3 LinkDelay
-		/*
-		if (te_info != null){
-			if(te_info.getUndirLinkDelay() != null){
-				int undirLinkDelay = te_info.getUndirLinkDelay().getDelay();
-				UndirectionalLinkDelayDescriptorSubTLV uSTLV =new UndirectionalLinkDelayDescriptorSubTLV();
-				uSTLV.setDelay(undirLinkDelay);
-				linkNLRI.setUndirectionalLinkDelayTLV(uSTLV);
-			}
-			if(te_info.getUndirDelayVar() != null){
-				int undirDelayVar = te_info.getUndirDelayVar().getDelayVar();
-				UndirectionalDelayVariationDescriptorSubTLV uSTLV =new UndirectionalDelayVariationDescriptorSubTLV();
-				uSTLV.setDelayVar(undirDelayVar);
-				linkNLRI.setUndirectionalDelayVariationTLV(uSTLV);
-			}
-			if(te_info.getMinMaxUndirLinkDelay() != null){
-				int minDelay = te_info.getMinMaxUndirLinkDelay().getLowDelay();
-				int maxDelay = te_info.getMinMaxUndirLinkDelay().getHighDelay();
-				MinMaxUndirectionalLinkDelayDescriptorSubTLV uSTLV =new MinMaxUndirectionalLinkDelayDescriptorSubTLV();
-				uSTLV.setHighDelay(maxDelay);
-				uSTLV.setLowDelay(minDelay);
-				linkNLRI.setMinMaxUndirectionalLinkDelayTLV(uSTLV);
-			}
-			if(te_info.getUndirLinkLoss() != null){
-				int linkLoss = te_info.getUndirLinkLoss().getLinkLoss();
-				UndirectionalLinkLossDescriptorSubTLV uSTLV =new UndirectionalLinkLossDescriptorSubTLV();
-				uSTLV.setLinkLoss(linkLoss);
-				linkNLRI.setUndirectionalLinkLossTLV(uSTLV);
-			}
-			if(te_info.getUndirResidualBw() != null){
-				int resBw = te_info.getUndirResidualBw().getResidualBw();
-				UndirectionalResidualBandwidthDescriptorSubTLV uSTLV =new UndirectionalResidualBandwidthDescriptorSubTLV();
-				uSTLV.setResidualBw(resBw);
-				linkNLRI.setUndirectionalResidualBwTLV(uSTLV);
-			}
-			if(te_info.getUndirAvailableBw() != null){
-				int availableBw = te_info.getUndirAvailableBw().getAvailableBw();
-				UndirectionalAvailableBandwidthDescriptorSubTLV uSTLV =new UndirectionalAvailableBandwidthDescriptorSubTLV();
-				uSTLV.setAvailableBw(availableBw);
-				linkNLRI.setUndirectionalAvailableBwTLV(uSTLV);
-			}
-			if(te_info.getUndirUtilizedBw() != null){
-				int utilizedBw = te_info.getUndirUtilizedBw().getUtilizedBw();
-				UndirectionalUtilizedBandwidthDescriptorSubTLV uSTLV =new UndirectionalUtilizedBandwidthDescriptorSubTLV();
-				uSTLV.setUtilizedBw(utilizedBw);
-				linkNLRI.setUndirectionalUtilizedBwTLV(uSTLV);
-			}
-
-		}
-		 */
 		linkNLRI.setIdentifier(this.identifier);
 		BGP_LS_MP_Reach_Attribute ra= new BGP_LS_MP_Reach_Attribute();
 		ra.setLsNLRI(linkNLRI);

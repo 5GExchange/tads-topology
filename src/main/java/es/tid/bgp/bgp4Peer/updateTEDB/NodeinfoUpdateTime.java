@@ -41,7 +41,7 @@ public NodeinfoUpdateTime(Hashtable<NodeinfoUpdateTime, Long> nodeinfoUpdate, In
             {
                 nodeinfoUpdate.remove(key);
                 nodeinfoUpdate.put(new NodeinfoUpdateTime(localDomainID, localnodeID), NodeupdateTime);
-                log.info("Node Info Update Match Found " +key.toString() +"   with: " +(new NodeinfoUpdateTime(localDomainID,localnodeID).toString()));
+                log.debug("Node Info Update Match Found " +key.toString() +"   with: " +(new NodeinfoUpdateTime(localDomainID,localnodeID).toString()));
                 indicator++;
                 break;
             }

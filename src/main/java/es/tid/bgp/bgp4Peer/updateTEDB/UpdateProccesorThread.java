@@ -449,7 +449,7 @@ public class UpdateProccesorThread extends Thread {
 
 		Inet4Address LocalNodeIGPId = null;
 		Inet4Address RemoteNodeIGPId = null;
-		log.info(".........................Fill Link Information.........................");
+		log.info("Received a Link Information");
 
 		IGP_type = linkNLRI.getLocalNodeDescriptors().getIGPRouterID().getIGP_router_id_type();
 
@@ -472,7 +472,7 @@ public class UpdateProccesorThread extends Thread {
 		if ((IGP_type == 1)||(IGP_type == 2)) {
 			if (linkNLRI.getLocalNodeDescriptors().getIGPRouterID() != null) {
 				localISISid = linkNLRI.getLocalNodeDescriptors().getIGPRouterID().getISIS_ISO_NODE_ID();
-				log.info("Local ISIS id is "+ String.valueOf(localISISid));
+				log.debug("Local ISIS id is "+ String.valueOf(localISISid));
 			}
 		}
 		if (linkNLRI.getRemoteNodeDescriptorsTLV().getAutonomousSystemSubTLV() != null) {
@@ -492,7 +492,7 @@ public class UpdateProccesorThread extends Thread {
 		if ((IGP_type == 1)||(IGP_type == 2)) {
 			if (linkNLRI.getRemoteNodeDescriptorsTLV().getIGPRouterID() != null) {
 				remoteISISid = linkNLRI.getRemoteNodeDescriptorsTLV().getIGPRouterID().getISIS_ISO_NODE_ID();
-				log.info("Remote ISIS id is "+ String.valueOf(remoteISISid));
+				log.debug("Remote ISIS id is "+ String.valueOf(remoteISISid));
 			}
 		}
 		if (linkNLRI.getUndirectionalLinkDelayTLV() != null) {
@@ -520,12 +520,12 @@ public class UpdateProccesorThread extends Thread {
 
 		if (linkNLRI.getIpv4InterfaceAddressTLV()!=null){
 			IPv4InterfaceAddress=linkNLRI.getIpv4InterfaceAddressTLV().getIpv4Address();
-			log.info("Ipv4 Interface Address:  " + IPv4InterfaceAddress.getHostAddress());
+			log.debug("Ipv4 Interface Address:  " + IPv4InterfaceAddress.getHostAddress());
 		}
 
 		if (linkNLRI.getIpv4NeighborAddressTLV()!=null){
 			IPv4RemoteAddress=linkNLRI.getIpv4NeighborAddressTLV().getIpv4Address();
-			log.info("Ipv4 Remote Address:  " + IPv4RemoteAddress.getHostAddress());
+			log.debug("Ipv4 Remote Address:  " + IPv4RemoteAddress.getHostAddress());
 		}
 
 		if (linkNLRI.getIpv4InterfaceAddressTLV() != null) {
@@ -610,13 +610,13 @@ public class UpdateProccesorThread extends Thread {
 					intraEdge.setTE_info(te_info);
 					intraEdge.setLearntFrom(learntFrom);
 					if ((IGP_type == 1)||(IGP_type == 2)) {
-						log.info("ISIS");
+						log.debug("ISIS");
 						if ((localDomainID!=null)&& (localISISid!=0)&&(remoteISISid!=0)&&(linkNLRI.getLinkIdentifiersTLV()!=null))
 							setIntraDomainEdgeUpdateTime (localDomainID, localISISid,remoteISISid, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(),linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(),System.currentTimeMillis());
 					}
 					//if (IGP_type == 3) {
 					else{
-						log.info("OSPF");
+						log.debug("OSPF");
 						if ((localDomainID!=null)&& (LocalNodeIGPId!=null)&&(RemoteNodeIGPId!=null)&&(linkNLRI.getLinkIdentifiersTLV()!=null))
 							setIntraDomainEdgeUpdateTime (localDomainID, LocalNodeIGPId,RemoteNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(),linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(),System.currentTimeMillis());
 					}
@@ -762,11 +762,11 @@ public class UpdateProccesorThread extends Thread {
 		}
 
 		else {
-			log.info(".........received new interDomain Link..........");
+			log.info("Received a new interDomain Link");
 			if ((LocalNodeIGPId!=null)&&(RemoteNodeIGPId!=null))
-				log.info("Source: " + LocalNodeIGPId.getHostAddress() + "  Destination:  " + RemoteNodeIGPId.getHostAddress());
+				log.debug("Source: " + LocalNodeIGPId.getHostAddress() + "  Destination:  " + RemoteNodeIGPId.getHostAddress());
 			if ((localISISid!=0)&&(remoteISISid!=0))
-				log.info("Source: " + localISISid + "  Destination:  " + remoteISISid);
+				log.debug("Source: " + localISISid + "  Destination:  " + remoteISISid);
 
 			InterDomainEdge interEdge = null;
 
@@ -1071,7 +1071,7 @@ public class UpdateProccesorThread extends Thread {
 			Thread.currentThread().interrupt();
 		}
 	*/
-        log.info(".........................Fill MDPCE Information.........................");
+        log.info("Received MDPCE Information");
 		DomainTEDB domainTEDB= null;
 		PCEInfo MDPCE= new PCEInfo();
 		PCEv4ScopeTLV pceScope= new PCEv4ScopeTLV();
@@ -1105,7 +1105,7 @@ public class UpdateProccesorThread extends Thread {
 			for (AreaIDNodeDescriptorSubTLV area: domTLV.getAreaIDSubTLVs()){
 				log.debug("Area ID Received: "+area.getAREA_ID().getHostAddress());
 				if (!localDomains.contains(area.getAREA_ID())){
-					log.info("Not Present, Added");
+					log.debug("Not Present, Added");
 					sb.append("Local Area: "+area.toString());
 					localDomains.add(area.getAREA_ID());
 				}
@@ -1137,7 +1137,7 @@ public class UpdateProccesorThread extends Thread {
 		if (pceNLRI.getPCEv4Descriptors()!=null){
 			PCEv4DescriptorsTLV pceTLV= pceNLRI.getPCEv4Descriptors();
 			PCEip = pceTLV.getPCEv4Address();
-			log.info("   PCE IP  :   "+PCEip);
+			log.debug("   PCE IP  :   "+PCEip);
 			MDPCE.setPCEipv4(PCEip);
 		}
 
@@ -1158,7 +1158,7 @@ public class UpdateProccesorThread extends Thread {
 					simpleTEDB.setNeighDomains(NeighDomains);
 					simpleTEDB.setDomainID(domain);
 					simpleTEDB.setPCEScope(pceScope);
-					log.info("Received PCE info for domain/AS "+sb.toString()+" from peer "+learntFrom+": "+simpleTEDB.getMDPCE().getPCEipv4().getHostAddress());
+					log.debug("Received PCE info for domain/AS "+sb.toString()+" from peer "+learntFrom+": "+simpleTEDB.getMDPCE().getPCEipv4().getHostAddress());
 					setMDPCEupdateTime (localDomains, PCEip, learntFrom);
 
 				}
@@ -1178,7 +1178,7 @@ public class UpdateProccesorThread extends Thread {
 					simpleTEDB.setNeighDomains(NeighDomains);
 					simpleTEDB.setDomainID(domain);
 					simpleTEDB.setPCEScope(pceScope);
-					log.info("Received PCE info for domain/AS "+sb.toString()+" from peer "+learntFrom+": "+simpleTEDB.getMDPCE().getPCEipv4().getHostAddress());
+					log.debug("Received PCE info for domain/AS "+sb.toString()+" from peer "+learntFrom+": "+simpleTEDB.getMDPCE().getPCEipv4().getHostAddress());
 					setMDPCEupdateTime (localDomains, PCEip, learntFrom);
 				}
 			}
@@ -1198,7 +1198,7 @@ public class UpdateProccesorThread extends Thread {
 			Thread.currentThread().interrupt();
 		}
 	*/
-        log.info(".........................Fill Node IT Information.........................");
+        log.info("Received Node IT Information");
 		IT_Resources itResources = null;
 		DomainTEDB domainTEDB= null;
 		domainTEDB=(DomainTEDB)intraTEDBs.get(itNodeNLRI.getNodeId());
@@ -1207,14 +1207,14 @@ public class UpdateProccesorThread extends Thread {
 			simpleTEDB = (SimpleTEDB) domainTEDB;
 			if(simpleTEDB.getItResources()!=null)
 				itResources= simpleTEDB.getItResources();
-			log.info("IT Resource:  " +simpleTEDB.getItResources());
+			log.debug("IT Resource:  " +simpleTEDB.getItResources());
 
 		}else if (domainTEDB==null){
 			simpleTEDB = new SimpleTEDB();
 			simpleTEDB.createGraph();
 			try {
 				simpleTEDB.setDomainID((Inet4Address) InetAddress.getByName(itNodeNLRI.getNodeId()));
-				log.info("Domain ID set to :  " +simpleTEDB.getDomainID());
+				log.debug("Domain ID set to :  " +simpleTEDB.getDomainID());
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
 			}
@@ -1226,13 +1226,13 @@ public class UpdateProccesorThread extends Thread {
 			return;
 		}
 
-		log.info("Received IT info for Domain "+itNodeNLRI.getNodeId()+" From Peer "+learntFrom);
+		log.debug("Received IT info for Domain "+itNodeNLRI.getNodeId()+" From Peer "+learntFrom);
 
 		if(simpleTEDB.getItResources()==null)
 		 itResources= new IT_Resources();
 
 			if(itResources.getLearntFrom()==null || itResources.getLearntFrom().equals(learntFrom)) {
-			log.info("Existing IT Resource LearntFrom:  " + itResources.getLearntFrom() + "  New LearntFrom:  " + learntFrom);
+			log.debug("Existing IT Resource LearntFrom:  " + itResources.getLearntFrom() + "  New LearntFrom:  " + learntFrom);
 			itResources.setControllerIT(itNodeNLRI.getControllerIT());
 			itResources.setCpu(itNodeNLRI.getCpu());
 			itResources.setMem(itNodeNLRI.getMem());
@@ -1255,7 +1255,7 @@ public class UpdateProccesorThread extends Thread {
 		Node_Info node_info = null;
 		Hashtable<Object, Node_Info> NodeTable;
 
-		log.info(".........................Fill Node Information.........................");
+		log.info("Received Node Information");
 
 		if (nodeNLRI.getLocalNodeDescriptors().getAutonomousSystemSubTLV()!=null){
 			as_number=nodeNLRI.getLocalNodeDescriptors().getAutonomousSystemSubTLV().getAS_ID();
@@ -1388,7 +1388,7 @@ public class UpdateProccesorThread extends Thread {
 
 				}
 				log.debug("Node Table:" + NodeTable.toString());
-				log.info("Node Information Table Updated....");
+				log.debug("Node Information Table Updated....");
 
 
 				if (IGP_type==1)
@@ -1495,7 +1495,7 @@ public class UpdateProccesorThread extends Thread {
 
 				}
 				log.debug("Node Table:" + NodeTable.toString());
-				log.info("Node Information Table Updated....");
+				log.debug("Node Information Table Updated....");
 
 
 				setNodeInfoUpdateTime (as_number, IGPIDint, learntFrom, System.currentTimeMillis());
