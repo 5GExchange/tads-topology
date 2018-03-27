@@ -2545,11 +2545,16 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			IPv4InterfaceAddressLinkDescriptorsSubTLV ipv4InterfaceAddressTLV = new IPv4InterfaceAddressLinkDescriptorsSubTLV();
 			ipv4InterfaceAddressTLV.setIpv4Address(interfacesList.get(0));
 			linkNLRI.setIpv4InterfaceAddressTLV(ipv4InterfaceAddressTLV);
+			if (linkNLRI.getLocalNodeDescriptors()!=null)
+				linkNLRI.getLocalNodeDescriptors().getIGPRouterID().setIpv4Address_ospf_dr_address(interfacesList.get(0));
 			log.info("222Added interface ip link descriptior->"+ipv4InterfaceAddressTLV.toString());
 			IPv4NeighborAddressLinkDescriptorSubTLV ipv4NeighborAddressTLV = new IPv4NeighborAddressLinkDescriptorSubTLV();
 			ipv4NeighborAddressTLV.setIpv4Address(interfacesList.get(1));
 			linkNLRI.setIpv4NeighborAddressTLV(ipv4NeighborAddressTLV);
 			log.info("22222Added remote ip link descriptior->"+ipv4NeighborAddressTLV.toString());
+			if (linkNLRI.getRemoteNodeDescriptorsTLV()!=null)
+				linkNLRI.getRemoteNodeDescriptorsTLV().getIGPRouterID().setIpv4Address_ospf_dr_address(interfacesList.get(1));
+
 		}
 		//2.2.2. Link Local/Remote identifiers TLV
 		/*

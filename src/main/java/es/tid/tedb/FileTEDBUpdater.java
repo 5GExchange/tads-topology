@@ -1430,13 +1430,10 @@ public class FileTEDBUpdater {
 						log.info("Node name: " + name);
 						Hashtable<Object, Node_Info> NodeTable;
 						NodeTable =tedb.getNodeTable();
-						if(tedb.getNodeTable().containsKey((Inet4Address)router_id_addr))
-
-						{
-							nodeI= tedb.getNodeTable().get((Inet4Address)router_id_addr);
+						if(tedb.getNodeTable().containsKey(router_id_addr)){
+							nodeI= tedb.getNodeTable().get(router_id_addr);
 						}
 						else {
-
 							nodeI = new Node_Info();
 						}
 						if (name!=null)
@@ -1449,6 +1446,9 @@ public class FileTEDBUpdater {
 							}
 						nodeI.setIpv4Address((Inet4Address)router_id_addr);
 						nodeI.setIpv4AddressLocalNode((Inet4Address)router_id_addr);
+						//nodeI.setIpv4Address();
+						//nodeI.setIpv4AddressLocalNode();
+
 						nodeI.setLearntFrom(learntFrom);
 
 						if (ip!=null) {
@@ -1461,6 +1461,8 @@ public class FileTEDBUpdater {
 								//NodeTable.remove((Inet4Address)router_id_addr);
 								NodeTable.put((Inet4Address)router_id_addr, nodeI);
 							}
+							else
+								log.info("node already present");
 						}
 						else
 							NodeTable.put((Inet4Address)router_id_addr, nodeI);
