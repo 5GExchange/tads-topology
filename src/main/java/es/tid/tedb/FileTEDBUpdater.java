@@ -1457,15 +1457,18 @@ public class FileTEDBUpdater {
 						if (ip!=null) {
 							nodeI.setAs_number(ip);
 						}
-						log.info ("created from file this node info       Andrea "+nodeI.toString());
+						log.info ("created from file this node info Andrea "+nodeI.toString());
 
 						if (NodeTable != null) {
 							if (!NodeTable.containsKey((Inet4Address)router_id_addr)) {
 								//NodeTable.remove((Inet4Address)router_id_addr);
 								NodeTable.put((Inet4Address)router_id_addr, nodeI);
 							}
-							else
+							else{
 								log.info("node already present");
+								NodeTable.remove((Inet4Address)router_id_addr);
+								NodeTable.put((Inet4Address)router_id_addr, nodeI);
+							}
 						}
 						else
 							NodeTable.put((Inet4Address)router_id_addr, nodeI);

@@ -221,7 +221,7 @@ public class SendTopology implements Runnable {
 			}
 			Node_Info node_info = NodeTable.get(node);
 			if (node_info != null) {
-				log.debug("Sending node: (" + node + ")");
+				log.info("Sending node: (" + node + ") with node_info "+ NodeTable.get(node).toString());
 				//Mandamos NodeNLRI
 				BGP4Update update = createMsgUpdateNodeNLRI(node_info,  NodeTable.get(node).getLearntFrom());
 				sendMessage(update);
@@ -1145,6 +1145,7 @@ public class SendTopology implements Runnable {
 			if (node_info.getName() != null) {
 				NodeNameNodeAttribTLV nna = new NodeNameNodeAttribTLV();
 				nna.setName(new String(node_info.getName()));
+				log.info("adding node name");
 				linkStateAttribute.setNodeNameTLV(nna);
 				linkStateNeeded=true;
 			}
@@ -1170,6 +1171,7 @@ public class SendTopology implements Runnable {
 				Inet4Address ip = node_info.getIpv4Address();
 				IPv4RouterIDLocalNodeNodeAttribTLV ipv4Id = new IPv4RouterIDLocalNodeNodeAttribTLV();
 				ipv4Id.setIpv4Address(ip);
+				log.info("adding router id");
 				linkStateAttribute.setIPv4RouterIDLocalNodeNATLV(ipv4Id);
 				linkStateNeeded=true;
 			}
@@ -1222,6 +1224,7 @@ public class SendTopology implements Runnable {
 			}
 			pathAttributes.add(ra);
 			update.setLearntFrom(node_info.getLearntFrom());
+			log.info("Node update: "+update.toString());
 			return update;
 		} catch (Exception e) {
 			e.printStackTrace();
