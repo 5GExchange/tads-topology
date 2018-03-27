@@ -64,13 +64,13 @@
    			<undir_available_bandwidth>500</undir_available_bandwidth>
    			<undir_utilized_bandwidth>436</undir_utilized_bandwidth>
 			<unreserved_bandwidth priority="7">12500</unreserved_bandwidth>
-			<unreserved_bandwidth priority="6">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="6">4</unreserved_bandwidth>
 			<unreserved_bandwidth priority="5">12500</unreserved_bandwidth>
 			<unreserved_bandwidth priority="4">12500</unreserved_bandwidth>
 			<unreserved_bandwidth priority="3">12500</unreserved_bandwidth>
-			<unreserved_bandwidth priority="2">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="2">4</unreserved_bandwidth>
 			<unreserved_bandwidth priority="1">12500</unreserved_bandwidth>
-			<unreserved_bandwidth priority="0">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="0">4</unreserved_bandwidth>
 		</edge>
 		<edge>
 			<source>
@@ -96,12 +96,12 @@
    			<undir_available_bandwidth>500</undir_available_bandwidth>
    			<undir_utilized_bandwidth>436</undir_utilized_bandwidth>
 			<unreserved_bandwidth priority="7">12500</unreserved_bandwidth>
-			<unreserved_bandwidth priority="6">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="6">5</unreserved_bandwidth>
 			<unreserved_bandwidth priority="5">12500</unreserved_bandwidth>
 			<unreserved_bandwidth priority="4">12500</unreserved_bandwidth>
-			<unreserved_bandwidth priority="3">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="3">5</unreserved_bandwidth>
 			<unreserved_bandwidth priority="2">12500</unreserved_bandwidth>
-			<unreserved_bandwidth priority="1">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="1">5</unreserved_bandwidth>
 			<unreserved_bandwidth priority="0">12500</unreserved_bandwidth>
 		</edge>
 		<!--edge>
@@ -353,12 +353,12 @@
    			<undir_utilized_bandwidth>436</undir_utilized_bandwidth>
 			<unreserved_bandwidth priority="7">12500</unreserved_bandwidth>
 			<unreserved_bandwidth priority="6">12500</unreserved_bandwidth>
-			<unreserved_bandwidth priority="5">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="5">6</unreserved_bandwidth>
 			<unreserved_bandwidth priority="4">12500</unreserved_bandwidth>
 			<unreserved_bandwidth priority="3">12500</unreserved_bandwidth>
-			<unreserved_bandwidth priority="2">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="2">6</unreserved_bandwidth>
 			<unreserved_bandwidth priority="1">12500</unreserved_bandwidth>
-			<unreserved_bandwidth priority="0">12500</unreserved_bandwidth>
+			<unreserved_bandwidth priority="0">6</unreserved_bandwidth>
 		</edge>
 
 	</domain>
