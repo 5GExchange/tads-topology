@@ -5,18 +5,18 @@
 		<layer type="transport" ></layer>
 
 		<domain_id>0.0.253.232</domain_id>
-		<reachability_entry>
+		<!--reachability_entry>
 			<ipv4_address>172.16.103.0</ipv4_address>
 			<prefix>24</prefix>
-		</reachability_entry>
+		</reachability_entry-->
 
 		<node>
 			<router_id>172.16.103.101</router_id>
-			<name>router1</name>
+			<name>router1_000</name>
 		</node>
 		<node>
 			<router_id>172.16.103.102</router_id>
-			<name>router2</name>
+			<name>router2_000</name>
 		</node>
 		<!--edgeCommon>
 			<maximum_bandwidth>1000</maximum_bandwidth>

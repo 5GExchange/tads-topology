@@ -1142,15 +1142,25 @@ public class SendTopology implements Runnable {
 				linkStateNeeded = true;
 			}
 
+
 			if (node_info.getName() != null) {
+				log.info("Sending node name: "+new String (node_info.getName()));
+				NodeNameNodeAttribTLV nna = new NodeNameNodeAttribTLV();
+				nna.setNameb(node_info.getName());
+				linkStateAttribute.setNodeNameTLV(nna);
+				linkStateNeeded=true;
+				log.info("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww "+linkStateAttribute.getNodeNameTLV().toString());
+			}
+
+			/*if (node_info.getName() != null) {
 				log.info("the name is "+new String(node_info.getName()));
 				NodeNameNodeAttribTLV nna = new NodeNameNodeAttribTLV();
-				nna.setName(new String(node_info.getName()));
+				//nna.setName(new String(node_info.getName()));
 				log.info("adding node name");
 				linkStateAttribute.setNodeNameTLV(nna);
 				linkStateNeeded=true;
-				//log.info("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww "+linkStateAttribute.getNodeNameTLV().toString());
-			}
+				log.info("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww "+linkStateAttribute.getNodeNameTLV().toString());
+			}*/
 
 			
 			if (node_info.getArea_id()!=null){
@@ -1169,6 +1179,8 @@ public class SendTopology implements Runnable {
 				linkStateAttribute.setIPv4RouterIDLocalNodeNATLV(ipv4Id);
 				linkStateNeeded=true;
 			}
+			else
+				log.info("area is null");
 			if (node_info.getIpv4Address()!=null){
 				Inet4Address ip = node_info.getIpv4Address();
 				IPv4RouterIDLocalNodeNodeAttribTLV ipv4Id = new IPv4RouterIDLocalNodeNodeAttribTLV();
