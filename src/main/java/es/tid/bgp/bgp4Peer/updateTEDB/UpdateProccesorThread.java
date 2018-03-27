@@ -896,12 +896,13 @@ public class UpdateProccesorThread extends Thread {
 					if(linkNLRI.getLinkIdentifiersTLV()!=null) {
 						setInterDomainEdgeUpdateTime(localDomainID, LocalNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(), remoteDomainID, RemoteNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(), System.currentTimeMillis());
 						multiTedb.addInterdomainLink(localDomainID, LocalNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(), remoteDomainID, RemoteNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(), te_info);//log.info("Checking new LearntFrom: " + interEdge.getLearntFrom());
-
-					}else{
+						log.info("interface ids are not null");
+					}
+					else{
 						if ((linkNLRI.getIpv4InterfaceAddressTLV()!=null)&&(linkNLRI.getIpv4NeighborAddressTLV()!=null)){
 							setInterDomainEdgeUpdateTime(localDomainID, LocalNodeIGPId, linkNLRI.getIpv4InterfaceAddressTLV().getIpv4Address(), remoteDomainID, RemoteNodeIGPId, linkNLRI.getIpv4NeighborAddressTLV().getIpv4Address(), System.currentTimeMillis());
 							multiTedb.addInterdomainLink(localDomainID, LocalNodeIGPId, linkNLRI.getIpv4InterfaceAddressTLV().getIpv4Address(), remoteDomainID, RemoteNodeIGPId, linkNLRI.getIpv4NeighborAddressTLV().getIpv4Address(), te_info);//log.info("Checking new LearntFrom: " + interEdge.getLearntFrom());
-
+							log.info(interEdge.toString()+ " learnt from "+ interEdge.getLearntFrom());
 						}
 					}
 				}
