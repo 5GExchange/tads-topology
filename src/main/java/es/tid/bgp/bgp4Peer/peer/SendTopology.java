@@ -809,11 +809,12 @@ public class SendTopology implements Runnable {
 						dst = (Inet4Address) edge.getDst_router_id();
 					if (edge.getDst_router_id() instanceof Long)
 						dst = (long) edge.getDst_router_id();
-					if ((source != null) && (dst != null))
-						log.info("Sending interdomain  Edge: (" + source.toString() +" " + dst.toString() + ")");
-					addressList = new ArrayList<Object>();
-					addressList.add(0, source);
-					addressList.add(1, dst);
+					if ((source != null) && (dst != null)){
+						log.info("Sending interdomain  Edge: (" + (source.toString()).replaceAll("/","") +" " + (dst.toString()).replaceAll("/","") + ")");
+						addressList = new ArrayList<Object>();
+						addressList.add(0, source);
+						addressList.add(1, dst);
+					}
 					//Link Local Remote Identifiers
 					ArrayList<Long> localRemoteIfList = null;
 					localRemoteIfList = new ArrayList<Long>();
@@ -2463,11 +2464,11 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		//2.1.1. IPv4
 		IGPRouterIDNodeDescriptorSubTLV igpRouterIDLNSubTLV = new IGPRouterIDNodeDescriptorSubTLV();
 		if (addressList.get(0) instanceof Inet4Address){
-			igpRouterIDLNSubTLV.setIpv4AddressOSPF((Inet4Address) addressList.get(0));
 			igpRouterIDLNSubTLV.setIGP_router_id_type(IGPRouterIDNodeDescriptorSubTLV.IGP_ROUTER_ID_TYPE_OSPF_NON_PSEUDO);
+			igpRouterIDLNSubTLV.setIpv4AddressOSPF((Inet4Address) addressList.get(0));
 			localNodeDescriptors.setIGPRouterID(igpRouterIDLNSubTLV);
 			linkNLRI.setProtocolID(ProtocolIDCodes.OSPF_Protocol_ID);
-			log.info("src node is ipv4-> protocol set to OSPF");
+			log.info("src node is ipv4-> protocol set to OSPF: "+((Inet4Address) addressList.get(0)).getHostAddress());
 		}
 		if (addressList.get(0) instanceof Long) {
 			igpRouterIDLNSubTLV.setISIS_ISO_NODE_ID((long) addressList.get(0));
@@ -2490,7 +2491,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			igpRouterIDDNSubTLV.setIpv4AddressOSPF((Inet4Address) addressList.get(1));
 			igpRouterIDDNSubTLV.setIGP_router_id_type(IGPRouterIDNodeDescriptorSubTLV.IGP_ROUTER_ID_TYPE_OSPF_NON_PSEUDO);
 			remoteNodeDescriptors.setIGPRouterID(igpRouterIDDNSubTLV);
-			log.info("dst node is ipv4-> protocol set to OSPF");
+			log.info("dst node is ipv4-> protocol set to OSPF: "+((Inet4Address) addressList.get(1)).getHostAddress());
 		}
 		if (addressList.get(1) instanceof Long) {
 			igpRouterIDDNSubTLV.setISIS_ISO_NODE_ID((long) addressList.get(1));
