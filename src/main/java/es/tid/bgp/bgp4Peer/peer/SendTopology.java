@@ -1148,6 +1148,7 @@ public class SendTopology implements Runnable {
 				log.info("adding node name");
 				linkStateAttribute.setNodeNameTLV(nna);
 				linkStateNeeded=true;
+				log.info("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"+linkStateAttribute.getNodeNameTLV().toString());
 			}
 
 			
@@ -1174,6 +1175,7 @@ public class SendTopology implements Runnable {
 				log.info("adding router id");
 				linkStateAttribute.setIPv4RouterIDLocalNodeNATLV(ipv4Id);
 				linkStateNeeded=true;
+				log.info("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"+linkStateAttribute.getNodeNameTLV().toString());
 			}
 
 
