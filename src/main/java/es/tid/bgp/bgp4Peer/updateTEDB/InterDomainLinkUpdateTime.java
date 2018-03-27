@@ -61,7 +61,43 @@ public InterDomainLinkUpdateTime(Hashtable<InterDomainLinkUpdateTime, Long> inte
         }
 }
 
-public InterDomainLinkUpdateTime(Hashtable<InterDomainLinkUpdateTime, Long> interDomainLinkUpdate, Inet4Address localDomainID, long LocalNodeIGPId, Long LocalIdentifier, Inet4Address remoteDomainID, long RemoteNodeIGPId, Long RemoteIdentifier, Long LinkUpdateTime){
+    public InterDomainLinkUpdateTime(Hashtable<InterDomainLinkUpdateTime, Long> interDomainLinkUpdate, Inet4Address localDomainID, Inet4Address LocalNodeIGPId, Inet4Address LocalIdentifier, Inet4Address remoteDomainID, Inet4Address RemoteNodeIGPId, Inet4Address RemoteIdentifier, Long LinkUpdateTime){
+
+        this.localDomainID=localDomainID;
+        this.remoteDomainID=remoteDomainID;
+        this.LocalNodeIGPId=LocalNodeIGPId;
+        this.RemoteNodeIGPId=RemoteNodeIGPId;
+        this.localIf= LocalIdentifier;
+        this.remoteIf=RemoteIdentifier;
+        this.LinkUpdateTime= LinkUpdateTime;
+        log= LoggerFactory.getLogger("BGP4Peer");
+
+        if(interDomainLinkUpdate.size()==0)
+            interDomainLinkUpdate.put(new InterDomainLinkUpdateTime(localDomainID, LocalNodeIGPId, LocalIdentifier, remoteDomainID, RemoteNodeIGPId, RemoteIdentifier), LinkUpdateTime);
+        else
+        {
+            int indicator=0;
+            InterDomainLinkUpdateTime key;
+            Enumeration link_ID =interDomainLinkUpdate.keys();
+            while(link_ID.hasMoreElements()) {
+                key = (InterDomainLinkUpdateTime) link_ID.nextElement();
+                if(key.equals(new InterDomainLinkUpdateTime(localDomainID, LocalNodeIGPId, LocalIdentifier, remoteDomainID, RemoteNodeIGPId, RemoteIdentifier)))
+                {
+                    interDomainLinkUpdate.remove(key);
+                    interDomainLinkUpdate.put(new InterDomainLinkUpdateTime(localDomainID, LocalNodeIGPId, LocalIdentifier, remoteDomainID, RemoteNodeIGPId, RemoteIdentifier), LinkUpdateTime);
+                    log.info("Inter-Domain Link Match Found " +key.toString() +"   with: " +(new InterDomainLinkUpdateTime(localDomainID, LocalNodeIGPId, LocalIdentifier, remoteDomainID, RemoteNodeIGPId, RemoteIdentifier).toString()));
+                    indicator++;
+                    break;
+                }
+            }
+            if(indicator==0)
+                interDomainLinkUpdate.put(new InterDomainLinkUpdateTime(localDomainID, LocalNodeIGPId, LocalIdentifier, remoteDomainID, RemoteNodeIGPId, RemoteIdentifier), LinkUpdateTime);
+        }
+    }
+
+
+
+    public InterDomainLinkUpdateTime(Hashtable<InterDomainLinkUpdateTime, Long> interDomainLinkUpdate, Inet4Address localDomainID, long LocalNodeIGPId, Long LocalIdentifier, Inet4Address remoteDomainID, long RemoteNodeIGPId, Long RemoteIdentifier, Long LinkUpdateTime){
 
         this.localDomainID=localDomainID;
         this.remoteDomainID=remoteDomainID;
@@ -140,6 +176,17 @@ public InterDomainLinkUpdateTime(Hashtable<InterDomainLinkUpdateTime, Long> inte
     this.LocalIdentifier=LocalIdentifier;
     this.RemoteIdentifier=RemoteIdentifier;
 }
+
+
+    public InterDomainLinkUpdateTime(Inet4Address localDomainID, Inet4Address LocalNodeIGPId, Inet4Address LocalIdentifier, Inet4Address remoteDomainID, Inet4Address RemoteNodeIGPId, Inet4Address RemoteIdentifier)
+    {
+        this.localDomainID=localDomainID;
+        this.remoteDomainID=remoteDomainID;
+        this.LocalNodeIGPId=LocalNodeIGPId;
+        this.RemoteNodeIGPId=RemoteNodeIGPId;
+        this.localIf=LocalIdentifier;
+        this.remoteIf=RemoteIdentifier;
+    }
 
 public InterDomainLinkUpdateTime(Inet4Address localDomainID, long LocalNodeIGPId, Long LocalIdentifier, Inet4Address remoteDomainID, long RemoteNodeIGPId, Long RemoteIdentifier) {
         this.localDomainID=localDomainID;

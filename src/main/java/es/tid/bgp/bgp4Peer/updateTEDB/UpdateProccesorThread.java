@@ -764,7 +764,7 @@ public class UpdateProccesorThread extends Thread {
 		else {
 			log.info(".........received new interDomain Link..........");
 			if ((LocalNodeIGPId!=null)&&(RemoteNodeIGPId!=null))
-				log.info("Source: " + LocalNodeIGPId + "  Destination:  " + RemoteNodeIGPId);
+				log.info("Source: " + LocalNodeIGPId.getHostAddress() + "  Destination:  " + RemoteNodeIGPId.getHostAddress());
 			if ((localISISid!=0)&&(remoteISISid!=0))
 				log.info("Source: " + localISISid + "  Destination:  " + remoteISISid);
 
@@ -893,8 +893,17 @@ public class UpdateProccesorThread extends Thread {
 				interEdge.setTE_info(te_info);
 				interEdge.setLearntFrom(learntFrom);
 				if ((LocalNodeIGPId!=null)&&(RemoteNodeIGPId!=null)) {
-					setInterDomainEdgeUpdateTime(localDomainID, LocalNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(), remoteDomainID, RemoteNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(), System.currentTimeMillis());
-					multiTedb.addInterdomainLink(localDomainID, LocalNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(), remoteDomainID, RemoteNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(), te_info);//log.info("Checking new LearntFrom: " + interEdge.getLearntFrom());
+					if(linkNLRI.getLinkIdentifiersTLV()!=null) {
+						setInterDomainEdgeUpdateTime(localDomainID, LocalNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(), remoteDomainID, RemoteNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(), System.currentTimeMillis());
+						multiTedb.addInterdomainLink(localDomainID, LocalNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(), remoteDomainID, RemoteNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(), te_info);//log.info("Checking new LearntFrom: " + interEdge.getLearntFrom());
+
+					}else{
+						if ((linkNLRI.getIpv4InterfaceAddressTLV()!=null)&&(linkNLRI.getIpv4NeighborAddressTLV()!=null)){
+							setInterDomainEdgeUpdateTime(localDomainID, LocalNodeIGPId, linkNLRI.getIpv4InterfaceAddressTLV().getIpv4Address(), remoteDomainID, RemoteNodeIGPId, linkNLRI.getIpv4NeighborAddressTLV().getIpv4Address(), System.currentTimeMillis());
+							multiTedb.addInterdomainLink(localDomainID, LocalNodeIGPId, linkNLRI.getIpv4InterfaceAddressTLV().getIpv4Address(), remoteDomainID, RemoteNodeIGPId, linkNLRI.getIpv4NeighborAddressTLV().getIpv4Address(), te_info);//log.info("Checking new LearntFrom: " + interEdge.getLearntFrom());
+
+						}
+					}
 				}
 				else{
 					if ((localISISid!=0)&&(remoteISISid!=0)) {
@@ -1542,6 +1551,17 @@ public class UpdateProccesorThread extends Thread {
 		//log.info("..................Added InterDomain Link : " +interDom_linkUpdate.toString()   + "   Time of Update:  " + LinkUpdateTime);
 		
 	}
+
+	public void setInterDomainEdgeUpdateTime(Inet4Address localDomainID,Inet4Address LocalNodeIGPId, Inet4Address LinkLocalIdentifier, Inet4Address remoteDomainID, Inet4Address RemoteNodeIGPId, Inet4Address LinkRemoteIdentifier, long LinkUpdateTime) {
+
+		DomainUpdateTime domain_update = new DomainUpdateTime(DomainUpdate, localDomainID, LinkUpdateTime);
+		//log.info("Domain Id : " +String.valueOf(localDomainID) +"DomainTEDS Size:  " +DomainUpdate.size()  + "   Time of Update:  " + LinkUpdateTime);
+		InterDomainLinkUpdateTime interDom_linkUpdate= new InterDomainLinkUpdateTime(interDomainLinkUpdate, localDomainID, LocalNodeIGPId,LinkLocalIdentifier,remoteDomainID,RemoteNodeIGPId,LinkRemoteIdentifier, LinkUpdateTime);
+		//log.info("..................Added InterDomain Link : " +interDom_linkUpdate.toString()   + "   Time of Update:  " + LinkUpdateTime);
+
+	}
+
+
 	public void setInterDomainEdgeUpdateTime(Inet4Address localDomainID,long LocalNodeIGPId, Long LinkLocalIdentifier, Inet4Address remoteDomainID, long RemoteNodeIGPId, Long LinkRemoteIdentifier, long LinkUpdateTime) {
 
 		DomainUpdateTime domain_update = new DomainUpdateTime(DomainUpdate, localDomainID, LinkUpdateTime);
