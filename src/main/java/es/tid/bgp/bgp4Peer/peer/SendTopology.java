@@ -2467,12 +2467,14 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 			igpRouterIDLNSubTLV.setIGP_router_id_type(IGPRouterIDNodeDescriptorSubTLV.IGP_ROUTER_ID_TYPE_OSPF_NON_PSEUDO);
 			localNodeDescriptors.setIGPRouterID(igpRouterIDLNSubTLV);
 			linkNLRI.setProtocolID(ProtocolIDCodes.OSPF_Protocol_ID);
+			log.info("src node is ipv4-> protocol set to OSPF");
 		}
 		if (addressList.get(0) instanceof Long) {
 			igpRouterIDLNSubTLV.setISIS_ISO_NODE_ID((long) addressList.get(0));
 			igpRouterIDLNSubTLV.setIGP_router_id_type(IGPRouterIDNodeDescriptorSubTLV.IGP_ROUTER_ID_TYPE_IS_IS_NON_PSEUDO);
 			localNodeDescriptors.setIGPRouterID(igpRouterIDLNSubTLV);
 			linkNLRI.setProtocolID(ProtocolIDCodes.IS_IS_Level2_Protocol_ID);
+			log.info("src node is long-> protocol set to ISIS");
 		}
 		//Complete Dummy TLVs
 		//BGPLSIdentifierNodeDescriptorSubTLV bGPLSIDSubTLV =new BGPLSIdentifierNodeDescriptorSubTLV();
@@ -2484,15 +2486,18 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		// localNodeDescriptors.setAreaID(areaID);
 
 		IGPRouterIDNodeDescriptorSubTLV igpRouterIDDNSubTLV = new IGPRouterIDNodeDescriptorSubTLV();
-		if (addressList.get(1) instanceof Inet4Address)
+		if (addressList.get(1) instanceof Inet4Address) {
 			igpRouterIDDNSubTLV.setIpv4AddressOSPF((Inet4Address) addressList.get(1));
 			igpRouterIDDNSubTLV.setIGP_router_id_type(IGPRouterIDNodeDescriptorSubTLV.IGP_ROUTER_ID_TYPE_OSPF_NON_PSEUDO);
 			remoteNodeDescriptors.setIGPRouterID(igpRouterIDDNSubTLV);
-		if (addressList.get(1) instanceof Long)
+			log.info("dst node is ipv4-> protocol set to OSPF");
+		}
+		if (addressList.get(1) instanceof Long) {
 			igpRouterIDDNSubTLV.setISIS_ISO_NODE_ID((long) addressList.get(1));
 			igpRouterIDDNSubTLV.setIGP_router_id_type(IGPRouterIDNodeDescriptorSubTLV.IGP_ROUTER_ID_TYPE_IS_IS_NON_PSEUDO);
 			remoteNodeDescriptors.setIGPRouterID(igpRouterIDDNSubTLV);
-		//2.1.2. AS
+			log.info("dst node is long-> protocol set to ISIS");
+		}//2.1.2. AS
 		if (domainList != null){
 			AutonomousSystemNodeDescriptorSubTLV as_local = new AutonomousSystemNodeDescriptorSubTLV();
 			try {
@@ -2622,7 +2627,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		else
 			log.info("local or null");
 		pathAttributes.add(ra);
-
+		log.info(update.toString());
 		return update;
 	}
 
