@@ -100,6 +100,132 @@ public class MDTEDB implements MultiDomainTEDB {
 		return networkGraph;
 	}
 	
+	public synchronized void addInterdomainLink( Object localDomainID, Object localRouterASBR, long localRouterASBRIf, Object remoteDomainID, Object remoteRouterASBR, long remoteRouterASBRIf, TE_Information te_info, String learnt){
+
+		if (!networkDomainGraph.containsVertex(localDomainID)){
+			networkDomainGraph.addVertex(localDomainID);
+			log.debug("Vertex (domain) "+localDomainID+" added");
+		}
+		if (!networkDomainGraph.containsVertex(remoteDomainID)){
+			networkDomainGraph.addVertex(remoteDomainID);
+			log.debug("Vertex (domain) "+remoteDomainID+" added");
+		}
+		log.debug("Looking to add "+localRouterASBR+":"+localRouterASBRIf+" ("+localDomainID+") -->"+remoteRouterASBR+":"+remoteRouterASBRIf+" ("+remoteDomainID+")");
+		Set<InterDomainEdge> edgeset= networkDomainGraph.edgesOf(localDomainID);
+		Iterator <InterDomainEdge> iterador=edgeset.iterator();
+		boolean edgeFound=false;
+		InterDomainEdge interDomainEdgeFound=null;
+		if (edgeset.size() == 0)
+			log.debug("Edge set size = 0");
+		while (iterador.hasNext()){
+			InterDomainEdge interDomainEdge=iterador.next();
+			log.debug("existing edge: "+interDomainEdge.toString());
+			if (interDomainEdge.getSrc_router_id().equals(localRouterASBR)){
+				log.debug("Local router is the same!!!");
+				if (interDomainEdge.getDst_router_id().equals(remoteRouterASBR)){
+					log.debug("Destination router is the same!!!");
+					edgeFound=true;
+					interDomainEdgeFound=interDomainEdge;
+				}
+				else {
+					log.debug("Destination router is NOT the same!!!");
+				}
+			}else {
+				log.debug("Local router is NOT the same!!!");
+			}
+		}
+
+		if (edgeFound==false) {
+			InterDomainEdge newInterDomainEdge =new InterDomainEdge();
+			newInterDomainEdge.setSrc_router_id(localRouterASBR);
+			newInterDomainEdge.setDst_router_id(remoteRouterASBR);
+			newInterDomainEdge.setSrc_if_id(localRouterASBRIf);
+			newInterDomainEdge.setDst_if_id(remoteRouterASBRIf);
+			newInterDomainEdge.setDomain_dst_router(remoteDomainID);
+			newInterDomainEdge.setDomain_src_router(localDomainID);
+			newInterDomainEdge.setLearntFrom(learnt);
+			newInterDomainEdge.setComplete(true);
+			if (te_info != null)
+				newInterDomainEdge.setTE_info(te_info);
+			networkDomainGraph.addEdge(localDomainID, remoteDomainID, newInterDomainEdge);
+			log.info("New InterDomain edge between "+localDomainID+" and "+remoteDomainID+" received");
+
+		}else {
+
+			if (te_info != null){
+				//FIXME: Update of TE info to be optimized
+				log.info("TE_info updated");
+				interDomainEdgeFound.setTE_info(te_info);
+			}
+			
+			
+		}
+	}
+
+
+	public synchronized void addInterdomainLink( Object localDomainID, Object localRouterASBR, Inet4Address localIf, Object remoteDomainID, Object remoteRouterASBR, Inet4Address remoteIf, TE_Information te_info, String learnt){
+
+		if (!networkDomainGraph.containsVertex(localDomainID)){
+			networkDomainGraph.addVertex(localDomainID);
+			log.debug("Vertex (domain) "+localDomainID+" added");
+		}
+		if (!networkDomainGraph.containsVertex(remoteDomainID)){
+			networkDomainGraph.addVertex(remoteDomainID);
+			log.debug("Vertex (domain) "+remoteDomainID+" added");
+		}
+		log.debug("Looking to add "+localRouterASBR+": ("+localDomainID+") -->"+remoteRouterASBR+" ("+remoteDomainID+")");
+		Set<InterDomainEdge> edgeset= networkDomainGraph.edgesOf(localDomainID);
+		Iterator <InterDomainEdge> iterador=edgeset.iterator();
+		boolean edgeFound=false;
+		InterDomainEdge interDomainEdgeFound=null;
+		if (edgeset.size() == 0)
+			log.debug("Edge set size = 0");
+		while (iterador.hasNext()){
+			InterDomainEdge interDomainEdge=iterador.next();
+			log.debug("existing edge: "+interDomainEdge.toString());
+			if (interDomainEdge.getSrc_router_id().equals(localRouterASBR)){
+				log.debug("Local router is the same!!!");
+				if (interDomainEdge.getDst_router_id().equals(remoteRouterASBR)){
+					log.debug("Destination router is the same!!!");
+					edgeFound=true;
+					interDomainEdgeFound=interDomainEdge;
+				}
+				else {
+					log.debug("Destination router is NOT the same!!!");
+				}
+			}else {
+				log.debug("Local router is NOT the same!!!");
+			}
+		}
+
+		if (edgeFound==false) {
+			InterDomainEdge newInterDomainEdge =new InterDomainEdge();
+			newInterDomainEdge.setSrc_router_id(localRouterASBR);
+			newInterDomainEdge.setDst_router_id(remoteRouterASBR);
+			newInterDomainEdge.setLocalInterfaceIPv4(localIf);
+			newInterDomainEdge.setNeighborIPv4(remoteIf);
+			newInterDomainEdge.setDomain_dst_router(remoteDomainID);
+			newInterDomainEdge.setDomain_src_router(localDomainID);
+			newInterDomainEdge.setLearntFrom(learnt);
+			newInterDomainEdge.setComplete(true);
+			if (te_info != null)
+				newInterDomainEdge.setTE_info(te_info);
+			networkDomainGraph.addEdge(localDomainID, remoteDomainID, newInterDomainEdge);
+			log.info("New InterDomain edge between "+localDomainID+" and "+remoteDomainID+" received");
+
+		}else {
+
+			if (te_info != null){
+				//FIXME: Update of TE info to be optimized
+				log.info("TE_info updated");
+				interDomainEdgeFound.setTE_info(te_info);
+			}
+
+
+		}
+	}
+
+
 	public synchronized void addInterdomainLink( Object localDomainID, Object localRouterASBR, long localRouterASBRIf, Object remoteDomainID, Object remoteRouterASBR, long remoteRouterASBRIf, TE_Information te_info){
 
 		if (!networkDomainGraph.containsVertex(localDomainID)){
@@ -156,8 +282,8 @@ public class MDTEDB implements MultiDomainTEDB {
 				log.info("TE_info updated");
 				interDomainEdgeFound.setTE_info(te_info);
 			}
-			
-			
+
+
 		}
 	}
 
@@ -222,8 +348,6 @@ public class MDTEDB implements MultiDomainTEDB {
 
 		}
 	}
-
-
 
 
 

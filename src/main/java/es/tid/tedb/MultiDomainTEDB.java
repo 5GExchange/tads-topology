@@ -8,10 +8,16 @@ import java.util.Hashtable;
 
 public interface MultiDomainTEDB extends TEDB {
 
-	public void addInterdomainLink( Object localDomainID, Object localRouterASBR, long localRouterASBRIf, Object remoteDomainID, Object remoteRouterASBR, long remoteRouterASBRIf, TE_Information te_info );
 	public void addReachabilityIPv4(Inet4Address domainId,Inet4Address aggregatedIPRange,int prefix);
 
+	public void addInterdomainLink( Object localDomainID, Object localRouterASBR, long localRouterASBRIf, Object remoteDomainID, Object remoteRouterASBR, long remoteRouterASBRIf, TE_Information te_info );
+
 	public void addInterdomainLink( Object localDomainID, Object localRouterASBR, Inet4Address localIf, Object remoteDomainID, Object remoteRouterASBR, Inet4Address remoteIf, TE_Information te_info );
+
+	public void addInterdomainLink( Object localDomainID, Object localRouterASBR, long localRouterASBRIf, Object remoteDomainID, Object remoteRouterASBR, long remoteRouterASBRIf, TE_Information te_info, String learnt);
+
+	public void addInterdomainLink( Object localDomainID, Object localRouterASBR, Inet4Address localIf, Object remoteDomainID, Object remoteRouterASBR, Inet4Address remoteIf, TE_Information te_info, String learnt );
+
 
 	DirectedWeightedMultigraph<Object, InterDomainEdge> getNetworkDomainGraph();
 
