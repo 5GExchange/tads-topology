@@ -7,7 +7,7 @@
         <mode>TM</mode>
     	<XMLFileTopology>target/SSSAODL2/network.xml</XMLFileTopology>
         <Identifier>10.10.10.38</Identifier>
-        <intra>true</intra>
+        <intra>false</intra>
     </XML_Plugin>
      <InitFrom>
         <Init>initFromXML</Init>
