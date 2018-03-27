@@ -2349,8 +2349,10 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 				e.printStackTrace();
 			}
 		}
-		else
+		else {
 			log.info("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwlocal or null");
+			log.info(update.toString());
+		}
 		pathAttributes.add(ra);
 		log.debug(update.toString());
 		return update;
