@@ -1345,7 +1345,8 @@ public class SendTopology implements Runnable {
 
 			ArrayList<AreaIDNodeDescriptorSubTLV> list = new ArrayList<AreaIDNodeDescriptorSubTLV>();
 			list.add(domID);
-			domTLV.setAreaIDSubTLVs(list);
+			//domTLV.setAreaIDSubTLVs(list);
+			domTLV.getAreaIDSubTLVs().add(domID);
 			pceNLRI.setPCEv4DomainID(domTLV);
 
 								//add NLRI to BGP-LS

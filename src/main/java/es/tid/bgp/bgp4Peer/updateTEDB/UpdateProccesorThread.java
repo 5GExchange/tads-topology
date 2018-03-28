@@ -1097,7 +1097,7 @@ public class UpdateProccesorThread extends Thread {
 			preL= pceScope.getPre_L();
 			preS= pceScope.getPre_S();
 			preY= pceScope.getPre_Y();
-			log.debug("PCE Scope [PreR:" +preR +"  PreL:" +preL + "  PreS:" +preS + "  PreY:" +preY +" ]");
+			log.info("PCE Scope [PreR:" +preR +"  PreL:" +preL + "  PreS:" +preS + "  PreY:" +preY +" ]");
 		}
 
 		if (pceNLRI.getPCEv4DomainID()!=null){
@@ -1118,6 +1118,7 @@ public class UpdateProccesorThread extends Thread {
 				}
 			}
 		}
+		else log.info("null");
 
 		if (pceNLRI.getPCEv4NeighbourID()!=null){
 			PCEv4NeighboursTLV NdomTLV= pceNLRI.getPCEv4NeighbourID();
@@ -1142,7 +1143,7 @@ public class UpdateProccesorThread extends Thread {
 			MDPCE.setPCEipv4(PCEip);
 		}
 
-		log.info(MDPCE.toString());
+		//log.info(MDPCE.toString());
 		for (Inet4Address domain: localDomains){
 			domainTEDB=(DomainTEDB)intraTEDBs.get(domain.getHostAddress());
 			if (domainTEDB instanceof SimpleTEDB) {
