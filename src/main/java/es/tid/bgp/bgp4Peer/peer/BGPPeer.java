@@ -357,12 +357,12 @@ public class BGPPeer {
 		}
 		executor.scheduleWithFixedDelay(sendTopologyTask, 0,params.getSendTopoDelay(), TimeUnit.MILLISECONDS);
 
-        // Copied lines -- LANNION
-        logServer.info("Before new UpdateDomainStatus()");
+       
+        logServer.debug("Before new UpdateDomainStatus()");
 		updomainstatus= new UpdateDomainStatus();
-        logServer.info("Before updomainstatus.configure");
+        logServer.debug("Before updomainstatus.configure");
 		updomainstatus.configure(multiDomainTEDB, intraTEDBs,DomainUpdate,intraDomainLinkUpdate,interDomainLinkUpdate,NodeITinfoUpdate, NodeinfoUpdate,MDPCEinfoUpdate, params);
-        logServer.info("Before executor.scheduleWithFixedDelay");
+        logServer.debug("Before executor.scheduleWithFixedDelay");
 		executor.scheduleWithFixedDelay(updomainstatus, 30, 30, TimeUnit.SECONDS );
 		// executor.scheduleWithFixedDelay(updomainstatus,params.getBGPupdateTime(), params.getBGPupdateTime(), TimeUnit.SECONDS );
         // Copied lines -----------
