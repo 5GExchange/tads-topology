@@ -1120,7 +1120,8 @@ public class UpdateProccesorThread extends Thread {
 				}
 			}
 		}
-		else log.info("null");
+		else
+			log.info("null");
 
 		if (pceNLRI.getPCEv4NeighbourID()!=null){
 			PCEv4NeighboursTLV NdomTLV= pceNLRI.getPCEv4NeighbourID();
@@ -1232,12 +1233,12 @@ public class UpdateProccesorThread extends Thread {
 			return;
 		}
 
-		log.debug("Received IT info for Domain "+itNodeNLRI.getNodeId()+" From Peer "+learntFrom);
+		log.info("Received IT info for Domain "+itNodeNLRI.getNodeId()+" From Peer "+learntFrom);
 
 		if(simpleTEDB.getItResources()==null)
-		 itResources= new IT_Resources();
+			itResources= new IT_Resources();
 
-			if(itResources.getLearntFrom()==null || itResources.getLearntFrom().equals(learntFrom)) {
+		if(itResources.getLearntFrom()==null || itResources.getLearntFrom().equals(learntFrom)) {
 			log.debug("Existing IT Resource LearntFrom:  " + itResources.getLearntFrom() + "  New LearntFrom:  " + learntFrom);
 			itResources.setControllerIT(itNodeNLRI.getControllerIT());
 			itResources.setCpu(itNodeNLRI.getCpu());
@@ -1247,7 +1248,7 @@ public class UpdateProccesorThread extends Thread {
 			itResources.setITdomainID(itNodeNLRI.getNodeId());
 			simpleTEDB.setItResources(itResources);
 			SetnodeITinfoUpdate(simpleTEDB.getDomainID(), itNodeNLRI.getNodeId(), learntFrom, System.currentTimeMillis());
-			}
+		}
 	}
 
 	private void fillNodeInformation(NodeNLRI nodeNLRI, String learntFrom) throws UnknownHostException {
