@@ -7,6 +7,18 @@
 		<node>
 			<router_id>3.3.3.3</router_id>
 		</node>
+		<mdpce>
+			<ipv4>192.168.2.1</ipv4>
+
+		</mdpce>
+
+		<it_resources>
+			<controller_it>https://sensor.com/url</controller_it>
+			<cpu>200</cpu>
+			<mem>200Gbyte</mem>
+			<storage>200Tbyte</storage>
+		</it_resources>
+
 		<edge>
 			<source>
 				<router_id>3.3.3.3</router_id>
