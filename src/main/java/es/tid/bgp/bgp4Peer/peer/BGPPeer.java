@@ -357,7 +357,7 @@ public class BGPPeer {
 		}
 		executor.scheduleWithFixedDelay(sendTopologyTask, 0,params.getSendTopoDelay(), TimeUnit.MILLISECONDS);
 
-       
+
         logServer.debug("Before new UpdateDomainStatus()");
 		updomainstatus= new UpdateDomainStatus();
         logServer.debug("Before updomainstatus.configure");

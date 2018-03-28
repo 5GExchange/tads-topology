@@ -554,6 +554,23 @@ public class SendTopology implements Runnable {
 				log.info("Number of nodes: "+ String.valueOf(md.getNetworkDomainGraph().vertexSet().size()));
 				log.info("Number of links: "+ String.valueOf(md.getNetworkDomainGraph().edgeSet().size()));
 				log.info("Number of intradomain: "+ String.valueOf(teds.size()));
+				Enumeration<String> iter = teds.keys();
+				while (iter.hasMoreElements()) {
+					String domainID = iter.nextElement();
+					if ((domainID != null) && (!domainID.equals("multidomain"))) {
+						log.debug("temp procedure checking domain_id: " + domainID);
+						TEDB ted = teds.get(domainID);
+						if (ted instanceof DomainTEDB) {
+							if (((DomainTEDB)ted).getMDPCE()!=null){
+								log.info("Domain "+ domainID+" found MD-PCE with ip "+((DomainTEDB)ted).getMDPCE().getPCEipv4().getHostName() );
+							}
+							else
+								log.info("No PCE info for domain "+ domainID );
+
+						}
+
+					}
+				}
 			}
 			else
 				log.debug("getNetworkDomainGraph is null");
