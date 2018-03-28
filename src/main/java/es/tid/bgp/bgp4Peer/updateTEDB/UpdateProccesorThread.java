@@ -1149,6 +1149,8 @@ public class UpdateProccesorThread extends Thread {
 				simpleTEDB = (SimpleTEDB) domainTEDB;
 				if (simpleTEDB.getMDPCE() != null)
 					MDPCE = simpleTEDB.getMDPCE();
+				else
+					log.info("Finito nell'else");
 				if(simpleTEDB.getMDPCE().getLearntFrom()==null || simpleTEDB.getMDPCE().getLearntFrom().equals(learntFrom))
 				{
 					simpleTEDB.setMDPCE(MDPCE);
@@ -1159,7 +1161,7 @@ public class UpdateProccesorThread extends Thread {
 					simpleTEDB.setNeighDomains(NeighDomains);
 					simpleTEDB.setDomainID(domain);
 					simpleTEDB.setPCEScope(pceScope);
-					log.debug("Received PCE info for domain/AS "+sb.toString()+" from peer "+learntFrom+": "+simpleTEDB.getMDPCE().getPCEipv4().getHostAddress());
+					log.info("Received PCE info for domain/AS "+sb.toString()+" from peer "+learntFrom+": "+simpleTEDB.getMDPCE().getPCEipv4().getHostAddress());
 					setMDPCEupdateTime (localDomains, PCEip, learntFrom);
 
 				}
@@ -1179,7 +1181,7 @@ public class UpdateProccesorThread extends Thread {
 					simpleTEDB.setNeighDomains(NeighDomains);
 					simpleTEDB.setDomainID(domain);
 					simpleTEDB.setPCEScope(pceScope);
-					log.debug("Received PCE info for domain/AS "+sb.toString()+" from peer "+learntFrom+": "+simpleTEDB.getMDPCE().getPCEipv4().getHostAddress());
+					log.info("Received 2 PCE info for domain/AS "+sb.toString()+" from peer "+learntFrom+": "+simpleTEDB.getMDPCE().getPCEipv4().getHostAddress());
 					setMDPCEupdateTime (localDomains, PCEip, learntFrom);
 				}
 			}
