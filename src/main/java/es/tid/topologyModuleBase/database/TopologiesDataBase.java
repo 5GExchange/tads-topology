@@ -460,24 +460,18 @@ public class TopologiesDataBase implements TopologyTEDB
 		if (!intra) {
 			System.out.println("Reading only interdomain links");
 			if (mdTed == null) {
-				System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh Mdted initialized from scratch");
+				System.out.println("Mdted initialized from scratch");
 				mdTed.initializeFromFile(file, ID);
 			} else {
 				FileTEDBUpdater.addLinksformFile(mdTed, teds, file, ID, intra);
-				System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh Mdted alredy present");
+				System.out.println("Mdted alredy present");
 			}
 		}
 		else{
 			System.out.println(".............................................Reading interdomain links and intradomain topology from file");
 			teds.putAll(FileTEDBUpdater.readMultipleDomainSimpleNetworks(file, null, false, 0, Integer.MAX_VALUE, false, ID));
 			FileTEDBUpdater.addLinksformFile(mdTed, teds, file, ID, intra);
-			/*if (mdTed == null) {
-				System.out.println("wwwwwwwwwwwwwwwwwwwwwwwwwwwww Mdted initialized from scratch");
-				mdTed.initializeFromFile(file, ID);
-			} else {
-				FileTEDBUpdater.addLinksformFile(mdTed, teds, file, ID, intra);
-				System.out.println("wjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj Mdted alredy present");
-			}*/
+
 		}
 	}
 

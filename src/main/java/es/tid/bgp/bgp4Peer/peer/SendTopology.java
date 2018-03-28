@@ -176,7 +176,7 @@ public class SendTopology implements Runnable {
 									}
 
 									if (((DomainTEDB) ted).getMDPCE() != null && domainID != null) {
-										log.debug("Sending MDPCE address for Domain " + domainID + " with IP: " + ((DomainTEDB) ted).getMDPCE().getPCEipv4().getHostAddress());
+										log.info("Sending MDPCE address for Domain " + domainID + " with IP: " + ((DomainTEDB) ted).getMDPCE().getPCEipv4().getHostAddress());
 										sendMDPCENLRI(domainID, ((DomainTEDB) ted).getMDPCE(), ((DomainTEDB) ted).getMDPCE().getLearntFrom());
 									}
 
@@ -553,6 +553,7 @@ public class SendTopology implements Runnable {
 			if (md.getNetworkDomainGraph()!=null){
 				log.info("Number of nodes: "+ String.valueOf(md.getNetworkDomainGraph().vertexSet().size()));
 				log.info("Number of links: "+ String.valueOf(md.getNetworkDomainGraph().edgeSet().size()));
+				log.info("Number of intradomain: "+ String.valueOf(teds.size()));
 			}
 			else
 				log.debug("getNetworkDomainGraph is null");

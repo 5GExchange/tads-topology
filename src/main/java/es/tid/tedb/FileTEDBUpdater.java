@@ -3476,13 +3476,13 @@ public class FileTEDBUpdater {
 						log.info("Loading topology from domain " + domain_id);
 					}
 
-					DomainTEDB domainTEDB=(DomainTEDB)teds.get(domain_id);
+					DomainTEDB domainTEDBx=(DomainTEDB)teds.get(domain_id);
 					SimpleTEDB tedb=null;
-					if (domainTEDB instanceof SimpleTEDB){
-						tedb = (SimpleTEDB) domainTEDB;
+					if (domainTEDBx instanceof SimpleTEDB){
+						tedb = (SimpleTEDB) domainTEDBx;
 
 						log.info("Domain " + domain_id+" exists!!");
-					}else if (domainTEDB==null){
+					}else if (domainTEDBx==null){
 						tedb = new SimpleTEDB();
 						tedb.setNetworkGraph(new SimpleDirectedWeightedGraph<Object, IntraDomainEdge>(IntraDomainEdge.class));
 						tedb.setIGPType(3);
