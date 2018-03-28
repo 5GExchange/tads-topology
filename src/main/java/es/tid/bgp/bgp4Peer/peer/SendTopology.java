@@ -1338,7 +1338,8 @@ public class SendTopology implements Runnable {
 			AreaIDNodeDescriptorSubTLV domID =new AreaIDNodeDescriptorSubTLV();
 			domainIDx = domainID.replace("/", "");
 			log.debug(domainIDx);
-			domID.setAREA_ID((Inet4Address) forString(domainIDx));
+			//domID.setAREA_ID((Inet4Address) forString(domainIDx));
+			domID.setAREA_ID((Inet4Address) Inet4Address.getByName(domainID.replaceAll("/","")));
 			//domTLV.addAreaIDSubTLV(domID);
 
 			ArrayList<AreaIDNodeDescriptorSubTLV> list = new ArrayList<AreaIDNodeDescriptorSubTLV>();
@@ -1349,7 +1350,7 @@ public class SendTopology implements Runnable {
 								//add NLRI to BGP-LS
 			BGP_LS_MP_Reach_Attribute ra= new BGP_LS_MP_Reach_Attribute();
 			ra.setLsNLRI(pceNLRI);
-			if (learntFrom!="local"){
+			if ((learntFrom!="local")&&(learntFrom!=null)){
 				try {
 					ra.setNextHop(InetAddress.getByName(learntFrom.replaceAll("/","")));
 				} catch (UnknownHostException e) {
