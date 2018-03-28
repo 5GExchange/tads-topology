@@ -2198,12 +2198,12 @@ public class FileTEDBUpdater {
 					tedb = (SimpleTEDB) domainTEDB;
 					graph = ((SimpleTEDB) domainTEDB).getNetworkGraph();
 
-					log.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXdomain " + domain_id+" exists!!");
+					log.info("Domain " + domain_id+" exists!!");
 				}else if (domainTEDB==null){
 					tedb = new SimpleTEDB();
 					graph = new SimpleDirectedWeightedGraph<Object, IntraDomainEdge>(IntraDomainEdge.class);
 					tedb.setIGPType(3);
-					log.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXdomain " + domain_id+" initialized!!");
+					log.info("Domain " + domain_id+" initialized!!");
 				}else {
 					log.debug("PROBLEM: TEDB not Compatible");
 					return;
@@ -3461,6 +3461,94 @@ public class FileTEDBUpdater {
 			}
 			log.debug("Domain_ids read");
 
+
+			if (!readIntra){
+				log.info("Loading MDPCE and IT resources");
+				for (int j = 0; j < nodes_domains.getLength(); j++) {
+					Element element1 = (Element) nodes_domains.item(j);
+					String domain_id = "";
+
+					Element element_domain = (Element) nodes_domains.item(j);
+					NodeList nodes_domain_id = element_domain.getElementsByTagName("domain_id");
+					for (int k = 0; k < nodes_domain_id.getLength(); k++) {
+						Element domain_id_e = (Element) nodes_domain_id.item(0);
+						domain_id = getCharacterDataFromElement(domain_id_e);
+						log.info("Loading topology from domain " + domain_id);
+					}
+
+					DomainTEDB domainTEDB=(DomainTEDB)teds.get(domain_id);
+					SimpleTEDB tedb=null;
+					if (domainTEDB instanceof SimpleTEDB){
+						tedb = (SimpleTEDB) domainTEDB;
+
+						log.info("Domain " + domain_id+" exists!!");
+					}else if (domainTEDB==null){
+						tedb = new SimpleTEDB();
+						tedb.setNetworkGraph(new SimpleDirectedWeightedGraph<Object, IntraDomainEdge>(IntraDomainEdge.class));
+						tedb.setIGPType(3);
+						log.info("Domain " + domain_id+" initialized!!");
+					}else {
+						log.debug("PROBLEM: TEDB not Compatible");
+						return;
+					}
+
+
+					PCEInfo pce= new PCEInfo();
+					NodeList mdPCE = element1.getElementsByTagName("mdpce");
+					for (int i = 0; i < mdPCE.getLength(); i++) {
+
+						Element element = (Element) mdPCE.item(i);
+
+						NodeList ipList = element.getElementsByTagName("ipv4");
+						Element ipElement = (Element) ipList.item(0);
+						String MDIP = getCharacterDataFromElement(ipElement);
+
+						log.info("adding MDPCE of " + domain_id+" with IP "+ MDIP);
+						pce.setPCEipv4((Inet4Address) InetAddress.getByName(MDIP));
+						pce.setLearntFrom(LearntFrom); //to be confirmed
+						tedb.setMDPCE(pce);
+
+					}
+
+					NodeList itResourcesElement = element1.getElementsByTagName("it_resources");
+					for (int i = 0; i < itResourcesElement.getLength(); i++) {
+						Element element = (Element) itResourcesElement.item(i);
+
+						NodeList itResourcesControllerITList = element.getElementsByTagName("controller_it");
+						Element itResourcesControllerITElement = (Element) itResourcesControllerITList.item(0);
+						String itResourcesControllerIT = getCharacterDataFromElement(itResourcesControllerITElement);
+
+						NodeList itResourcesCpuList = element.getElementsByTagName("cpu");
+						Element itResourcesCpuElement = (Element) itResourcesCpuList.item(0);
+						String itResourcesCpu = getCharacterDataFromElement(itResourcesCpuElement);
+
+						NodeList itResourcesMemList = element.getElementsByTagName("mem");
+						Element itResourcesMemElement = (Element) itResourcesMemList.item(0);
+						String itResourcesMem = getCharacterDataFromElement(itResourcesMemElement);
+
+						NodeList itResourcesStorageList = element.getElementsByTagName("storage");
+						Element itResourcesStorageElement = (Element) itResourcesStorageList.item(0);
+						String itResourcesStorage = getCharacterDataFromElement(itResourcesStorageElement);
+
+						IT_Resources itResources = new IT_Resources();
+						if (itResourcesControllerIT != null) {
+							itResources.setControllerIT(itResourcesControllerIT);
+							itResources.setLearntFrom(LearntFrom);
+						}
+						if (itResourcesCpu != null) itResources.setCpu(itResourcesCpu);
+						if (itResourcesMem != null) itResources.setMem(itResourcesMem);
+						if (itResourcesStorage != null) {
+							itResources.setStorage(itResourcesStorage);
+							log.debug("set learn from for it resources " + itResources.toString());
+						}
+						tedb.setItResources(itResources);
+					}
+					if (!teds.contains(domain_id)){
+						teds.put(domain_id, tedb);
+						log.info("added a new domain in teds");
+					}
+				}
+			}
 			int numLabels=0;
 
 			Boolean commonBitmapLabelSet = false;
