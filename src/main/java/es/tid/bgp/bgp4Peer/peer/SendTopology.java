@@ -1339,7 +1339,8 @@ public class SendTopology implements Runnable {
 			domainIDx = domainID.replace("/", "");
 			log.debug(domainIDx);
 			//domID.setAREA_ID((Inet4Address) forString(domainIDx));
-			domID.setAREA_ID((Inet4Address) Inet4Address.getByName(domainID.replaceAll("/","")));
+			//domID.setAREA_ID((Inet4Address) Inet4Address.getByName(domainID.replaceAll("/","")));
+			domID.setAREA_ID((Inet4Address) Inet4Address.getByName(domainID));
 			//domTLV.addAreaIDSubTLV(domID);
 
 			ArrayList<AreaIDNodeDescriptorSubTLV> list = new ArrayList<AreaIDNodeDescriptorSubTLV>();
