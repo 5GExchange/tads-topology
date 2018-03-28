@@ -1104,9 +1104,9 @@ public class UpdateProccesorThread extends Thread {
 			PCEv4DomainTLV domTLV= pceNLRI.getPCEv4DomainID();
 			//ArrayList<AreaIDNodeDescriptorSubTLV> arealist = ;
 			for (AreaIDNodeDescriptorSubTLV area: domTLV.getAreaIDSubTLVs()){
-				log.debug("Area ID Received: "+area.getAREA_ID().getHostAddress());
+				log.info("Area ID Received: "+area.getAREA_ID().getHostAddress());
 				if (!localDomains.contains(area.getAREA_ID())){
-					log.debug("Not Present, Added");
+					log.info("Not Present, Added");
 					sb.append("Local Area: "+area.toString());
 					localDomains.add(area.getAREA_ID());
 				}
@@ -1138,11 +1138,11 @@ public class UpdateProccesorThread extends Thread {
 		if (pceNLRI.getPCEv4Descriptors()!=null){
 			PCEv4DescriptorsTLV pceTLV= pceNLRI.getPCEv4Descriptors();
 			PCEip = pceTLV.getPCEv4Address();
-			log.debug("   PCE IP  :   "+PCEip);
+			log.info("   PCE IP  :   "+PCEip);
 			MDPCE.setPCEipv4(PCEip);
 		}
 
-
+		log.info(MDPCE.toString());
 		for (Inet4Address domain: localDomains){
 			domainTEDB=(DomainTEDB)intraTEDBs.get(domain.getHostAddress());
 			if (domainTEDB instanceof SimpleTEDB) {
