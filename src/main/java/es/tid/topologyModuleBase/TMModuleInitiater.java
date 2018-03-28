@@ -41,14 +41,6 @@ public class TMModuleInitiater {
 		for (int i = 0; i < paramList.size(); i++)
 		{
 			TopologyModuleParams actualLittleParams = paramList.get(i);
-			// IMPORTER/EXPORTER
-			if (actualLittleParams.isBGPLSReadingWriting())
-			{
-				TMPlugin p = new TopologyReaderWriterBGPLS(ted, actualLittleParams,lock);
-				//executor.execute(p);
-				executor.schedule (p, 10, TimeUnit.SECONDS);
-				pluginsList.add(p);
-			}
 
 			//IMPORTERS
 			if (actualLittleParams.isCOPReading())
@@ -58,7 +50,18 @@ public class TMModuleInitiater {
 				pluginsList.add(p);
 			}
 
-			
+
+			if (actualLittleParams.isXML())
+			{
+				//Thread.sleep(8000);
+				TMPlugin p = new TopologyReaderXML(ted, actualLittleParams,lock);
+				System.out.println("Andrea............................................Topology Reader");
+				executor.execute(p);
+				//executor.schedule (p, 20, TimeUnit.SECONDS);
+				//executor.schedule (p, 5, TimeUnit.SECONDS);
+				pluginsList.add(p);
+				//log.info("Topology Read from file. State:\n"+ted.printTopology());
+			}
 			
 			if (actualLittleParams.isOSPF())
 			{
@@ -139,21 +142,19 @@ public class TMModuleInitiater {
 				executor.execute(p);
 				pluginsList.add(p);
 			} else {
-                            System.out.println("VALOR DEL FLAG: " + actualLittleParams.isTAPIWriting());
-                        }
+                System.out.println("VALOR DEL FLAG: " + actualLittleParams.isTAPIWriting());
+            }
                         
-                        
-			if (actualLittleParams.isXML())
+
+			// IMPORTER/EXPORTER
+			if (actualLittleParams.isBGPLSReadingWriting())
 			{
-				//Thread.sleep(8000);
-				TMPlugin p = new TopologyReaderXML(ted, actualLittleParams,lock);
-				System.out.println("Andrea............................................Topology Reader");
-				executor.execute(p);
-				//executor.schedule (p, 20, TimeUnit.SECONDS);
-				//executor.schedule (p, 5, TimeUnit.SECONDS);
+				TMPlugin p = new TopologyReaderWriterBGPLS(ted, actualLittleParams,lock);
+				//executor.execute(p);
+				executor.schedule (p, 5, TimeUnit.SECONDS);
 				pluginsList.add(p);
-				//log.info("Topology Read from file. State:\n"+ted.printTopology());
 			}
+
 			//BOTH
 			/*NO WS
 			 if (actualLittleParams.isWSOld()){
