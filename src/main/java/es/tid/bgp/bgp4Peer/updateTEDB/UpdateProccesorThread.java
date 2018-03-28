@@ -1101,7 +1101,9 @@ public class UpdateProccesorThread extends Thread {
 		}
 
 		if (pceNLRI.getPCEv4DomainID()!=null){
+			log.info(pceNLRI.getPCEv4DomainID().toString());
 			PCEv4DomainTLV domTLV= pceNLRI.getPCEv4DomainID();
+
 			//ArrayList<AreaIDNodeDescriptorSubTLV> arealist = ;
 			for (AreaIDNodeDescriptorSubTLV area: domTLV.getAreaIDSubTLVs()){
 				log.info("Area ID Received: "+area.getAREA_ID().getHostAddress());
