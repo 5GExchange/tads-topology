@@ -1,0 +1,111 @@
+
+des: 
+	/172.16.101.101
+	/172.16.101.104
+	/172.16.101.102
+	/172.16.101.103
+Node Information Table::: 
+{/172.16.101.102=IGP-ID:/172.16.101.102	as_num:/0.0.0.1	learnFrom:127.0.0.1	Name :r1_2	Local Node IP Address: /172.16.101.102	, /172.16.101.101=IGP-ID:/172.16.101.101	as_num:/0.0.0.1	learnFrom:127.0.0.1	Name :r1_1	Local Node IP Address: /172.16.101.101	, /172.16.101.104=IGP-ID:/172.16.101.104	as_num:/0.0.0.1	learnFrom:127.0.0.1	Name :r1_4	Local Node IP Address: /172.16.101.104	, /172.16.101.103=IGP-ID:/172.16.101.103	as_num:/0.0.0.1	learnFrom:127.0.0.1	Name :r1_3	Local Node IP Address: /172.16.101.103	}
+Intradomain Link list: 
+	/172.16.101.101:0-->/172.16.101.104:0 NumFibers = 1
+ TED: MaximumBandwidth: 3.35	UndirectionalLinkDelay [delay_ms=99]
+MinMaxUndirectionalLinkDelay [low_delay_ms=23 , high_delay_ms=43]
+UndirectionalDelayVariation [delayVar_ms=1]
+UndirectionalLinkLoss: 102
+UndirectionalResidualBW [bw_bytes_per_second=802.0]
+UndirectionalAvailableBW [bw_bytes_per_second=500.0]
+UndirectionalUtilizedBW [bw_bytes_per_second=436.0]
+
+
+	/172.16.101.104:0-->/172.16.101.101:0 NumFibers = 1
+ TED: MaximumBandwidth: 3.35	UndirectionalLinkDelay [delay_ms=99]
+MinMaxUndirectionalLinkDelay [low_delay_ms=23 , high_delay_ms=43]
+UndirectionalDelayVariation [delayVar_ms=1]
+UndirectionalLinkLoss: 102
+UndirectionalResidualBW [bw_bytes_per_second=802.0]
+UndirectionalAvailableBW [bw_bytes_per_second=500.0]
+UndirectionalUtilizedBW [bw_bytes_per_second=436.0]
+
+
+	/172.16.101.101:0-->/172.16.101.102:0 NumFibers = 1
+ TED: MaximumBandwidth: 3.35	UndirectionalLinkDelay [delay_ms=99]
+MinMaxUndirectionalLinkDelay [low_delay_ms=23 , high_delay_ms=43]
+UndirectionalDelayVariation [delayVar_ms=1]
+UndirectionalLinkLoss: 102
+UndirectionalResidualBW [bw_bytes_per_second=802.0]
+UndirectionalAvailableBW [bw_bytes_per_second=500.0]
+UndirectionalUtilizedBW [bw_bytes_per_second=436.0]
+
+
+	/172.16.101.102:0-->/172.16.101.101:0 NumFibers = 1
+ TED: MaximumBandwidth: 3.35	UndirectionalLinkDelay [delay_ms=99]
+MinMaxUndirectionalLinkDelay [low_delay_ms=23 , high_delay_ms=43]
+UndirectionalDelayVariation [delayVar_ms=1]
+UndirectionalLinkLoss: 102
+UndirectionalResidualBW [bw_bytes_per_second=802.0]
+UndirectionalAvailableBW [bw_bytes_per_second=500.0]
+UndirectionalUtilizedBW [bw_bytes_per_second=436.0]
+
+
+	/172.16.101.102:0-->/172.16.101.103:0 NumFibers = 1
+ TED: MaximumBandwidth: 3.35	UndirectionalLinkDelay [delay_ms=99]
+MinMaxUndirectionalLinkDelay [low_delay_ms=23 , high_delay_ms=43]
+UndirectionalDelayVariation [delayVar_ms=1]
+UndirectionalLinkLoss: 102
+UndirectionalResidualBW [bw_bytes_per_second=802.0]
+UndirectionalAvailableBW [bw_bytes_per_second=500.0]
+UndirectionalUtilizedBW [bw_bytes_per_second=436.0]
+
+
+	/172.16.101.103:0-->/172.16.101.102:0 NumFibers = 1
+ TED: MaximumBandwidth: 3.35	UndirectionalLinkDelay [delay_ms=99]
+MinMaxUndirectionalLinkDelay [low_delay_ms=23 , high_delay_ms=43]
+UndirectionalDelayVariation [delayVar_ms=1]
+UndirectionalLinkLoss: 102
+UndirectionalResidualBW [bw_bytes_per_second=802.0]
+UndirectionalAvailableBW [bw_bytes_per_second=500.0]
+UndirectionalUtilizedBW [bw_bytes_per_second=436.0]
+
+
+	/172.16.101.103:0-->/172.16.101.104:0 NumFibers = 1
+ TED: MaximumBandwidth: 3.35	UndirectionalLinkDelay [delay_ms=99]
+MinMaxUndirectionalLinkDelay [low_delay_ms=23 , high_delay_ms=43]
+UndirectionalDelayVariation [delayVar_ms=1]
+UndirectionalLinkLoss: 102
+UndirectionalResidualBW [bw_bytes_per_second=802.0]
+UndirectionalAvailableBW [bw_bytes_per_second=500.0]
+UndirectionalUtilizedBW [bw_bytes_per_second=436.0]
+
+
+	/172.16.101.104:0-->/172.16.101.103:0 NumFibers = 1
+ TED: MaximumBandwidth: 3.35	UndirectionalLinkDelay [delay_ms=99]
+MinMaxUndirectionalLinkDelay [low_delay_ms=23 , high_delay_ms=43]
+UndirectionalDelayVariation [delayVar_ms=1]
+UndirectionalLinkLoss: 102
+UndirectionalResidualBW [bw_bytes_per_second=802.0]
+UndirectionalAvailableBW [bw_bytes_per_second=500.0]
+UndirectionalUtilizedBW [bw_bytes_per_second=436.0]
+
+
+	/172.16.101.102:0-->/172.16.101.104:0 NumFibers = 1
+ TED: MaximumBandwidth: 3.35	UndirectionalLinkDelay [delay_ms=99]
+MinMaxUndirectionalLinkDelay [low_delay_ms=23 , high_delay_ms=43]
+UndirectionalDelayVariation [delayVar_ms=1]
+UndirectionalLinkLoss: 102
+UndirectionalResidualBW [bw_bytes_per_second=802.0]
+UndirectionalAvailableBW [bw_bytes_per_second=500.0]
+UndirectionalUtilizedBW [bw_bytes_per_second=436.0]
+
+
+	/172.16.101.104:0-->/172.16.101.102:0 NumFibers = 1
+ TED: MaximumBandwidth: 3.35	UndirectionalLinkDelay [delay_ms=99]
+MinMaxUndirectionalLinkDelay [low_delay_ms=23 , high_delay_ms=43]
+UndirectionalDelayVariation [delayVar_ms=1]
+UndirectionalLinkLoss: 102
+UndirectionalResidualBW [bw_bytes_per_second=802.0]
+UndirectionalAvailableBW [bw_bytes_per_second=500.0]
+UndirectionalUtilizedBW [bw_bytes_per_second=436.0]
+
+
+Interdomain Link list: 
+
