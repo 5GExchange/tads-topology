@@ -1101,7 +1101,7 @@ public class UpdateProccesorThread extends Thread {
 		}
 
 		if (pceNLRI.getPCEv4DomainID()!=null){
-			log.info(pceNLRI.getPCEv4DomainID().toString());
+			log.info("number of domain contained"+  String.valueOf(pceNLRI.getPCEv4DomainID().getAreaIDSubTLVs().size()));
 			PCEv4DomainTLV domTLV= pceNLRI.getPCEv4DomainID();
 
 			//ArrayList<AreaIDNodeDescriptorSubTLV> arealist = ;
