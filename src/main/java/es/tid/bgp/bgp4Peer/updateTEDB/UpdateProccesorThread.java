@@ -1098,21 +1098,21 @@ public class UpdateProccesorThread extends Thread {
 			preL= pceScope.getPre_L();
 			preS= pceScope.getPre_S();
 			preY= pceScope.getPre_Y();
-			log.info("PCE Scope [PreR:" +preR +"  PreL:" +preL + "  PreS:" +preS + "  PreY:" +preY +" ]");
+			//log.info("PCE Scope [PreR:" +preR +"  PreL:" +preL + "  PreS:" +preS + "  PreY:" +preY +" ]");
 		}
 		else
 			log.info("PCE scope is null");
 
 
 		if (pceNLRI.getPCEv4DomainID()!=null){
-			log.info("number of domain contained "+  String.valueOf(pceNLRI.getPCEv4DomainID().getAreaIDSubTLVs().size()));
+			//log.info("number of domain contained "+  String.valueOf(pceNLRI.getPCEv4DomainID().getAreaIDSubTLVs().size()));
 			PCEv4DomainTLV domTLV= pceNLRI.getPCEv4DomainID();
 
 			//ArrayList<AreaIDNodeDescriptorSubTLV> arealist = ;
 			for (AreaIDNodeDescriptorSubTLV area: domTLV.getAreaIDSubTLVs()){
-				log.info("Area ID Received: "+area.getAREA_ID().getHostAddress());
+				//log.info("Area ID Received: "+area.getAREA_ID().getHostAddress());
 				if (!localDomains.contains(area.getAREA_ID())){
-					log.info("Not Present, Added");
+					//log.info("Not Present, Added");
 					sb.append("Local Area: "+area.toString());
 					localDomains.add(area.getAREA_ID());
 				}
@@ -1146,7 +1146,7 @@ public class UpdateProccesorThread extends Thread {
 		if (pceNLRI.getPCEv4Descriptors()!=null){
 			PCEv4DescriptorsTLV pceTLV= pceNLRI.getPCEv4Descriptors();
 			PCEip = pceTLV.getPCEv4Address();
-			log.info("   PCE IP  :   "+PCEip);
+			//log.info("   PCE IP  :   "+PCEip);
 			MDPCE.setPCEipv4(PCEip);
 		}
 
@@ -1191,7 +1191,7 @@ public class UpdateProccesorThread extends Thread {
 					simpleTEDB.setNeighDomains(NeighDomains);
 					simpleTEDB.setDomainID(domain);
 					simpleTEDB.setPCEScope(pceScope);
-					log.info("Received 2 PCE info for domain/AS "+sb.toString()+" from peer "+learntFrom+": "+simpleTEDB.getMDPCE().getPCEipv4().getHostAddress());
+					log.info("Received PCE info for domain/AS "+sb.toString()+" from peer "+learntFrom+": "+simpleTEDB.getMDPCE().getPCEipv4().getHostAddress());
 					setMDPCEupdateTime (localDomains, PCEip, learntFrom);
 				}
 			}

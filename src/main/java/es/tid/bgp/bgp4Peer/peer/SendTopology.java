@@ -1360,7 +1360,7 @@ public class SendTopology implements Runnable {
 				}
 			}
 			pathAttributes.add(ra);
-			log.info(ra.toString());
+			//log.info(ra.toString());
 			return update;
 
 		} catch (Exception e) {
