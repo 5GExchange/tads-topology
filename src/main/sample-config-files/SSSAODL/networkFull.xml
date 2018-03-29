@@ -9,7 +9,7 @@
 			<ipv4_address>172.16.103.0</ipv4_address>
 			<prefix>24</prefix>
 		</reachability_entry-->
-		<mdpce>
+		<!--mdpce>
 			<ipv4>192.168.1.1</ipv4>
 
 		</mdpce>
@@ -19,7 +19,7 @@
 			<cpu>100</cpu>
 			<mem>100Gbyte</mem>
 			<storage>100Tbyte</storage>
-		</it_resources>
+		</it_resources-->
 		<node>
 			<router_id>172.16.103.101</router_id>
 			<name>router1_000</name>
