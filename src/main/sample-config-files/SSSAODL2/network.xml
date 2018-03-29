@@ -7,7 +7,7 @@
 		<node>
 			<router_id>3.3.3.3</router_id>
 		</node>
-		<mdpce>
+		<!--mdpce>
 			<ipv4>192.168.2.1</ipv4>
 
 		</mdpce>
@@ -17,7 +17,7 @@
 			<cpu>200</cpu>
 			<mem>200Gbyte</mem>
 			<storage>200Tbyte</storage>
-		</it_resources>
+		</it_resources-->
 
 		<edge>
 			<source>
@@ -53,11 +53,5 @@
    			<undir_utilized_bandwidth>436</undir_utilized_bandwidth>
 		</edge>
 	</domain>
-	<!--domain>
-		<domain_id>0.0.253.232</domain_id>
 
-		<node>
-			<router_id>2.2.2.2</router_id>
-		</node>
-	</domain-->
 </network>
