@@ -1074,7 +1074,8 @@ public class UpdateProccesorThread extends Thread {
 	*/
         log.info("Received MDPCE Information");
 		DomainTEDB domainTEDB= null;
-		PCEInfo MDPCE= new PCEInfo();
+		PCEInfo MDPCE=
+				new PCEInfo();
 		PCEv4ScopeTLV pceScope= new PCEv4ScopeTLV();
 		Inet4Address PCEip = null;
 		Inet4Address domainID = null;
@@ -1099,9 +1100,12 @@ public class UpdateProccesorThread extends Thread {
 			preY= pceScope.getPre_Y();
 			log.info("PCE Scope [PreR:" +preR +"  PreL:" +preL + "  PreS:" +preS + "  PreY:" +preY +" ]");
 		}
+		else
+			log.info("PCE scope is null");
+
 
 		if (pceNLRI.getPCEv4DomainID()!=null){
-			log.info("number of domain contained"+  String.valueOf(pceNLRI.getPCEv4DomainID().getAreaIDSubTLVs().size()));
+			log.info("number of domain contained "+  String.valueOf(pceNLRI.getPCEv4DomainID().getAreaIDSubTLVs().size()));
 			PCEv4DomainTLV domTLV= pceNLRI.getPCEv4DomainID();
 
 			//ArrayList<AreaIDNodeDescriptorSubTLV> arealist = ;
@@ -1153,8 +1157,6 @@ public class UpdateProccesorThread extends Thread {
 				simpleTEDB = (SimpleTEDB) domainTEDB;
 				if (simpleTEDB.getMDPCE() != null)
 					MDPCE = simpleTEDB.getMDPCE();
-				else
-					log.info("Finito nell'else");
 				if(simpleTEDB.getMDPCE().getLearntFrom()==null || simpleTEDB.getMDPCE().getLearntFrom().equals(learntFrom))
 				{
 					simpleTEDB.setMDPCE(MDPCE);
