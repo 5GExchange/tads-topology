@@ -55,7 +55,7 @@ public class TMModuleInitiater {
 			{
 				//Thread.sleep(8000);
 				TMPlugin p = new TopologyReaderXML(ted, actualLittleParams,lock);
-				System.out.println("Andrea............................................Topology Reader");
+				System.out.println("dev. Andrea Sgambelluri");
 				executor.execute(p);
 				//executor.schedule (p, 20, TimeUnit.SECONDS);
 				//executor.schedule (p, 5, TimeUnit.SECONDS);

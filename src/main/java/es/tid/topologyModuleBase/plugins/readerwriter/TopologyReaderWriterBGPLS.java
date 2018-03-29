@@ -39,7 +39,7 @@ public class TopologyReaderWriterBGPLS extends TopologyReaderWriter{
         BGPPeer bgpPeer = new BGPPeer();
         bgpPeer.configure(params.getBGPSConfigurationFile());
 
-        log.info("777777777777777777777777777777777777777777777777777num of domain in teds :"+ String.valueOf(ted.getTeds().size()));
+        //log.info("777777777777777777777777777777777777777777777777777num of domain in teds :"+ String.valueOf(ted.getTeds().size()));
 
         bgpPeer.setIntraTEDBs(ted.getTeds());
         bgpPeer.setMultiDomainTEDB(ted.getMdTed());

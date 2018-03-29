@@ -133,9 +133,9 @@ public class TopologyModuleParamsArray
 				littleParams.setNetworkDescriptionFile(getCharacterDataFromElement(((Element) nodes_xml.getElementsByTagName("XMLFileTopology").item(0))));
 				littleParams.setXML(true);
 				if (littleParams.getModexml().equals("TM")){
-					log.info("..................................................XML mode: "+littleParams.getModexml()+".");
+					//log.info("..................................................XML mode: "+littleParams.getModexml()+".");
 					littleParams.setIdentifier(getCharacterDataFromElement(((Element) nodes_xml.getElementsByTagName("Identifier").item(0))));
-					log.info("..................................................XML mode: "+littleParams.getIdentifier());
+					//log.info("..................................................XML mode: "+littleParams.getIdentifier());
 					littleParams.setLoadIntraTopology(Boolean.parseBoolean(getCharacterDataFromElement(((Element) nodes_xml.getElementsByTagName("intra").item(0)))));
 					if (littleParams.getLoadIntraTopology())
 						log.info("Set read intra topology from file");
@@ -143,7 +143,7 @@ public class TopologyModuleParamsArray
 						log.info("Topology read from dataplane");
 
 				}
-				log.info("..................................................XML configured with file: "+littleParams.getNetworkDescriptionFile()+" with identifier "+
+				log.info("XML configured with file: "+littleParams.getNetworkDescriptionFile()+" with identifier "+
 						littleParams.getIdentifier());
 				paramList.add(littleParams);
 
