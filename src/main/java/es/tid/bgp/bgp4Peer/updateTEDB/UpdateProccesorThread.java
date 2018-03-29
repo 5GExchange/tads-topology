@@ -1155,7 +1155,7 @@ public class UpdateProccesorThread extends Thread {
 			domainTEDB=(DomainTEDB)intraTEDBs.get(domain.getHostAddress());
 			if (domainTEDB instanceof SimpleTEDB) {
 				simpleTEDB = (SimpleTEDB) domainTEDB;
-				if (simpleTEDB.getMDPCE() != null)
+				if ((simpleTEDB!=null)&&(simpleTEDB.getMDPCE() != null))
 					MDPCE = simpleTEDB.getMDPCE();
 				if(simpleTEDB.getMDPCE().getLearntFrom()==null || simpleTEDB.getMDPCE().getLearntFrom().equals(learntFrom))
 				{
