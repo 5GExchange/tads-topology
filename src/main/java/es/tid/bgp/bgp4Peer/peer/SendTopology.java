@@ -174,7 +174,7 @@ public class SendTopology implements Runnable {
 
 									if (((DomainTEDB) ted).getMDPCE() != null && domainID != null) {
 										log.info("Sending MDPCE address for Domain " + domainID + " with IP: " + ((DomainTEDB) ted).getMDPCE().getPCEipv4().getHostAddress());
-										//sendMDPCENLRI(domainID, ((DomainTEDB) ted).getMDPCE(), ((DomainTEDB) ted).getMDPCE().getLearntFrom());
+										sendMDPCENLRI(domainID, ((DomainTEDB) ted).getMDPCE(), ((DomainTEDB) ted).getMDPCE().getLearntFrom());
 									}
 
 								}
@@ -1566,55 +1566,7 @@ public class SendTopology implements Runnable {
             log.debug("Node update: "+update.toString());
             return update;
 
-            /*
-			//NLRI
-			PCENLRI pceNLRI = new PCENLRI();
-			pceNLRI.setProtocolID(ProtocolIDCodes.Static_Protocol_ID);
-			pceNLRI.setRoutingUniverseIdentifier(identifier);
-			//PCE descriptor
-			PCEv4DescriptorsTLV pcev4 = new PCEv4DescriptorsTLV();
-			pcev4.setPCEv4Address(IP.getPCEipv4());
-			pceNLRI.setPCEv4Descriptors(pcev4);
 
-			//PCE Scope SubTLV
-			PCEv4ScopeTLV pcev4scope= new PCEv4ScopeTLV();
-			pcev4scope.setPre_L(5);
-			pcev4scope.setPre_R(3);
-			pcev4scope.setPre_S(4);
-			pcev4scope.setPre_Y(1);
-			pceNLRI.setPCEv4ScopeTLV(pcev4scope);
-			log.info("Creating PCE Update related to Domain "+domainID);
-
-			//Domain TLV
-			PCEv4DomainTLV domTLV= new PCEv4DomainTLV();
-			AreaIDNodeDescriptorSubTLV domID =new AreaIDNodeDescriptorSubTLV();
-			domainIDx = domainID.replace("/", "");
-			log.debug(domainIDx);
-			//domID.setAREA_ID((Inet4Address) forString(domainIDx));
-			//domID.setAREA_ID((Inet4Address) Inet4Address.getByName(domainID)));
-			domID.setAREA_ID((Inet4Address) Inet4Address.getByName(domainIDx));
-			//domTLV.addAreaIDSubTLV(domID);
-
-			ArrayList<AreaIDNodeDescriptorSubTLV> list = new ArrayList<AreaIDNodeDescriptorSubTLV>();
-			list.add(domID);
-			domTLV.setAreaIDSubTLVs(list);
-			//domTLV.getAreaIDSubTLVs().add(domID);
-			pceNLRI.setPCEv4DomainID(domTLV);
-
-			//add NLRI to BGP-LS
-			BGP_LS_MP_Reach_Attribute ra= new BGP_LS_MP_Reach_Attribute();
-			ra.setLsNLRI(pceNLRI);
-			if ((learntFrom!="local")&&(learntFrom!=null)){
-				try {
-					ra.setNextHop(InetAddress.getByName(learntFrom.replaceAll("/","")));
-				} catch (UnknownHostException e) {
-					e.printStackTrace();
-				}
-			}
-			pathAttributes.add(ra);
-			//log.info(ra.toString());
-			return update;
-*/
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
