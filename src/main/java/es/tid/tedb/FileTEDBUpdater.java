@@ -1346,7 +1346,9 @@ public class FileTEDBUpdater {
 
 						NodeList ipList = element.getElementsByTagName("pce_ipv4");
 						Element ipElement = (Element) ipList.item(0);
-						String MDIP = getCharacterDataFromElement(ipElement);
+						String MDIP = null;
+						if (ipElement!=null)
+							MDIP=getCharacterDataFromElement(ipElement);
 
 						log.info("load MDPCE of " + domain_id+" with IP "+ MDIP);
 						NodeList neighs = element.getElementsByTagName("neighbor");

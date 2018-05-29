@@ -174,7 +174,7 @@ public class SendTopology implements Runnable {
 
 									if (((DomainTEDB) ted).getMDPCE() != null && domainID != null) {
 										log.info("Sending MDPCE address for Domain " + domainID + " with IP: " + ((DomainTEDB) ted).getMDPCE().getPCEipv4().getHostAddress());
-										sendMDPCENLRI(domainID, ((DomainTEDB) ted).getMDPCE(), ((DomainTEDB) ted).getMDPCE().getLearntFrom());
+										//sendMDPCENLRI(domainID, ((DomainTEDB) ted).getMDPCE(), ((DomainTEDB) ted).getMDPCE().getLearntFrom());
 									}
 
 								}
