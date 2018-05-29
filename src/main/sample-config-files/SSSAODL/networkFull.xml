@@ -9,6 +9,15 @@
 			<ipv4_address>172.16.103.0</ipv4_address>
 			<prefix>24</prefix>
 		</reachability_entry-->
+
+		<mdpce>
+			<pce_ipv4>172.16.103.44</pce_ipv4>
+			<neighbor>
+				<neig_as>0.0.253.233</neig_as>
+				<neig_ipv4>192.168.21.254</neig_ipv4>
+			</neighbor>
+		</mdpce>
+
 		<!--mdpce>
 			<ipv4>192.168.1.1</ipv4>
 

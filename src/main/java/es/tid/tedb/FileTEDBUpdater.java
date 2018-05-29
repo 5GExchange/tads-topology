@@ -1344,11 +1344,25 @@ public class FileTEDBUpdater {
 
 						Element element = (Element) mdPCE.item(i);
 
-						NodeList ipList = element.getElementsByTagName("ipv4");
+						NodeList ipList = element.getElementsByTagName("pce_ipv4");
 						Element ipElement = (Element) ipList.item(0);
 						String MDIP = getCharacterDataFromElement(ipElement);
 
 						log.info("load MDPCE of " + domain_id+" with IP "+ MDIP);
+						NodeList neighs = element.getElementsByTagName("neighbor");
+						for (int kj = 0; kj < neighs.getLength(); kj++) {
+							Element neigh_e = (Element) neighs.item(kj);
+							NodeList neigh_as = neigh_e.getElementsByTagName("neig_as");
+							Element nAS_e = (Element) neigh_as.item(0);
+							String nAS = getCharacterDataFromElement(nAS_e);
+							NodeList neigh_ips = neigh_e.getElementsByTagName("neig_ipv4");
+							Element neig_ipv4_e = (Element) neigh_ips.item(0);
+							String nip = getCharacterDataFromElement(neig_ipv4_e);
+							log.info("Loading mdpce conf: neig as " + nAS+ " and neig ip"+ nip);
+							if (!pce.getNeighbours().containsKey((Inet4Address) InetAddress.getByName(nAS)))
+								pce.getNeighbours().put((Inet4Address) InetAddress.getByName(nAS), (Inet4Address) InetAddress.getByName(nip));
+						}
+
 						pce.setPCEipv4((Inet4Address) InetAddress.getByName(MDIP));
 						pce.setLearntFrom(learntFrom); //to be confirmed
 						tedb.setMDPCE(pce);
@@ -2212,8 +2226,37 @@ public class FileTEDBUpdater {
 				//SimpleTEDB tedb = new SimpleTEDB();
 				//SimpleDirectedWeightedGraph<Object, IntraDomainEdge> graph = new SimpleDirectedWeightedGraph<Object, IntraDomainEdge>(IntraDomainEdge.class);
 
+				PCEInfo pce= new PCEInfo();
+				NodeList mdPCE = element1.getElementsByTagName("mdpce");
+				for (int i = 0; i < mdPCE.getLength(); i++) {
 
+					Element element = (Element) mdPCE.item(i);
 
+					NodeList ipList = element.getElementsByTagName("pce_ipv4");
+					Element ipElement = (Element) ipList.item(0);
+					String MDIP = getCharacterDataFromElement(ipElement);
+
+					log.info("load MDPCE of " + domain_id+" with IP "+ MDIP);
+					NodeList neighs = element.getElementsByTagName("neighbor");
+					for (int kj = 0; kj < neighs.getLength(); kj++) {
+						Element neigh_e = (Element) neighs.item(kj);
+						NodeList neigh_as = neigh_e.getElementsByTagName("neig_as");
+						Element nAS_e = (Element) neigh_as.item(0);
+						String nAS = getCharacterDataFromElement(nAS_e);
+						NodeList neigh_ips = neigh_e.getElementsByTagName("neig_ipv4");
+						Element neig_ipv4_e = (Element) neigh_ips.item(0);
+						String nip = getCharacterDataFromElement(neig_ipv4_e);
+						log.info("Loading mdpce conf: neig as " + nAS+ " and neig ip"+ nip);
+						if (!pce.getNeighbours().containsKey((Inet4Address) InetAddress.getByName(nAS)))
+							pce.getNeighbours().put((Inet4Address) InetAddress.getByName(nAS), (Inet4Address) InetAddress.getByName(nip));
+					}
+
+					pce.setPCEipv4((Inet4Address) InetAddress.getByName(MDIP));
+					pce.setLearntFrom(learntFrom); //to be confirmed
+					tedb.setMDPCE(pce);
+
+				}
+				/*
 				PCEInfo pce= new PCEInfo();
 				NodeList mdPCE = element1.getElementsByTagName("mdpce");
 				for (int i = 0; i < mdPCE.getLength(); i++) {
@@ -2230,7 +2273,7 @@ public class FileTEDBUpdater {
 					tedb.setMDPCE(pce);
 
 				}
-
+				*/
 				NodeList itResourcesElement = element1.getElementsByTagName("it_resources");
 				for (int i = 0; i < itResourcesElement.getLength(); i++) {
 					Element element = (Element) itResourcesElement.item(i);
@@ -3499,11 +3542,25 @@ public class FileTEDBUpdater {
 
 						Element element = (Element) mdPCE.item(i);
 
-						NodeList ipList = element.getElementsByTagName("ipv4");
+						NodeList ipList = element.getElementsByTagName("pce_ipv4");
 						Element ipElement = (Element) ipList.item(0);
 						String MDIP = getCharacterDataFromElement(ipElement);
 
-						log.info("adding MDPCE of " + domain_id+" with IP "+ MDIP);
+						log.info("load MDPCE of " + domain_id+" with IP "+ MDIP);
+						NodeList neighs = element.getElementsByTagName("neighbor");
+						for (int kj = 0; kj < neighs.getLength(); kj++) {
+							Element neigh_e = (Element) neighs.item(kj);
+							NodeList neigh_as = neigh_e.getElementsByTagName("neig_as");
+							Element nAS_e = (Element) neigh_as.item(0);
+							String nAS = getCharacterDataFromElement(nAS_e);
+							NodeList neigh_ips = neigh_e.getElementsByTagName("neig_ipv4");
+							Element neig_ipv4_e = (Element) neigh_ips.item(0);
+							String nip = getCharacterDataFromElement(neig_ipv4_e);
+							log.info("Loading mdpce conf: neig as " + nAS+ " and neig ip"+ nip);
+							if (!pce.getNeighbours().containsKey((Inet4Address) InetAddress.getByName(nAS)))
+								pce.getNeighbours().put((Inet4Address) InetAddress.getByName(nAS), (Inet4Address) InetAddress.getByName(nip));
+						}
+
 						pce.setPCEipv4((Inet4Address) InetAddress.getByName(MDIP));
 						pce.setLearntFrom(LearntFrom); //to be confirmed
 						tedb.setMDPCE(pce);

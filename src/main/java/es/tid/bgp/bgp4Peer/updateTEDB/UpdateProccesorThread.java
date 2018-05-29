@@ -91,6 +91,7 @@ public class UpdateProccesorThread extends Thread {
 	 * */
 	NodeFlagBitsNodeAttribTLV nodeFlagBitsTLV = new NodeFlagBitsNodeAttribTLV();
 	NodeNameNodeAttribTLV nodeNameTLV = new NodeNameNodeAttribTLV();
+	OpaqueNodeNodeAttribTLV opaqueNodeTLV= new OpaqueNodeNodeAttribTLV();
 	IS_IS_AreaIdentifierNodeAttribTLV areaIDTLV = new IS_IS_AreaIdentifierNodeAttribTLV();
 	SidLabelNodeAttribTLV sidTLV = new SidLabelNodeAttribTLV();
 
@@ -364,6 +365,9 @@ public class UpdateProccesorThread extends Thread {
 		}
 		if(lsAtt.getNodeNameTLV() != null){
 			nodeNameTLV = lsAtt.getNodeNameTLV();
+		}
+		if(lsAtt.getOpaqueNodeTLV() != null){
+			opaqueNodeTLV = lsAtt.getOpaqueNodeTLV();
 		}
 		if(lsAtt.getAreaIDTLV() != null){
 			areaIDTLV = lsAtt.getAreaIDTLV();
@@ -1074,8 +1078,7 @@ public class UpdateProccesorThread extends Thread {
 	*/
         log.info("Received MDPCE Information");
 		DomainTEDB domainTEDB= null;
-		PCEInfo MDPCE=
-				new PCEInfo();
+		PCEInfo MDPCE=new PCEInfo();
 		PCEv4ScopeTLV pceScope= new PCEv4ScopeTLV();
 		Inet4Address PCEip = null;
 		Inet4Address domainID = null;
@@ -1267,6 +1270,10 @@ public class UpdateProccesorThread extends Thread {
 		long IGPIDint=0L;
 		Node_Info node_info = null;
 		Hashtable<Object, Node_Info> NodeTable;
+		ArrayList<Inet4Address> localDomains = new ArrayList<Inet4Address>();
+		ArrayList<Inet4Address> localASs = new ArrayList<Inet4Address>();
+		ArrayList<Inet4Address> NeighDomains = new ArrayList<Inet4Address>();
+		ArrayList<Inet4Address> NeighASs = new ArrayList<Inet4Address>();
 
 		log.info("Received Node Information");
 
@@ -1314,6 +1321,41 @@ public class UpdateProccesorThread extends Thread {
 			if(node_info.getLearntFrom()==null || node_info.getLearntFrom().equals(learntFrom)) {
 				log.debug("Learnt From: " + learntFrom);
 
+
+				if (opaqueNodeTLV != null) {
+
+					log.info("Receiving PCE info new xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+					PCEInfo MDPCE= new PCEInfo();
+
+
+					if((simpleTEDB.getMDPCE()==null) || (simpleTEDB.getMDPCE().getLearntFrom()==null) || (simpleTEDB.getMDPCE().getLearntFrom().equals(learntFrom))) {
+
+
+						if (iPv4RouterIDLocalNodeLATLV != null)
+							MDPCE.setPCEipv4(iPv4RouterIDLocalNodeLATLV.getIpv4Address());
+						if (as_number != null){
+							MDPCE.setdomainID(as_number.getHostAddress());
+							localDomains.add(as_number);
+						}
+						MDPCE.setNeighbours(opaqueNodeTLV.getNeighbours());
+						MDPCE.setLearntFrom(learntFrom);
+
+						simpleTEDB.setMDPCE(MDPCE);
+						simpleTEDB.getMDPCE().setLearntFrom(learntFrom);
+						simpleTEDB.setLocalDomains(localDomains);
+						simpleTEDB.setLocalASs(localASs);
+
+						simpleTEDB.setNeighASs(NeighASs);
+						simpleTEDB.setNeighDomains(NeighDomains);
+						//simpleTEDB.setDomainID(domain);
+						//simpleTEDB.setPCEScope(pceScope);
+
+						setMDPCEupdateTime (localDomains , iPv4RouterIDLocalNodeLATLV.getIpv4Address(), learntFrom);
+
+					}
+				}
+
+
 				if (nodeNLRI.getLocalNodeDescriptors().getAreaID() != null) {
 					areaID = nodeNLRI.getLocalNodeDescriptors().getAreaID().getAREA_ID();
 				}
@@ -1355,6 +1397,7 @@ public class UpdateProccesorThread extends Thread {
 					log.debug("Adding name of Local Node to Table.... -> "+ new String (nodeNameTLV.getName()));
 					node_info.setName(nodeNameTLV.getName());
 				}
+
 
 				if (areaIDTLV != null) {
 					log.debug("Adding AreaID of Local node to table....with len "+String.valueOf(areaIDTLV.getValid_len()));

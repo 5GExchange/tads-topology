@@ -9,8 +9,6 @@ import es.tid.bgp.bgp4.update.tlv.linkstate_attribute_tlvs.*;
 import es.tid.bgp.bgp4.update.tlv.node_link_prefix_descriptor_subTLVs.*;
 import es.tid.bgp.bgp4Peer.bgp4session.BGP4SessionsInformation;
 import es.tid.bgp.bgp4Peer.bgp4session.GenericBGP4Session;
-import es.tid.bgp.bgp4Peer.updateTEDB.InterDomainLinkUpdateTime;
-import es.tid.of.DataPathID;
 import es.tid.ospf.ospfv2.OSPFv2LinkStateUpdatePacket;
 import es.tid.ospf.ospfv2.lsa.LSA;
 import es.tid.ospf.ospfv2.lsa.LSATypes;
@@ -19,7 +17,6 @@ import es.tid.ospf.ospfv2.lsa.tlv.LinkTLV;
 import es.tid.ospf.ospfv2.lsa.tlv.subtlv.*;
 import es.tid.ospf.ospfv2.lsa.tlv.subtlv.complexFields.BitmapLabelSet;
 import es.tid.tedb.*;
-import es.tid.tedb.elements.Node;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -1275,6 +1272,357 @@ public class SendTopology implements Runnable {
 		
 	}
 
+	/*
+	private BGP4Update createMsgUpdateNodeNLRI(Node_Info node_info, String learntFrom) {
+		try {
+
+
+			BGP4Update update = new BGP4Update();
+			//Path Attributes
+			ArrayList<PathAttribute> pathAttributes = update.getPathAttributes();
+
+			//Origin
+			OriginAttribute or = new OriginAttribute();
+			or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
+			pathAttributes.add(or);
+			//AS_PATH
+
+
+			if (send4AS == true) {
+				AS4_Path_Attribute as_path = new AS4_Path_Attribute();
+				AS4_Path_Segment as_path_seg = new AS4_Path_Segment();
+				long[] segs = new long[1];
+				segs[0] = ASnumber;
+				as_path_seg.setSegments(segs);
+				//as_path.getAsPathSegments().add(as_path_seg);
+				pathAttributes.add(as_path);
+			} else {
+				AS_Path_Attribute as_path = new AS_Path_Attribute();
+				AS_Path_Segment as_path_seg = new AS_Path_Segment();
+				int[] segs = new int[1];
+				segs[0] = ASnumber;
+				as_path_seg.setSegments(segs);
+				//as_path.getAsPathSegments().add(as_path_seg);
+				pathAttributes.add(as_path);
+			}
+
+
+			//LOCAL PREF Attribute
+			LOCAL_PREF_Attribute as_local_pref = new LOCAL_PREF_Attribute();
+			as_local_pref.setValue(LocalPref);
+			pathAttributes.add(as_local_pref);
+
+			//Node Attribute
+
+			LinkStateAttribute linkStateAttribute = new LinkStateAttribute();
+			boolean linkStateNeeded = false;
+
+			if (node_info.getSid() != 0) {
+				int sid = node_info.getSid();
+				SidLabelNodeAttribTLV sidLabelTLV = new SidLabelNodeAttribTLV();
+				sidLabelTLV.setSid(sid);
+				linkStateAttribute.setSidLabelTLV(sidLabelTLV);
+				linkStateNeeded = true;
+			}
+
+
+			if (node_info.getName() != null) {
+				log.debug("Sending node name: "+new String (node_info.getName()));
+				NodeNameNodeAttribTLV nna = new NodeNameNodeAttribTLV();
+				nna.setNameb(node_info.getName());
+				linkStateAttribute.setNodeNameTLV(nna);
+				linkStateNeeded=true;
+			}
+
+
+
+
+	if (node_info.getArea_id()!=null){
+		byte[] address = null;
+		address=new byte[4];
+		Inet4Address idarea = null;
+		System.arraycopy(node_info.getArea_id(),0, address, 0, 4);
+		try {
+			idarea= (Inet4Address) Inet4Address.getByAddress(address);
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		IPv4RouterIDLocalNodeNodeAttribTLV ipv4Id = new IPv4RouterIDLocalNodeNodeAttribTLV();
+		ipv4Id.setIpv4Address(idarea);
+		linkStateAttribute.setIPv4RouterIDLocalNodeNATLV(ipv4Id);
+		linkStateNeeded=true;
+	}
+	else
+			log.debug("area is null");
+	if (node_info.getIpv4Address()!=null){
+		Inet4Address ip = node_info.getIpv4Address();
+		IPv4RouterIDLocalNodeNodeAttribTLV ipv4Id = new IPv4RouterIDLocalNodeNodeAttribTLV();
+		ipv4Id.setIpv4Address(ip);
+		log.debug("adding router id");
+		linkStateAttribute.setIPv4RouterIDLocalNodeNATLV(ipv4Id);
+		linkStateNeeded=true;
+	}
+
+
+	if (linkStateNeeded) {
+		log.debug("Node Attribute added....");
+		pathAttributes.add(linkStateAttribute);
+	}
+
+	//NLRI
+	NodeNLRI nodeNLRI = new NodeNLRI();
+	nodeNLRI.setProtocolID(ProtocolIDCodes.OSPF_Protocol_ID);
+	nodeNLRI.setRoutingUniverseIdentifier(identifier);
+	LocalNodeDescriptorsTLV localNodeDescriptors = new LocalNodeDescriptorsTLV();
+
+	//igp router id
+	if (node_info.getIpv4Address() != null) {
+		IGPRouterIDNodeDescriptorSubTLV igpRouterIDLNSubTLV = new IGPRouterIDNodeDescriptorSubTLV();
+		igpRouterIDLNSubTLV.setIpv4AddressOSPF(node_info.getIpv4Address());
+		igpRouterIDLNSubTLV.setIGP_router_id_type(IGPRouterIDNodeDescriptorSubTLV.IGP_ROUTER_ID_TYPE_OSPF_NON_PSEUDO);
+		localNodeDescriptors.setIGPRouterID(igpRouterIDLNSubTLV);
+
+	}
+
+	//as number
+	if (node_info.getAs_number() != null) {
+		AutonomousSystemNodeDescriptorSubTLV asNodeDescrSubTLV = new AutonomousSystemNodeDescriptorSubTLV();
+		asNodeDescrSubTLV.setAS_ID(node_info.getAs_number());
+		localNodeDescriptors.setAutonomousSystemSubTLV(asNodeDescrSubTLV);
+	}
+	//Complete Dummy TLVs
+	//BGPLSIdentifierNodeDescriptorSubTLV bGPLSIDSubTLV = new BGPLSIdentifierNodeDescriptorSubTLV();
+	//bGPLSIDSubTLV.setBGPLS_ID(this.localBGPLSIdentifer);
+	//localNodeDescriptors.setBGPLSIDSubTLV(bGPLSIDSubTLV);
+	AreaIDNodeDescriptorSubTLV areaID = new AreaIDNodeDescriptorSubTLV();
+	areaID.setAREA_ID(this.localAreaID);
+	//commented for compliance with ODL
+	// localNodeDescriptors.setAreaID(areaID);
+
+	nodeNLRI.setLocalNodeDescriptors(localNodeDescriptors);
+	BGP_LS_MP_Reach_Attribute ra = new BGP_LS_MP_Reach_Attribute();
+	ra.setLsNLRI(nodeNLRI);
+	if ((learntFrom!="local")&&(learntFrom!=null)){
+		try {
+			ra.setNextHop(InetAddress.getByName(learntFrom.replaceAll("/","")));
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}//aaaa
+	}
+	pathAttributes.add(ra);
+	update.setLearntFrom(node_info.getLearntFrom());
+	log.debug("Node update: "+update.toString());
+	return update;
+} catch (Exception e) {
+		e.printStackTrace();
+		return null;
+		}
+
+		}
+
+	*/
+
+
+	private  BGP4Update createMsgUpdateMDPCENLRI(String domainID, PCEInfo IP, String learntFrom){
+		try{
+
+			BGP4Update update = new BGP4Update();
+			//Path Attributes
+			ArrayList<PathAttribute> pathAttributes = update.getPathAttributes();
+
+			//Origin
+			OriginAttribute or = new OriginAttribute();
+			or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
+			pathAttributes.add(or);
+			//AS_PATH
+
+
+			if (send4AS == true) {
+				AS4_Path_Attribute as_path = new AS4_Path_Attribute();
+				AS4_Path_Segment as_path_seg = new AS4_Path_Segment();
+				long[] segs = new long[1];
+				segs[0] = ASnumber;
+				as_path_seg.setSegments(segs);
+				//as_path.getAsPathSegments().add(as_path_seg);
+				pathAttributes.add(as_path);
+			} else {
+				AS_Path_Attribute as_path = new AS_Path_Attribute();
+				AS_Path_Segment as_path_seg = new AS_Path_Segment();
+				int[] segs = new int[1];
+				segs[0] = ASnumber;
+				as_path_seg.setSegments(segs);
+				//as_path.getAsPathSegments().add(as_path_seg);
+				pathAttributes.add(as_path);
+			}
+
+
+			//LOCAL PREF Attribute
+			LOCAL_PREF_Attribute as_local_pref = new LOCAL_PREF_Attribute();
+			as_local_pref.setValue(LocalPref);
+			pathAttributes.add(as_local_pref);
+
+            //Node Attribute
+
+            LinkStateAttribute linkStateAttribute = new LinkStateAttribute();
+            boolean linkStateNeeded = false;
+
+
+			/*if (node_info.getName() != null) {
+				log.info("the name is "+new String(node_info.getName()));
+				NodeNameNodeAttribTLV nna = new NodeNameNodeAttribTLV();
+				//nna.setName(new String(node_info.getName()));
+				log.info("adding node name");
+				linkStateAttribute.setNodeNameTLV(nna);
+				linkStateNeeded=true;
+				log.info("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww "+linkStateAttribute.getNodeNameTLV().toString());
+			}
+
+
+            if (node_info.getArea_id()!=null){
+                byte[] address = null;
+                address=new byte[4];
+                Inet4Address idarea = null;
+                System.arraycopy(node_info.getArea_id(),0, address, 0, 4);
+                try {
+                    idarea= (Inet4Address) Inet4Address.getByAddress(address);
+                } catch (UnknownHostException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                IPv4RouterIDLocalNodeNodeAttribTLV ipv4Id = new IPv4RouterIDLocalNodeNodeAttribTLV();
+                ipv4Id.setIpv4Address(idarea);
+                linkStateAttribute.setIPv4RouterIDLocalNodeNATLV(ipv4Id);
+                linkStateNeeded=true;
+            }
+            else
+                log.debug("area is null");
+            */
+            if (IP.getPCEipv4()!=null){
+                Inet4Address ip = IP.getPCEipv4();
+                IPv4RouterIDLocalNodeNodeAttribTLV ipv4Id = new IPv4RouterIDLocalNodeNodeAttribTLV();
+                ipv4Id.setIpv4Address(ip);
+                log.debug("adding router id");
+                linkStateAttribute.setIPv4RouterIDLocalNodeNATLV(ipv4Id);
+                linkStateNeeded=true;
+            }
+
+
+            if (IP.getNeighbours() != null) {
+                log.info("Sending opaque node: ");
+                OpaqueNodeNodeAttribTLV ona = new OpaqueNodeNodeAttribTLV();
+                ona.setNeighbours(IP.getNeighbours());
+                linkStateAttribute.setOpaqueNodeTLV(ona);
+                linkStateNeeded=true;
+            }
+
+            if (linkStateNeeded) {
+                log.debug("Node Attribute added....");
+                pathAttributes.add(linkStateAttribute);
+            }
+
+            //NLRI
+            NodeNLRI nodeNLRI = new NodeNLRI();
+            nodeNLRI.setProtocolID(ProtocolIDCodes.OSPF_Protocol_ID);
+            nodeNLRI.setRoutingUniverseIdentifier(identifier);
+            LocalNodeDescriptorsTLV localNodeDescriptors = new LocalNodeDescriptorsTLV();
+
+            //igp router id
+            if (IP.getPCEipv4() != null) {
+                IGPRouterIDNodeDescriptorSubTLV igpRouterIDLNSubTLV = new IGPRouterIDNodeDescriptorSubTLV();
+                igpRouterIDLNSubTLV.setIpv4AddressOSPF(IP.getPCEipv4());
+                igpRouterIDLNSubTLV.setIGP_router_id_type(IGPRouterIDNodeDescriptorSubTLV.IGP_ROUTER_ID_TYPE_OSPF_NON_PSEUDO);
+                localNodeDescriptors.setIGPRouterID(igpRouterIDLNSubTLV);
+
+            }
+
+            //as number
+            if (IP.getdomainID() != null) {
+                AutonomousSystemNodeDescriptorSubTLV asNodeDescrSubTLV = new AutonomousSystemNodeDescriptorSubTLV();
+                asNodeDescrSubTLV.setAS_ID((Inet4Address) Inet4Address.getByName(IP.getdomainID()));
+                localNodeDescriptors.setAutonomousSystemSubTLV(asNodeDescrSubTLV);
+            }
+            //Complete Dummy TLVs
+            //BGPLSIdentifierNodeDescriptorSubTLV bGPLSIDSubTLV = new BGPLSIdentifierNodeDescriptorSubTLV();
+            //bGPLSIDSubTLV.setBGPLS_ID(this.localBGPLSIdentifer);
+            //localNodeDescriptors.setBGPLSIDSubTLV(bGPLSIDSubTLV);
+            AreaIDNodeDescriptorSubTLV areaID = new AreaIDNodeDescriptorSubTLV();
+            areaID.setAREA_ID(this.localAreaID);
+            //commented for compliance with ODL
+            // localNodeDescriptors.setAreaID(areaID);
+
+            nodeNLRI.setLocalNodeDescriptors(localNodeDescriptors);
+            BGP_LS_MP_Reach_Attribute ra = new BGP_LS_MP_Reach_Attribute();
+            ra.setLsNLRI(nodeNLRI);
+            if ((learntFrom!="local")&&(learntFrom!=null)){
+                try {
+                    ra.setNextHop(InetAddress.getByName(learntFrom.replaceAll("/","")));
+                } catch (UnknownHostException e) {
+                    e.printStackTrace();
+                }//aaaa
+            }
+            pathAttributes.add(ra);
+            update.setLearntFrom(IP.getLearntFrom());
+            log.debug("Node update: "+update.toString());
+            return update;
+
+            /*
+			//NLRI
+			PCENLRI pceNLRI = new PCENLRI();
+			pceNLRI.setProtocolID(ProtocolIDCodes.Static_Protocol_ID);
+			pceNLRI.setRoutingUniverseIdentifier(identifier);
+			//PCE descriptor
+			PCEv4DescriptorsTLV pcev4 = new PCEv4DescriptorsTLV();
+			pcev4.setPCEv4Address(IP.getPCEipv4());
+			pceNLRI.setPCEv4Descriptors(pcev4);
+
+			//PCE Scope SubTLV
+			PCEv4ScopeTLV pcev4scope= new PCEv4ScopeTLV();
+			pcev4scope.setPre_L(5);
+			pcev4scope.setPre_R(3);
+			pcev4scope.setPre_S(4);
+			pcev4scope.setPre_Y(1);
+			pceNLRI.setPCEv4ScopeTLV(pcev4scope);
+			log.info("Creating PCE Update related to Domain "+domainID);
+
+			//Domain TLV
+			PCEv4DomainTLV domTLV= new PCEv4DomainTLV();
+			AreaIDNodeDescriptorSubTLV domID =new AreaIDNodeDescriptorSubTLV();
+			domainIDx = domainID.replace("/", "");
+			log.debug(domainIDx);
+			//domID.setAREA_ID((Inet4Address) forString(domainIDx));
+			//domID.setAREA_ID((Inet4Address) Inet4Address.getByName(domainID)));
+			domID.setAREA_ID((Inet4Address) Inet4Address.getByName(domainIDx));
+			//domTLV.addAreaIDSubTLV(domID);
+
+			ArrayList<AreaIDNodeDescriptorSubTLV> list = new ArrayList<AreaIDNodeDescriptorSubTLV>();
+			list.add(domID);
+			domTLV.setAreaIDSubTLVs(list);
+			//domTLV.getAreaIDSubTLVs().add(domID);
+			pceNLRI.setPCEv4DomainID(domTLV);
+
+			//add NLRI to BGP-LS
+			BGP_LS_MP_Reach_Attribute ra= new BGP_LS_MP_Reach_Attribute();
+			ra.setLsNLRI(pceNLRI);
+			if ((learntFrom!="local")&&(learntFrom!=null)){
+				try {
+					ra.setNextHop(InetAddress.getByName(learntFrom.replaceAll("/","")));
+				} catch (UnknownHostException e) {
+					e.printStackTrace();
+				}
+			}
+			pathAttributes.add(ra);
+			//log.info(ra.toString());
+			return update;
+*/
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
+	/*
 	private  BGP4Update createMsgUpdateMDPCENLRI(String domainID, PCEInfo IP, String learntFrom){
 		try{
 
@@ -1369,6 +1717,9 @@ public class SendTopology implements Runnable {
 		}
 
 	}
+
+	*/
+
 
 	private static IllegalArgumentException formatIllegalArgumentException(String format, Object... args) {
 		return new IllegalArgumentException(String.format(Locale.ROOT, format, args));

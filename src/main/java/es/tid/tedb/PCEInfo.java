@@ -1,19 +1,22 @@
 package es.tid.tedb;
 
 import java.net.Inet4Address;
+import java.util.Hashtable;
 
 public class PCEInfo {
 
 	private Inet4Address PCEipv4;
 	private String learntFrom;
 	private String domainID;
+	private Hashtable<Inet4Address, Inet4Address> neighbours = null;
 
 	/**
 	 * TEDB logger
 	 */
 	public PCEInfo()
 	{
-		//initWLANs();
+		//neighbours= new Hashtable<>();
+		neighbours=new Hashtable<Inet4Address, Inet4Address>();
 	}
 
 	public Inet4Address getPCEipv4() {
@@ -74,6 +77,17 @@ public class PCEInfo {
 
 	public void setdomainID(String ID) {
 		this.domainID = ID;
+	}
+
+	public void setNeighbours(Hashtable<Inet4Address, Inet4Address> neig)
+	{
+		this.neighbours = neig;
+
+	}
+
+
+	public Hashtable<Inet4Address, Inet4Address> getNeighbours(){
+		return this.neighbours;
 	}
 
 	
