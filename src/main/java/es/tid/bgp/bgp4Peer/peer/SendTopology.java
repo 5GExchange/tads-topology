@@ -1503,7 +1503,7 @@ public class SendTopology implements Runnable {
                 Inet4Address ip = IP.getPCEipv4();
                 IPv4RouterIDLocalNodeNodeAttribTLV ipv4Id = new IPv4RouterIDLocalNodeNodeAttribTLV();
                 ipv4Id.setIpv4Address(ip);
-                log.info("adding PCE router id");
+                log.debug("adding PCE router id");
                 linkStateAttribute.setIPv4RouterIDLocalNodeNATLV(ipv4Id);
                 linkStateNeeded=true;
             }
@@ -1513,7 +1513,7 @@ public class SendTopology implements Runnable {
                 OpaqueNodeNodeAttribTLV ona = new OpaqueNodeNodeAttribTLV();
                 ona.setNeighbours(IP.getNeighbours());
                 linkStateAttribute.setOpaqueNodeTLV(ona);
-				log.info("Sending opaque node: "+ona.toString());
+				log.debug("Sending opaque node: "+ona.toString());
                 linkStateNeeded=true;
             }
 
