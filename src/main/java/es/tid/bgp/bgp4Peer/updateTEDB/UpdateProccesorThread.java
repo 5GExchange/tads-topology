@@ -244,7 +244,7 @@ public class UpdateProccesorThread extends Thread {
 											continue;
 										case NLRITypes.Node_NLRI:
 											fillNodeInformation((NodeNLRI)(nlri), learntFrom);
-											log.info("Received Node NLRI Learnt From: "+learntFrom +">-----<" +nlri.toString());
+											log.debug("Received Node NLRI Learnt From: "+learntFrom +">-----<" +nlri.toString());
 											continue;
 										case NLRITypes.Prefix_v4_NLRI://POR HACER...
 											fillPrefixNLRI((PrefixNLRI)nlri, igpFlagBitsTLV, OSPFForwardingAddrTLV, prefixMetricTLV, routeTagTLV);
