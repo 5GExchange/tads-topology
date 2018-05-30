@@ -244,7 +244,7 @@ public class UpdateProccesorThread extends Thread {
 											continue;
 										case NLRITypes.Node_NLRI:
 											fillNodeInformation((NodeNLRI)(nlri), learntFrom);
-											log.debug("Received Node NLRI Learnt From: "+learntFrom +">-----<" +nlri.toString());
+											log.info("Received Node NLRI Learnt From: "+learntFrom +">-----<" +nlri.toString());
 											continue;
 										case NLRITypes.Prefix_v4_NLRI://POR HACER...
 											fillPrefixNLRI((PrefixNLRI)nlri, igpFlagBitsTLV, OSPFForwardingAddrTLV, prefixMetricTLV, routeTagTLV);
@@ -255,7 +255,7 @@ public class UpdateProccesorThread extends Thread {
 											log.debug("Received IT Node NLRI Learnt From: "+learntFrom +">-----<" +nlri.toString());;
 											continue;
 										case NLRITypes.PCE_NLRI:
-											log.debug("Received PCE NLRI Learnt From: "+learntFrom +">-----<" +nlri.toString());
+											log.info("Received PCE NLRI Learnt From: "+learntFrom +">-----<" +nlri.toString());
 											fillMDPCEInformation((PCENLRI)(nlri), learntFrom);
 											continue;
 										default:
@@ -1343,15 +1343,15 @@ public class UpdateProccesorThread extends Thread {
 						simpleTEDB.setMDPCE(MDPCE);
 						simpleTEDB.getMDPCE().setLearntFrom(learntFrom);
 						simpleTEDB.setLocalDomains(localDomains);
-						simpleTEDB.setLocalASs(localASs);
+						//simpleTEDB.setLocalASs(localASs);
 
-						simpleTEDB.setNeighASs(NeighASs);
-						simpleTEDB.setNeighDomains(NeighDomains);
+						//simpleTEDB.setNeighASs(NeighASs);
+						//simpleTEDB.setNeighDomains(NeighDomains);
 						//simpleTEDB.setDomainID(domain);
 						//simpleTEDB.setPCEScope(pceScope);
 
 						setMDPCEupdateTime (localDomains , iPv4RouterIDLocalNodeLATLV.getIpv4Address(), learntFrom);
-
+						return;
 					}
 				}
 
