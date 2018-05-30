@@ -1281,7 +1281,7 @@ public class UpdateProccesorThread extends Thread {
 		if (nodeNLRI.getLocalNodeDescriptors().getAutonomousSystemSubTLV()!=null){
 			as_number=nodeNLRI.getLocalNodeDescriptors().getAutonomousSystemSubTLV().getAS_ID();
 			if (as_number == null) {
-				log.debug(" As_Number is Null");
+				log.info(" As_Number is Null");
 			}
 			else{
 				log.debug("AS Number:  "+as_number.getHostAddress());

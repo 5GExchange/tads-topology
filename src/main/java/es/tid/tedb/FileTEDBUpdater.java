@@ -1367,6 +1367,7 @@ public class FileTEDBUpdater {
 
 						pce.setPCEipv4((Inet4Address) InetAddress.getByName(MDIP));
 						pce.setLearntFrom(learntFrom); //to be confirmed
+						pce.setdomainID(domain_id);
 						tedb.setMDPCE(pce);
 
 					}
