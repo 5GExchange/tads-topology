@@ -91,7 +91,7 @@ public class UpdateProccesorThread extends Thread {
 	 * */
 	NodeFlagBitsNodeAttribTLV nodeFlagBitsTLV = new NodeFlagBitsNodeAttribTLV();
 	NodeNameNodeAttribTLV nodeNameTLV = new NodeNameNodeAttribTLV();
-	OpaqueNodeNodeAttribTLV opaqueNodeTLV= new OpaqueNodeNodeAttribTLV();
+	OpaqueNodeNodeAttribTLV opaqueNodeTLV= null;
 	IS_IS_AreaIdentifierNodeAttribTLV areaIDTLV = new IS_IS_AreaIdentifierNodeAttribTLV();
 	SidLabelNodeAttribTLV sidTLV = new SidLabelNodeAttribTLV();
 
@@ -367,6 +367,7 @@ public class UpdateProccesorThread extends Thread {
 			nodeNameTLV = lsAtt.getNodeNameTLV();
 		}
 		if(lsAtt.getOpaqueNodeTLV() != null){
+			opaqueNodeTLV=new OpaqueNodeNodeAttribTLV();
 			opaqueNodeTLV = lsAtt.getOpaqueNodeTLV();
 		}
 		if(lsAtt.getAreaIDTLV() != null){
@@ -1324,7 +1325,7 @@ public class UpdateProccesorThread extends Thread {
 
 				if (opaqueNodeTLV != null) {
 
-					log.info("Receiving PCE info new xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+					log.info("Receiving PCE info new xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"+opaqueNodeTLV.toString());
 					PCEInfo MDPCE= new PCEInfo();
 
 
