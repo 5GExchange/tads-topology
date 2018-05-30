@@ -1292,7 +1292,7 @@ public class UpdateProccesorThread extends Thread {
 		if (domainTEDB instanceof SimpleTEDB){
 			simpleTEDB = (SimpleTEDB) domainTEDB;
 		}
-		else if (domainTEDB==null){
+		else if ((domainTEDB==null)&&(as_number!=null)){
 			simpleTEDB = new SimpleTEDB();
 			simpleTEDB.createGraph();
 			this.intraTEDBs.put(as_number.getHostAddress(), simpleTEDB);
