@@ -1502,7 +1502,7 @@ public class SendTopology implements Runnable {
                 Inet4Address ip = IP.getPCEipv4();
                 IPv4RouterIDLocalNodeNodeAttribTLV ipv4Id = new IPv4RouterIDLocalNodeNodeAttribTLV();
                 ipv4Id.setIpv4Address(ip);
-                log.debug("adding router id");
+                log.info("adding PCE router id");
                 linkStateAttribute.setIPv4RouterIDLocalNodeNATLV(ipv4Id);
                 linkStateNeeded=true;
             }
@@ -1563,7 +1563,7 @@ public class SendTopology implements Runnable {
             }
             pathAttributes.add(ra);
             update.setLearntFrom(IP.getLearntFrom());
-            log.debug("Node update: "+update.toString());
+            log.info("Node PCE xxxxxxxxxxxxxxxxxxxxxxxxxxxxx update: "+update.toString());
             return update;
 
 
