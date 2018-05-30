@@ -1277,16 +1277,17 @@ public class UpdateProccesorThread extends Thread {
 		ArrayList<Inet4Address> NeighASs = new ArrayList<Inet4Address>();
 
 		log.info("Received Node Information");
-
+		DomainTEDB domainTEDB=null;
 		if (nodeNLRI.getLocalNodeDescriptors().getAutonomousSystemSubTLV()!=null){
 			as_number=nodeNLRI.getLocalNodeDescriptors().getAutonomousSystemSubTLV().getAS_ID();
 			if (as_number == null) {
 				log.debug(" As_Number is Null");
 			}
-			else
+			else{
 				log.debug("AS Number:  "+as_number.getHostAddress());
+				domainTEDB=(DomainTEDB)intraTEDBs.get(as_number.getHostAddress());
+			}
 		}
-		DomainTEDB domainTEDB=(DomainTEDB)intraTEDBs.get(as_number.getHostAddress());
 		SimpleTEDB simpleTEDB=null;
 		if (domainTEDB instanceof SimpleTEDB){
 			simpleTEDB = (SimpleTEDB) domainTEDB;
