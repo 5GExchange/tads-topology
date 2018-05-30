@@ -2,6 +2,7 @@ package es.tid.tedb;
 
 import java.net.Inet4Address;
 import java.util.Hashtable;
+import java.util.Set;
 
 public class PCEInfo {
 
@@ -41,26 +42,26 @@ public class PCEInfo {
 		return numberBytes;
 	}
 	
-	/*
+
 	public String toString(){
 		String ret="";
 
 		if (PCEipv4!=null){
-			ret=ret+controllerIT.toString()+"\t";
+			ret=ret+PCEipv4.toString()+"\t";
 		}
-		if (cpu!=null){
-			ret=ret+cpu.toString()+"\t";
-		}
-		if (mem!=null){
-			ret=ret+mem.toString()+"\t";
-		}
-		if (storage!=null){
-			ret=ret+storage.toString()+"\t";
-		}
+		if (neighbours!=null){
+			Set<Inet4Address> keys= neighbours.keySet();
+			for (Inet4Address as: keys){
+				ret=ret+"AS="+as.toString()+" IP="+neighbours.get(as).toString()+"\t";
+			}
 
+		}
+		if (learntFrom!=null){
+			ret=ret+learntFrom+"\t";
+		}
 
 		return ret;
-	}*/
+	}
 
 
 
