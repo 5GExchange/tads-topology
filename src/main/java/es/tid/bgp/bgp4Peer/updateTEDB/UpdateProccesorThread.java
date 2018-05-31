@@ -1340,9 +1340,10 @@ public class UpdateProccesorThread extends Thread {
 							MDPCE.setdomainID(as_number.getHostAddress());
 							localDomains.add(as_number);
 						}
+						log.info(opaqueNodeTLV.toString());
 						MDPCE.setNeighbours(opaqueNodeTLV.getNeighbours());
 						MDPCE.setLearntFrom(learntFrom);
-
+						log.info("MDPCE info is: "+MDPCE.toString());
 						simpleTEDB.setMDPCE(MDPCE);
 						simpleTEDB.getMDPCE().setLearntFrom(learntFrom);
 						simpleTEDB.setLocalDomains(localDomains);
