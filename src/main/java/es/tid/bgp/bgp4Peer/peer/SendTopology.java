@@ -1513,7 +1513,7 @@ public class SendTopology implements Runnable {
                 OpaqueNodeNodeAttribTLV ona = new OpaqueNodeNodeAttribTLV();
                 ona.setNeighbours(IP.getNeighbours());
                 linkStateAttribute.setOpaqueNodeTLV(ona);
-				log.info("Sending opaque node: "+ona.toString());
+				log.debug("Sending opaque node: "+ona.toString());
                 linkStateNeeded=true;
             }
 
@@ -1564,7 +1564,7 @@ public class SendTopology implements Runnable {
             }
             pathAttributes.add(ra);
             update.setLearntFrom(IP.getLearntFrom());
-            log.info("Node PCE xxxxxxxxxxxxxxxxxxxxxxxxxxxxx update: "+update.toString());
+            log.debug("Node PCE update: "+update.toString());
             return update;
 
 

@@ -1327,7 +1327,7 @@ public class UpdateProccesorThread extends Thread {
 				if (opaqueNodeTLV != null) {
 
 					log.info("Receiving PCE info");
-					log.debug(opaqueNodeTLV.toString());
+					log.info(opaqueNodeTLV.toString());
 					PCEInfo MDPCE= new PCEInfo();
 
 
@@ -1343,7 +1343,7 @@ public class UpdateProccesorThread extends Thread {
 						log.info(opaqueNodeTLV.toString());
 						MDPCE.setNeighbours(opaqueNodeTLV.getNeighbours());
 						MDPCE.setLearntFrom(learntFrom);
-						log.info("MDPCE info is: "+MDPCE.toString());
+						log.debug("MDPCE info is: "+MDPCE.toString());
 						simpleTEDB.setMDPCE(MDPCE);
 						simpleTEDB.getMDPCE().setLearntFrom(learntFrom);
 						simpleTEDB.setLocalDomains(localDomains);
