@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <managementIP>localhost</managementIP>
+    <managementPort>5002</managementPort>
+    <XML_Plugin>
+        <mode>TM</mode>
+    	<XMLFileTopology>target/Orange/networkFull.xml</XMLFileTopology>
+        <Identifier>192.168.1.132</Identifier>
+        <intra>true</intra>
+    </XML_Plugin>
+     <InitFrom>
+        <Init>initFromXML</Init>
+    </InitFrom>
+    <!--WSOld>
+	<ip>localhost</ip>
+	<port>9876</port>
+    </WSOld-->
+    <UNIFY>
+        <serve_port>8088</serve_port>
+    </UNIFY>
+    <BGPLS>
+        <Reader>True</Reader>
+        <Writer>True</Writer>
+        <BGPLSconfigFile>target/Orange/BGPLS.xml</BGPLSconfigFile>
+    </BGPLS>
+   
+</config>
