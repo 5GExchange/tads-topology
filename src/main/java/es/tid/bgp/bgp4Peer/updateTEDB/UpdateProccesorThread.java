@@ -1329,7 +1329,7 @@ public class UpdateProccesorThread extends Thread {
 					if (opaqueNodeTLV.getPCEAttribSubTLV()!=null){
 
 						log.info("Receiving PCE info");
-						log.info(opaqueNodeTLV.toString());
+						log.debug(opaqueNodeTLV.toString());
 						PCEInfo MDPCE= new PCEInfo();
 
 
