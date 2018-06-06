@@ -1511,7 +1511,9 @@ public class SendTopology implements Runnable {
 
             if (IP.getNeighbours() != null) {
                 OpaqueNodeNodeAttribTLV ona = new OpaqueNodeNodeAttribTLV();
-                ona.setNeighbours(IP.getNeighbours());
+				PCEAttribSubTLV pce= new PCEAttribSubTLV();
+				pce.setNeighbours(IP.getNeighbours());
+                ona.setPCEAttribSubTLV(pce);
                 linkStateAttribute.setOpaqueNodeTLV(ona);
 				log.debug("Sending opaque node: "+ona.toString());
                 linkStateNeeded=true;

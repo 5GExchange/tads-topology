@@ -1326,37 +1326,42 @@ public class UpdateProccesorThread extends Thread {
 
 				if (opaqueNodeTLV != null) {
 
-					log.info("Receiving PCE info");
-					log.info(opaqueNodeTLV.toString());
-					PCEInfo MDPCE= new PCEInfo();
+					if (opaqueNodeTLV.getPCEAttribSubTLV()!=null){
 
-
-					if((simpleTEDB.getMDPCE()==null) || (simpleTEDB.getMDPCE().getLearntFrom()==null) || (simpleTEDB.getMDPCE().getLearntFrom().equals(learntFrom))) {
-
-
-						if (iPv4RouterIDLocalNodeLATLV != null)
-							MDPCE.setPCEipv4(iPv4RouterIDLocalNodeLATLV.getIpv4Address());
-						if (as_number != null){
-							MDPCE.setdomainID(as_number.getHostAddress());
-							localDomains.add(as_number);
-						}
+						log.info("Receiving PCE info");
 						log.info(opaqueNodeTLV.toString());
-						MDPCE.setNeighbours(opaqueNodeTLV.getNeighbours());
-						MDPCE.setLearntFrom(learntFrom);
-						log.debug("MDPCE info is: "+MDPCE.toString());
-						simpleTEDB.setMDPCE(MDPCE);
-						simpleTEDB.getMDPCE().setLearntFrom(learntFrom);
-						simpleTEDB.setLocalDomains(localDomains);
-						//simpleTEDB.setLocalASs(localASs);
+						PCEInfo MDPCE= new PCEInfo();
 
-						//simpleTEDB.setNeighASs(NeighASs);
-						//simpleTEDB.setNeighDomains(NeighDomains);
-						//simpleTEDB.setDomainID(domain);
-						//simpleTEDB.setPCEScope(pceScope);
 
-						setMDPCEupdateTime (localDomains , iPv4RouterIDLocalNodeLATLV.getIpv4Address(), learntFrom);
-						return;
+						if((simpleTEDB.getMDPCE()==null) || (simpleTEDB.getMDPCE().getLearntFrom()==null) || (simpleTEDB.getMDPCE().getLearntFrom().equals(learntFrom))) {
+
+
+							if (iPv4RouterIDLocalNodeLATLV != null)
+								MDPCE.setPCEipv4(iPv4RouterIDLocalNodeLATLV.getIpv4Address());
+							if (as_number != null){
+								MDPCE.setdomainID(as_number.getHostAddress());
+								localDomains.add(as_number);
+							}
+							log.info(opaqueNodeTLV.toString());
+							MDPCE.setNeighbours(opaqueNodeTLV.getPCEAttribSubTLV().getNeighbours());
+							MDPCE.setLearntFrom(learntFrom);
+							log.debug("MDPCE info is: "+MDPCE.toString());
+							simpleTEDB.setMDPCE(MDPCE);
+							simpleTEDB.getMDPCE().setLearntFrom(learntFrom);
+							simpleTEDB.setLocalDomains(localDomains);
+							//simpleTEDB.setLocalASs(localASs);
+
+							//simpleTEDB.setNeighASs(NeighASs);
+							//simpleTEDB.setNeighDomains(NeighDomains);
+							//simpleTEDB.setDomainID(domain);
+							//simpleTEDB.setPCEScope(pceScope);
+
+							setMDPCEupdateTime (localDomains , iPv4RouterIDLocalNodeLATLV.getIpv4Address(), learntFrom);
+							return;
+						}
 					}
+					else
+						log.info("Opaque Node but not PCE");
 				}
 
 
