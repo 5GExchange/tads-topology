@@ -87,7 +87,7 @@ public class BGPPeer {
 	private boolean saveTopology;
 	
 	private SaveTopologyinDB saveTopologyDB;
-	
+	private CheckLinks checkLinksTask;
 	/**
 	 * 
 	 */
@@ -223,6 +223,7 @@ public class BGPPeer {
 		//Create the task to send the topology. It has to be created because you can start sending the topology in the management (wirting): send topology on.
 		sendTopologyTask = new SendTopology();
 		saveTopologyDB= new SaveTopologyinDB();
+		checkLinksTask= new CheckLinks();
 		if (params.isSaveTopologyDB() == true){
 			saveTopologyDB.configure(intraTEDBs, multiDomainTEDB, params.isSaveTopologyDB(), params.getTopologyDBIP().getHostAddress(), params.getTopologyDBport());
 		}
@@ -357,8 +358,7 @@ public class BGPPeer {
 		else{
 			sendTopologyTask.configure(intraTEDBs, bgp4SessionsInformation, sendTopology, params.getInstanceID(),params.isSendIntradomainLinks(),this.multiDomainTEDB, params.getMyAutonomousSystem(),params.getMyLocalPref());
 		}
-		executor.scheduleWithFixedDelay(sendTopologyTask, 15,params.getSendTopoDelay(), TimeUnit.MILLISECONDS);
-
+		executor.scheduleWithFixedDelay(sendTopologyTask, 0,params.getSendTopoDelay(), TimeUnit.MILLISECONDS);
 
         logServer.debug("Before new UpdateDomainStatus()");
 		updomainstatus= new UpdateDomainStatus();
@@ -368,6 +368,8 @@ public class BGPPeer {
 		executor.scheduleWithFixedDelay(updomainstatus, 100, 100, TimeUnit.SECONDS );
 		// executor.scheduleWithFixedDelay(updomainstatus,params.getBGPupdateTime(), params.getBGPupdateTime(), TimeUnit.SECONDS );
         // Copied lines -----------
+		checkLinksTask.configure(intraTEDBs,sendTopologyTask,multiDomainTEDB);
+		executor.scheduleWithFixedDelay(checkLinksTask, 0,10, TimeUnit.MILLISECONDS);
 	}
 	
 	
