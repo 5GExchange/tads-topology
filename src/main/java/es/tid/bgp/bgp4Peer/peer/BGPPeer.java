@@ -321,6 +321,7 @@ public class BGPPeer {
 	 * It starts once the session server manager.
 	 */
 	public  void startServer(){
+		logServer.info("Starting the server.");
 		logServer.debug("Initializing Session Manager to connect as server");
 		Inet4Address localAddress=null;
 		Inet4Address BGPIdentifier=null;
@@ -349,6 +350,7 @@ public class BGPPeer {
 	}
 	
 	public void startSendTopology(){
+		logServer.info("Starting send topology.");
 		if (params.isTest()) {
 			sendTopologyTask.configure(intraTEDBs, bgp4SessionsInformation, sendTopology, params.getInstanceID(),params.isSendIntradomainLinks(),this.multiDomainTEDB, params.isTest(), params.getMyAutonomousSystem(), params.getMyLocalPref());
 		}
@@ -363,7 +365,7 @@ public class BGPPeer {
         logServer.debug("Before updomainstatus.configure");
 		updomainstatus.configure(multiDomainTEDB, intraTEDBs,DomainUpdate,intraDomainLinkUpdate,interDomainLinkUpdate,NodeITinfoUpdate, NodeinfoUpdate,MDPCEinfoUpdate, params);
         logServer.debug("Before executor.scheduleWithFixedDelay");
-		executor.scheduleWithFixedDelay(updomainstatus, 30, 30, TimeUnit.SECONDS );
+		executor.scheduleWithFixedDelay(updomainstatus, 100, 100, TimeUnit.SECONDS );
 		// executor.scheduleWithFixedDelay(updomainstatus,params.getBGPupdateTime(), params.getBGPupdateTime(), TimeUnit.SECONDS );
         // Copied lines -----------
 	}

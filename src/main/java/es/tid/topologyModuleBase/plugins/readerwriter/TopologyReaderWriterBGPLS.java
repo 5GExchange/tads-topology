@@ -47,8 +47,8 @@ public class TopologyReaderWriterBGPLS extends TopologyReaderWriter{
         log.fine("Testing change");
         bgpPeer.startClient();
         bgpPeer.startServer();
-        bgpPeer.startManagementServer();
         bgpPeer.startSendTopology();
+        bgpPeer.startManagementServer();
     }
 
     /**

@@ -132,6 +132,8 @@ public class SendTopology implements Runnable {
 
 
 	public void run() {
+		log.info("Run of Sending topology.");
+
 		try {
 			if (sendTopology) {
 				if (!(bgp4SessionsInformation.getSessionList().isEmpty())) {
