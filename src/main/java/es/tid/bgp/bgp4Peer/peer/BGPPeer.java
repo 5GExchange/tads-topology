@@ -47,7 +47,7 @@ public class BGPPeer {
 	/**
 	 * List of opened BGP4 sessions. 
 	 */
-	private BGP4SessionsInformation bgp4SessionsInformation;
+	public BGP4SessionsInformation bgp4SessionsInformation;
 	
 	/**
 	 * Topology database only for interDomain Links.

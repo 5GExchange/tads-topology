@@ -47,8 +47,24 @@ public class TopologyReaderWriterBGPLS extends TopologyReaderWriter{
         log.fine("Testing change");
         bgpPeer.startClient();
         bgpPeer.startServer();
-        bgpPeer.startSendTopology();
         bgpPeer.startManagementServer();
+        Boolean connectedx=Boolean.FALSE;
+        while (connectedx!= Boolean.TRUE){
+            if (bgpPeer.bgp4SessionsInformation.sessionList.size()>0 || bgpPeer.bgp4SessionsInformation.sessionListByPeerIP.size()>0) {
+                bgpPeer.startSendTopology();
+                connectedx=Boolean.TRUE;
+                break;
+            }
+            else{
+                log.info("not yet connected");
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
     }
 
     /**
