@@ -1,0 +1,161 @@
+<network>
+	<domain>
+		<layer type="transport" ></layer>
+
+		<domain_id>0.0.253.240</domain_id>
+		<!--reachability_entry>
+			<ipv4_address>10.19.1.0</ipv4_address>
+			<prefix>24</prefix>
+		</reachability_entry-->
+
+		<mdpce>
+			<pce_ipv4>your ip</pce_ipv4>
+			<neighbor>
+				<neig_as>0.0.253.235</neig_as><!--ASID1-->
+				<neig_ipv4>10.11.11.1</neig_ipv4><!--IPAS1-->
+			</neighbor>
+			<neighbor><!--if 3 domains-->
+				<neig_as>0.0.253.236</neig_as><!--ASID2-->
+				<neig_ipv4>10.10.10.1</neig_ipv4><!--IPAS2-->
+			</neighbor>
+		</mdpce>
+
+		<node>
+			<router_id>10.19.1.13</router_id>
+			<name>r13</name>
+		</node>
+		<node>
+			<router_id>10.19.1.5</router_id>
+			<name>r5</name>
+		</node>
+		<edge>
+			<source>
+				<router_id>10.19.1.13</router_id>
+				<if_id>1</if_id>
+				<ip>192.168.100.1</ip>
+			</source>			
+			<destination>
+				<router_id>10.19.1.5</router_id>
+				<if_id>1</if_id>
+				<ip>192.168.100.2</ip>
+			</destination>	
+			<maximum_bandwidth>1000</maximum_bandwidth>
+			<default_te_metric>10</default_te_metric>
+   			<undir_delay_link>10</undir_delay_link>
+ 			<undir_min_max_delay>
+			    <min>1000</min>
+    			<max>2000</max>
+   			</undir_min_max_delay> 
+   			<undir_delay_variation>100</undir_delay_variation>
+   			<undir_link_loss>0</undir_link_loss>
+   			<undir_residual_bandwidth>1000</undir_residual_bandwidth>
+   			<undir_available_bandwidth>1000</undir_available_bandwidth>
+   			<undir_utilized_bandwidth>0</undir_utilized_bandwidth>
+			<unreserved_bandwidth priority="7">1250000</unreserved_bandwidth>
+			<unreserved_bandwidth priority="6">1250000</unreserved_bandwidth>
+			<unreserved_bandwidth priority="5">1250000</unreserved_bandwidth>
+			<unreserved_bandwidth priority="4">1250000</unreserved_bandwidth>
+			<unreserved_bandwidth priority="3">1250000</unreserved_bandwidth>
+			<unreserved_bandwidth priority="2">1250000</unreserved_bandwidth>
+			<unreserved_bandwidth priority="1">1250000</unreserved_bandwidth>
+			<unreserved_bandwidth priority="0">1250000</unreserved_bandwidth>
+		</edge>
+		<edge>
+			<source>
+				<router_id>10.19.1.5</router_id>
+				<if_id>1</if_id>
+				<ip>192.168.100.2</ip>
+			</source>			
+			<destination>
+				<router_id>10.19.1.13</router_id>
+				<if_id>1</if_id>
+				<ip>192.168.100.1</ip>
+			</destination>	
+			<maximum_bandwidth>1000</maximum_bandwidth>
+			<default_te_metric>10</default_te_metric>
+   			<undir_delay_link>10</undir_delay_link>
+ 			<undir_min_max_delay>
+			    <min>1000</min>
+    			<max>2000</max>
+   			</undir_min_max_delay> 
+   			<undir_delay_variation>100</undir_delay_variation>
+   			<undir_link_loss>0</undir_link_loss>
+   			<undir_residual_bandwidth>1000</undir_residual_bandwidth>
+   			<undir_available_bandwidth>1000</undir_available_bandwidth>
+   			<undir_utilized_bandwidth>0</undir_utilized_bandwidth>
+			<unreserved_bandwidth priority="7">1250000</unreserved_bandwidth>
+			<unreserved_bandwidth priority="6">1250000</unreserved_bandwidth>
+			<unreserved_bandwidth priority="5">1250000</unreserved_bandwidth>
+			<unreserved_bandwidth priority="4">1250000</unreserved_bandwidth>
+			<unreserved_bandwidth priority="3">1250000</unreserved_bandwidth>
+			<unreserved_bandwidth priority="2">1250000</unreserved_bandwidth>
+			<unreserved_bandwidth priority="1">1250000</unreserved_bandwidth>
+			<unreserved_bandwidth priority="0">1250000</unreserved_bandwidth>
+		</edge>
+		<edge>
+			<source>
+				<router_id>10.19.1.13</router_id>
+				<if_id>2</if_id>
+				<ip>10.253.0.1</ip>
+			</source>			
+			<destination>
+				<router_id>10.11.11.11</router_id><!--put here your edge ingress router ip-->
+				<if_id>1</if_id>
+				<ip>10.253.0.2</ip>
+			</destination>	
+			<maximum_bandwidth>1000</maximum_bandwidth>
+			<default_te_metric>10</default_te_metric>
+   			<undir_delay_link>10</undir_delay_link>
+ 			<undir_min_max_delay>
+			    <min>11000</min>
+    			<max>12000</max>
+   			</undir_min_max_delay> 
+   			<undir_delay_variation>100</undir_delay_variation>
+   			<undir_link_loss>0</undir_link_loss>
+   			<undir_residual_bandwidth>1000</undir_residual_bandwidth>
+   			<undir_available_bandwidth>1000</undir_available_bandwidth>
+   			<undir_utilized_bandwidth>0</undir_utilized_bandwidth>
+			<unreserved_bandwidth priority="7">1250000</unreserved_bandwidth>
+			<unreserved_bandwidth priority="6">1250000</unreserved_bandwidth>
+			<unreserved_bandwidth priority="5">1250000</unreserved_bandwidth>
+			<unreserved_bandwidth priority="4">1250000</unreserved_bandwidth>
+			<unreserved_bandwidth priority="3">1250000</unreserved_bandwidth>
+			<unreserved_bandwidth priority="2">1250000</unreserved_bandwidth>
+			<unreserved_bandwidth priority="1">1250000</unreserved_bandwidth>
+			<unreserved_bandwidth priority="0">1250000</unreserved_bandwidth>
+		</edge>
+		<edge>
+			<source>
+				<router_id>10.19.1.5</router_id>
+				<if_id>2</if_id>
+				<ip>10.251.0.1</ip>
+			</source>			
+			<destination>
+				<router_id>10.10.10.10</router_id><!--put here your edge egress router ip-->
+				<if_id>1</if_id>
+				<ip>10.251.0.2</ip>
+			</destination>	
+			<maximum_bandwidth>1000</maximum_bandwidth>
+			<default_te_metric>10</default_te_metric>
+   			<undir_delay_link>10</undir_delay_link>
+ 			<undir_min_max_delay>
+			    <min>11000</min>
+    			<max>12000</max>
+   			</undir_min_max_delay> 
+   			<undir_delay_variation>100</undir_delay_variation>
+   			<undir_link_loss>0</undir_link_loss>
+   			<undir_residual_bandwidth>1000</undir_residual_bandwidth>
+   			<undir_available_bandwidth>1000</undir_available_bandwidth>
+   			<undir_utilized_bandwidth>0</undir_utilized_bandwidth>
+			<unreserved_bandwidth priority="7">1250000</unreserved_bandwidth>
+			<unreserved_bandwidth priority="6">1250000</unreserved_bandwidth>
+			<unreserved_bandwidth priority="5">1250000</unreserved_bandwidth>
+			<unreserved_bandwidth priority="4">1250000</unreserved_bandwidth>
+			<unreserved_bandwidth priority="3">1250000</unreserved_bandwidth>
+			<unreserved_bandwidth priority="2">1250000</unreserved_bandwidth>
+			<unreserved_bandwidth priority="1">1250000</unreserved_bandwidth>
+			<unreserved_bandwidth priority="0">1250000</unreserved_bandwidth>
+		</edge>
+
+	</domain>
+</network>

@@ -355,7 +355,7 @@ public class BGPPeer {
 		else{
 			sendTopologyTask.configure(intraTEDBs, bgp4SessionsInformation, sendTopology, params.getInstanceID(),params.isSendIntradomainLinks(),this.multiDomainTEDB, params.getMyAutonomousSystem(),params.getMyLocalPref());
 		}
-		executor.scheduleWithFixedDelay(sendTopologyTask, 0,params.getSendTopoDelay(), TimeUnit.MILLISECONDS);
+		executor.scheduleWithFixedDelay(sendTopologyTask, 10,params.getSendTopoDelay(), TimeUnit.MILLISECONDS);
 
 
         logServer.debug("Before new UpdateDomainStatus()");
