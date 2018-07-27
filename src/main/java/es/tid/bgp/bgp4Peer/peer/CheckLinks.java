@@ -50,7 +50,7 @@ public class CheckLinks implements Runnable {
 
 
 	public void run() {
-		log.info("Run of check links.");
+		log.debug("Run of check links.");
 
 		try {
 			LinkedList<InterDomainEdge> interdomainLinks = md.getInterDomainLinks();
@@ -174,21 +174,21 @@ public class CheckLinks implements Runnable {
 
 							}
 							if(sfound&&dfound){
-								log.info("Adding interdomain link to md ted");
 								//Only add if the source and destination domains are different
 
 								//setInterDomainEdgeUpdateTime(localDomainID, LocalNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkLocalIdentifier(), remoteDomainID, RemoteNodeIGPId, linkNLRI.getLinkIdentifiersTLV().getLinkRemoteIdentifier(), System.currentTimeMillis());
 								edge.setComplete(true);
 								md.getNetworkDomainGraph().addEdge((Inet4Address) edge.getDomain_src_router(), edge.getDomain_dst_router(), edge);
 								md.getTemps().remove(key);
+								log.info("Added interdomain link to md ted and sending update");
 								sendTopology.sendLinkNLRI(md, teds);
 								log.debug(edge.toString());
 							}else{
-								log.info("This link is still not complete");
-								if (dfound) log.info("dst found");
-								else log.info("dst not found");
-								if (sfound) log.info("src found");
-								else log.info("src not found");
+								log.debug("This link is still not complete");
+								if (dfound) log.debug("dst found");
+								else log.debug("dst not found");
+								if (sfound) log.debug("src found");
+								else log.debug("src not found");
 							}
 
 
@@ -209,7 +209,7 @@ public class CheckLinks implements Runnable {
 				if (md.getNetworkDomainGraph()!=null){
 					log.info("Number of nodes: "+ String.valueOf(md.getNetworkDomainGraph().vertexSet().size()));
 					log.info("Number of links: "+ String.valueOf(md.getNetworkDomainGraph().edgeSet().size()));
-					log.info("Number of intradomain: "+ String.valueOf(teds.size()));
+					log.info("Number of domain: "+ String.valueOf(teds.size()));
 					Enumeration<String> iter = teds.keys();
 					while (iter.hasMoreElements()) {
 						String domainID = iter.nextElement();

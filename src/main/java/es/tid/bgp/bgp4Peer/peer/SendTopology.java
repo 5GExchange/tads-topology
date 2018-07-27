@@ -135,7 +135,7 @@ public class SendTopology implements Runnable {
 
 
 	public void run() {
-		log.info("Run of Sending topology.");
+		log.debug("Run of Sending topology.");
 
 		try {
 			if (sendTopology) {
@@ -556,7 +556,7 @@ public class SendTopology implements Runnable {
 			if (md.getNetworkDomainGraph()!=null){
 				log.info("Number of nodes: "+ String.valueOf(md.getNetworkDomainGraph().vertexSet().size()));
 				log.info("Number of links: "+ String.valueOf(md.getNetworkDomainGraph().edgeSet().size()));
-				log.info("Number of intradomain: "+ String.valueOf(teds.size()));
+				log.info("Number of domain: "+ String.valueOf(teds.size()));
 				Enumeration<String> iter = teds.keys();
 				while (iter.hasMoreElements()) {
 					String domainID = iter.nextElement();
