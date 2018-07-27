@@ -88,7 +88,7 @@ public class BGPPeer {
 	private boolean saveTopology;
 	
 	private SaveTopologyinDB saveTopologyDB;
-	private CheckLinks checkLinksTask;
+	
 	/**
 	 * 
 	 */
@@ -225,7 +225,6 @@ public class BGPPeer {
 		sendTopologyTask = new SendTopology();
 		CheckLInksTask= new CheckLinks();
 		saveTopologyDB= new SaveTopologyinDB();
-		checkLinksTask= new CheckLinks();
 		if (params.isSaveTopologyDB() == true){
 			saveTopologyDB.configure(intraTEDBs, multiDomainTEDB, params.isSaveTopologyDB(), params.getTopologyDBIP().getHostAddress(), params.getTopologyDBport());
 		}
@@ -360,6 +359,7 @@ public class BGPPeer {
 		else{
 			sendTopologyTask.configure(intraTEDBs, bgp4SessionsInformation, sendTopology, params.getInstanceID(),params.isSendIntradomainLinks(),this.multiDomainTEDB, params.getMyAutonomousSystem(),params.getMyLocalPref(), params.getBGPIdentifier());
 		}
+		executor.scheduleWithFixedDelay(sendTopologyTask, 0,params.getSendTopoDelay(), TimeUnit.MILLISECONDS);
 		CheckLInksTask.configure(intraTEDBs,sendTopologyTask, multiDomainTEDB);
 		executor.scheduleWithFixedDelay(CheckLInksTask, 0,10, TimeUnit.SECONDS);
 
@@ -371,8 +371,6 @@ public class BGPPeer {
 		executor.scheduleWithFixedDelay(updomainstatus, 100, 100, TimeUnit.SECONDS );
 		// executor.scheduleWithFixedDelay(updomainstatus,params.getBGPupdateTime(), params.getBGPupdateTime(), TimeUnit.SECONDS );
         // Copied lines -----------
-		checkLinksTask.configure(intraTEDBs,sendTopologyTask,multiDomainTEDB);
-		executor.scheduleWithFixedDelay(checkLinksTask, 0,10, TimeUnit.MILLISECONDS);
 	}
 	
 	

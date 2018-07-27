@@ -4,7 +4,6 @@ import es.tid.bgp.bgp4.messages.BGP4Update;
 import es.tid.bgp.bgp4Peer.peer.BGP4Parameters;
 import es.tid.bgp.bgp4Peer.peer.DomainUpdateTime;
 import es.tid.bgp.bgp4Peer.peer.MDPCEinfoUpdateTime;
-import es.tid.bgp.bgp4Peer.peer.SendTopology;
 import es.tid.tedb.MultiDomainTEDB;
 import es.tid.tedb.TEDB;
 import org.slf4j.Logger;
@@ -22,7 +21,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  *
  */
 public class UpdateDispatcher {
-	private SendTopology sendTopo;
+	
 	private Logger log;
 	private LinkedBlockingQueue<BGP4Update> updateList;
 	private UpdateProccesorThread upt;

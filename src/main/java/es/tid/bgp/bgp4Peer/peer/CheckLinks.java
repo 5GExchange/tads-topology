@@ -19,6 +19,10 @@ import java.util.LinkedList;
  */
 public class CheckLinks implements Runnable {
 
+	/**
+	 * 1= optical
+	 * 0= L3
+	 */
 	//TEDBs
 	private Hashtable<String, TEDB> teds;
 
@@ -40,6 +44,10 @@ public class CheckLinks implements Runnable {
 		this.md = multiTED;
 	}
 
+	/**
+	 * Function to send the topology database.
+	 */
+
 
 	public void run() {
 		log.info("Run of check links.");
@@ -57,9 +65,9 @@ public class CheckLinks implements Runnable {
 			boolean sfound = false;
 			boolean dfound = false;
 
-			if ((md != null) && (md.getTemps() != null)) {
-				if (md.getTemps().size() > 0) {
-					if (keys != null) {
+			if ((md!=null)&&(md.getTemps()!=null)){
+				if (md.getTemps().size()>0){
+					if(keys !=null){
 						while (keys.hasMoreElements()) {
 							key = (String) keys.nextElement();
 							InterDomainEdge edge = md.getTemps().get(key);
@@ -193,6 +201,8 @@ public class CheckLinks implements Runnable {
 			}//xx
 			else
 				log.debug("md null or md.temp null");
+
+
 
 
 			if (md!=null){

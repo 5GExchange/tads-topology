@@ -128,7 +128,8 @@ public class UpdateProccesorThread extends Thread {
 	public UpdateProccesorThread(LinkedBlockingQueue<BGP4Update> updateList,
 								 MultiDomainTEDB multiTedb, Hashtable<String, TEDB> intraTEDBs, Hashtable<IntraDomainLinkUpdateTime, Long> intraDomainLinkUpdate, Hashtable<InterDomainLinkUpdateTime, Long> interDomainLinkUpdate, Hashtable<NodeITinfoUpdateTime, Long> nodeITinfoUpdate, Hashtable<NodeinfoUpdateTime, Long> nodeinfoUpdate, Hashtable<MDPCEinfoUpdateTime, Long> MDPCEinfoUpdate, Hashtable<DomainUpdateTime, Long> domainUpdate)  {
 
-		log = LoggerFactory.getLogger("BGP4Peer");
+			log = LoggerFactory.getLogger("BGP4Peer");
+
 		this.executor=executor;
 		running=true;
 		this.updateList=updateList;
@@ -276,9 +277,6 @@ public class UpdateProccesorThread extends Thread {
 			}
 		}
 	}
-
-
-
 
 
 	private void fillPrefixNLRI(PrefixNLRI nlri, IGPFlagBitsPrefixAttribTLV igpFlagBitsTLV, OSPFForwardingAddressPrefixAttribTLV oSPFForwardingAddrTLV, PrefixMetricPrefixAttribTLV prefixMetricTLV, RouteTagPrefixAttribTLV routeTagTLV) {
