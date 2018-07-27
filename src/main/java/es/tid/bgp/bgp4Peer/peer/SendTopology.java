@@ -40,6 +40,7 @@ public class SendTopology implements Runnable {
 	 * 1= optical
 	 * 0= L3
 	 */
+	private String BGPID;
 	private int identifier = 0;
 	private static final int IPV4_PART_COUNT = 4;
 	private static final int IPV6_PART_COUNT = 8;
@@ -71,29 +72,30 @@ public class SendTopology implements Runnable {
 	}
 
 	public void configure(Hashtable<String, TEDB> intraTEDBs, BGP4SessionsInformation bgp4SessionsInformation, boolean sendTopology, int instanceId, boolean sendIntraDomainLinks, MultiDomainTEDB multiTED) {
-		configure(intraTEDBs, bgp4SessionsInformation, sendTopology, instanceId, sendIntraDomainLinks, multiTED, false, 0, 0);
+		configure(intraTEDBs, bgp4SessionsInformation, sendTopology, instanceId, sendIntraDomainLinks, multiTED, false, 0, 0, null);
 
 	}
 
 	public void configure(Hashtable<String, TEDB> intraTEDBs, BGP4SessionsInformation bgp4SessionsInformation, boolean sendTopology, int instanceId, boolean sendIntraDomainLinks, MultiDomainTEDB multiTED, boolean test) {
-		configure(intraTEDBs, bgp4SessionsInformation, sendTopology, instanceId, sendIntraDomainLinks, multiTED, test, 0, 0);
+		configure(intraTEDBs, bgp4SessionsInformation, sendTopology, instanceId, sendIntraDomainLinks, multiTED, test, 0, 0, null);
 
 	}
 
 
-	public void configure(Hashtable<String, TEDB> intraTEDBs, BGP4SessionsInformation bgp4SessionsInformation, boolean sendTopology, int instanceId, boolean sendIntraDomainLinks, MultiDomainTEDB multiTED, int AS, int pref) {
-		configure(intraTEDBs, bgp4SessionsInformation, sendTopology, instanceId, sendIntraDomainLinks, multiTED, false, AS, pref);
+	public void configure(Hashtable<String, TEDB> intraTEDBs, BGP4SessionsInformation bgp4SessionsInformation, boolean sendTopology, int instanceId, boolean sendIntraDomainLinks, MultiDomainTEDB multiTED, int AS, int pref, String BGPIdent) {
+		configure(intraTEDBs, bgp4SessionsInformation, sendTopology, instanceId, sendIntraDomainLinks, multiTED, false, AS, pref, BGPIdent);
 
 	}
 
 
-	public void configure(Hashtable<String, TEDB> intraTEDBs, BGP4SessionsInformation bgp4SessionsInformation, boolean sendTopology, int instanceId, boolean sendIntraDomainLinks, MultiDomainTEDB multiTED, boolean test, int AS, int localPref) {
+	public void configure(Hashtable<String, TEDB> intraTEDBs, BGP4SessionsInformation bgp4SessionsInformation, boolean sendTopology, int instanceId, boolean sendIntraDomainLinks, MultiDomainTEDB multiTED, boolean test, int AS, int localPref, String BGPIdent) {
 		this.intraTEDBs = intraTEDBs;
 		this.bgp4SessionsInformation = bgp4SessionsInformation;
 		this.sendTopology = sendTopology;
 		this.instanceId = instanceId;
 		this.sendIntraDomainLinks = sendIntraDomainLinks;
 		this.multiDomainTEDB = multiTED;
+		this.BGPID=BGPIdent;
 		if (AS != 0) this.ASnumber = AS;
 		this.isTest = test;
 		if (localPref != 0) this.LocalPref = localPref;
@@ -108,7 +110,7 @@ public class SendTopology implements Runnable {
 	}
 
 
-	public void configure(Hashtable<String, TEDB> intraTEDBs, BGP4SessionsInformation bgp4SessionsInformation, boolean sendTopology, int instanceId, boolean sendIntraDomainLinks, MultiDomainTEDB multiTED, boolean test, int AS) {
+	public void configure(Hashtable<String, TEDB> intraTEDBs, BGP4SessionsInformation bgp4SessionsInformation, boolean sendTopology, int instanceId, boolean sendIntraDomainLinks, MultiDomainTEDB multiTED, boolean test, int AS, String BGPIdent) {
 		this.intraTEDBs = intraTEDBs;
 		this.bgp4SessionsInformation = bgp4SessionsInformation;
 		this.sendTopology = sendTopology;
@@ -116,6 +118,7 @@ public class SendTopology implements Runnable {
 		this.sendIntraDomainLinks = sendIntraDomainLinks;
 		this.multiDomainTEDB = multiTED;
 		this.isTest = test;
+		this.BGPID=BGPIdent;
 		this.ASnumber = AS;
 		try {
 			this.localAreaID = (Inet4Address) Inet4Address.getByName("0.0.0.0");
@@ -1072,7 +1075,10 @@ public class SendTopology implements Runnable {
 
 			//Origin
 			OriginAttribute or = new OriginAttribute();
-			or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
+			if (learntFrom==BGPID)
+				or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
+			else
+				or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_EGP);
 			pathAttributes.add(or);
 			//AS_PATH
 
@@ -1229,7 +1235,10 @@ public class SendTopology implements Runnable {
 
 			//Origin
 			OriginAttribute or = new OriginAttribute();
-			or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
+			if (learntFrom==BGPID)
+				or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
+			else
+				or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_EGP);
 			pathAttributes.add(or);
 			//AS_PATH
 
@@ -1396,8 +1405,11 @@ public class SendTopology implements Runnable {
 			//Path Attributes
 			ArrayList<PathAttribute> pathAttributes = update.getPathAttributes();
 			//Origin
-			OriginAttribute or = new OriginAttribute(); 
-			or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
+			OriginAttribute or = new OriginAttribute();
+			if (learntFrom==BGPID)
+				or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
+			else
+				or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_EGP);
 			pathAttributes.add(or);
 
 			//AS_PATH
@@ -1477,7 +1489,10 @@ public class SendTopology implements Runnable {
 
 			//Origin
 			OriginAttribute or = new OriginAttribute();
-			or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
+			if (learntFrom==BGPID)
+				or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
+			else
+				or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_EGP);
 			pathAttributes.add(or);
 			//AS_PATH
 
@@ -1627,7 +1642,10 @@ public class SendTopology implements Runnable {
 
 			//Origin
 			OriginAttribute or = new OriginAttribute();
-			or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
+			if (learntFrom==BGPID)
+				or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
+			else
+				or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_EGP);
 			pathAttributes.add(or);
 			//AS_PATH
 
@@ -1781,7 +1799,10 @@ public class SendTopology implements Runnable {
 			ArrayList<PathAttribute> pathAttributes = update.getPathAttributes();
 			//Origin
 			OriginAttribute or = new OriginAttribute();
-			or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
+			if (learntFrom==BGPID)
+				or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
+			else
+				or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_EGP);
 			pathAttributes.add(or);
 			//AS_PATH
 
@@ -2035,7 +2056,10 @@ public class SendTopology implements Runnable {
 			ArrayList<PathAttribute> pathAttributes = update.getPathAttributes();
 			//Origin
 			OriginAttribute or = new OriginAttribute();
-			or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
+			if (learntFrom==BGPID)
+				or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
+			else
+				or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_EGP);
 			pathAttributes.add(or);
 
 			//AS_PATH
@@ -2514,7 +2538,7 @@ if(multiDomainTEDB.getAsInfo_DB().containsKey(learntFrom))
 		if (intradomain)
 			or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
 		else
-			or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_IGP);
+			or.setValue(PathAttributesTypeCode.PATH_ATTRIBUTE_ORIGIN_EGP);
 		pathAttributes.add(or);
 		///Andrea
 		//update.setLearntFrom("192.168.0.1");

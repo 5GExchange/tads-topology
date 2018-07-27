@@ -19,7 +19,6 @@ import java.util.LinkedList;
  */
 public class CheckLinks implements Runnable {
 
-
 	//TEDBs
 	private Hashtable<String, TEDB> teds;
 
@@ -39,22 +38,20 @@ public class CheckLinks implements Runnable {
 		this.teds = intraTEDBs;
 		this.sendTopology = sendTopology;
 		this.md = multiTED;
-
 	}
 
 
 	public void run() {
-		log.info("Run of Sending topology.");
+		log.info("Run of check links.");
 
 		try {
-
 			LinkedList<InterDomainEdge> interdomainLinks = md.getInterDomainLinks();
 
-			log.debug(interdomainLinks.size() + "  in interdomainLinks graph");
+			log.debug(interdomainLinks.size()+ "  in interdomainLinks graph");
 
 			Enumeration keys = null;
-			if ((md != null) && (md.getTemps() != null)) {
-				keys = md.getTemps().keys();
+			if((md!=null)&&(md.getTemps()!=null)){
+				keys=md.getTemps().keys();
 			}
 			String key;
 			boolean sfound = false;
@@ -69,8 +66,8 @@ public class CheckLinks implements Runnable {
 							Enumeration<String> iter = teds.keys();
 							while (iter.hasMoreElements()) {
 								String domainID = iter.nextElement();
-								if ((domainID != null) && (!domainID.equals("multidomain"))) {
-									log.debug("Procedure checking domain_id: " + domainID);
+								if ((domainID != null)&&(!domainID.equals("multidomain"))) {
+									log.debug("temp procedure checking domain_id: " + domainID);
 									TEDB ted = teds.get(domainID);
 									if (ted instanceof DomainTEDB) {
 										Iterator<Object> vertexIt = ((DomainTEDB) ted).getIntraDomainLinksvertexSet().iterator();
@@ -91,8 +88,8 @@ public class CheckLinks implements Runnable {
 												String nodeip = node_info.getIpv4AddressLocalNode().getCanonicalHostName();
 												log.debug("Current node ID=" + nodeip);
 												//src node
-												if (edge.getLocal_Node_Info() == null) {
-													if (edge.getSrc_router_id() instanceof Inet4Address) {
+												if (edge.getLocal_Node_Info()==null){
+													if(edge.getSrc_router_id() instanceof Inet4Address) {
 														if (((Inet4Address) edge.getSrc_router_id()).getHostAddress().equals(nodeip)) {
 															log.debug("Node info id = to src");
 															sfound = true;
@@ -100,21 +97,25 @@ public class CheckLinks implements Runnable {
 															if (v instanceof Long) {
 																edge.setSrc_router_id(node);
 																log.debug("ISIS");
-															} else
+															}
+															else
 																log.debug("ipv4");
 
-														} else
+														}
+														else
 															log.debug("edge src and node ip are different");
-													} else
+													}
+													else
 														log.debug("not ipv4");
-												} else {
+												}
+												else{
 													log.debug("Src info already present");
-													sfound = true;
+													sfound=true;
 												}
 
 												//dest node
-												if (edge.getRemote_Node_Info() == null) {
-													if (edge.getDst_router_id() instanceof Inet4Address) {
+												if (edge.getRemote_Node_Info()==null){
+													if(edge.getDst_router_id() instanceof Inet4Address) {
 														if (((Inet4Address) edge.getDst_router_id()).getHostAddress().equals(nodeip)) {
 															log.debug("Node info id = to dst");
 															dfound = true;
@@ -135,30 +136,36 @@ public class CheckLinks implements Runnable {
 																edge.setDomain_dst_router(dom);
 															} else
 																log.debug("dom is null");
-														} else {
+														}
+														else{
 															log.debug("edge dst and node ip are different");
 															log.debug(((Inet4Address) edge.getDst_router_id()).getHostAddress());
 															log.debug(nodeip);
 														}
-													} else
+													}
+													else
 														log.debug("not ipv4");
-												} else {
+												}
+												else{
 													log.debug("dst info already present");
-													dfound = true;
+													dfound=true;
 												}
 
 
-											} else
+											}
+											else
 												log.debug("node info null");
 										}
-									} else
+									}
+									else
 										log.debug("not a domainTEDB instance");
 
-								} else
+								}
+								else
 									log.debug("domain null or multidomani");
 
 							}
-							if (sfound && dfound) {
+							if(sfound&&dfound){
 								log.info("Adding interdomain link to md ted");
 								//Only add if the source and destination domains are different
 
@@ -166,9 +173,9 @@ public class CheckLinks implements Runnable {
 								edge.setComplete(true);
 								md.getNetworkDomainGraph().addEdge((Inet4Address) edge.getDomain_src_router(), edge.getDomain_dst_router(), edge);
 								md.getTemps().remove(key);
-								log.debug(edge.toString());
 								sendTopology.sendLinkNLRI(md, teds);
-							} else {
+								log.debug(edge.toString());
+							}else{
 								log.info("This link is still not complete");
 								if (dfound) log.info("dst found");
 								else log.info("dst not found");
@@ -188,11 +195,11 @@ public class CheckLinks implements Runnable {
 				log.debug("md null or md.temp null");
 
 
-			if (md != null) {
-				if (md.getNetworkDomainGraph() != null) {
-					log.info("Number of nodes: " + String.valueOf(md.getNetworkDomainGraph().vertexSet().size()));
-					log.info("Number of links: " + String.valueOf(md.getNetworkDomainGraph().edgeSet().size()));
-					log.debug("Number of domains: " + String.valueOf(teds.size()));
+			if (md!=null){
+				if (md.getNetworkDomainGraph()!=null){
+					log.info("Number of nodes: "+ String.valueOf(md.getNetworkDomainGraph().vertexSet().size()));
+					log.info("Number of links: "+ String.valueOf(md.getNetworkDomainGraph().edgeSet().size()));
+					log.info("Number of intradomain: "+ String.valueOf(teds.size()));
 					Enumeration<String> iter = teds.keys();
 					while (iter.hasMoreElements()) {
 						String domainID = iter.nextElement();
@@ -200,32 +207,29 @@ public class CheckLinks implements Runnable {
 							log.debug("temp procedure checking domain_id: " + domainID);
 							TEDB ted = teds.get(domainID);
 							if (ted instanceof DomainTEDB) {
-								if (((DomainTEDB) ted).getMDPCE() != null) {
-									log.info("Domain " + domainID + " found MD-PCE with ip " + ((DomainTEDB) ted).getMDPCE().getPCEipv4().getHostName());
-								} else
-									log.info("No PCE info for domain " + domainID);
+								if (((DomainTEDB)ted).getMDPCE()!=null){
+									log.info("Domain "+ domainID+" found MD-PCE with ip "+((DomainTEDB)ted).getMDPCE().getPCEipv4().getHostName() );
+								}
+								else
+									log.info("No PCE info for domain "+ domainID );
 
 							}
 
 						}
 					}
-				} else
+				}
+				else
 					log.debug("getNetworkDomainGraph is null");
-			} else {
+			}
+			else {
 				log.debug("md is null");
 			}
 
-
-
 		} catch (Exception e) {
 			e.printStackTrace();
-			log.error("PROBLEM checking topology: " + e.toString());
+			log.error("PROBLEM SENDING TOPOLOGY: " + e.toString());
 		}
 
 	}
-
-
-
-
 
 }
