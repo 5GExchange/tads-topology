@@ -1393,12 +1393,17 @@ public class FileTEDBUpdater {
 						String itResourcesStorage = getCharacterDataFromElement(itResourcesStorageElement);
 
 						IT_Resources itResources = new IT_Resources();
-						if (itResourcesControllerIT!=null) itResources.setControllerIT(itResourcesControllerIT);
-						if (itResourcesCpu!=null) itResources.setCpu(itResourcesCpu);
-						if (itResourcesMem!=null) itResources.setMem(itResourcesMem);
-						if (itResourcesStorage!=null) itResources.setStorage(itResourcesStorage);
-
-
+						if (itResourcesControllerIT != null) {
+							itResources.setControllerIT(itResourcesControllerIT);
+							itResources.setLearntFrom(learntFrom);
+						}
+						if (itResourcesCpu != null) itResources.setCpu(itResourcesCpu);
+						if (itResourcesMem != null) itResources.setMem(itResourcesMem);
+						if (itResourcesStorage != null) {
+							itResources.setStorage(itResourcesStorage);
+							log.debug("set learn from for it resources " + itResources.toString());
+						}
+						tedb.setItResources(itResources);
 
 
 						/*
@@ -1435,8 +1440,9 @@ public class FileTEDBUpdater {
 							itResources.setStorage(itResourcesStorage);
 							log.debug("set learn from for it resources "+ itResources.toString());
 						}
-						*/
 						tedb.setItResources(itResources);
+						*/
+
 
 					}
 					NodeList nodes = element1.getElementsByTagName("node");
