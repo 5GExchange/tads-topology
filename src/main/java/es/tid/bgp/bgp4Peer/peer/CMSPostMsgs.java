@@ -54,11 +54,11 @@ public class CMSPostMsgs implements Runnable {
                     SimpleTEDB ted=(SimpleTEDB)intraTEDBs.get(key);
                     entry=ted.getItResources().getControllerIT();
                     log.info("New domain detected: " +entry);
-                    if(entry!=null||entry !=""){
+                    if(entry!=null&&!entry.equals("")){
                         log.info("New domain detected: " +key);
                         log.info(localID);
                         log.info(ted.getItResources().getLearntFrom());
-                        if(ted.getItResources().getLearntFrom()==localID)
+                        if(ted.getItResources().getLearntFrom().equals(localID));
                             localDomain=true;
                         create_post= new Create_CMS_Post(entry, key, localDomain);
                         sent.put(key,true);

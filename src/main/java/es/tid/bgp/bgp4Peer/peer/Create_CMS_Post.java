@@ -26,7 +26,14 @@ public class Create_CMS_Post {
 
     public Create_CMS_Post(String entryPoint, String domain, boolean localDomain) {
 
-        this.EntryPoint=EntryPoint;
+        if (entryPoint.contains("http://")){
+            String[] parts = entryPoint.split("/");
+            this.EntryPoint=parts[2];
+            log.info(parts[0]);
+            log.info(parts[1]);
+            log.info(parts[2]);
+        }else
+            this.EntryPoint=entryPoint;
         this.domain=domain;
         this.localDomain=localDomain;
         log = LoggerFactory.getLogger("BGP4Peer");
