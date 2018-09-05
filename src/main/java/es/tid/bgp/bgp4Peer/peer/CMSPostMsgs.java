@@ -17,9 +17,7 @@ import java.util.LinkedList;
 public class CMSPostMsgs implements Runnable {
     private Logger log;
     private LinkedList<CMS_Domain_Msgs> cms_msg;
-    private int Domainid;
     private Create_CMS_Post create_post ;
-    private Boolean localDomain= false;
     Hashtable<String, TEDB> intraTEDBs;
     Hashtable<String, Boolean> sent=new Hashtable<>();
     String localID;
@@ -53,14 +51,16 @@ public class CMSPostMsgs implements Runnable {
 
                     SimpleTEDB ted=(SimpleTEDB)intraTEDBs.get(key);
                     entry=ted.getItResources().getControllerIT();
-                    log.info("New domain detected: " +entry);
+                    log.info("Controller IT is: " +entry);
                     if(entry!=null&&!entry.equals("")){
                         log.info("New domain detected: " +key);
                         log.info(localID);
                         log.info(ted.getItResources().getLearntFrom());
-                        if(ted.getItResources().getLearntFrom().equals(localID));
-                            localDomain=true;
-                        create_post= new Create_CMS_Post(entry, key, localDomain);
+                        if(ted.getItResources().getLearntFrom().equals(localID)){
+                            create_post= new Create_CMS_Post(entry, key, true);
+                        }else
+                            create_post= new Create_CMS_Post(entry, key, false);
+
                         sent.put(key,true);
 
                     }
