@@ -1376,6 +1376,32 @@ public class FileTEDBUpdater {
 					for (int i = 0; i < itResourcesElement.getLength(); i++) {
 						Element element = (Element) itResourcesElement.item(i);
 
+						NodeList itResourcesControllerITList = element.getElementsByTagName("controller_it");
+						Element itResourcesControllerITElement = (Element) itResourcesControllerITList.item(0);
+						String itResourcesControllerIT = getCharacterDataFromElement(itResourcesControllerITElement);
+
+						NodeList itResourcesCpuList = element.getElementsByTagName("cpu");
+						Element itResourcesCpuElement = (Element) itResourcesCpuList.item(0);
+						String itResourcesCpu = getCharacterDataFromElement(itResourcesCpuElement);
+
+						NodeList itResourcesMemList = element.getElementsByTagName("mem");
+						Element itResourcesMemElement = (Element) itResourcesMemList.item(0);
+						String itResourcesMem = getCharacterDataFromElement(itResourcesMemElement);
+
+						NodeList itResourcesStorageList = element.getElementsByTagName("storage");
+						Element itResourcesStorageElement = (Element) itResourcesStorageList.item(0);
+						String itResourcesStorage = getCharacterDataFromElement(itResourcesStorageElement);
+
+						IT_Resources itResources = new IT_Resources();
+						if (itResourcesControllerIT!=null) itResources.setControllerIT(itResourcesControllerIT);
+						if (itResourcesCpu!=null) itResources.setCpu(itResourcesCpu);
+						if (itResourcesMem!=null) itResources.setMem(itResourcesMem);
+						if (itResourcesStorage!=null) itResources.setStorage(itResourcesStorage);
+
+
+
+
+						/*
 
 						NodeList itResourcesCpuList = element.getElementsByTagName("cpu");
 						Element itResourcesCpuElement = (Element) itResourcesCpuList.item(0);
@@ -1409,7 +1435,7 @@ public class FileTEDBUpdater {
 							itResources.setStorage(itResourcesStorage);
 							log.debug("set learn from for it resources "+ itResources.toString());
 						}
-
+						*/
 						tedb.setItResources(itResources);
 
 					}
