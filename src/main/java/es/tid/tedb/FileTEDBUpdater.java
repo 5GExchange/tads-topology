@@ -2277,14 +2277,15 @@ public class FileTEDBUpdater {
 
 				}
 				*/
+				log.info("the used function to read");
 				NodeList itResourcesElement = element1.getElementsByTagName("it_resources");
 				for (int i = 0; i < itResourcesElement.getLength(); i++) {
 					Element element = (Element) itResourcesElement.item(i);
 
-					NodeList itResourcesControllerITList = element.getElementsByTagName("controller_it");
+					/*NodeList itResourcesControllerITList = element.getElementsByTagName("controller_it");
 					Element itResourcesControllerITElement = (Element) itResourcesControllerITList.item(0);
 					String itResourcesControllerIT = getCharacterDataFromElement(itResourcesControllerITElement);
-
+					*/
 					NodeList itResourcesCpuList = element.getElementsByTagName("cpu");
 					Element itResourcesCpuElement = (Element) itResourcesCpuList.item(0);
 					String itResourcesCpu = getCharacterDataFromElement(itResourcesCpuElement);
@@ -2298,10 +2299,9 @@ public class FileTEDBUpdater {
 					String itResourcesStorage = getCharacterDataFromElement(itResourcesStorageElement);
 
 					IT_Resources itResources = new IT_Resources();
-					if (itResourcesControllerIT!=null){
-						itResources.setControllerIT(itResourcesControllerIT);
-						itResources.setLearntFrom(learntFrom);
-					}
+					itResources.setControllerIT("http://"+learntFrom);
+					itResources.setLearntFrom(learntFrom);
+
 					if (itResourcesCpu!=null) itResources.setCpu(itResourcesCpu);
 					if (itResourcesMem!=null) itResources.setMem(itResourcesMem);
 					if (itResourcesStorage!=null) {

@@ -8,7 +8,7 @@
 	<!-- Peers to which this Peer is going to establish connection -->
 	<configPeer>
                 <peer>172.17.18.121</peer>
-                <export>false</export>
+                <export>true</export>
                 <import>true</import>
                 <peerPort>179</peerPort>
 	</configPeer>
