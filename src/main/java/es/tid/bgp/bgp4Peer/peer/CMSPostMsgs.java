@@ -20,7 +20,7 @@ import java.util.LinkedList;
 
 
 /**
- * Created by Ajmal on 2017-09-27.
+ * Created by Andrea.
  */
 public class CMSPostMsgs implements Runnable {
     private Logger log;
@@ -55,24 +55,21 @@ public class CMSPostMsgs implements Runnable {
         while(names.hasMoreElements()) {
             key = (String) names.nextElement();
             if (!key.equals("multidomin")){
-                log.info("size of sent"+ String.valueOf(sent.size()));
                 if (!sent.containsKey(key)||(sent.get(key)==false)){
 
                     SimpleTEDB ted=(SimpleTEDB)intraTEDBs.get(key);
                     entry=ted.getItResources().getControllerIT();
-                    log.info("Controller IT is: " +entry);
+                    log.debug("Controller IT is: " +entry);
                     if(entry!=null&&!entry.equals("")){
                         log.info("New domain detected: " +key);
-                        log.info(localID);
-                        log.info(ted.getItResources().getLearntFrom());
+                        log.debug(localID);
+                        log.debug(ted.getItResources().getLearntFrom());
                         if(ted.getItResources().getLearntFrom().equals(localID)){
-                            log.info("true");
                             //create_post= new Create_CMS_Post(entry, key, true);
                             SendPost(entry, key, true);
                         }else{
                             //create_post= new Create_CMS_Post(entry, key, false);
                             SendPost(entry, key, false);
-                            log.info("false");
                         }
 
                         sent.put(key,true);
@@ -91,13 +88,9 @@ public class CMSPostMsgs implements Runnable {
     }
     private void SendPost(String entryPoint, String domain, boolean localDomain) {
         String EntryPoint = "";
-        log.info("sending");
         if (entryPoint.contains("http://")){
             String[] parts = entryPoint.split("/");
             EntryPoint=parts[2];
-            log.info(parts[0]);
-            log.info(parts[1]);
-            log.info(parts[2]);
         }else
             EntryPoint=entryPoint;
         try {
