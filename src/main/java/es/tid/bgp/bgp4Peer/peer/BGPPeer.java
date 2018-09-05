@@ -112,7 +112,8 @@ public class BGPPeer {
 
 	private Hashtable<MDPCEinfoUpdateTime, Long> MDPCEinfoUpdate= new Hashtable<MDPCEinfoUpdateTime, Long>();
 
-
+	private LinkedList<CMS_Domain_Msgs> cms_msg= new LinkedList<CMS_Domain_Msgs>();
+	private CMSPostMsgs cmsPostMsgs;
 
 	private UpdateDomainStatus updomainstatus;
 
@@ -261,7 +262,9 @@ public class BGPPeer {
 	public void createUpdateDispatcher(){
 		//Updater dispatcher
 		ud = new UpdateDispatcher(multiDomainTEDB,intraTEDBs, DomainUpdate,intraDomainLinkUpdate,interDomainLinkUpdate,NodeITinfoUpdate, NodeinfoUpdate,MDPCEinfoUpdate, params);
-
+		cmsPostMsgs= new CMSPostMsgs();
+		cmsPostMsgs.configure(cms_msg, intraTEDBs, params.getBGPIdentifier());
+		executor.scheduleWithFixedDelay(cmsPostMsgs,30, 30, TimeUnit.SECONDS);
 	}
 
 	public void CheckUpdateTime(){
@@ -271,6 +274,11 @@ public class BGPPeer {
 
 	}
 
+	/*public void CMSUpdate(){
+		cmsPostMsgs= new CMSPostMsgs();
+		cmsPostMsgs.configure(cms_msg, intraTEDBs, params.getBGPIdentifier());
+		executor.scheduleWithFixedDelay(cmsPostMsgs,30, 30, TimeUnit.SECONDS);
+	}*/
 
 
 	/**
