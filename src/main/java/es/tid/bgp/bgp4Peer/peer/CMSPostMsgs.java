@@ -3,9 +3,17 @@ package es.tid.bgp.bgp4Peer.peer;
 import es.tid.bgp.bgp4Peer.updateTEDB.CMS_Domain_Msgs;
 import es.tid.tedb.SimpleTEDB;
 import es.tid.tedb.TEDB;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.LinkedList;
@@ -46,7 +54,8 @@ public class CMSPostMsgs implements Runnable {
         names =  this.intraTEDBs.keys();
         while(names.hasMoreElements()) {
             key = (String) names.nextElement();
-            if (key!="multidomin"){
+            if (!key.equals("multidomin")){
+                log.info("size of sent"+ String.valueOf(sent.size()));
                 if (!sent.containsKey(key)||(sent.get(key)==false)){
 
                     SimpleTEDB ted=(SimpleTEDB)intraTEDBs.get(key);
@@ -57,9 +66,12 @@ public class CMSPostMsgs implements Runnable {
                         log.info(localID);
                         log.info(ted.getItResources().getLearntFrom());
                         if(ted.getItResources().getLearntFrom().equals(localID)){
-                            create_post= new Create_CMS_Post(entry, key, true);
-                        }else
-                            create_post= new Create_CMS_Post(entry, key, false);
+                            //create_post= new Create_CMS_Post(entry, key, true);
+                            SendPost(entry, key, true);
+                        }else{
+                            //create_post= new Create_CMS_Post(entry, key, false);
+                            SendPost(entry, key, false);
+                        }
 
                         sent.put(key,true);
 
@@ -75,4 +87,62 @@ public class CMSPostMsgs implements Runnable {
 
 
     }
+    private void SendPost(String entryPoint, String domain, boolean localDomain) {
+        String EntryPoint ="";
+        if (entryPoint.contains("http://")){
+            String[] parts = entryPoint.split("/");
+            EntryPoint=parts[2];
+            log.info(parts[0]);
+            log.info(parts[1]);
+            log.info(parts[2]);
+        }else
+            EntryPoint=entryPoint;
+        try {
+
+            URL url = new URL("http://localhost/mdc/mdc");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setDoOutput(true);
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json");
+
+            // String input = "{\"domain\":%$d,\"localDomain\":%b \"entryPoint\":%s}" ;
+            JSONObject obj = new JSONObject();
+
+            obj.put("domain", domain);
+            obj.put("localDomain", localDomain);
+            obj.put("EntryPoint", EntryPoint);
+            log.info("CMS:"+obj.toJSONString());
+
+            OutputStream os = conn.getOutputStream();
+            os.write(obj.toString().getBytes());
+            os.flush();
+
+            if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
+                throw new RuntimeException("Failed : HTTP error code : "
+                        + conn.getResponseCode());
+            }
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(
+                    (conn.getInputStream())));
+
+            String output;
+            log.info("CMS:Output from Server .... \n");
+            while ((output = br.readLine()) != null) {
+                log.info(output);
+            }
+
+            conn.disconnect();
+
+        } catch (MalformedURLException e) {
+
+            e.printStackTrace();
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        }
+
+    }
+
 }
