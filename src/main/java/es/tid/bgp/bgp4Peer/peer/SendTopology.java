@@ -862,8 +862,10 @@ public class SendTopology implements Runnable {
 						}
 					}
 					else
-						log.debug("update.getLearntFrom() = null");
+						log.info("update.getLearntFrom() = null");
 				}
+				else
+					log.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSunva");
 			}
 
 		}
