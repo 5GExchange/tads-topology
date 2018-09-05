@@ -810,7 +810,7 @@ public class SendTopology implements Runnable {
 
 		Enumeration<GenericBGP4Session> sessions = bgp4SessionsInformation.getSessionList().elements();
 
-		log.debug("Sending a BGP4 update message:" + update.toString());
+		log.info("Sending a BGP4 update message:" + update.toString());
 		while (sessions.hasMoreElements()) {
 			GenericBGP4Session session = sessions.nextElement();
 			if (session == null) {
@@ -819,15 +819,15 @@ public class SendTopology implements Runnable {
 
 				if (session.getSendTo()) {
 					String destination = session.getRemotePeerIP().getHostAddress();
-					log.info("BGP4 Update learnt from:" + update.getLearntFrom());
+					log.info("xxxxxxxxxxxxxxxxxxxxxxxxxxxxBGP4 Update learnt from:" + update.getLearntFrom());
 					if (update.getLearntFrom() != null) {
 
 						if (update.getLearntFrom().contains("/"))
-							log.debug("BGP4 Update learnt from new:" + update.getLearntFrom().replaceAll("/", ""));
+							log.info("BGP4 Update learnt from new:" + update.getLearntFrom().replaceAll("/", ""));
 						if (isTest) {
-							log.debug("Sending BGP4 update to:" + destination + " with no check on the ID since it is test");
+							log.info("Sending BGP4 update to:" + destination + " with no check on the ID since it is test");
 							if (session.getMyAutonomousSystem() != session.getRemoteAutonomousSystem()) {
-								log.debug("size before: " + String.valueOf(update.getPathAttributes().size()));
+								log.info("size before: " + String.valueOf(update.getPathAttributes().size()));
 								for (PathAttribute attr : update.getPathAttributes()) {
 									if (attr.getTypeCode() == PathAttributesTypeCode.PATH_ATTRIBUTE_TYPECODE_LOCAL_PREF)
 										update.getPathAttributes().remove(attr);
@@ -841,19 +841,19 @@ public class SendTopology implements Runnable {
 									//log.info(update.getLearntFrom().substring(1));
 									if (!destination.equals(update.getLearntFrom().substring(1))) {
 										//log.info("id da getLearnt "+ update.getLearntFrom());
-										log.debug("Sending update to destination " + destination + " for info learnt from " + update.getLearntFrom().substring(1));
+										log.info("Sending update to destination " + destination + " for info learnt from " + update.getLearntFrom().substring(1));
 										//log.info("Sending BGP4 update to:" + destination);
 										session.sendBGP4Message(update);
 									} else
-										log.debug("destination " + destination + " and source of information " + update.getLearntFrom().substring(1) + " are equal");
+										log.info("destination " + destination + " and source of information " + update.getLearntFrom().substring(1) + " are equal");
 								} else {
 									if (!destination.equals(update.getLearntFrom())) {
 										//log.info("id da getLearnt "+ update.getLearntFrom());
-										log.debug("Sending update to destination " + destination + " for info learnt from " + update.getLearntFrom());
+										log.info("Sending update to destination " + destination + " for info learnt from " + update.getLearntFrom());
 										//log.info("Sending BGP4 update to:" + destination);
 										session.sendBGP4Message(update);
 									} else
-										log.debug("destination " + destination + " and source of information " + update.getLearntFrom() + " are equal");
+										log.info("destination " + destination + " and source of information " + update.getLearntFrom() + " are equal");
 								}
 							} catch (Exception e) {
 								e.printStackTrace();
