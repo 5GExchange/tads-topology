@@ -55,6 +55,8 @@ public class CMSPostMsgs implements Runnable {
                     entry=ted.getItResources().getControllerIT();
                     if(entry!=null||entry !=""){
                         log.info("New domain detected: " +key);
+                        log.info(localID);
+                        log.info(ted.getItResources().getLearntFrom());
                         if(ted.getItResources().getLearntFrom()==localID)
                             localDomain=true;
                         create_post= new Create_CMS_Post(entry, key, localDomain);
