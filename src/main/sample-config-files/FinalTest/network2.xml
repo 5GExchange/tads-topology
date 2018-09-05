@@ -24,6 +24,7 @@
 		</mdpce-->
 
 		<it_resources>
+			<controller_it>http</controller_it>
 			<cpu>100</cpu>
 			<mem>100Gbyte</mem>
 			<storage>100Tbyte</storage>
@@ -131,7 +132,6 @@
 			<destination>
 				<router_id>172.16.1.101</router_id>
 				<if_id>3</if_id>
-				<ip>192.168.207.1</ip>
 			</destination>
 			<maximum_bandwidth>1000</maximum_bandwidth>
 			<default_te_metric>10</default_te_metric>
