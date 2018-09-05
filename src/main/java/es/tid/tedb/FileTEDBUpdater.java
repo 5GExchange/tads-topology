@@ -1396,8 +1396,10 @@ public class FileTEDBUpdater {
 							itResources.setControllerIT("http://"+learntFrom);
 						}else{
 							Element itResourcesControllerITElement = (Element) itResourcesControllerITList.item(0);
-							String itResourcesControllerIT = getCharacterDataFromElement(itResourcesControllerITElement);
-							itResources.setControllerIT(itResourcesControllerIT);
+							if(itResourcesControllerITElement!=null) {
+								String itResourcesControllerIT = getCharacterDataFromElement(itResourcesControllerITElement);
+								itResources.setControllerIT(itResourcesControllerIT);
+							}
 						}
 
 						itResources.setLearntFrom(learntFrom);
