@@ -816,7 +816,6 @@ public class SendTopology implements Runnable {
 			if (session == null) {
 				log.error("SESSION NULL");
 			} else {
-				log.info(session.toString());
 				if (session.getSendTo()) {
 					String destination = session.getRemotePeerIP().getHostAddress();
 					log.debug("xxxxxxxxxxxxxxxxxxxxxxxxxxxxBGP4 Update learnt from:" + update.getLearntFrom());

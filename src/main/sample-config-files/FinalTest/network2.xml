@@ -23,12 +23,12 @@
 
 		</mdpce-->
 
-		<!--it_resources>
+		<it_resources>
 			<controller_it>http</controller_it>
 			<cpu>100</cpu>
 			<mem>100Gbyte</mem>
 			<storage>100Tbyte</storage>
-		</it_resources-->
+		</it_resources>
 		<node>
 			<router_id>172.16.2.21</router_id>
 			<name>router1_000</name>

@@ -1371,7 +1371,7 @@ public class FileTEDBUpdater {
 						tedb.setMDPCE(pce);
 
 					}
-					
+
 					NodeList itResourcesElement = element1.getElementsByTagName("it_resources");
 					for (int i = 0; i < itResourcesElement.getLength(); i++) {
 						Element element = (Element) itResourcesElement.item(i);
