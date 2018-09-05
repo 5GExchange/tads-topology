@@ -66,11 +66,13 @@ public class CMSPostMsgs implements Runnable {
                         log.info(localID);
                         log.info(ted.getItResources().getLearntFrom());
                         if(ted.getItResources().getLearntFrom().equals(localID)){
+                            log.info("true");
                             //create_post= new Create_CMS_Post(entry, key, true);
                             SendPost(entry, key, true);
                         }else{
                             //create_post= new Create_CMS_Post(entry, key, false);
                             SendPost(entry, key, false);
+                            log.info("false");
                         }
 
                         sent.put(key,true);
@@ -88,7 +90,8 @@ public class CMSPostMsgs implements Runnable {
 
     }
     private void SendPost(String entryPoint, String domain, boolean localDomain) {
-        String EntryPoint ="";
+        String EntryPoint = "";
+        log.info("sending");
         if (entryPoint.contains("http://")){
             String[] parts = entryPoint.split("/");
             EntryPoint=parts[2];
