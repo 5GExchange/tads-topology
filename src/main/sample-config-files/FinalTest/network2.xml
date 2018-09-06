@@ -24,7 +24,7 @@
 		</mdpce-->
 
 		<it_resources>
-			<controller_it>http://172.17.18.103/openstack</controller_it>
+			<controller_it>http://IP/openstack</controller_it>
 			<cpu>100</cpu>
 			<mem>100Gbyte</mem>
 			<storage>100Tbyte</storage>

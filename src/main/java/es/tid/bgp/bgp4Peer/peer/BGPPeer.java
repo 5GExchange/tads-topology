@@ -262,9 +262,12 @@ public class BGPPeer {
 	public void createUpdateDispatcher(){
 		//Updater dispatcher
 		ud = new UpdateDispatcher(multiDomainTEDB,intraTEDBs, DomainUpdate,intraDomainLinkUpdate,interDomainLinkUpdate,NodeITinfoUpdate, NodeinfoUpdate,MDPCEinfoUpdate, params);
-		cmsPostMsgs= new CMSPostMsgs();
+		if (params.isCMS()){
+			cmsPostMsgs= new CMSPostMsgs();
+
 		cmsPostMsgs.configure(cms_msg, intraTEDBs, params.getBGPIdentifier());
-		executor.scheduleWithFixedDelay(cmsPostMsgs,30, 30, TimeUnit.SECONDS);
+		executor.scheduleWithFixedDelay(cmsPostMsgs,30, params.getCMSDelay(), TimeUnit.MILLISECONDS);
+		}
 	}
 
 	public void CheckUpdateTime(){

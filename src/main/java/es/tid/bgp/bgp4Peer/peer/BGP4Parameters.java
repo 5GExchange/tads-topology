@@ -102,6 +102,9 @@ public class BGP4Parameters {
 	 * Time between topology updates
 	 */
 	long sendTopoDelay=30000;
+
+	private Boolean CMSenabled=false;
+	long CMSupdate=30000;
 	
 	private boolean saveTopologyDB=false;
 	
@@ -305,6 +308,10 @@ public class BGP4Parameters {
 					else if (qName.equalsIgnoreCase("sendTopoDelay")){
 						sendTopoDelay = Long.parseLong(tempVal.trim());
 					}
+					else if (qName.equalsIgnoreCase("CMSPeriod")){
+						CMSupdate = Long.parseLong(tempVal.trim());
+						CMSenabled=true;
+					}
 					/*
 					else if (qName.equalsIgnoreCase("peer")){
 						String peerBGP_IPaddress = tempVal.trim();
@@ -405,6 +412,21 @@ public class BGP4Parameters {
 		this.isTest = test;
 	}
 
+	public boolean isCMS() {
+		return CMSenabled;
+	}
+	public void setisCMS(boolean test) {
+		this.CMSenabled = test;
+	}
+
+	public long getCMSDelay() {
+		return CMSupdate;
+	}
+	public void setCMSDelay(long delay) {
+		this.CMSupdate = delay;
+	}
+
+
 	public String getConfFile() {
 		return confFile;
 	}
@@ -414,6 +436,7 @@ public class BGP4Parameters {
 	public boolean isNodelay() {
 		return nodelay;
 	}
+
 	public void setNodelay(boolean nodelay) {
 		this.nodelay = nodelay;
 	}

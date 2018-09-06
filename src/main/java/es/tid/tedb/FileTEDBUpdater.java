@@ -1394,6 +1394,7 @@ public class FileTEDBUpdater {
 
 						IT_Resources itResources = new IT_Resources();
 						if (itResourcesControllerIT != null) {
+							itResourcesControllerIT=itResourcesControllerIT.replaceAll("IP",learntFrom);
 							itResources.setControllerIT(itResourcesControllerIT);
 							itResources.setLearntFrom(learntFrom);
 						}
