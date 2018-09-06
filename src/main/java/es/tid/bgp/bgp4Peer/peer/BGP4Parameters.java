@@ -6,16 +6,13 @@ import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-
+import java.io.IOException;
 import java.net.Inet4Address;
 import java.net.UnknownHostException;
 import java.util.LinkedList;
-import java.io.IOException;
 
 /**
  * Parameters to configure the BGP4 session
@@ -171,9 +168,10 @@ public class BGP4Parameters {
 
 		if (confFile!=null){
 			this.confFile=confFile;
-			File Identifier= new File("src/main/sample-config-files/BGPIdentifier").getAbsoluteFile();
+			/*File Identifier= new File("src/main/sample-config-files/BGPIdentifier").getAbsoluteFile();
 			BufferedReader br = new BufferedReader(new FileReader(String.valueOf(Identifier)));
 			BGPIdentifier = br.readLine();
+			*/
 		}else {
 			confFile="BGP4Parameters.xml";
 		}
@@ -297,7 +295,7 @@ public class BGP4Parameters {
 					//else if ((qName.equalsIgnoreCase("BGPIdentifier"))&&(BGPIdentifier.equals(null))){//El BGP Identifier es la local BGP Address.
 					else if (qName.equalsIgnoreCase("BGPIdentifier")){//El BGP Identifier es la local BGP Address.
 
-							if(isTest)
+							//if(isTest)
 							BGPIdentifier = tempVal.trim();
 
 					log.info("BGP Identifier:  " +BGPIdentifier +" Test: " +isTest);
