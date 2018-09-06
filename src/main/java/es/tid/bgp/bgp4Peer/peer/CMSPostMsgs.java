@@ -79,7 +79,7 @@ public class CMSPostMsgs implements Runnable {
 
                 }
                 else
-                    log.info("CMS:Post already sent for domain "+ key);
+                    log.info("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWCMS:Post already sent for domain "+ key);
             }
             else
                 log.info("CMS: it is multidomain intra-domain");
