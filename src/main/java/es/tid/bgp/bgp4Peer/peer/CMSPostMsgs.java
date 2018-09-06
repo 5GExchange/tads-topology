@@ -45,7 +45,7 @@ public class CMSPostMsgs implements Runnable {
     @Override
     public void run() {
 
-        log.info("executing Post of the message to CMS");
+        log.info("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ executing Post of the message to CMS");
 
         Enumeration names;
         String key;
@@ -84,10 +84,11 @@ public class CMSPostMsgs implements Runnable {
             else
                 log.info("CMS: it is multidomain intra-domain");
         }
-
+        log.info("Over");
 
 
     }
+
     private void SendPost(String entryPoint, String domain, boolean localDomain) {
         String EntryPoint = "";
         if (entryPoint.contains("http://")){
