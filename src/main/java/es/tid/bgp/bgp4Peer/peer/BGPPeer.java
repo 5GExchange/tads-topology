@@ -278,11 +278,17 @@ public class BGPPeer {
 
 	}
 
-	/*public void CMSUpdate(){
-		cmsPostMsgs= new CMSPostMsgs();
-		cmsPostMsgs.configure(cms_msg, intraTEDBs, params.getBGPIdentifier());
-		executor.scheduleWithFixedDelay(cmsPostMsgs,30, 30, TimeUnit.SECONDS);
-	}*/
+	public void CMSUpdate(){
+		if (params.isCMS()){
+			logServer.info("Enabling CMS");
+			cmsPostMsgs= new CMSPostMsgs();
+
+			cmsPostMsgs.configure(cms_msg, intraTEDBs, params.getBGPIdentifier());
+			executor.scheduleWithFixedDelay(cmsPostMsgs,20, params.getCMSDelay(), TimeUnit.SECONDS);
+
+		}else
+			logServer.info("CMS disabled");
+	}
 
 
 	/**

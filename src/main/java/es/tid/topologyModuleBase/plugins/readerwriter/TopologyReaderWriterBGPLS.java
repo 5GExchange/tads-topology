@@ -52,6 +52,7 @@ public class TopologyReaderWriterBGPLS extends TopologyReaderWriter{
         while (connectedx!= Boolean.TRUE){
             if (bgpPeer.bgp4SessionsInformation.sessionList.size()>0 || bgpPeer.bgp4SessionsInformation.sessionListByPeerIP.size()>0) {
                 bgpPeer.startSendTopology();
+                bgpPeer.CMSUpdate();
                 connectedx=Boolean.TRUE;
                 break;
             }
