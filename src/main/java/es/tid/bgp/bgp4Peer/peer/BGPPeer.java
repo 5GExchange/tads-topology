@@ -265,8 +265,9 @@ public class BGPPeer {
 		if (params.isCMS()){
 			cmsPostMsgs= new CMSPostMsgs();
 
-		cmsPostMsgs.configure(cms_msg, intraTEDBs, params.getBGPIdentifier());
-		executor.scheduleWithFixedDelay(cmsPostMsgs,30, params.getCMSDelay(), TimeUnit.MILLISECONDS);
+			cmsPostMsgs.configure(cms_msg, intraTEDBs, params.getBGPIdentifier());
+			executor.scheduleWithFixedDelay(cmsPostMsgs,20, params.getCMSDelay(), TimeUnit.SECONDS);
+
 		}
 	}
 
