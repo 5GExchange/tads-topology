@@ -45,7 +45,7 @@ public class CMSPostMsgs implements Runnable {
     @Override
     public void run() {
 
-        log.info("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ executing Post of the message to CMS");
+        log.debug("Executing Post of the message to CMS");
 
 
         Set<String> keys = this.intraTEDBs.keySet();
@@ -76,12 +76,11 @@ public class CMSPostMsgs implements Runnable {
 
                 }
                 else
-                    log.info("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWCMS:Post already sent for domain "+ key);
+                    log.debug("CMS:Post already sent for domain "+ key);
             }
             else
-                log.info("CMS: it is multidomain intra-domain");
+                log.debug("CMS: it is multidomain intra-domain");
         }
-        log.info("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQOver");
 
 
     }
