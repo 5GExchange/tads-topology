@@ -51,7 +51,7 @@ public class CMSPostMsgs implements Runnable {
         Set<String> keys = this.intraTEDBs.keySet();
         for(String key: keys){
             log.info(key);
-            if (!key.equals("multidomin")){
+            if (!key.equals("multidomain")){
                 if (!sent.containsKey(key)||(sent.get(key)==false)){
 
                     SimpleTEDB ted=(SimpleTEDB)intraTEDBs.get(key);
