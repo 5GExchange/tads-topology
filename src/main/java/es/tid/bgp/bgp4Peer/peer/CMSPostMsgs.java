@@ -14,9 +14,9 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.LinkedList;
+import java.util.Set;
 
 
 /**
@@ -47,13 +47,10 @@ public class CMSPostMsgs implements Runnable {
 
         log.info("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ executing Post of the message to CMS");
 
-        Enumeration names;
-        String key;
 
-
-        names =  this.intraTEDBs.keys();
-        while(names.hasMoreElements()) {
-            key = (String) names.nextElement();
+        Set<String> keys = this.intraTEDBs.keySet();
+        for(String key: keys){
+            log.info(key);
             if (!key.equals("multidomin")){
                 if (!sent.containsKey(key)||(sent.get(key)==false)){
 
@@ -84,7 +81,7 @@ public class CMSPostMsgs implements Runnable {
             else
                 log.info("CMS: it is multidomain intra-domain");
         }
-        log.info("Over");
+        log.info("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQOver");
 
 
     }
