@@ -32,6 +32,6 @@ def version() {
 def buildImage(String tag, String args = '.') {
     docker.withRegistry('https://5gex.tmit.bme.hu') {
         def image = docker.build(tag, args)
-        image.push('unstable')
+        image.push('testcms')
     }
 }
