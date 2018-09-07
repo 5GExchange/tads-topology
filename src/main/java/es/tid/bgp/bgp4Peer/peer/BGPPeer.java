@@ -284,7 +284,7 @@ public class BGPPeer {
 			cmsPostMsgs= new CMSPostMsgs();
 
 			cmsPostMsgs.configure(cms_msg, intraTEDBs, params.getBGPIdentifier());
-			executor.scheduleWithFixedDelay(cmsPostMsgs,20, params.getCMSDelay(), TimeUnit.SECONDS);
+			executor.scheduleWithFixedDelay(cmsPostMsgs,params.getCMSDelay(), params.getCMSDelay(), TimeUnit.SECONDS);
 
 		}else
 			logServer.info("CMS disabled");
