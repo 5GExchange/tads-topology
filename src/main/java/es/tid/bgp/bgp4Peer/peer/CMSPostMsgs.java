@@ -63,7 +63,8 @@ public class CMSPostMsgs implements Runnable {
                         log.debug(ted.getItResources().getLearntFrom());
                         if(ted.getItResources().getLearntFrom().equals(localID)){
                             //create_post= new Create_CMS_Post(entry, key, true);
-                            SendPost(entry, key, true);
+                            log.info("same domain");
+                            //SendPost(entry, key, true);
                         }else{
                             //create_post= new Create_CMS_Post(entry, key, false);
                             SendPost(entry, key, false);
