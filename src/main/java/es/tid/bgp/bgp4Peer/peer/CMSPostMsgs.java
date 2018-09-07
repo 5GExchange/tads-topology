@@ -94,7 +94,7 @@ public class CMSPostMsgs implements Runnable {
             EntryPoint=entryPoint;
         try {
 
-            URL url = new URL("http://localhost/mdc/mdc");
+            URL url = new URL("http://mdc:8500/domain/");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");
