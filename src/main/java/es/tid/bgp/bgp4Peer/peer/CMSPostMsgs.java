@@ -105,7 +105,7 @@ public class CMSPostMsgs implements Runnable {
 
             obj.put("domain", domain);
             obj.put("localDomain", localDomain);
-            obj.put("EntryPoint", EntryPoint);
+            obj.put("entryPoint", EntryPoint);
             log.info("CMS:"+obj.toJSONString());
 
             OutputStream os = conn.getOutputStream();
