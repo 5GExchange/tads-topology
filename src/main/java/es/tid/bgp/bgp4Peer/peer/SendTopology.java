@@ -436,6 +436,7 @@ public class SendTopology implements Runnable {
 										if (v instanceof Inet4Address) {
 											nodex = (Inet4Address) v;
 											node_info = ((DomainTEDB) ted).getNodeTable().get(nodex);
+											log.info(nodex.getHostAddress());
 										} else if (v instanceof Long) {
 											node = (long) v;
 											node_info = ((DomainTEDB) ted).getNodeTable().get(node);
@@ -443,7 +444,7 @@ public class SendTopology implements Runnable {
 										if (node_info != null) {
 
 											String nodeip = node_info.getIpv4AddressLocalNode().getCanonicalHostName();
-											log.debug("Current node ID=" + nodeip);
+											log.info("Current node ID=" + nodeip);
 											//src node
 											if (edge.getLocal_Node_Info()==null){
 												if(edge.getSrc_router_id() instanceof Inet4Address) {
