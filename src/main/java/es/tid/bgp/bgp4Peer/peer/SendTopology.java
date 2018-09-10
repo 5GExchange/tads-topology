@@ -534,7 +534,7 @@ public class SendTopology implements Runnable {
 						}else{
 							log.info("This link is still not complete");
 							if (dfound) log.info("dst found");
-							else log.info("dst not found"+((Inet4Address) edge.getDst_router_id()).getHostAddress());git add
+							else log.info("dst not found"+((Inet4Address) edge.getDst_router_id()).getHostAddress());
 							if (sfound) log.info("src found");
 							else log.info("src not found");
 						}
