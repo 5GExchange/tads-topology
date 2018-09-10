@@ -419,11 +419,12 @@ public class SendTopology implements Runnable {
 					while (keys.hasMoreElements()) {
 						key = (String) keys.nextElement();
 						InterDomainEdge edge = md.getTemps().get(key);
+						log.info("Looking for temp interdomain link "+ edge.toString());
 						Enumeration<String> iter = teds.keys();
 						while (iter.hasMoreElements()) {
 							String domainID = iter.nextElement();
 							if ((domainID != null)&&(!domainID.equals("multidomain"))) {
-								log.debug("temp procedure checking domain_id: " + domainID);
+								log.info("temp procedure checking domain_id: " + domainID);
 								TEDB ted = teds.get(domainID);
 								if (ted instanceof DomainTEDB) {
 									Iterator<Object> vertexIt = ((DomainTEDB) ted).getIntraDomainLinksvertexSet().iterator();
@@ -533,7 +534,7 @@ public class SendTopology implements Runnable {
 						}else{
 							log.info("This link is still not complete");
 							if (dfound) log.info("dst found");
-							else log.info("dst not found"+((Inet4Address) edge.getDst_router_id()).getHostAddress());
+							else log.info("dst not found"+((Inet4Address) edge.getDst_router_id()).getHostAddress());git add
 							if (sfound) log.info("src found");
 							else log.info("src not found");
 						}
