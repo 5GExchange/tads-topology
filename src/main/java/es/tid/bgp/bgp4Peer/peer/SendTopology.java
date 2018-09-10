@@ -436,7 +436,7 @@ public class SendTopology implements Runnable {
 										if (v instanceof Inet4Address) {
 											nodex = (Inet4Address) v;
 											node_info = ((DomainTEDB) ted).getNodeTable().get(nodex);
-											log.info(nodex.getHostAddress()+" with nde info "+ node_info.toString());
+											log.info(nodex.getHostAddress()+" with nde info ");
 										} else if (v instanceof Long) {
 											node = (long) v;
 											node_info = ((DomainTEDB) ted).getNodeTable().get(node);
