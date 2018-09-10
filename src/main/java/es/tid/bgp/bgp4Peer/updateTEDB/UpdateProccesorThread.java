@@ -1276,7 +1276,7 @@ public class UpdateProccesorThread extends Thread {
 		ArrayList<Inet4Address> NeighDomains = new ArrayList<Inet4Address>();
 		ArrayList<Inet4Address> NeighASs = new ArrayList<Inet4Address>();
 
-		log.info("Received Node Information");
+		log.info("TEST:Received Node Information");
 		DomainTEDB domainTEDB=null;
 		if (nodeNLRI.getLocalNodeDescriptors().getAutonomousSystemSubTLV()!=null){
 			as_number=nodeNLRI.getLocalNodeDescriptors().getAutonomousSystemSubTLV().getAS_ID();
@@ -1290,9 +1290,11 @@ public class UpdateProccesorThread extends Thread {
 		}
 		SimpleTEDB simpleTEDB=null;
 		if (domainTEDB instanceof SimpleTEDB){
+			log.info("TEST:ted exists");
 			simpleTEDB = (SimpleTEDB) domainTEDB;
 		}
 		else if ((domainTEDB==null)&&(as_number!=null)){
+			log.info("TEST:ted does not exist");
 			simpleTEDB = new SimpleTEDB();
 			simpleTEDB.createGraph();
 			this.intraTEDBs.put(as_number.getHostAddress(), simpleTEDB);
@@ -1311,17 +1313,17 @@ public class UpdateProccesorThread extends Thread {
 			if(simpleTEDB.getNodeTable().containsKey(nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getIpv4AddressOSPF()))
 			{
 				node_info= simpleTEDB.getNodeTable().get(nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getIpv4AddressOSPF());
-				log.debug("Node_info object for AS Already Exist:  " +nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getIpv4AddressOSPF());
+				log.info("TEST:Node_info object for AS Already Exist:  " +nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getIpv4AddressOSPF());
 			}
 			else {
 
-				log.debug("........New Node Info Object........");
+				log.info("TEST:........New Node Info Object........");
 				node_info = new Node_Info();
 				node_info.setAs_number(as_number);
 			}
 
 			if(node_info.getLearntFrom()==null || node_info.getLearntFrom().equals(learntFrom)) {
-				log.debug("Learnt From: " + learntFrom);
+				log.info("TEST:Learnt From: " + learntFrom);
 
 
 				if (opaqueNodeTLV != null) {
@@ -1383,7 +1385,7 @@ public class UpdateProccesorThread extends Thread {
 							IGPID = nodeNLRI.getLocalNodeDescriptors().getIGPRouterID().getIpv4AddressOSPF();
 
 							node_info.setIpv4Address(IGPID);
-							log.debug("IGP OSPF ");
+							log.info("TEST:IGP OSPF ");
 							break;
 						default:
 							log.info("No IS no OSPF ");
@@ -1391,7 +1393,7 @@ public class UpdateProccesorThread extends Thread {
 				}
 
 				if (iPv4RouterIDLocalNodeLATLV != null) {
-					log.debug("Adding IPv4 of Local Node to Table........");
+					log.info("TEST:Adding IPv4 of Local Node to Table........");
 					node_info.setIpv4AddressLocalNode(iPv4RouterIDLocalNodeLATLV.getIpv4Address());
 				}
 				if (nodeFlagBitsTLV != null) {
@@ -1403,13 +1405,13 @@ public class UpdateProccesorThread extends Thread {
 				}
 
 				if (nodeNameTLV != null) {
-					log.debug("Adding name of Local Node to Table.... -> "+ new String (nodeNameTLV.getName()));
+					log.info("TEST:Adding name of Local Node to Table.... -> "+ new String (nodeNameTLV.getName()));
 					node_info.setName(nodeNameTLV.getName());
 				}
 
 
 				if (areaIDTLV != null) {
-					log.debug("Adding AreaID of Local node to table....with len "+String.valueOf(areaIDTLV.getValid_len()));
+					log.info("TEST:Adding AreaID of Local node to table....with len "+String.valueOf(areaIDTLV.getValid_len()));
                     node_info.setValid_len(areaIDTLV.getValid_len());
                     node_info.setIpv4areaIDs(areaIDTLV.getIpv4areaIDs());
 				}
@@ -1431,7 +1433,7 @@ public class UpdateProccesorThread extends Thread {
 							if (!NodeTable.containsKey(IGPIDint)) {
 								NodeTable.remove(IGPIDint);
 								NodeTable.put(IGPIDint, node_info);
-								log.info("node info added "+node_info.toString());
+
 							}
 						}
 					}
@@ -1440,6 +1442,12 @@ public class UpdateProccesorThread extends Thread {
 						if (!NodeTable.containsKey(IGPID)) {
 							NodeTable.remove(IGPID);
 							NodeTable.put(IGPID, node_info);
+							log.info("TEST:node info added "+node_info.toString());
+						}
+						else {
+							NodeTable.remove(IGPID);
+							NodeTable.put(IGPID, node_info);
+							log.info("TEST:node info present but readded " + node_info.toString());
 						}
 					}
 				}
@@ -1453,7 +1461,7 @@ public class UpdateProccesorThread extends Thread {
 					}
 
 				}
-				log.debug("Node Table:" + NodeTable.toString());
+				log.info("TEST:Node Table:" + NodeTable.toString());
 				log.debug("Node Information Table Updated....");
 
 
