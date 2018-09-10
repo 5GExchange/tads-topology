@@ -1431,6 +1431,7 @@ public class UpdateProccesorThread extends Thread {
 							if (!NodeTable.containsKey(IGPIDint)) {
 								NodeTable.remove(IGPIDint);
 								NodeTable.put(IGPIDint, node_info);
+								log.info("node info added "+node_info.toString());
 							}
 						}
 					}

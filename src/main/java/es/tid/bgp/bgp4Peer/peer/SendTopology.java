@@ -436,7 +436,7 @@ public class SendTopology implements Runnable {
 										if (v instanceof Inet4Address) {
 											nodex = (Inet4Address) v;
 											node_info = ((DomainTEDB) ted).getNodeTable().get(nodex);
-											log.info(nodex.getHostAddress());
+											log.info(nodex.getHostAddress()+" with nde info "+ node_info.toString());
 										} else if (v instanceof Long) {
 											node = (long) v;
 											node_info = ((DomainTEDB) ted).getNodeTable().get(node);
@@ -512,7 +512,7 @@ public class SendTopology implements Runnable {
 
 										}
 										else
-											log.debug("node info null");
+											log.info("node info null");
 									}
 								}
 								else
