@@ -164,15 +164,15 @@ public class SendTopology implements Runnable {
 								TEDB ted = intraTEDBs.get(domainID);
 								if (ted instanceof DomainTEDB) {
 									if ((((DomainTEDB) ted).getIGPType() == 1) || (((DomainTEDB) ted).getIGPType() == 2)) {
-										sendLinkNLRIISIS(((DomainTEDB) ted).getIntraDomainLinks(), domainID);
-									} else {
-										sendLinkNLRI(((DomainTEDB) ted).getIntraDomainLinks(), domainID);
-									}//log.info(" XXXX ted.getNodeTable():"+ted.getNodeTable());
-									if ((((DomainTEDB) ted).getIGPType() == 1) || (((DomainTEDB) ted).getIGPType() == 2)) {
 										sendNodeNLRIISIS(((DomainTEDB) ted).getIntraDomainLinksvertexSet(), ((DomainTEDB) ted).getNodeTable());
 									} else {
 										sendNodeNLRI(((DomainTEDB) ted).getIntraDomainLinksvertexSet(), ((DomainTEDB) ted).getNodeTable());
 									}
+									if ((((DomainTEDB) ted).getIGPType() == 1) || (((DomainTEDB) ted).getIGPType() == 2)) {
+										sendLinkNLRIISIS(((DomainTEDB) ted).getIntraDomainLinks(), domainID);
+									} else {
+										sendLinkNLRI(((DomainTEDB) ted).getIntraDomainLinks(), domainID);
+									}//log.info(" XXXX ted.getNodeTable():"+ted.getNodeTable());
 									if (((DomainTEDB) ted).getItResources() != null) {
 										sendITNodeNLRI(domainID, ((DomainTEDB) ted).getItResources(),  ((DomainTEDB) ted).getItResources().getLearntFrom());
 									}

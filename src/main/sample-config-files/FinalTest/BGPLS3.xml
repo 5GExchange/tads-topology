@@ -2,7 +2,7 @@
 <config>
 	<!-- TCP port where the BGP is listening for incoming bgp4 connections. Optional Parameter. Default value: 179 (BGP Port)  --> 
 	<BGP4Port>179</BGP4Port>
-	<BGPIdentifier>172.17.11.43</BGPIdentifier>
+	<BGPIdentifier>172.17.18.104</BGPIdentifier>
 <!-- TCP port to connect to manage the BGP connection. Default value: 1112 -->
 	<BGP4ManagementPort>1112</BGP4ManagementPort> 
 	<!-- Peers to which this Peer is going to establish connection -->

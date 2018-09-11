@@ -6,7 +6,7 @@
     <XML_Plugin>
         <mode>TM</mode>
     	<XMLFileTopology>target/FinalTest/network3.xml</XMLFileTopology>
-        <Identifier>172.17.11.43</Identifier>
+        <Identifier>172.17.18.104</Identifier>
         <intra>true</intra>
     </XML_Plugin>
      <InitFrom>

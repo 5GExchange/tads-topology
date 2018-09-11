@@ -13,7 +13,7 @@
                 <peerPort>179</peerPort>
 	</configPeer>
 	<configPeer>
-		<peer>172.17.11.43</peer>
+		<peer>172.17.18.104</peer>
 		<export>true</export>
 		<import>true</import>
 		<peerPort>179</peerPort>
