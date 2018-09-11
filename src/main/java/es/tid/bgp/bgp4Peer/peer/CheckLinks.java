@@ -71,13 +71,13 @@ public class CheckLinks implements Runnable {
 						while (keys.hasMoreElements()) {
 							key = (String) keys.nextElement();
 							InterDomainEdge edge = md.getTemps().get(key);
-							log.info("Looking for temp interdomain link "+ edge.toString());
+							log.debug("CHeck links: Looking for temp interdomain link "+ edge.toString());
 
 							Enumeration<String> iter = teds.keys();
 							while (iter.hasMoreElements()) {
 								String domainID = iter.nextElement();
 								if ((domainID != null)&&(!domainID.equals("multidomain"))) {
-									log.info("temp procedure checking domain_id: " + domainID);
+									log.debug("temp procedure checking domain_id: " + domainID);
 									TEDB ted = teds.get(domainID);
 									if (ted instanceof DomainTEDB) {
 										Iterator<Object> vertexIt = ((DomainTEDB) ted).getIntraDomainLinksvertexSet().iterator();
@@ -209,9 +209,9 @@ public class CheckLinks implements Runnable {
 
 			if (md!=null){
 				if (md.getNetworkDomainGraph()!=null){
-					log.info("Number of nodes: "+ String.valueOf(md.getNetworkDomainGraph().vertexSet().size()));
-					log.info("Number of links: "+ String.valueOf(md.getNetworkDomainGraph().edgeSet().size()));
-					log.info("Number of domain: "+ String.valueOf(teds.size()));
+					log.debug("Number of nodes: "+ String.valueOf(md.getNetworkDomainGraph().vertexSet().size()));
+					log.debug("Number of links: "+ String.valueOf(md.getNetworkDomainGraph().edgeSet().size()));
+					log.debug("Number of domain: "+ String.valueOf(teds.size()));
 					Enumeration<String> iter = teds.keys();
 					while (iter.hasMoreElements()) {
 						String domainID = iter.nextElement();
