@@ -1360,6 +1360,7 @@ public class UpdateProccesorThread extends Thread {
 							//simpleTEDB.setPCEScope(pceScope);
 
 							setMDPCEupdateTime (localDomains , iPv4RouterIDLocalNodeLATLV.getIpv4Address(), learntFrom);
+							opaqueNodeTLV=null;
 							return;
 						}
 					}
