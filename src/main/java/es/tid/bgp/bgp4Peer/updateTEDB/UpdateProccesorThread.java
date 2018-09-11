@@ -1320,6 +1320,7 @@ public class UpdateProccesorThread extends Thread {
 				log.info("TEST:........New Node Info Object........");
 				node_info = new Node_Info();
 				node_info.setAs_number(as_number);
+				node_info.setLearntFrom(learntFrom);
 			}
 
 			if(node_info.getLearntFrom()==null || node_info.getLearntFrom().equals(learntFrom)) {
