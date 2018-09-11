@@ -4,17 +4,17 @@
 	<domain>
 		<layer type="transport" ></layer>
 
-		<domain_id>0.0.0.2</domain_id>
+		<domain_id>0.0.0.3</domain_id>
 		<!--reachability_entry>
 			<ipv4_address>172.16.103.0</ipv4_address>
 			<prefix>24</prefix>
 		</reachability_entry-->
 
 		<mdpce>
-			<pce_ipv4>172.16.2.44</pce_ipv4>
+			<pce_ipv4>172.16.3.44</pce_ipv4>
 			<neighbor>
-				<neig_as>0.0.0.1</neig_as>
-				<neig_ipv4>172.16.1.44</neig_ipv4>
+				<neig_as>0.0.0.2</neig_as>
+				<neig_ipv4>172.16.2.44</neig_ipv4>
 			</neighbor>
 		</mdpce>
 
@@ -25,16 +25,16 @@
 
 		<it_resources>
 			<controller_it>http://IP/openstack</controller_it>
-			<cpu>100</cpu>
-			<mem>100Gbyte</mem>
-			<storage>100Tbyte</storage>
+			<cpu>300</cpu>
+			<mem>300Gbyte</mem>
+			<storage>300Tbyte</storage>
 		</it_resources>
 		<node>
-			<router_id>172.16.2.21</router_id>
+			<router_id>172.16.3.31</router_id>
 			<name>router1_000</name>
 		</node>
 		<node>
-			<router_id>172.16.2.22</router_id>
+			<router_id>172.16.3.32</router_id>
 			<name>router2_000</name>
 		</node>
 		<!--edgeCommon>
@@ -61,12 +61,12 @@
 		</edgeCommon-->
 		<edge>
 			<source>
-				<router_id>172.16.2.21</router_id>
+				<router_id>172.16.3.31</router_id>
 				<if_id>1</if_id>
 				<ip>192.168.100.1</ip>
 			</source>			
 			<destination>
-				<router_id>172.16.2.22</router_id>
+				<router_id>172.16.3.32</router_id>
 				<if_id>1</if_id>
 				<ip>192.168.100.2</ip>
 			</destination>	
@@ -93,12 +93,12 @@
 		</edge>
 		<edge>
 			<source>
-				<router_id>172.16.2.22</router_id>
+				<router_id>172.16.3.32</router_id>
 				<if_id>1</if_id>
 				<ip>192.168.100.2</ip>
 			</source>			
 			<destination>
-				<router_id>172.16.2.21</router_id>
+				<router_id>172.16.3.31</router_id>
 				<if_id>1</if_id>
 				<ip>192.168.100.1</ip>
 			</destination>		
@@ -125,14 +125,14 @@
 		</edge>
 		<edge>
 			<source>
-				<router_id>172.16.2.22</router_id>
+				<router_id>172.16.3.32</router_id>
 				<if_id>3</if_id>
-				<ip>192.168.207.2</ip>
+				<ip>192.168.208.2</ip>
 			</source>
 			<destination>
-				<router_id>172.16.1.1</router_id>
+				<router_id>172.16.2.21</router_id>
 				<if_id>3</if_id>
-				<ip>192.168.207.1</ip>
+				<ip>192.168.208.1</ip>
 			</destination>
 			<maximum_bandwidth>1000</maximum_bandwidth>
 			<default_te_metric>10</default_te_metric>
@@ -155,37 +155,6 @@
 			<unreserved_bandwidth priority="1">3</unreserved_bandwidth>
 			<unreserved_bandwidth priority="0">12500</unreserved_bandwidth>
 		</edge>
-		<edge>
-			<source>
-				<router_id>172.16.2.21</router_id>
-				<if_id>3</if_id>
-				<ip>192.168.208.1</ip>
-			</source>
-			<destination>
-				<router_id>172.16.3.32</router_id>
-				<if_id>3</if_id>
-				<ip>192.168.208.2</ip>
-			</destination>
-			<maximum_bandwidth>1000</maximum_bandwidth>
-			<default_te_metric>10</default_te_metric>
-			<undir_delay_link>99</undir_delay_link>
-			<undir_min_max_delay>
-				<min>23</min>
-				<max>43</max>
-			</undir_min_max_delay>
-			<undir_delay_variation>1</undir_delay_variation>
-			<undir_link_loss>102</undir_link_loss>
-			<undir_residual_bandwidth>802</undir_residual_bandwidth>
-			<undir_available_bandwidth>500</undir_available_bandwidth>
-			<undir_utilized_bandwidth>436</undir_utilized_bandwidth>
-			<unreserved_bandwidth priority="7">12500</unreserved_bandwidth>
-			<unreserved_bandwidth priority="6">3</unreserved_bandwidth>
-			<unreserved_bandwidth priority="5">12500</unreserved_bandwidth>
-			<unreserved_bandwidth priority="4">3</unreserved_bandwidth>
-			<unreserved_bandwidth priority="3">3</unreserved_bandwidth>
-			<unreserved_bandwidth priority="2">12500</unreserved_bandwidth>
-			<unreserved_bandwidth priority="1">3</unreserved_bandwidth>
-			<unreserved_bandwidth priority="0">12500</unreserved_bandwidth>
-		</edge>
+
 	</domain>
 </network>
