@@ -1,4 +1,4 @@
-netphony-topology v1.3.3
+netphony-topology v1.3.5
 =======
 Repository branch build status:
 
@@ -23,7 +23,7 @@ The Topology Module can export the topologies via BGP-LS or RESCONF based APIs f
 - Moved to slf4j logging framework
 - Added method to pass multiple TEDs from en external program
 - Added docker support in travis
-- Supports network-protocols 1.3.2 (chages in reading as_path were needed)
+- Supports network-protocols 1.3.5 (chages in reading as_path were needed)
 - Update to support reading multiple AS_PATH
 - Topology Module added
 - Topology Module: Export via RESCONF with COP model
@@ -97,7 +97,7 @@ To run the Topology Module as a standalone application use the class es.tid.topo
  
  For example, to launch a Topology module with BGP-LS import and RECONF COP export (be sure to be in the target directory):
   ```
- sudo java -Dlog4j.configurationFile=log4j2.xml  -jar topology-1.3.2-shaded.jar TMConfiguration_BGPLSreader_COPwriter.xml
+ sudo java -Dlog4j.configurationFile=log4j2.xml  -jar topology-1.3.5-shaded.jar TMConfiguration_BGPLSreader_COPwriter.xml
   ```
  Sample configuration files are included. 
 
